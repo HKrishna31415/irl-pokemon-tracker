@@ -516,8 +516,26 @@
 
     {#if selected && status && !hidden}
       <div
-        class="col-span-2 mt-1 flex flex-wrap gap-1.5 md:col-span-4 lg:col-span-8 lg:justify-end"
+        class="col-span-2 mt-1 flex flex-wrap gap-1 md:col-span-4 lg:col-span-8 lg:justify-end"
       >
+        <button
+          class="flex items-center gap-x-1 rounded-md border border-gray-100 bg-gray-50/50 px-2 py-0.5 text-[9px] font-bold text-gray-400 transition-colors hover:border-lime-200 hover:bg-lime-50/50 hover:text-lime-600 dark:border-gray-800 dark:bg-gray-800/40 dark:hover:border-lime-900/40 dark:hover:text-lime-400"
+          title="Re-roll IVs"
+          on:click={() => {
+            ivs = {
+              hp: Math.floor(Math.random() * 32),
+              atk: Math.floor(Math.random() * 32),
+              def: Math.floor(Math.random() * 32),
+              spa: Math.floor(Math.random() * 32),
+              spd: Math.floor(Math.random() * 32),
+              spe: Math.floor(Math.random() * 32)
+            }
+          }}
+        >
+          <Icon icon={Dice} height="0.8rem" />
+          RE-ROLL
+        </button>
+
         {#each stats as stat}
           <div
             class="flex items-center gap-x-1 rounded-md border border-gray-100 bg-gray-50/50 px-1.5 py-0.5 text-[9px] font-bold transition-colors hover:border-gray-200 dark:border-gray-800 dark:bg-gray-800/40 dark:hover:border-gray-700"
@@ -527,7 +545,7 @@
               type="number"
               min="0"
               max="31"
-              class="w-5 bg-transparent text-center text-gray-700 focus:outline-none dark:text-gray-200"
+              class="w-7 bg-transparent text-center text-gray-700 focus:outline-none dark:text-gray-200"
               bind:value={ivs[stat]}
             />
           </div>
