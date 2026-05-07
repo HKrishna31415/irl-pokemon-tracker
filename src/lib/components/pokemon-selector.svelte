@@ -41,7 +41,7 @@
 
   import { createEventDispatcher, onMount, getContext } from 'svelte'
 
-  let selected, nickname, status, nature, hidden, death
+  let selected, nickname, status, nature, hidden, death, ability
   let level, ivs = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 }
   const stats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
   let prevstatus = 'loading'
@@ -130,6 +130,7 @@
         death = pkmn.death
         level = pkmn.level
         ivs = pkmn.ivs || { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 }
+        ability = pkmn.ability
         if (pkmn.pokemon)
           getPkmn(pkmn.pokemon).then((p) => {
             selected = p
@@ -149,7 +150,8 @@
     ...(hidden ? { hidden: true } : {}),
     ...(status?.id === 5 && death ? { death } : {}),
     ...(level ? { level } : {}),
-    ...(ivs ? { ivs } : {})
+    ...(ivs ? { ivs } : {}),
+    ...(ability ? { ability } : {})
   });
 
   if (selected && !oEqual(topatch, resetd)) {
@@ -282,9 +284,9 @@
 
 <SettingsWrapper id="nickname-clause" let:setting={nicknames}>
   <div
-    class:lg:grid-cols-8={nicknames}
-    class:lg:grid-cols-6={!nicknames}
-    class="relative flex grid w-full grid-cols-2 gap-y-3 gap-x-2 md:grid-cols-4 md:gap-y-2 lg:grid-cols-8 lg:gap-y-0"
+    class:lg:grid-cols-9={nicknames}
+    class:lg:grid-cols-7={!nicknames}
+    class="relative flex grid w-full grid-cols-2 gap-y-3 gap-x-2 md:grid-cols-4 md:gap-y-2 lg:grid-cols-9 lg:gap-y-0"
   >
     <span class="location group relative z-50">
       {#if $$slots.location}
@@ -513,6 +515,17 @@
         {/if}
       </div>
     </AutoCompleteV2>
+    
+    <AutoCompleteV2
+      itemF={(_) => Object.values(selected?.abilities || {})}
+      bind:selected={ability}
+      id="{location} Ability"
+      name="{location} Ability"
+      placeholder="Ability"
+      class="col-span-1 {!selected || status?.id === 4 || hidden
+        ? 'hidden sm:block'
+        : ''}"
+    />
 
     {#if selected && status && !hidden}
       <div
@@ -529,6 +542,22 @@
               spa: Math.floor(Math.random() * 32),
               spd: Math.floor(Math.random() * 32),
               spe: Math.floor(Math.random() * 32)
+            }
+
+            const pkmnAbilities = selected.abilities || {}
+            const rAbility = Math.random()
+            if (rAbility < 0.1 && pkmnAbilities.H) {
+              ability = pkmnAbilities.H
+            } else {
+              const regs = Object.keys(pkmnAbilities)
+                .filter((k) => k !== 'H')
+                .map((k) => pkmnAbilities[k])
+              if (regs.length) {
+                const roll = Math.random() * 0.9
+                if (roll < 0.3) ability = regs[0]
+                else if (roll < 0.6) ability = regs[1] || regs[0]
+                else ability = regs[2] || regs[1] || regs[0]
+              }
             }
           }}
         >
@@ -582,6 +611,21 @@
                if(result) {
                  selected = result
                  search = null
+                 const pkmnAbilities = result.abilities || {}
+                 const rAbility = Math.random()
+                 if (rAbility < 0.1 && pkmnAbilities.H) {
+                   ability = pkmnAbilities.H
+                 } else {
+                   const regs = Object.keys(pkmnAbilities)
+                     .filter((k) => k !== 'H')
+                     .map((k) => pkmnAbilities[k])
+                   if (regs.length) {
+                     const roll = Math.random() * 0.9
+                     if (roll < 0.3) ability = regs[0]
+                     else if (roll < 0.6) ability = regs[1] || regs[0]
+                     else ability = regs[2] || regs[1] || regs[0]
+                   }
+                 }
                  nature = Natures[Math.floor(Math.random() * Natures.length)]
                  ivs = {
                    hp: Math.floor(Math.random() * 32),

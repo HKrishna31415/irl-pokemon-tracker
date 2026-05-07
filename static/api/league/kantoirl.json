@@ -3,11 +3,11 @@
     "name": "Brock",
     "speciality": "rock",
     "img": "/leaders/frlg-brock",
-    "lvlCap": 15,
+    "lvlCap": 14,
     "pokemon": [
       {
         "name": "sudowoodo",
-        "level": "15",
+        "level": "14",
         "moves": [
           {
             "power": 120,
@@ -62,7 +62,7 @@
       },
       {
         "name": "marill",
-        "level": "15",
+        "level": "14",
         "moves": [
           {
             "power": 40,
@@ -119,7 +119,7 @@
       },
       {
         "name": "rhyhorn",
-        "level": "15",
+        "level": "14",
         "moves": [
           {
             "power": 0,
@@ -175,7 +175,7 @@
       },
       {
         "name": "onix",
-        "level": "15",
+        "level": "14",
         "moves": [
           {
             "power": 60,
@@ -231,7 +231,7 @@
       },
       {
         "name": "geodude",
-        "level": "15",
+        "level": "14",
         "moves": [
           {
             "power": 200,
@@ -287,7 +287,7 @@
       },
       {
         "name": "golbat",
-        "level": "15",
+        "level": "14",
         "moves": [
           {
             "power": 50,
@@ -7136,54 +7136,6 @@
     "speciality": "",
     "img": "/leaders/rs-brendan",
     "pokemon": [
-      {
-        "name": "corphish",
-        "level": "7",
-        "moves": [
-          {
-            "power": 55,
-            "type": "normal",
-            "damage_class": "physical",
-            "name": "Vise Grip",
-            "effect": ""
-          },
-          {
-            "power": 40,
-            "type": "water",
-            "damage_class": "special",
-            "name": "Bubble",
-            "effect": ""
-          },
-          {
-            "type": "normal",
-            "damage_class": "status",
-            "name": "Harden",
-            "effect": ""
-          },
-          {
-            "type": "normal",
-            "damage_class": "status",
-            "name": "Leer",
-            "effect": ""
-          }
-        ],
-        "ability": {
-          "name": "Battle Armor",
-          "effect": ""
-        },
-        "sprite": "341",
-        "types": [
-          "water"
-        ],
-        "stats": {
-          "hp": 43,
-          "atk": 80,
-          "def": 65,
-          "spa": 50,
-          "spd": 35,
-          "spe": 35
-        }
-      },
       {
         "name": "treecko",
         "level": "8",
@@ -17270,7 +17222,7 @@
     "pokemon": [
       {
         "name": "bulbasaur",
-        "level": "12",
+        "level": "11",
         "moves": [
           {
             "power": 0,
@@ -17326,7 +17278,7 @@
       },
       {
         "name": "shuckle",
-        "level": "10",
+        "level": "9",
         "moves": [
           {
             "power": 50,
@@ -17424,7 +17376,7 @@
       },
       {
         "name": "pineco",
-        "level": "10",
+        "level": "9",
         "moves": [
           {
             "power": 200,
@@ -17468,7 +17420,7 @@
       },
       {
         "name": "venonat",
-        "level": "9",
+        "level": "8",
         "moves": [
           {
             "power": 50,
@@ -17513,7 +17465,7 @@
       },
       {
         "name": "pidgeotto",
-        "level": "10",
+        "level": "9",
         "moves": [
           {
             "power": 0,
@@ -17565,7 +17517,7 @@
     "pokemon": [
       {
         "name": "noctowl",
-        "level": "12",
+        "level": "10",
         "moves": [
           {
             "power": 50,
@@ -17621,7 +17573,7 @@
       },
       {
         "name": "drifloon",
-        "level": "12",
+        "level": "10",
         "moves": [
           {
             "power": 0,
@@ -17673,7 +17625,7 @@
       },
       {
         "name": "ledian",
-        "level": "12",
+        "level": "10",
         "moves": [
           {
             "power": 0,
@@ -17725,7 +17677,7 @@
       },
       {
         "name": "pidgeotto",
-        "level": "13",
+        "level": "11",
         "moves": [
           {
             "power": 0,
@@ -17770,7 +17722,7 @@
       },
       {
         "name": "staravia",
-        "level": "13",
+        "level": "11",
         "moves": [
           {
             "power": 60,
@@ -17815,7 +17767,7 @@
       },
       {
         "name": "taillow",
-        "level": "10",
+        "level": "8",
         "moves": [
           {
             "power": 60,
@@ -17861,7 +17813,7 @@
     "name": "Miner Brad",
     "speciality": "rock",
     "img": "/leaders/frlg-hiker",
-    "lvlCap": 13,
+    "lvlCap": 12,
     "pokemon": [
       {
         "name": "graveler",
@@ -17925,11 +17877,11 @@
     "name": "Miner George",
     "speciality": "ground",
     "img": "/leaders/frlg-hiker",
-    "lvlCap": 14,
+    "lvlCap": 13,
     "pokemon": [
       {
         "name": "gloom",
-        "level": "13",
+        "level": "12",
         "moves": [
           {
             "power": 0,
@@ -17981,7 +17933,7 @@
       },
       {
         "name": "geodude",
-        "level": "16",
+        "level": "14",
         "moves": [
           {
             "power": 200,
@@ -18033,7 +17985,7 @@
       },
       {
         "name": "zubat",
-        "level": "13",
+        "level": "12",
         "moves": [
           {
             "power": 0,
@@ -18085,7 +18037,7 @@
       },
       {
         "name": "sandshrew",
-        "level": "15",
+        "level": "13",
         "moves": [
           {
             "power": 40,
@@ -18136,7 +18088,7 @@
       },
       {
         "name": "diglett",
-        "level": "14",
+        "level": "12",
         "moves": [
           {
             "power": 20,
@@ -18187,7 +18139,7 @@
       },
       {
         "name": "geodude-alola",
-        "level": "16",
+        "level": "14",
         "moves": [
           {
             "power": 40,
