@@ -7,6 +7,36 @@ import Themes from '$lib/data/theme.json'
 export const csr = true
 export const prerender = true
 
+const STARTER_ORDER = ['fire', 'water', 'grass']
+const STARTER_LABELS = {
+  fire: 'A',
+  water: 'B',
+  grass: 'C'
+}
+
+const filterTeamByStarter = (team, starter = 'all') => {
+  if (!team?.pokemon?.length || starter === 'all') return team
+
+  return {
+    ...team,
+    pokemon: team.pokemon.filter((p) => !p.starter || p.starter === starter)
+  }
+}
+
+const filterLeagueByStarter = (league, starter = 'all') =>
+  Object.entries(league || {}).reduce(
+    (acc, [id, team]) => ({
+      ...acc,
+      [id]: filterTeamByStarter(team, starter)
+    }),
+    {}
+  )
+
+const formatEncounterLocation = (route, encounter) => {
+  const rate = route.encounterRates?.[encounter]
+  return rate ? `${route.name} (${rate}%)` : route.name
+}
+
 export async function load({ params, url, fetch }) {
   const { game } = params
   const gameCfg = Object.values(Games).find((g) => toSlug(g.title) === game)
@@ -46,18 +76,51 @@ export async function load({ params, url, fetch }) {
       .map((x) => x.charAt(0).toUpperCase() + x.slice(1))
       .join(' ')
 
-  const fetchJson = (uri) =>
-    fetch(uri, { redirect: 'follow' }).then((res) => {
-      if (res.status === 301) return fetchJson(res.headers.get('location'))
-      else return res.json()
-    })
-  const [pokemon, route, fire, water, grass] = await Promise.all([
+  const fetchJson = async (uri) => {
+    const res = await fetch(uri, { redirect: 'follow' })
+
+    if (res.status === 301) return fetchJson(res.headers.get('location'))
+    if (!res.ok) throw new Error(`${res.status} ${uri}`)
+
+    return res.json()
+  }
+
+  const fetchOptionalJson = async (uri) => {
+    try {
+      return await fetchJson(uri)
+    } catch (e) {
+      if (String(e.message || e).startsWith('404 ')) return null
+      throw e
+    }
+  }
+
+  const [pokemon, route, combinedLeague] = await Promise.all([
     fetchJson(`/api/pokemon/${gameCfg.pid}.json`),
     fetchJson(`/api/route/${gameCfg.pid}.json`),
-    fetchJson(`/api/league/${gameCfg.pid}.fire.json`),
-    fetchJson(`/api/league/${gameCfg.pid}.water.json`),
-    fetchJson(`/api/league/${gameCfg.pid}.grass.json`)
+    fetchOptionalJson(`/api/league/${gameCfg.pid}.json`)
   ])
+
+  const league = combinedLeague
+    ? {
+        combined: true,
+        all: combinedLeague,
+        fire: filterLeagueByStarter(combinedLeague, 'fire'),
+        water: filterLeagueByStarter(combinedLeague, 'water'),
+        grass: filterLeagueByStarter(combinedLeague, 'grass')
+      }
+    : (() => {
+        const files = STARTER_ORDER.map((starter) =>
+          fetchJson(`/api/league/${gameCfg.pid}.${starter}.json`)
+        )
+
+        return Promise.all(files).then(([fire, water, grass]) => ({
+          combined: false,
+          fire,
+          water,
+          grass
+        }))
+      })()
+  const { combined, all, fire, water, grass } = await league
 
   const findPokemon = (id) =>
     pokemon.find(
@@ -75,7 +138,9 @@ export async function load({ params, url, fetch }) {
       ...(route.encounters || []).reduce(
         (rest, encounter) => ({
           ...rest,
-          [encounter]: (acc[encounter] || []).concat(route.name)
+          [encounter]: (acc[encounter] || []).concat(
+            formatEncounterLocation(route, encounter)
+          )
         }),
         {}
       )
@@ -128,9 +193,34 @@ export async function load({ params, url, fetch }) {
       }
     }, {})
 
+  const leagueData = all || fire
+  const expandGym = (gym) => {
+    if (!combined) return [gym]
+
+    const starters = STARTER_ORDER.filter((starter) =>
+      leagueData[gym.value]?.pokemon?.some((p) => p.starter === starter)
+    )
+
+    if (!starters.length) return [gym]
+
+    return starters.map((starter) => ({
+      ...gym,
+      starter,
+      boss:
+        gym.group === 'rival'
+          ? `Rival ${STARTER_LABELS[starter]}`
+          : `${gym.boss} ${STARTER_LABELS[starter]}`
+    }))
+  }
+
   const gyms = route
     .filter((r) => r.type === 'gym')
+    .flatMap(expandGym)
     .reduce((acc, g) => {
+      const team =
+        (g.starter ? filterTeamByStarter(leagueData[g.value], g.starter) : null) ||
+        fire[g.value]
+
       return {
         ...acc,
         [titleCase(g.group || 'other')]: (
@@ -138,7 +228,7 @@ export async function load({ params, url, fetch }) {
         ).concat({
           ...g,
           lvlCap: Math.max(
-            ...(fire[g.value]?.pokemon?.map((i) => i.level) || [])
+            ...(team?.pokemon?.map((i) => i.level) || [])
           )
         })
       }
@@ -157,6 +247,6 @@ export async function load({ params, url, fetch }) {
       encounters: encounterdata,
       encounterMap
     },
-    data: { fire, water, grass }
+    data: { combined, all, fire, water, grass }
   }
 }

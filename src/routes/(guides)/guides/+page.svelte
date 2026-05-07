@@ -9,7 +9,7 @@
 
   import { Logo } from '$lib/components/core'
 
-  const title = `Nuzlocke Tracker | Pokémon Nuzlocke Guides`
+  const title = `Run Tracker | Pokémon Run Guides`
   const description = `Find guides to Nuzlocking every Pokémon game from Generation 1 to 8 as well as some of the most popular Rom Hacks.`
 </script>
 
@@ -25,8 +25,8 @@
 <Hero theme={['#000', '#4a4a4a', '#fff']}>
   <svelte:fragment slot=hero>
     <div>
-      <small>Nuzlocke Tracker</small>
-      <h1>Pokémon Nuzlocke Guides</h1>
+      <small>Run Tracker</small>
+      <h1>Pokémon Run Guides</h1>
     </div>
   </svelte:fragment>
 </Hero>
@@ -48,7 +48,7 @@
               class=drop-shadow-mark/>
         </div>
         <div>
-          <h2>Pokémon {title} Nuzlocke Guide</h2>
+          <h2>Pokémon {title} Run Guide</h2>
           <p>
             See every Pokémon encounter & boss battle you'll face in
             Pokémon {title} to help you become the champion of the

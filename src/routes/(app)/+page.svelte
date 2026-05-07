@@ -69,16 +69,12 @@
 
 <main>
   <h1 aria-level="1" class="mx-auto text-center font-mono text-4xl">
-    Pokémon
-    <Picture
-      src="/logo"
+    <img
+      src="/assets/img/logos/kantoIRL-logo.png"
       loading="eager"
-      aspect="324x62"
-      pixelated
-      alt="Nuzlocke logo"
-      className="transition h-auto md:h-16 mt-2 mx-auto"
+      alt="Kanto IRL logo"
+      class="transition h-auto md:h-24 mt-2 mx-auto"
     />
-    tracker
   </h1>
 
   <div>
@@ -173,12 +169,7 @@
     </PixelatedContainer>
   </div>
 
-  <p>
-    Keep track of your Pokémon encounters across multiple Nuzlocke runs, and
-    prepare for Gym battles and Rival fights so you never wipe again! Get
-    insights into team match ups, compare stat blocks and get detail on Gym
-    movesets & abilities.
-  </p>
+
 </main>
 
 <style lang="postcss">

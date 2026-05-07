@@ -76,7 +76,7 @@
   $: {
     if ((selectedGame && !gameName) || customName === gameName) {
       customName = gameName = selectedGame
-        ? `${selectedGame?.title} Nuzlocke`
+        ? `${selectedGame?.title} Run`
         : ''
     }
   }
@@ -90,11 +90,11 @@
 </script>
 
 <svelte:head>
-  <title>Nuzlocke Tracker | Create new game</title>
+  <title>Run Tracker | Create new game</title>
 </svelte:head>
 
 <ScreenContainer
-  title="Select a New Nuzlocke"
+  title="Select a New Run"
   icon={File}
   className="mb-20 relative"
 >

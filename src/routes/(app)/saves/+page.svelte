@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-  <title>Nuzlocke Tracker | Load game</title>
+  <title>Run Tracker | Load game</title>
 </svelte:head>
 
 <Modal

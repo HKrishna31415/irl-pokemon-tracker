@@ -5,7 +5,8 @@
     updateGame,
     parse,
     readdata,
-    getGameStore
+    getGameStore,
+    read
   } from '$lib/store'
   import { fade, fly } from 'svelte/transition'
 
@@ -15,8 +16,10 @@
   import { MiniTeamController } from '$c/TeamBuilder'
 
   let game = {},
-    games
+    games,
+    money = 0
   activeGame.subscribe((id) => {
+    getGameStore(id).subscribe(read(d => { money = d.__money || 0 }))
     savedGames.subscribe(
       parse((g) => {
         game = g[id]
@@ -53,17 +56,18 @@
 
   import ThemeToggle from '$lib/components/theme-toggle.svelte'
   import { Icon, Logo, Button, Popover } from '$lib/components/core'
-  import { Box, Save, Game, Grave, Caret, CaretRight, Dots } from '$icons'
+  import { Box, Save, Game, Grave, Caret, CaretRight, Dots, Gift } from '$icons'
 
   const pages = [
     { name: 'Game', link: '/game', icon: Game },
     { name: 'Box', link: '/box', icon: Box },
+    { name: 'Store', link: '/store', icon: Gift },
     { name: 'Grave', link: '/graveyard', icon: Grave }
   ]
 </script>
 
 <svelte:head>
-  <title>Nuzlocke | {game?.name || ''}</title>
+  <title>Run | {game?.name || ''}</title>
 </svelte:head>
 
 <nav class={$page.url.pathname.replace('/', '')}>
@@ -159,7 +163,10 @@
 
     {#if $page.url.pathname !== '/graveyard'}<MiniTeamController />{/if}
 
-    <span class="relative inline-flex">
+    <span class="relative inline-flex items-center">
+      <div class="mr-4 text-lime-600 dark:text-lime-400 font-bold tracking-wider hidden sm:block">
+        ${money.toLocaleString()}
+      </div>
       <ThemeToggle />
 
       {#each pages as p}

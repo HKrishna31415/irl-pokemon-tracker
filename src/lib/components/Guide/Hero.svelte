@@ -11,7 +11,7 @@
   import { savedGames, createGame } from '$store'
 
   const onnew = () => {
-    savedGames.update(createGame(title + ' Nuzlocke', pid))
+    savedGames.update(createGame(title + ' Run', pid))
     window.location = '/game'
   }
 </script>
@@ -34,15 +34,15 @@
       <slot name="hero" />
     {:else}
       <div>
-        <small>Nuzlocke Tracker</small>
-        <h1>Pokémon {title} Nuzlocke Guide</h1>
+        <small>Run Tracker</small>
+        <h1>Pokémon {title} Run Guide</h1>
 
         <p>
           {#if description}
             {@html description}
           {:else}
             This guide contains useful information for a <strong
-              >{title} Nuzlocke</strong
+              >{title} Run</strong
             >. Lists of all of the available Pokémon, the number of encounters,
             and detailed overviews of all <strong>Boss battles</strong>.
           {/if}
@@ -87,9 +87,9 @@
   >
     <p>
       Now that you're ready to take on the <b
-        >Pokémon {title} Nuzlocke Challenge</b
-      >, why not keep track of all your encounters with the
-      <b>Nuzlocke Tracker</b>?
+        >Pokémon {title} Run Challenge</b
+      > with this guide? Want to keep track of your run with
+      <b>Run Tracker</b>?
 
       <br />
 

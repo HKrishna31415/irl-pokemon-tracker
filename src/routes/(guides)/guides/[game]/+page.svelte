@@ -11,7 +11,10 @@
   import { faq } from '$c/Guide/schemas'
 
   setContext('game', {
-    getLeague: (_, starter) => data.data[starter]
+    getLeague: (_, starter = 'all') =>
+      starter === 'all'
+        ? data.data.all || data.data.fire
+        : data.data[starter] || data.data.fire
   })
   setContext('simple-modal', {
     open: false
@@ -21,18 +24,18 @@
   const encounterCount = route.count
   const routeCount = route.routes.length
 
-  const title = `Nuzlocke Tracker | Pokémon ${game.title} Nuzlocke Guide`
+  const title = `Run Tracker | Pokémon ${game.title} Run Guide`
   const description = `This guide shows you all ${encounterCount} Pokémon available across ${routeCount} route encounters in Pokémon ${game.title}, as well as detailed information on all ${gymCount} boss battles!`
 
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `A Nuzlocke guide for Pokémon ${game.title}`,
+    headline: `A Run guide for Pokémon ${game.title}`,
     alternativeHeadline: `A guide and overview to Nuzlocking Pokémon ${game.title}`,
     image: `https://img.nuzlocke.app${game.logo}@2.png`,
-    author: 'Nuzlocke Tracker',
+    author: 'Run Tracker',
     genre: 'Pokémon',
-    keywords: `pokemon nuzlocke ${game.title} encounters boss battles fights`,
+    keywords: `pokemon run ${game.title} encounters boss battles fights`,
     url: `https://nuzlocke.app/${path}`,
     datePublished: attributes.created || '2022-01-07',
     dateCreated: attributes.created || '2022-01-07',

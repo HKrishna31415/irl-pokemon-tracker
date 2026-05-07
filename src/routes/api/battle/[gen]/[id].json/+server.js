@@ -136,8 +136,17 @@ export async function GET({ params, url }) {
 
   if (!game) return new Response('', { status: 404 })
 
-  const patch =
+  const patchData =
     patches[game?.patchId] || patches[gen] || patches[game.lid] || {}
+
+  const patch = {
+    move: {},
+    ability: {},
+    item: {},
+    pokemon: {},
+    fakemon: {},
+    ...patchData
+  }
 
   const {
     types = {},

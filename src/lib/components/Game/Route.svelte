@@ -8,6 +8,8 @@
     hidelocation,
     read
   } from '$lib/store'
+  import { Gift } from '$icons'
+  import { Icon } from '$c/core'
 
   import { toDbLocation } from '$utils/link'
   import { insertList } from '$utils/arr'
@@ -46,9 +48,13 @@
   let element
 
   /** Custom route handlers & Empty routes */
+  const FREE_ROLLS_PER_ROUTE = 3
+
   let custom = [],
     hidden = [],
     bossTeamIds = [],
+    encounterTokens = 0,
+    routeRolls = {},
     hideRoute = (_) => false
   store.subscribe(
     read((d) => {
@@ -56,9 +62,45 @@
       if (!hidden.length && d.__hidden?.length) hidden = d.__hidden
 
       bossTeamIds = (d.__teams || []).map((i) => i.id)
+      encounterTokens = d.__encounterTokens || 0
+      routeRolls = d.__routeRolls || {}
       hideRoute = hideRouteF(d)
     })
   )
+
+  /** Returns the number of extra encounters already used on a route */
+  const getRollCount = (routeName) => routeRolls[routeName] || 0
+
+  /**
+   * Add an extra encounter slot to a route beyond the first 3.
+   * Costs 1 Encounter Token.
+   */
+  const useEncounterToken = (routeName) => {
+    if (encounterTokens <= 0) {
+      window.alert(`No Encounter Tokens left! You've used your 3 guaranteed slots on ${routeName}. Purchase more tokens in the Store.`)
+      return
+    }
+
+    if (!window.confirm(`Spend 1 Encounter Token for an extra encounter on ${routeName}? (${encounterTokens} token${encounterTokens !== 1 ? 's' : ''} remaining)`)) return
+
+    const routeIndex = route.findIndex(r => r.name === routeName)
+    const extrasCount = custom.filter(c => c.parentId === routeName).length
+    const loc = {
+      type: 'custom',
+      name: `${routeName} (Extra ${extrasCount + 1})`,
+      parentId: routeName,
+      id: `${routeName.toLowerCase().replace(/\s+/g, '-')}-extra-${extrasCount + 1}`,
+      index: routeIndex !== -1 ? routeIndex + 1 : 9999
+    }
+    custom = custom.concat(loc)
+
+    store.update((raw) => {
+      const d = JSON.parse(raw)
+      const newCustom = (d.__custom || []).concat(loc)
+      const newTokens = Math.max(0, (d.__encounterTokens || 0) - 1)
+      return JSON.stringify({ ...d, __encounterTokens: newTokens, __custom: newCustom })
+    })
+  }
 
   const onnewlocation = (e) => {
     const index = e.detail.id + 1
@@ -116,7 +158,9 @@
     scroll = null
   })
 
-  $: routeList = insertList(route, custom)
+  $: routeList = insertList(route, custom).filter(p => !p.parentId)
+  $: getExtras = (routeName) => custom.filter(c => c.parentId === routeName || (c.name && c.name.startsWith(routeName) && c.name.includes('(Extra')))
+
 </script>
 
 <ul bind:this={ulRef} class="flex flex-col gap-y-0 lg:gap-y-2 {className}">
@@ -135,6 +179,7 @@
           {id}
           {store}
           encounters={p.encounters}
+          encounterRates={p.encounterRates}
           type="starter"
           location="Starter"
           locationName="Starter"
@@ -155,21 +200,75 @@
       </li>
     {:else if isRoute(p)}
       <li
-        class="location"
+        class="location-group mb-4 lg:mb-6 flex flex-col gap-y-2 rounded-2xl border border-gray-100 bg-white/40 p-3 shadow-sm transition-all hover:bg-white/60 dark:border-gray-800/50 dark:bg-gray-900/20 dark:hover:bg-gray-900/40"
         id="route-{p.name}"
         in:fade
         out:fade={{ duration: 100 }}
         class:hidden={hidden || !showRoute(p, filters, hideRoute)}
       >
-        <PokemonSelector
-          {id}
-          {store}
-          infolink={toDbLocation(key, p.name)}
-          location={p.name}
-          encounters={p.encounters}
-          on:hide={onhidelocation}
-          on:new={onnewlocation}
-        />
+        <div class="flex items-center justify-between px-1">
+          <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">
+            {p.name}
+          </h3>
+          
+          {#if encounterTokens > 0}
+            <button
+              class="inline-flex items-center gap-x-1 rounded-full bg-lime-100 px-2 py-0.5 text-[10px] font-bold text-lime-700 shadow-xs transition hover:bg-lime-200 dark:bg-lime-900/40 dark:text-lime-300 dark:hover:bg-lime-800/60"
+              title="Spend 1 Encounter Token for an extra slot on {p.name}"
+              on:click={() => useEncounterToken(p.name)}
+            >
+              <Icon inline icon={Gift} height="0.8rem" />
+              +1 SLOT ({encounterTokens})
+            </button>
+          {/if}
+        </div>
+
+        <div class="flex flex-col gap-y-1">
+          <PokemonSelector
+            {id}
+            {store}
+            infolink={toDbLocation(key, p.name)}
+            location={p.name}
+            encounters={p.encounters}
+            encounterRates={p.encounterRates}
+            on:hide={onhidelocation}
+            on:new={onnewlocation}
+          />
+          
+          <PokemonSelector
+            id="{id}-2"
+            {store}
+            location="{p.name} (Roll 2)"
+            locationName="{p.name} (Roll 2)"
+            encounters={p.encounters}
+            encounterRates={p.encounterRates}
+            on:new={onnewlocation}
+          />
+
+          <PokemonSelector
+            id="{id}-3"
+            {store}
+            location="{p.name} (Roll 3)"
+            locationName="{p.name} (Roll 3)"
+            encounters={p.encounters}
+            encounterRates={p.encounterRates}
+            on:new={onnewlocation}
+          />
+
+          {#each getExtras(p.name) as extra, i}
+            <PokemonSelector
+              id="{id}-extra-{i}"
+              {store}
+              type="custom"
+              location={extra.id}
+              locationName={extra.name}
+              encounters={p.encounters}
+              encounterRates={p.encounterRates}
+              on:new={onnewlocation}
+              on:delete={ondeletelocation}
+            />
+          {/each}
+        </div>
       </li>
     {:else if isCustom(p)}
       <li
@@ -185,6 +284,8 @@
           location={p.id}
           {id}
           {store}
+          encounters={p.encounters}
+          encounterRates={p.encounterRates}
           on:new={onnewlocation}
           on:delete={ondeletelocation}
         >

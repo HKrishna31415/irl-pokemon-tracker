@@ -20,7 +20,8 @@
   // Extra leader data
   let doubleBattle = false,
     effect,
-    info
+    info,
+    dataLevelCap = null
 
   import { browser } from '$app/environment'
   import { getContext } from 'svelte'
@@ -63,9 +64,21 @@
 
   const fetchData = async (starter) => {
     if (!browser) return
+
+    loading = true
+    pokemon = []
+    name = ''
+    speciality = ''
+    img = null
+    doubleBattle = false
+    effect = null
+    info = null
+    dataLevelCap = null
+
     try {
       const league = await getLeague(game, starter)
       const data = league[id]
+      if (!data) throw new Error(`Missing boss data for ${game}:${id}`)
 
       img = bossToImage(data);
 
@@ -76,6 +89,7 @@
       doubleBattle = data.doubleBattle
       effect = data.effect
       info = data.info
+      dataLevelCap = data.lvlCap ?? null
       loading = false
     } catch (e) {
       console.error(e)
@@ -84,11 +98,12 @@
 
   $: (async () => await fetchData(starter))()
 
-  $: levelCap = pokemon.every(
+  $: derivedLevelCap = pokemon.every(
     (it) => it.level.startsWith('+') || it.level.startsWith('-')
   )
     ? null
     : pokemon.reduce((acc, it) => Math.max(acc, it.level), 0)
+  $: levelCap = dataLevelCap ?? derivedLevelCap
   $: maxStat = pokemon.reduce(
     (acc, it) => Math.max(acc, Math.max(...Object.values(it.stats))),
     0
@@ -225,7 +240,7 @@
 
           {#if levelCap}
             <SettingWrapper let:setting id="level-caps">
-              {#if (setting === 1 && (type === 'gym-leader' || type === 'elite-four')) || (setting === 2 && (type === 'gym-leader' || type === 'elite-four' || type === 'rival')) || setting === 3 || forceLevelCap}
+              {#if (setting === 1 && (type === 'gym-leader' || type === 'elite-four')) || (setting === 2 && (type === 'gym-leader' || type === 'elite-four' || type === 'rival' || type === 'mini-boss')) || setting === 3 || forceLevelCap}
                 <Label heading="Lvl cap" body={levelCap} />
               {/if}
             </SettingWrapper>

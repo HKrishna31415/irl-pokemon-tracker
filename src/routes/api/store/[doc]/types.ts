@@ -1,6 +1,7 @@
 import z from 'zod'
 
 const EGame = z.enum([
+    'kantoirl', 'kantoirl_hard',
     'blazingem',
     'newgen',
     'glazed',

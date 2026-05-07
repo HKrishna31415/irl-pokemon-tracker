@@ -33,7 +33,7 @@
 
   let filter = 'nuzlocke'
   const filters = [
-    { label: 'Nuzlocke', val: 'nuzlocke' },
+    { label: 'Run', val: 'nuzlocke' },
     { label: 'Routes', val: 'route' },
     { label: 'Bosses', val: 'bosses' },
     { label: 'Upcoming', val: 'upcoming' }
@@ -90,6 +90,12 @@
 
       gameStore = getGameStore(id)
       gameKey = key
+
+      if (!Games[key]) {
+        console.error(`Game ${key} not found in games list`)
+        window.location = '/'
+        return
+      }
 
       fetchRoute(Games[key].pid).then((r) => {
         console.timeEnd('setup')

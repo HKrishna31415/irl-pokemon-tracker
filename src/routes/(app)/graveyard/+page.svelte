@@ -81,7 +81,7 @@
 </script>
 
 <svelte:head>
-  <title>Nuzlocke Tracker | Graveyard</title>
+  <title>Run Tracker | Graveyard</title>
 </svelte:head>
 
 <main

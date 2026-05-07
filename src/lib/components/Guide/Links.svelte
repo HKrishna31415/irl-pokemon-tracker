@@ -8,17 +8,17 @@
   {@html SVGs.lines}
 
   <div class=g-container>
-    <h2>Other Nuzlocke Guides</h2>
+    <h2>Other Run Guides</h2>
 
     <div class=g-grid>
       {#each order as id}
         <div>
           <h3>{id.startsWith('rom') ? 'Rom hacks' : `Gen ${id}`}</h3>
-          {#each links[id] as { href, logo, title }}
+          {#each links[id] || [] as { href, logo, title }}
             <a
               {href}
               data-sveltekit-reload
-              title='Pokémon {title} Nuzlocke Guide'>
+              title='Pokémon {title} Run Guide'>
               Pokémon {title}
             </a>
           {/each}

@@ -12,13 +12,15 @@
 
   const count = Object.values(gyms).flat().length
   const order = GuideBossOrder.filter(i => gyms[i])
-  const identity = i => i
 
-  const rivalVal = gyms['Rival'][0].value
-  const champVal = gyms['Elite Four'].slice(-2)[0].value
+  const rivalVal = gyms['Rival']?.[0]?.value
+  const champVal = gyms['Elite Four']?.slice(-2)?.[0]?.value
   // TODO : Fix the games whose guides are failing
-  const rivalData = data?.fire[rivalVal] ?? { name: 'your rival', pokemon: [{ name: 'Pokemon'}] }
-  const champData = data.fire[champVal] ?? { name: 'the champion', pokemon: [{ name: 'Pokemon'}] }
+  const league = data?.all || data?.fire || {}
+  const rivalData = league[rivalVal] ?? { name: 'your rival', pokemon: [{ name: 'Pokemon'}] }
+  const champData = league[champVal] ?? { name: 'the champion', pokemon: [{ name: 'Pokemon'}] }
+  const rivalLead = rivalData.pokemon.find(p => !p.starter) || rivalData.pokemon[0] || { name: 'Pokemon' }
+  const champAce = champData.pokemon.slice(-1)[0] || { name: 'Pokemon' }
 
   let starter = 'fire'
   const setstarter = type => _ => starter = type
@@ -35,7 +37,7 @@
 <section class=copy>
   <div>
     <p>
-      In order to complete a <b>{game.title}</b> Nuzlocke and become the
+      In order to complete a <b>{game.title}</b> Run and become the
       Champion, you will need to win <span class=figure>{count}</span>
       Boss battles throughout the {capitalise(game.region)} region - ranging from
       bickering Rival & Evil team fights, to Gym Leaders & ultimately the Elite Four.
@@ -44,8 +46,8 @@
       These can be a challenge, especially when your dear nicknamed
       nuzlocke mons are at risk. So below we've listed detailed
       overviews of all these fights! Giving you all the information you'll need to
-      face everything from <b>{rivalData.name}'s {capitalise(rivalData.pokemon[0].name)}</b> to
-      <b>{champData.name}'s {capitalise(champData.pokemon.slice(-1)[0].name)}</b>.
+      face everything from <b>{rivalData.name}'s {capitalise(rivalLead.name)}</b> to
+      <b>{champData.name}'s {capitalise(champAce.name)}</b>.
     </p>
   </div>
   <div>
@@ -58,25 +60,34 @@
   </div>
 </section>
 
-<section class=starter>
-  <h3>Select your starter type</h3>
-  <ul role=radiogroup class=flex>
-    {#each ['grass', 'water', 'fire'] as type}
-      <li class={type} aria-checked={starter === type} role=radio>
-        <button title='Select {type}' on:click={setstarter(type)}>
-          <PIcon className='starter-icon' type=symbol name='type-{type}' />
-        </button>
-      </li>
-    {/each}
-  </ul>
+{#if !data.combined}
+  <section class=starter>
+    <h3>Select your starter type</h3>
+    <ul role=radiogroup class=flex>
+      {#each ['grass', 'water', 'fire'] as type}
+        <li class={type} aria-checked={starter === type} role=radio>
+          <button title='Select {type}' on:click={setstarter(type)}>
+            <PIcon className='starter-icon' type=symbol name='type-{type}' />
+          </button>
+        </li>
+      {/each}
+    </ul>
 
-  <p>
-    Like all Pokémon games, you will have to select a starter. The
-    type will update some of the boss teams to match. For
-    example, if your starter was a grass type <b>{rivalData.name}</b> might have a
-    fire type to take advantage!
-  </p>
-</section>
+    <p>
+      Like all Pokémon games, you will have to select a starter. The
+      type will update some of the boss teams to match. For
+      example, if your starter was a grass type <b>{rivalData.name}</b> might have a
+      fire type to take advantage!
+    </p>
+  </section>
+{:else}
+  <section class=starter>
+    <p>
+      Starter-dependent rival fights are shown as separate entries here, so you can
+      compare Rival A, B and C without switching views.
+    </p>
+  </section>
+{/if}
 
 {#each order as group, i}
   <section>
@@ -89,14 +100,14 @@
     </h3>
 
     <ul>
-      {#each gyms[group] as { group, value, boss, name, lvlCap }}
+      {#each gyms[group] as { group, value, boss, name, lvlCap, starter: entryStarter }}
         <li id={toId.boss(boss, name)}>
           <GymCard
             reader
             forceLevelCap
             loading={false}
             {game}
-            {starter}
+            starter={entryStarter || starter}
             id={value}
             location={name}
             />

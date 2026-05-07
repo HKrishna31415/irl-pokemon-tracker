@@ -17,7 +17,7 @@
 </h2>
 
 <p>
-  A fun aspect of Nuzlocke runs is the variety of encounters forcing you to try
+  A fun aspect of runs is the variety of encounters forcing you to try
   out new Pokémon you've never used before. That is why it's important to know
   which Pokémon will be available during a run. We've compiled a list of every
   encounter for <b>Pokémon {game.title}</b> so you can quickly see who you might

@@ -40,7 +40,7 @@ const patchPokemon = (pkmn, patches = {}, fakemon = {}) => {
 
 export async function GET({ params }) {
   const game = games[params.game]
-  const { pokemon, fakemon } =
+  const { pokemon = {}, fakemon = {} } =
     patches[game?.patchId] || patches[params.game] || {}
 
   if (!game) return new Response('', { status: 404 })

@@ -35,18 +35,21 @@
     Dots,
     Map,
     Search,
-    LongGrass
+    LongGrass,
+    Dice
   } from '$icons'
 
   import { createEventDispatcher, onMount, getContext } from 'svelte'
 
   let selected, nickname, status, nature, hidden, death
+  let level, ivs
   let prevstatus = 'loading'
 
   // Search text bindings for ACs
   let search, statusSearch, natureSearch
 
   export let encounters = []
+  export let encounterRates = {}
   let encounterItems = []
 
   const encounterF = (_) =>
@@ -124,6 +127,8 @@
         hidden = pkmn.hidden
         nickname = pkmn.nickname
         death = pkmn.death
+        level = pkmn.level
+        ivs = pkmn.ivs
         if (pkmn.pokemon)
           getPkmn(pkmn.pokemon).then((p) => {
             selected = p
@@ -141,7 +146,9 @@
     location: locationName || location,
     ...(nickname ? { nickname } : {}),
     ...(hidden ? { hidden: true } : {}),
-    ...(status?.id === 5 && death ? { death } : {})
+    ...(status?.id === 5 && death ? { death } : {}),
+    ...(level ? { level } : {}),
+    ...(ivs ? { ivs } : {})
   });
 
   if (selected && !oEqual(topatch, resetd)) {
@@ -340,10 +347,6 @@
             >
               <span
                 class="flex h-8 items-center px-4 py-5 md:py-6"
-                class:hidden={dupes === 2 &&
-                  (missdupes ? misslines : dupelines).has(option?.evoline)}
-                class:dupe={dupes === 1 &&
-                  (missdupes ? misslines : dupelines).has(option?.evoline)}
                 aria-label={label}
                 slot="option"
                 let:option
@@ -354,10 +357,6 @@
                   className="transform -mb-4 -ml-6 -mt-5 -mr-2"
                 />
                 {@html label}
-                {#if dupes === 1 && (missdupes ? misslines : dupelines).has(option?.evoline)}
-                  <span class="dupe__span absolute right-4 text-tiny">dupe</span
-                  >
-                {/if}
               </span>
 
               <svelte:fragment slot="icon" let:iconClass>
@@ -398,11 +397,22 @@
         bind:value={nickname}
         name="{location} Nickname"
         placeholder="Nickname"
-        className="col-span-2 {!selected || hidden || status?.id === 4
+        className="col-span-1 {!selected || hidden || status?.id === 4
           ? 'hidden sm:block'
           : ''}"
       />
     </SettingsWrapper>
+
+    <Input
+      rounded
+      type="number"
+      bind:value={level}
+      name="{location} Level"
+      placeholder="Lvl"
+      className="col-span-1 {!selected || hidden || status?.id === 4
+        ? 'hidden sm:block'
+        : ''}"
+    />
 
     <SettingsWrapper id="permadeath" on="1" condition={status?.id === 5}>
       <div
@@ -504,6 +514,50 @@
     </AutoCompleteV2>
 
     <span class="inline-flex gap-x-2 text-left">
+      {#if !selected && encounters && encounters.length}
+        <IconButton
+          rounded
+          src={Dice}
+          title="Roll random encounter"
+          on:click={() => {
+            getPkmns(encounters).then(e => {
+               let result;
+               if (encounterRates && Object.keys(encounterRates).length) {
+                 const total = Object.values(encounterRates).reduce((a, b) => a + b, 0)
+                 let r = Math.random() * total
+                 for (const [pkmnId, rate] of Object.entries(encounterRates)) {
+                   r -= rate
+                   if (r <= 0) {
+                     result = e[pkmnId]
+                     break
+                   }
+                 }
+               } else {
+                 const list = (encounters || []).map(i => e[i]).filter(i => i)
+                 if(list.length) {
+                   result = list[Math.floor(Math.random() * list.length)]
+                 }
+               }
+
+               if(result) {
+                 selected = result
+                 search = null
+                 nature = Natures[Math.floor(Math.random() * Natures.length)]
+                 ivs = {
+                   hp: Math.floor(Math.random() * 31) + 1,
+                   atk: Math.floor(Math.random() * 31) + 1,
+                   def: Math.floor(Math.random() * 31) + 1,
+                   spa: Math.floor(Math.random() * 31) + 1,
+                   spd: Math.floor(Math.random() * 31) + 1,
+                   spe: Math.floor(Math.random() * 31) + 1
+                 }
+               }
+            })
+          }}
+          containerClassName={selected || hidden ? 'hidden sm:block' : ''}
+        />
+      {/if}
+
       {#if selected && status && status.id !== 4 && status.id !== 5}
         <IconButton
           rounded

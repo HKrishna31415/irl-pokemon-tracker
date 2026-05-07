@@ -7,13 +7,13 @@
 
 <svelte:head>
   {#if $page.status === 404}
-    <title>Nuzlocke Tracker | Not Found</title>
-    <meta property="og:title" content="Nuzlocke Tracker | Not Found" />
-    <meta name="twitter:title" content="Nuzlocke Tracker | Not Found" />
+    <title>Run Tracker | Not Found</title>
+    <meta property="og:title" content="Run Tracker | Not Found" />
+    <meta name="twitter:title" content="Run Tracker | Not Found" />
   {:else}
-    <title>Nuzlocke Tracker Error</title>
-    <meta property="og:title" content="Nuzlocke Tracker | Error" />
-    <meta name="twitter:title" content="Nuzlocke Tracker | Error" />
+    <title>Run Tracker Error</title>
+    <meta property="og:title" content="Run Tracker | Error" />
+    <meta name="twitter:title" content="Run Tracker | Error" />
   {/if}
 
   <meta name="robots" content="nofollow, noindex" />

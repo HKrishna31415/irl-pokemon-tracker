@@ -22,6 +22,7 @@ interface IRoute {
     name: string;
     type: RouteType.route;
     encounters: string[];
+    encounterRates?: Record<string, number>;
 }
 
 interface IGym {
@@ -80,8 +81,14 @@ const generateGame = (routes: Route[], patch?: IPatch, gen?: string): Record<str
 
             if (!validEncounters || !validEncounters.length) return acc;
 
+            const route = it as IRoute
+            const expandedEncounters = validEncounters.flatMap((encounter) => {
+                const rate = route.encounterRates?.[encounter]
+                return Array.from({ length: Math.max(1, rate || 1) }, () => encounter)
+            })
+
             const encounter =
-                validEncounters[Math.floor(Math.random() * validEncounters.length)];
+                expandedEncounters[Math.floor(Math.random() * expandedEncounters.length)];
 
             seen.add(PokemonMap[normalise(encounter)].evoline);
             return {

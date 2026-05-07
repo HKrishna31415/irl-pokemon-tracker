@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-  <title>Nuzlocke Tracker | Privacy Policy</title>
+  <title>Run Tracker | Privacy Policy</title>
 </svelte:head>
 
 <main class='container mx-auto text-gray-800 pb-24 pt-8 sm:pt-0 dark:text-gray-300'>

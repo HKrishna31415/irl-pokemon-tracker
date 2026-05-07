@@ -70,7 +70,7 @@
         JSON.stringify({ __meta: meta, ...JSON.parse(gameData || '{}') })
       )
     downloadAnchor.setAttribute('href', 'data:' + data)
-    downloadAnchor.setAttribute('download', `Nuzlocke Tracker - ${name}.nzsav`)
+    downloadAnchor.setAttribute('download', `Run Tracker - ${name}.nzsav`)
   }
 
   const { open } = getContext('simple-modal')

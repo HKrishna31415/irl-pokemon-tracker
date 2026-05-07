@@ -3,8 +3,8 @@ import { toList, capitalise } from '$utils/string'
 export const faq = (game, data, { routes, gyms, encounters }) => {
   const { title } = game
   const routesQuestion = [
-    `How many encounters are there in a Pokémon ${title} Nuzlocke`,
-    `There are ${routes.length} distinct routes and locations to encounter Pokémon in a Pokémon ${title} Nuzlocke run.`
+    `How many encounters are there in a Pokémon ${title} Run`,
+    `There are ${routes.length} distinct routes and locations to encounter Pokémon in a Pokémon ${title} Run.`
   ]
   const encounterTypesQuestions = Object
         .entries(encounters)

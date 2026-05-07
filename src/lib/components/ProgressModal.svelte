@@ -63,9 +63,26 @@
       team: team.map((i) => ({ sprite: i.alias, id: locid(i.original) }))
     })
 
+    const isNewDefeat = !bossTeams.some((t) => t.id === boss.id)
+    let extraPatch = {}
+
+    if (isNewDefeat) {
+      const payout = boss.type === 'gym-leader' ? 10000 : 2000
+      extraPatch.__money = (rawData.__money || 0) + payout
+
+      team.forEach(i => {
+        const id = locid(i.original)
+        const mon = rawData[id]
+        if (mon) {
+          extraPatch[id] = { ...mon, level: (mon.level || 0) + 1 }
+        }
+      })
+    }
+
     gameStore.update(
       patch({
-        __teams: bossTeams.filter((t) => t.id !== boss.id).concat(teamData)
+        __teams: bossTeams.filter((t) => t.id !== boss.id).concat(teamData),
+        ...extraPatch
       })
     )
 
