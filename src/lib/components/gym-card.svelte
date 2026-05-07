@@ -37,7 +37,7 @@
   import { Picture, Icon, PIcon, IconButton, Accordion, Tooltip } from '$c/core'
   import { Wrapper as SettingWrapper } from '$lib/components/Settings'
 
-  import { Loop as Badge, Ball, Info } from '$icons'
+  import { Loop as Badge, Ball, Info, Download } from '$icons'
   import { Vs } from '$lib/components/BossBattle'
   import { bossToImage } from '$utils/rewrites'
 
@@ -108,6 +108,33 @@
     (acc, it) => Math.max(acc, Math.max(...Object.values(it.stats))),
     0
   )
+
+  const exportToShowdown = () => {
+    const showdownTeam = pokemon
+      .map((p) => {
+        const name = p.name
+        const item = p.held?.name || ''
+        const ability = p.ability?.name || ''
+        const level = p.level
+        const stats = p.stats
+        const moves = p.moves.map((m) => m.name)
+
+        return `${capitalise(name)}${item ? ' @ ' + item : ''}
+Ability: ${ability}
+Level: ${level}
+EVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Serious Nature
+- ${moves[0] || 'Move 1'}
+- ${moves[1] || 'Move 2'}
+- ${moves[2] || 'Move 3'}
+- ${moves[3] || 'Move 4'}`
+      })
+      .join('\n\n')
+
+    navigator.clipboard.writeText(showdownTeam).then(() => {
+      alert(`${name}'s team exported to clipboard!`)
+    })
+  }
 </script>
 
 {#if reader}
@@ -259,6 +286,9 @@
               />
             </IconButton>
           {/if}
+          <IconButton rounded title="Export {name}'s team to Showdown" on:click={exportToShowdown}>
+            <Icon class="pl-1" height="1.2em" inline icon={Download} />
+          </IconButton>
         {/if}
       </div>
     </span>

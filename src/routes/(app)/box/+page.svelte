@@ -8,7 +8,7 @@
 
   import { Settings } from '$lib/components/Settings'
   import { Loader, PIcon, IconButton, Tooltip, Toggle, Icon } from '$c/core'
-  import { Ball, Plus, Minus, Shiny, X, Deceased, External } from '$icons'
+  import { Ball, Plus, Minus, Shiny, X, Deceased, External, Download } from '$icons'
 
   import TypeLogo from '$lib/components/type-logo.svelte'
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
@@ -35,6 +35,7 @@
   import { UNOWN, createImgUrl } from '$utils/rewrites'
   import { toDb } from '$utils/link'
   import { summarise } from '$utils/badges'
+  import { NaturesMap } from '$lib/data/natures'
 
   const region = getContext('region')
   const { getPkmns, getPkmn } = getContext('game')
@@ -223,6 +224,66 @@
       .filter((i) => i)
       .slice(0, 6)
   }
+
+  const exportToShowdown = async () => {
+    const showdownTeam = await Promise.all(
+      mons.map(async (p) => {
+        const data = Pokemon[p.pokemon]
+        const nickname = p.nickname ? `${p.nickname} (${data.name})` : data.name
+        const item = '' // Item tracking not currently implemented
+        const ability = p.ability || 'Unknown Ability'
+        const level = p.level || 50
+        const nature = p.nature ? NaturesMap[p.nature]?.label : 'Serious'
+        const ivs = p.ivs || {
+          hp: 31,
+          atk: 31,
+          def: 31,
+          spa: 31,
+          spd: 31,
+          spe: 31
+        }
+
+        let moves = ['Move 1', 'Move 2', 'Move 3', 'Move 4']
+        try {
+          const res = await fetch(`/assets/data/learnsets/${p.pokemon}.json`)
+          const ls = await res.json()
+          if (ls && ls.learnset) {
+            const possibleMoves = Object.entries(ls.learnset)
+              .map(([move, sources]) => {
+                const lvlSource = sources.find((s) => s.startsWith('8L'))
+                if (!lvlSource) return null
+                const lvl = parseInt(lvlSource.replace('8L', ''))
+                return { move, lvl }
+              })
+              .filter((m) => m && m.lvl <= level)
+              .sort((a, b) => b.lvl - a.lvl)
+
+            moves = possibleMoves
+              .slice(0, 4)
+              .map((m) => capitalise(m.move.replace(/-/g, ' ')))
+            while (moves.length < 4) moves.push(`Move ${moves.length + 1}`)
+          }
+        } catch (e) {
+          console.warn(`Could not fetch learnset for ${p.pokemon}`)
+        }
+
+        return `${nickname}${item ? ' @ ' + item : ''}
+Ability: ${ability}
+Level: ${level}
+EVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+${nature} Nature
+IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd} SpD / ${ivs.spe} Spe
+- ${moves[0]}
+- ${moves[1]}
+- ${moves[2]}
+- ${moves[3]}`
+      })
+    )
+
+    navigator.clipboard.writeText(showdownTeam.join('\n\n')).then(() => {
+      alert('Team exported to clipboard!')
+    })
+  }
 </script>
 
 {#if loading}
@@ -246,6 +307,10 @@
           <AnalysisModal box={mons.map((p) => Pokemon[p.pokemon])}>
             <small>Team</small>
           </AnalysisModal>
+          <IconButton rounded title="Export Team to Showdown" on:click={exportToShowdown}>
+            <Icon class="pl-1" height="1.2em" inline icon={Download} />
+            <small class="pl-0.5 pr-2">Showdown</small>
+          </IconButton>
 
           <Settings class="absolute right-0" />
 

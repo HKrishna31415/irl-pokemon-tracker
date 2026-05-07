@@ -545,19 +545,21 @@
             }
 
             const pkmnAbilities = selected.abilities || {}
-            const rAbility = Math.random()
-            if (rAbility < 0.1 && pkmnAbilities.H) {
-              ability = pkmnAbilities.H
+            const h = pkmnAbilities.H
+            const regs = Object.keys(pkmnAbilities)
+              .filter((k) => k !== 'H')
+              .map((k) => pkmnAbilities[k])
+
+            const roll = Math.floor(Math.random() * 10) + 1
+            if (roll === 10 && h) ability = h
+            else if (regs.length === 3) {
+              if (roll <= 3) ability = regs[0]
+              else if (roll <= 6) ability = regs[1]
+              else ability = regs[2]
+            } else if (regs.length === 2) {
+              ability = roll % 2 !== 0 ? regs[0] : regs[1]
             } else {
-              const regs = Object.keys(pkmnAbilities)
-                .filter((k) => k !== 'H')
-                .map((k) => pkmnAbilities[k])
-              if (regs.length) {
-                const roll = Math.random() * 0.9
-                if (roll < 0.3) ability = regs[0]
-                else if (roll < 0.6) ability = regs[1] || regs[0]
-                else ability = regs[2] || regs[1] || regs[0]
-              }
+              ability = regs[0] || h
             }
           }}
         >
@@ -609,23 +611,25 @@
                }
 
                if(result) {
-                 selected = result
                  search = null
                  const pkmnAbilities = result.abilities || {}
-                 const rAbility = Math.random()
-                 if (rAbility < 0.1 && pkmnAbilities.H) {
-                   ability = pkmnAbilities.H
+                 const h = pkmnAbilities.H
+                 const regs = Object.keys(pkmnAbilities)
+                   .filter((k) => k !== 'H')
+                   .map((k) => pkmnAbilities[k])
+
+                 const roll = Math.floor(Math.random() * 10) + 1
+                 if (roll === 10 && h) ability = h
+                 else if (regs.length === 3) {
+                   if (roll <= 3) ability = regs[0]
+                   else if (roll <= 6) ability = regs[1]
+                   else ability = regs[2]
+                 } else if (regs.length === 2) {
+                   ability = roll % 2 !== 0 ? regs[0] : regs[1]
                  } else {
-                   const regs = Object.keys(pkmnAbilities)
-                     .filter((k) => k !== 'H')
-                     .map((k) => pkmnAbilities[k])
-                   if (regs.length) {
-                     const roll = Math.random() * 0.9
-                     if (roll < 0.3) ability = regs[0]
-                     else if (roll < 0.6) ability = regs[1] || regs[0]
-                     else ability = regs[2] || regs[1] || regs[0]
-                   }
+                   ability = regs[0] || h
                  }
+
                  nature = Natures[Math.floor(Math.random() * Natures.length)]
                  ivs = {
                    hp: Math.floor(Math.random() * 32),
@@ -635,6 +639,7 @@
                    spd: Math.floor(Math.random() * 32),
                    spe: Math.floor(Math.random() * 32)
                  }
+                 selected = result
                }
             })
           }}
