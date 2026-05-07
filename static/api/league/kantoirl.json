@@ -16493,7 +16493,7 @@
       },
       {
         "name": "magby",
-        "level": "5",
+        "level": "4",
         "moves": [
           {
             "power": 40,
@@ -16617,6 +16617,40 @@
           "spa": 70,
           "spd": 30,
           "spe": 40
+        }
+      },
+      {
+        "name": "clauncher",
+        "level": "4",
+        "moves": [
+          {
+            "power": 40,
+            "type": "water",
+            "damage_class": "special",
+            "name": "Water Gun",
+            "effect": ""
+          }
+        ],
+        "ability": {
+          "name": "Mega Launcher",
+          "effect": ""
+        },
+        "held": {
+          "sprite": "mystic-water",
+          "name": "Mystic Water",
+          "effect": ""
+        },
+        "sprite": "692",
+        "types": [
+          "water"
+        ],
+        "stats": {
+          "hp": 50,
+          "atk": 53,
+          "def": 62,
+          "spa": 58,
+          "spd": 63,
+          "spe": 44
         }
       },
       {
