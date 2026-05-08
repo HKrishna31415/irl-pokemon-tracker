@@ -2,6 +2,7 @@
   export let sprite,
     fallback,
     name,
+    nickname = '',
     types,
     tera,
     level = '',
@@ -11,6 +12,7 @@
     ability = '',
     stats,
     nature = undefined,
+    ivs = {},
     minimal = false
 
   import { capitalise, regionise } from '$lib/utils/string'
@@ -75,12 +77,16 @@
                   <Tooltip>{ability.effect}</Tooltip>
                 {/if}
 
-                {ability.name}
+                {ability.name || ability}
               </span>
             {/if}
           </p>
 
-          {regionise(capitalise(name))}
+          {#if nickname}
+            {nickname} <span class="text-xs opacity-60">({regionise(capitalise(name))})</span>
+          {:else}
+            {regionise(capitalise(name))}
+          {/if}
 
           {#if held}
             <div
@@ -171,6 +177,7 @@
             col={color(types[0], themeId)}
             {nature}
             max={maxStat}
+            {ivs}
             {...stats}
           />
         {/if}

@@ -11,7 +11,8 @@
     compare,
     side = 'right',
     shorthand = true,
-    showbars = true
+    showbars = true,
+    ivs = {}
 
   import StatBar from '$lib/components/stat-bar.svelte'
   import NaturesMap from '$lib/data/natures'
@@ -50,6 +51,7 @@
         mod={s === pos ? 1.1 : s === neg ? 0.9 : 1}
         stat={shorthand ? s : statMap[s]}
         val={sval}
+        iv={ivs[s]}
         {max}
       />
     {/each}

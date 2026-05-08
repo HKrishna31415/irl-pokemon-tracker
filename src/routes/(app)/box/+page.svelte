@@ -8,10 +8,12 @@
 
   import { Settings } from '$lib/components/Settings'
   import { Loader, PIcon, IconButton, Tooltip, Toggle, Icon } from '$c/core'
-  import { Ball, Plus, Minus, Shiny, X, Deceased, External, Download } from '$icons'
+  import { Ball, Plus, Minus, Shiny, X, Deceased, External, Download, Analysis as LearnsetIcon } from '$icons'
 
   import TypeLogo from '$lib/components/type-logo.svelte'
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
+  import LearnsetModal from '$lib/components/LearnsetModal.svelte'
+  import TMBox from '$c/TMBox.svelte'
 
   import { capitalise } from '$utils/string'
   import { drag } from '$utils/drag'
@@ -41,6 +43,7 @@
   const { getPkmns, getPkmn } = getContext('game')
   const { open } = getContext('simple-modal')
 
+  let subview = 'pokemon'
   let minimal = false
   let Particles
   let gameStore,
@@ -217,6 +220,12 @@
     setTeam((teamData || []).filter((i) => i !== locid(p)))
   }
 
+  const openLearnset = (pokemon) => {
+    open(LearnsetModal, { pokemon }, {
+      styleWindow: { width: '500px', maxWidth: '90vw', padding: '0', background: 'transparent' }
+    })
+  }
+
   let mons = []
   $: {
     mons = (teamData || [])
@@ -323,6 +332,22 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
           </div>
         </div>
 
+        <div class="mt-4 flex gap-x-2 rounded-t-xl bg-gray-50/50 p-1 dark:bg-gray-800/50">
+          <button 
+            class="flex-1 rounded-lg py-2.5 text-sm font-bold transition-all {subview === 'pokemon' ? 'bg-white text-blue-600 shadow-sm dark:bg-gray-700 dark:text-blue-400' : 'text-gray-500 hover:bg-white/50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700/50'}"
+            on:click={() => subview = 'pokemon'}
+          >
+            Pokémon
+          </button>
+          <button 
+            class="flex-1 rounded-lg py-2.5 text-sm font-bold transition-all {subview === 'tms' ? 'bg-white text-blue-600 shadow-sm dark:bg-gray-700 dark:text-blue-400' : 'text-gray-500 hover:bg-white/50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700/50'}"
+            on:click={() => subview = 'tms'}
+          >
+            TMs
+          </button>
+        </div>
+
+        {#if subview === 'pokemon'}
         <div
           class="z-50 mt-2 inline-flex flex-wrap gap-y-2 gap-x-4 sm:flex-row sm:items-start md:flex-nowrap"
         >
@@ -487,15 +512,12 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
                   ...Object.values(Pokemon[p.pokemon].baseStats)
                 )}
                 moves={[]}
-                ability={p.nickname
-                  ? {
-                      name:
-                        p.nickname + ' the ' + (p.nature || '').toLowerCase()
-                    }
-                  : null}
+                nickname={p.nickname}
+                ability={p.ability}
                 name={Pokemon[p.pokemon].name}
-                stats={Pokemon[p.pokemon].baseStats}
                 nature={p.nature}
+                ivs={p.ivs}
+                stats={Pokemon[p.pokemon].baseStats}
                 types={(Pokemon[p.pokemon].types || []).map((t) =>
                   t.toLowerCase()
                 )}
@@ -604,6 +626,13 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
                       src={Deceased}
                       borderless
                     />
+                    <IconButton
+                      className="translate-y-1 transform scale-125"
+                      borderless
+                      src={LearnsetIcon}
+                      title="View {p.pokemon} Learnset"
+                      on:click={() => openLearnset(p.pokemon)}
+                    />
                     {#if !teamData || teamData?.length < 6 || teamData?.includes(p.location)}
                       <IconButton
                         className="translate-y-1 transform scale-125"
@@ -640,6 +669,9 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
             </span>
           {/each}
         </div>
+        {:else}
+          <TMBox />
+        {/if}
 
         <Footer class="!relative !mt-6 !-mb-20 md:hidden" />
       </main>
