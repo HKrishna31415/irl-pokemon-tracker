@@ -10,6 +10,7 @@
 
   import { read, readdata, patch, getTeams } from '$lib/store'
   import { capitalise } from '$lib/utils/string'
+  import { pokeapi } from '$utils/api'
 
   import { fly } from 'svelte/transition'
   import { Natures, NaturesMap } from '$lib/data/natures'
@@ -550,24 +551,31 @@
               spe: Math.floor(Math.random() * 32)
             }
 
-            const pkmnAbilities = selected.abilities || {}
-            const h = pkmnAbilities.H
-            const regs = Object.keys(pkmnAbilities)
-              .filter((k) => k !== 'H')
-              .map((k) => pkmnAbilities[k])
+            // Fetch abilities from PokeAPI
+            pokeapi(`pokemon/${selected.name.toLowerCase().replace(/ /g, '-')}`)
+              .then(data => {
+                if (!data) return
+                
+                const hAbility = data.abilities.find(a => a.is_hidden)?.ability.name
+                const regAbilities = data.abilities
+                  .filter(a => !a.is_hidden)
+                  .sort((a, b) => a.slot - b.slot)
+                  .map(a => a.ability.name)
 
-            const roll = Math.floor(Math.random() * 10) + 1
-            abilityRoll = roll
-            if (roll === 10 && h) ability = h
-            else if (regs.length === 3) {
-              if (roll <= 3) ability = regs[0]
-              else if (roll <= 6) ability = regs[1]
-              else ability = regs[2]
-            } else if (regs.length === 2) {
-              ability = roll % 2 !== 0 ? regs[0] : regs[1]
-            } else {
-              ability = regs[0] || h
-            }
+                const roll = Math.floor(Math.random() * 10) + 1
+                abilityRoll = roll
+                
+                if (roll === 10 && hAbility) ability = capitalise(hAbility.replace(/-/g, ' '))
+                else if (regAbilities.length === 3) {
+                  const idx = roll <= 3 ? 0 : roll <= 6 ? 1 : 2
+                  ability = capitalise(regAbilities[idx].replace(/-/g, ' '))
+                } else if (regAbilities.length === 2) {
+                  const idx = roll % 2 !== 0 ? 0 : 1
+                  ability = capitalise(regAbilities[idx].replace(/-/g, ' '))
+                } else {
+                  ability = capitalise((regAbilities[0] || hAbility || '').replace(/-/g, ' '))
+                }
+              })
           }}
         >
           <Icon icon={Dice} height="0.8rem" />
@@ -619,24 +627,31 @@
 
                if(result) {
                  search = null
-                 const pkmnAbilities = result.abilities || {}
-                 const h = pkmnAbilities.H
-                 const regs = Object.keys(pkmnAbilities)
-                   .filter((k) => k !== 'H')
-                   .map((k) => pkmnAbilities[k])
+                 // Fetch abilities from PokeAPI
+                 pokeapi(`pokemon/${result.name.toLowerCase().replace(/ /g, '-')}`)
+                   .then(data => {
+                     if (!data) return
+                     
+                     const hAbility = data.abilities.find(a => a.is_hidden)?.ability.name
+                     const regAbilities = data.abilities
+                       .filter(a => !a.is_hidden)
+                       .sort((a, b) => a.slot - b.slot)
+                       .map(a => a.ability.name)
 
-                 const roll = Math.floor(Math.random() * 10) + 1
-                 abilityRoll = roll
-                 if (roll === 10 && h) ability = h
-                 else if (regs.length === 3) {
-                   if (roll <= 3) ability = regs[0]
-                   else if (roll <= 6) ability = regs[1]
-                   else ability = regs[2]
-                 } else if (regs.length === 2) {
-                   ability = roll % 2 !== 0 ? regs[0] : regs[1]
-                 } else {
-                   ability = regs[0] || h
-                 }
+                     const roll = Math.floor(Math.random() * 10) + 1
+                     abilityRoll = roll
+                     
+                     if (roll === 10 && hAbility) ability = capitalise(hAbility.replace(/-/g, ' '))
+                     else if (regAbilities.length === 3) {
+                       const idx = roll <= 3 ? 0 : roll <= 6 ? 1 : 2
+                       ability = capitalise(regAbilities[idx].replace(/-/g, ' '))
+                     } else if (regAbilities.length === 2) {
+                       const idx = roll % 2 !== 0 ? 0 : 1
+                       ability = capitalise(regAbilities[idx].replace(/-/g, ' '))
+                     } else {
+                       ability = capitalise((regAbilities[0] || hAbility || '').replace(/-/g, ' '))
+                     }
+                   })
 
                  nature = Natures[Math.floor(Math.random() * Natures.length)]
                  ivs = {

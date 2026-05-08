@@ -18,6 +18,7 @@
   import { capitalise } from '$utils/string'
   import { drag } from '$utils/drag'
   import { locid } from '$utils/pokemon'
+  import { pokeapi } from '$utils/api'
 
   import {
     getGameStore,
@@ -254,49 +255,44 @@
       .slice(0, 6)
   }
 
-  const exportToShowdown = async () => {
-    const showdownTeam = await Promise.all(
-      mons.map(async (p) => {
-        const data = Pokemon[p.pokemon]
-        const nickname = p.nickname ? `${p.nickname} (${data.name})` : data.name
-        const item = '' // Item tracking not currently implemented
-        const ability = p.ability || 'Unknown Ability'
-        const level = p.level || 50
-        const nature = p.nature ? NaturesMap[p.nature]?.label : 'Serious'
-        const ivs = p.ivs || {
-          hp: 31,
-          atk: 31,
-          def: 31,
-          spa: 31,
-          spd: 31,
-          spe: 31
-        }
+  const formatPokemon = async (p) => {
+    const data = Pokemon[p.pokemon] || { name: capitalise(p.pokemon) }
+    const nickname = p.nickname ? `${p.nickname} (${data.name})` : data.name
+    const item = '' // Item tracking not currently implemented
+    const ability = p.ability || 'Unknown Ability'
+    const level = p.level || 50
+    const nature = p.nature ? NaturesMap[p.nature]?.label : 'Serious'
+    const ivs = p.ivs || { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 }
 
-        let moves = ['Move 1', 'Move 2', 'Move 3', 'Move 4']
-        try {
-          const res = await fetch(`/assets/data/learnsets/${p.pokemon}.json`)
-          const ls = await res.json()
-          if (ls && ls.learnset) {
-            const possibleMoves = Object.entries(ls.learnset)
-              .map(([move, sources]) => {
-                const lvlSource = sources.find((s) => s.startsWith('8L'))
-                if (!lvlSource) return null
-                const lvl = parseInt(lvlSource.replace('8L', ''))
-                return { move, lvl }
-              })
-              .filter((m) => m && m.lvl <= level)
-              .sort((a, b) => b.lvl - a.lvl)
+    let moves = ['Move 1', 'Move 2', 'Move 3', 'Move 4']
+    try {
+      const name = p.pokemon.toLowerCase()
+        .replace(/ /g, '-')
+        .replace(/\./g, '')
+        .replace(/'/g, '')
+        .replace(/jr\./g, 'jr')
+        .replace(/mime\./g, 'mime')
+      
+      const data = await pokeapi(`pokemon/${name}`)
+      if (data && data.moves) {
+        const possibleMoves = data.moves
+          .map(m => {
+            const levelUpDetail = m.version_group_details.find(d => d.move_learn_method.name === 'level-up')
+            return levelUpDetail ? { name: m.move.name, level: levelUpDetail.level_learned_at } : null
+          })
+          .filter(m => m && m.level <= level)
+          .sort((a, b) => b.level - a.level)
 
-            moves = possibleMoves
-              .slice(0, 4)
-              .map((m) => capitalise(m.move.replace(/-/g, ' ')))
-            while (moves.length < 4) moves.push(`Move ${moves.length + 1}`)
-          }
-        } catch (e) {
-          console.warn(`Could not fetch learnset for ${p.pokemon}`)
-        }
+        moves = possibleMoves
+          .slice(0, 4)
+          .map(m => capitalise(m.name.replace(/-/g, ' ')))
+        while (moves.length < 4) moves.push(`Move ${moves.length + 1}`)
+      }
+    } catch (e) {
+      console.warn(`Could not fetch learnset for ${p.pokemon}`, e)
+    }
 
-        return `${nickname}${item ? ' @ ' + item : ''}
+    return `${nickname}${item ? ' @ ' + item : ''}
 Ability: ${ability}
 Level: ${level}
 EVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
@@ -306,11 +302,26 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
 - ${moves[1]}
 - ${moves[2]}
 - ${moves[3]}`
-      })
-    )
+  }
 
-    navigator.clipboard.writeText(showdownTeam.join('\n\n')).then(() => {
+  const exportToShowdown = async () => {
+    const formatted = await Promise.all(mons.map(p => formatPokemon(p)))
+    navigator.clipboard.writeText(formatted.join('\n\n')).then(() => {
       alert('Team exported to clipboard!')
+    })
+  }
+
+  const exportBox = async () => {
+    const formatted = await Promise.all(boxData.map(p => formatPokemon(p)))
+    navigator.clipboard.writeText(formatted.join('\n\n')).then(() => {
+      alert('Full Box exported to clipboard!')
+    })
+  }
+
+  const exportSingle = async (p) => {
+    const formatted = await formatPokemon(p)
+    navigator.clipboard.writeText(formatted).then(() => {
+      alert(`${p.nickname || capitalise(p.pokemon)} exported to clipboard!`)
     })
   }
 </script>
@@ -336,10 +347,16 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
           <AnalysisModal box={mons.map((p) => Pokemon[p.pokemon])}>
             <small>Team</small>
           </AnalysisModal>
-          <IconButton rounded title="Export Team to Showdown" on:click={exportToShowdown}>
-            <Icon class="pl-1" height="1.2em" inline icon={Download} />
-            <small class="pl-0.5 pr-2">Showdown</small>
-          </IconButton>
+          <div class="flex flex-wrap items-center gap-2">
+            <IconButton rounded title="Export Team to Showdown" on:click={exportToShowdown}>
+              <Icon class="pl-1" height="1.2em" inline icon={Download} />
+              <small class="pl-0.5 pr-2">Team</small>
+            </IconButton>
+            <IconButton rounded title="Export Entire Box" on:click={exportBox}>
+              <Icon class="pl-1" height="1.2em" inline icon={Download} />
+              <small class="pl-0.5 pr-2">Full Box</small>
+            </IconButton>
+          </div>
 
           <Settings class="absolute right-0" />
 
@@ -658,6 +675,13 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
                       src={LearnsetIcon}
                       title="View {p.pokemon} Learnset"
                       on:click={() => openLearnset(p.pokemon)}
+                    />
+                    <IconButton
+                      className="translate-y-1 transform scale-125"
+                      borderless
+                      src={Download}
+                      title="Export to Showdown"
+                      on:click={() => exportSingle(p)}
                     />
                     {#if !teamData || teamData?.length < 6 || teamData?.includes(p.location)}
                       <IconButton

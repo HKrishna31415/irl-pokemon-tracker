@@ -24,7 +24,12 @@
 
   onMount(async () => {
     try {
-      const name = pokemon.toLowerCase().replace(/ /g, '-')
+      const name = pokemon.toLowerCase()
+        .replace(/ /g, '-')
+        .replace(/\./g, '')
+        .replace(/'/g, '')
+        .replace(/jr\./g, 'jr')
+        .replace(/mime\./g, 'mime')
       const data = await pokeapi(`pokemon/${name}`)
       
       if (!data) throw new Error('Could not fetch data from PokeAPI')
