@@ -61,6 +61,7 @@
   const pages = [
     { name: 'Game', link: '/game', icon: Game },
     { name: 'Box', link: '/box', icon: Box },
+    { name: 'Locker', link: '/locker', icon: Save },
     { name: 'Store', link: '/store', icon: Gift },
     { name: 'Grave', link: '/graveyard', icon: Grave }
   ]

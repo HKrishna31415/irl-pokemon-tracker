@@ -14,6 +14,41 @@
       type: 'special'
     },
     {
+      id: 'rare-candy',
+      name: 'Rare Candy',
+      price: 500,
+      description: 'Instantly levels a Pokémon up by 1 level.',
+      type: 'item'
+    },
+    {
+      id: 'tier-0-tms',
+      name: 'Tier 0 TMs',
+      price: 8000,
+      description: 'The most powerful moves: Momentum, 100/100 spread, and high-power recoil moves.',
+      type: 'tm'
+    },
+    {
+      id: 'tier-1-tms',
+      name: 'Tier 1 TMs',
+      price: 4000,
+      description: 'Crucial competitive setup and 90BP/100Acc elemental attacks.',
+      type: 'tm'
+    },
+    {
+      id: 'tier-2-tms',
+      name: 'Tier 2 TMs',
+      price: 2000,
+      description: 'Mid-tier moves: Status, Weather, Hazards, and high-power low-accuracy moves.',
+      type: 'tm'
+    },
+    {
+      id: 'tier-3-tms',
+      name: 'Tier 3 TMs',
+      price: 1000,
+      description: 'Niche utility moves and other Technical Machines.',
+      type: 'tm'
+    },
+    {
       id: 'exp-share',
       name: 'Exp. Share',
       price: 30000,
@@ -35,64 +70,6 @@
       price: 15000,
       description: 'Allows a Pokémon to Terastallize during battle.',
       type: 'key-item'
-    },
-    {
-      id: 'tm-earthquake',
-      name: 'Earthquake TM',
-      price: 10000,
-      description: 'A reliable, high-power Ground-type physical spread move.',
-      type: 'tm'
-    },
-    {
-      id: 'tm-u-turn',
-      name: 'U-Turn TM',
-      price: 10000,
-      description: 'Provides momentum and pivoting for physical attackers.',
-      type: 'tm'
-    },
-    {
-      id: 'tm-volt-switch',
-      name: 'Volt Switch TM',
-      price: 10000,
-      description: 'Provides momentum and pivoting for special attackers.',
-      type: 'tm'
-    },
-    {
-      id: 'tm-flip-turn',
-      name: 'Flip Turn TM',
-      price: 10000,
-      description: 'Provides momentum and pivoting for Water-types.',
-      type: 'tm'
-    },
-    {
-      id: 'tm-flare-blitz',
-      name: 'Flare Blitz TM',
-      price: 10000,
-      description: 'A powerful, recoil-inducing Fire-type physical move.',
-      type: 'tm'
-    },
-    {
-      id: 'tm-close-combat',
-      name: 'Close Combat TM',
-      price: 10000,
-      description:
-        'A high-powered Fighting-type physical move that lowers defenses.',
-      type: 'tm'
-    },
-    {
-      id: 'tm-brave-bird',
-      name: 'Brave Bird TM',
-      price: 10000,
-      description: 'A powerful, recoil-inducing Flying-type physical move.',
-      type: 'tm'
-    },
-    {
-      id: 'tm-knock-off',
-      name: 'Knock Off TM',
-      price: 10000,
-      description:
-        "Removes the opponent's held item, crucial for breaking defensive cores.",
-      type: 'tm'
     },
     {
       id: 'amulet-coin',
@@ -210,14 +187,6 @@
       description:
         'Guarantees survival of a single fatal hit from full HP. Great for setup sweepers.',
       type: 'held'
-    },
-    {
-      id: 'tier-1-tms',
-      name: 'Tier 1 TMs',
-      price: 4000,
-      description:
-        'Crucial competitive setup and utility moves like Swords Dance, Substitute, Trick Room, etc.',
-      type: 'tm'
     },
     {
       id: 'move-tutor-access',
@@ -447,14 +416,6 @@
       type: 'held'
     },
     {
-      id: 'tier-2-tms',
-      name: 'Tier 2 TMs',
-      price: 2000,
-      description:
-        'Mid-tier moves like Fire Blast, Toxic, and weather setting utility.',
-      type: 'tm'
-    },
-    {
       id: 'air-balloon',
       name: 'Air Balloon',
       price: 2000,
@@ -597,32 +558,11 @@
       type: 'held'
     },
     {
-      id: 'tier-3-tms',
-      name: 'Tier 3 TMs',
-      price: 1000,
-      description: 'Niche utility moves like Swift, Flash, and Chilling Water.',
-      type: 'tm'
-    },
-    {
       id: 'heart-scale',
       name: 'Heart Scale',
       price: 1000,
       description:
         'Used as currency for a Pokémon to remember a forgotten move.',
-      type: 'item'
-    },
-    {
-      id: 'poke-ball',
-      name: 'Poké Ball',
-      price: 500,
-      description: 'Standard tool for catching wild Pokémon.',
-      type: 'item'
-    },
-    {
-      id: 'rare-candy',
-      name: 'Rare Candy',
-      price: 500,
-      description: 'Instantly levels a Pokémon up by 1 level.',
       type: 'item'
     },
     {
@@ -765,8 +705,39 @@
     )
   }
 
+  import TypePicker from '$lib/components/TypePicker.svelte'
+  const { open } = getContext('simple-modal')
+
   const buyItem = (item) => {
     if (money < item.price) return window.alert('Not enough money!')
+
+    if (item.id === 'type-gem' || item.id === 'z-crystal') {
+      open(TypePicker, {
+        title: `Select ${item.name} Type`,
+        onSelect: (type) => {
+          const typeId = type.toLowerCase()
+          const finalId = item.id === 'type-gem' ? `${typeId}-gem` : `${typeId}ium-z`
+          const finalName = item.id === 'type-gem' ? `${type} Gem` : `${type}ium Z`
+          
+          if (window.confirm(`Buy ${finalName} for $${item.price}?`)) {
+            gameStore.update(
+              patch({
+                __money: money - item.price,
+                __items: {
+                  ...(rawData.__items || {}),
+                  [finalId]: (rawData.__items?.[finalId] || 0) + 1
+                }
+              })
+            )
+          }
+        }
+      }, {
+        closeButton: true,
+        styleWindow: { background: 'transparent' }
+      })
+      return
+    }
+
     if (!window.confirm(`Buy ${item.name} for $${item.price}?`)) return
 
     if (item.id === 'encounter-token') {
@@ -858,10 +829,10 @@
       </div>
     </div>
 
-    <div class="grid gap-6 md:grid-cols-2">
+    <div class="grid gap-6">
       <!-- Encounter Token -->
       <div
-        class="flex flex-col justify-between rounded-lg border-2 border-gray-200 p-6 dark:border-gray-700"
+        class="flex flex-col justify-between rounded-lg border-2 border-gray-200 p-6 dark:border-gray-700 bg-lime-50/20 dark:bg-lime-900/10"
       >
         <div class="flex gap-x-4">
           <div class="shrink-0">
@@ -869,7 +840,7 @@
               src={getItemImage('encounter-token')}
               alt="Token"
               class="h-12 w-12 object-contain"
-              on:error={(e) => (e.target.src = '/assets/img/items/unknown-item.png')}
+              on:error={(e) => (e.target.src = '/assets/img/items/pass.png')}
             />
           </div>
           <div>
@@ -892,40 +863,7 @@
         </Button>
       </div>
 
-      <div class="rounded-lg border-2 border-gray-200 p-6 dark:border-gray-700">
-        <h2 class="mb-2 text-xl font-bold">Held Item Locker</h2>
-        <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-          Store purchases are saved here so you can track your competitive held
-          item pool.
-        </p>
-
-        {#if Object.keys(inventory).length}
-          <div class="grid grid-cols-2 gap-2 text-sm">
-            {#each Object.entries(inventory) as [itemId, qty]}
-              <div
-                class="flex items-center justify-between rounded-md bg-gray-50 px-3 py-2 dark:bg-gray-900"
-              >
-                <div class="flex items-center gap-x-2">
-                  <img
-                    src={getItemImage(itemId)}
-                    alt={itemId}
-                    class="h-6 w-6 object-contain"
-                    on:error={(e) => (e.target.src = '/assets/img/items/unknown-item.png')}
-                  />
-                  <span>{capitalise(itemId.replace(/-/g, ' '))}</span>
-                </div>
-                <strong class="text-lime-600 dark:text-lime-400">x{qty}</strong>
-              </div>
-            {/each}
-          </div>
-        {:else}
-          <div
-            class="rounded-md bg-gray-50 px-3 py-4 text-sm text-gray-500 dark:bg-gray-900"
-          >
-            No held items purchased yet.
-          </div>
-        {/if}
-      </div>
+      <p class="text-gray-500 text-center italic text-sm">Select an item category below to browse the shop.</p>
     </div>
   </div>
 
@@ -950,7 +888,7 @@
                 </div>
               </div>
               <div class="shrink-0 text-right">
-                <div class="font-bold text-lime-600 dark:text-lime-400">${item.price}</div>
+                <div class="font-bold text-lime-600 dark:text-lime-400">${item.price.toLocaleString()}</div>
                 <div class="text-xs text-gray-500">Owned: {inventory[item.id] || 0}</div>
               </div>
             </div>
@@ -981,7 +919,7 @@
               </div>
             </div>
             <div class="shrink-0 text-right">
-              <div class="font-bold text-lime-600 dark:text-lime-400">${item.price}</div>
+              <div class="font-bold text-lime-600 dark:text-lime-400">${item.price.toLocaleString()}</div>
               <div class="text-xs text-gray-500">Owned: {inventory[item.id] || 0}</div>
             </div>
           </div>
@@ -995,7 +933,7 @@
     <div class="mb-8 rounded-xl bg-white p-8 shadow-lg dark:bg-gray-800">
       <h2 class="mb-2 text-2xl font-bold">Technical Machines (TMs)</h2>
       <p class="mb-6 text-sm text-gray-600 dark:text-gray-400">
-        Expand your movepool with reliable high-power and utility moves.
+        Expand your movepool with tiered access to high-power and utility moves.
       </p>
 
       <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -1004,7 +942,7 @@
             <div class="flex items-start justify-between gap-x-3">
               <div class="flex gap-x-3">
                 <div class="shrink-0 pt-1">
-                  <img src={getItemImage(item.id)} alt={item.name} class="h-10 w-10 object-contain" on:error={(e) => (e.target.src = '/assets/img/items/unknown-item.png')} />
+                  <img src={getItemImage(item.id)} alt={item.name} class="h-10 w-10 object-contain" on:error={(e) => (e.target.src = '/assets/img/items/normal-tm.png')} />
                 </div>
                 <div>
                   <h3 class="font-bold">{item.name}</h3>
@@ -1012,7 +950,7 @@
                 </div>
               </div>
               <div class="shrink-0 text-right">
-                <div class="font-bold text-lime-600 dark:text-lime-400">${item.price}</div>
+                <div class="font-bold text-lime-600 dark:text-lime-400">${item.price.toLocaleString()}</div>
                 <div class="text-xs text-gray-500">Owned: {inventory[item.id] || 0}</div>
               </div>
             </div>
@@ -1044,7 +982,7 @@
                 </div>
               </div>
               <div class="shrink-0 text-right">
-                <div class="font-bold text-lime-600 dark:text-lime-400">${item.price}</div>
+                <div class="font-bold text-lime-600 dark:text-lime-400">${item.price.toLocaleString()}</div>
                 <div class="text-xs text-gray-500">Owned: {inventory[item.id] || 0}</div>
               </div>
             </div>
@@ -1084,7 +1022,7 @@
               </div>
               <div class="shrink-0 text-right">
                 <div class="font-bold text-lime-600 dark:text-lime-400">
-                  ${item.price}
+                  ${item.price.toLocaleString()}
                 </div>
                 {#if owned}
                   <div class="text-xs font-bold uppercase text-orange-500">
@@ -1107,52 +1045,4 @@
       </div>
     </div>
   {/if}
-
-  <div class="rounded-xl bg-white p-8 shadow-lg dark:bg-gray-800">
-    <div class="flex items-center gap-x-4 mb-4">
-      <img src="/assets/img/items/rare-candy.png" alt="Rare Candy" class="h-10 w-10 object-contain" />
-      <h2 class="text-2xl font-bold">Rare Candies</h2>
-    </div>
-    <p class="mb-6 text-sm text-gray-600 dark:text-gray-400">
-      Buy Rare Candies for your caught Pokémon ($500 each). This will
-      immediately increase their level by 1.
-    </p>
-
-    {#if loading}
-      <div class="py-8 text-center">Loading box...</div>
-    {:else}
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-        {#each boxData as mon}
-          <div
-            class="flex items-center justify-between rounded-lg border-2 border-gray-200 p-3 transition-colors hover:border-lime-400 dark:border-gray-700"
-          >
-            <div class="flex items-center gap-x-2">
-              <PIcon
-                name={mon.details?.sprite}
-                className="-my-4 -ml-2 transform scale-75"
-              />
-              <div>
-                <div class="text-sm font-medium leading-tight">
-                  {mon.nickname || capitalise(mon.pokemon)}
-                </div>
-                <div class="text-xs text-gray-500">Lv. {mon.level || '?'}</div>
-              </div>
-            </div>
-            <button
-              class="rounded-full bg-lime-500 py-1 px-3 text-xs font-bold text-white shadow-sm transition-colors hover:bg-lime-600"
-              on:click={() =>
-                buyRareCandy(mon.customId || mon.location, mon.level)}
-            >
-              $500
-            </button>
-          </div>
-        {/each}
-      </div>
-      {#if !boxData.length}
-        <div class="py-8 text-center text-gray-500">
-          You haven't caught any Pokémon yet.
-        </div>
-      {/if}
-    {/if}
-  </div>
 </div>

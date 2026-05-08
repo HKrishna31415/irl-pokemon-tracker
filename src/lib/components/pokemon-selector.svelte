@@ -41,7 +41,7 @@
 
   import { createEventDispatcher, onMount, getContext } from 'svelte'
 
-  let selected, nickname, status, nature, hidden, death, ability
+  let selected, nickname, status, nature, hidden, death, ability, abilityRoll
   let level, ivs = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 }
   const stats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
   let prevstatus = 'loading'
@@ -526,6 +526,12 @@
         ? 'hidden sm:block'
         : ''}"
     />
+    {#if selected && abilityRoll}
+      <div class="mt-1 text-[10px] font-bold text-blue-500 uppercase flex items-center gap-x-1">
+        <span>🎲</span>
+        Ability Roll: {abilityRoll}
+      </div>
+    {/if}
 
     {#if selected && status && !hidden}
       <div
@@ -551,6 +557,7 @@
               .map((k) => pkmnAbilities[k])
 
             const roll = Math.floor(Math.random() * 10) + 1
+            abilityRoll = roll
             if (roll === 10 && h) ability = h
             else if (regs.length === 3) {
               if (roll <= 3) ability = regs[0]
@@ -619,6 +626,7 @@
                    .map((k) => pkmnAbilities[k])
 
                  const roll = Math.floor(Math.random() * 10) + 1
+                 abilityRoll = roll
                  if (roll === 10 && h) ability = h
                  else if (regs.length === 3) {
                    if (roll <= 3) ability = regs[0]

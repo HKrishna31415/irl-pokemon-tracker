@@ -2,6 +2,7 @@
   import { onMount } from 'svelte'
   import { Loader, Icon } from '$c/core'
   import { capitalise } from '$utils/string'
+  import { pokeapi } from '$utils/api'
 
   export let pokemon
 
@@ -24,9 +25,9 @@
   onMount(async () => {
     try {
       const name = pokemon.toLowerCase().replace(/ /g, '-')
-      const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
-      if (!res.ok) throw new Error('Could not fetch data from PokeAPI')
-      const data = await res.json()
+      const data = await pokeapi(`pokemon/${name}`)
+      
+      if (!data) throw new Error('Could not fetch data from PokeAPI')
 
       const result = {}
       data.moves.forEach(m => {

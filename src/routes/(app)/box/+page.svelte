@@ -1,6 +1,7 @@
 <script>
   import { onMount, getContext } from 'svelte'
   import { fade } from 'svelte/transition'
+  import { page } from '$app/stores'
 
   import { Footer } from '$c/navs'
 
@@ -13,7 +14,6 @@
   import TypeLogo from '$lib/components/type-logo.svelte'
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
   import LearnsetModal from '$lib/components/LearnsetModal.svelte'
-  import TMBox from '$c/TMBox.svelte'
 
   import { capitalise } from '$utils/string'
   import { drag } from '$utils/drag'
@@ -43,10 +43,12 @@
   const { getPkmns, getPkmn } = getContext('game')
   const { open } = getContext('simple-modal')
 
-  let subview = 'pokemon'
   let minimal = false
   let Particles
   let gameStore,
+    rawData,
+    money = 0,
+    inventory = {},
     teamData = [],
     winData,
     setTeam = (_) => _
@@ -58,12 +60,29 @@
     gameStore = getGameStore(gameId)
     gameStore.subscribe(
       read((data) => {
+        rawData = data
+        money = data.__money || 0
+        inventory = data.__items || {}
         teamData = readTeam(data)
         winData = readTeams(data)
       })
     )
 
     setTeam = (data) => gameStore.update(patch({ __team: data.slice(0, 6) }))
+
+    const useRareCandy = (monId, currentLevel) => {
+      const qty = inventory['rare-candy'] || 0
+      if (qty <= 0) return window.alert('You have no Rare Candies! Buy them in the Store.')
+      
+      if (!window.confirm(`Use 1 Rare Candy to level up to Lv. ${+(currentLevel || 0) + 1}?`)) return
+
+      gameStore.update(
+        patch({
+          __items: { ...inventory, 'rare-candy': qty - 1 },
+          [monId]: { ...rawData[monId], level: (currentLevel || 0) + 1 }
+        })
+      )
+    }
 
     // FIXME: Awkward hack to allow page transition cleanup
     ;['game_el'].forEach((id) => {
@@ -332,19 +351,17 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
           </div>
         </div>
 
-        <div class="mt-4 flex gap-x-2 rounded-t-xl bg-gray-50/50 p-1 dark:bg-gray-800/50">
-          <button 
-            class="flex-1 rounded-lg py-2.5 text-sm font-bold transition-all {subview === 'pokemon' ? 'bg-white text-blue-600 shadow-sm dark:bg-gray-700 dark:text-blue-400' : 'text-gray-500 hover:bg-white/50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700/50'}"
-            on:click={() => subview = 'pokemon'}
-          >
-            Pokémon
-          </button>
-          <button 
-            class="flex-1 rounded-lg py-2.5 text-sm font-bold transition-all {subview === 'tms' ? 'bg-white text-blue-600 shadow-sm dark:bg-gray-700 dark:text-blue-400' : 'text-gray-500 hover:bg-white/50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-700/50'}"
-            on:click={() => subview = 'tms'}
-          >
-            TMs
-          </button>
+        <div class="mt-4 flex items-center justify-between gap-x-4 border-b dark:border-gray-700 pb-2">
+           <h2 class="text-xl font-bold">Pokémon Box</h2>
+           <div class="flex items-center gap-x-4">
+             <div class="flex items-center gap-x-2 text-sm bg-lime-50 dark:bg-lime-900/20 px-3 py-1 rounded-full border border-lime-100 dark:border-lime-900/30">
+                <img src="/assets/img/items/rare-candy.png" alt="Candy" class="h-4 w-4" />
+                <span class="font-bold text-lime-700 dark:text-lime-400">x{inventory['rare-candy'] || 0}</span>
+             </div>
+             <div class="text-lg font-bold font-mono text-lime-600 dark:text-lime-400">
+                ${money.toLocaleString()}
+             </div>
+           </div>
         </div>
 
         {#if subview === 'pokemon'}
@@ -627,6 +644,14 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
                       borderless
                     />
                     <IconButton
+                      className="translate-y-1 transform scale-110"
+                      borderless
+                      src="/assets/img/items/rare-candy.png"
+                      title="Level Up (Use Rare Candy)"
+                      disabled={!inventory['rare-candy']}
+                      on:click={() => useRareCandy(p.customId || p.location, p.level)}
+                    />
+                    <IconButton
                       className="translate-y-1 transform scale-125"
                       borderless
                       src={LearnsetIcon}
@@ -669,9 +694,6 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
             </span>
           {/each}
         </div>
-        {:else}
-          <TMBox />
-        {/if}
 
         <Footer class="!relative !mt-6 !-mb-20 md:hidden" />
       </main>
