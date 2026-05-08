@@ -51,6 +51,7 @@
     inventory = {},
     teamData = [],
     winData,
+    subview = 'pokemon',
     setTeam = (_) => _
 
   onMount(() => {
@@ -694,6 +695,7 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
             </span>
           {/each}
         </div>
+        {/if}
 
         <Footer class="!relative !mt-6 !-mb-20 md:hidden" />
       </main>
