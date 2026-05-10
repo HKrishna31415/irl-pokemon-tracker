@@ -56,6 +56,11 @@
         Object.keys(inventory).forEach(itemId => {
           if (itemId.startsWith('tm-')) {
             const moveAlias = itemId.replace('tm-', '')
+            
+            // Verify the Pokémon's native learnset includes this move
+            const canLearn = data.moves.some(m => m.move.name === moveAlias)
+            if (!canLearn) return
+
             // Find move name in tmsData
             for (const tier of Object.values(tmsData)) {
               const tm = tier.find(t => t.alias === moveAlias)
