@@ -297,6 +297,7 @@
       }
     }
 
+    moves = moves.filter(m => m && m.trim())
     while (moves.length < 4) moves.push(`Move ${moves.length + 1}`)
 
     return `${nickname}${item ? ' @ ' + item : ''}
@@ -319,7 +320,7 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
   }
 
   const exportBox = async () => {
-    const formatted = await Promise.all(boxData.map(p => formatPokemon(p)))
+    const formatted = await Promise.all(ogbox.map(p => formatPokemon(p)))
     navigator.clipboard.writeText(formatted.join('\n\n')).then(() => {
       alert('Full Box exported to clipboard!')
     })
