@@ -87,6 +87,14 @@
       type: 'held'
     },
     {
+      id: 'ability-capsule',
+      name: 'Ability Capsule',
+      price: 2000,
+      description:
+        "Switches a Pokémon's ability to its other standard (non-Hidden) ability.",
+      type: 'item'
+    },
+    {
       id: 'ability-patch',
       name: 'Ability Patch',
       price: 10000,

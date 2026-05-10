@@ -1,5 +1,5 @@
 <script>
-  export let max, stat, val, mod = 1, className = '', iv = undefined
+  export let max, stat, val, mod = 1, className = '', iv = undefined, ev = undefined
 
   import Icon from '@iconify/svelte/dist/OfflineIcon.svelte'
   import { Chevron as Priority } from '$icons'
@@ -26,9 +26,14 @@
 
 <span class='{c} {className} transition col-span-3 sm:col-span-1 -ml-1 font-bold text-xs text-right'>
     {val}
-    {#if typeof iv !== 'undefined'}
-      <sub class="text-[8px] opacity-70 ml-0.5">+{iv}</sub>
-    {/if}
+    <div class="inline-flex flex-col -mb-1 leading-[6px]">
+      {#if typeof iv !== 'undefined' && iv > 0}
+        <sub class="text-[7px] opacity-60 ml-0.5">IV:{iv}</sub>
+      {/if}
+      {#if typeof ev !== 'undefined' && ev > 0}
+        <sub class="text-[7px] text-blue-500 opacity-80 ml-0.5">EV:{ev}</sub>
+      {/if}
+    </div>
 </span>
 <div style='width: {100 * val / max}%' class='{c} {className} transition col-span-5 sm:col-span-4 h-2 rounded-md ring-2' />
 

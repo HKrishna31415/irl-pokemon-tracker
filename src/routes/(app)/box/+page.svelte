@@ -9,11 +9,12 @@
 
   import { Settings } from '$lib/components/Settings'
   import { Loader, PIcon, IconButton, Tooltip, Toggle, Icon } from '$c/core'
-  import { Ball, Plus, Minus, Shiny, X, Deceased, External, Download, Analysis as LearnsetIcon } from '$icons'
+  import { Ball, Plus, Minus, Shiny, X, Deceased, External, Download, Analysis as LearnsetIcon, Settings as SettingsIcon } from '$icons'
 
   import TypeLogo from '$lib/components/type-logo.svelte'
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
   import LearnsetModal from '$lib/components/LearnsetModal.svelte'
+  import PokemonEditorModal from '$lib/components/PokemonEditorModal.svelte'
 
   import { capitalise } from '$utils/string'
   import { drag } from '$utils/drag'
@@ -263,39 +264,44 @@
     const level = p.level || 50
     const nature = p.nature ? NaturesMap[p.nature]?.label : 'Serious'
     const ivs = p.ivs || { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 }
+    const evs = p.evs || { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 }
 
-    let moves = ['Move 1', 'Move 2', 'Move 3', 'Move 4']
-    try {
-      const name = p.pokemon.toLowerCase()
-        .replace(/ /g, '-')
-        .replace(/\./g, '')
-        .replace(/'/g, '')
-        .replace(/jr\./g, 'jr')
-        .replace(/mime\./g, 'mime')
-      
-      const data = await pokeapi(`pokemon/${name}`)
-      if (data && data.moves) {
-        const possibleMoves = data.moves
-          .map(m => {
-            const levelUpDetail = m.version_group_details.find(d => d.move_learn_method.name === 'level-up')
-            return levelUpDetail ? { name: m.move.name, level: levelUpDetail.level_learned_at } : null
-          })
-          .filter(m => m && m.level <= level)
-          .sort((a, b) => b.level - a.level)
+    let moves = p.moves && p.moves.length ? p.moves.map(m => typeof m === 'string' ? m : m.name) : []
+    
+    if (moves.length === 0) {
+      try {
+        const name = p.pokemon.toLowerCase()
+          .replace(/ /g, '-')
+          .replace(/\./g, '')
+          .replace(/'/g, '')
+          .replace(/jr\./g, 'jr')
+          .replace(/mime\./g, 'mime')
+        
+        const data = await pokeapi(`pokemon/${name}`)
+        if (data && data.moves) {
+          const possibleMoves = data.moves
+            .map(m => {
+              const levelUpDetail = m.version_group_details.find(d => d.move_learn_method.name === 'level-up')
+              return levelUpDetail ? { name: m.move.name, level: levelUpDetail.level_learned_at } : null
+            })
+            .filter(m => m && m.level <= level)
+            .sort((a, b) => b.level - a.level)
 
-        moves = possibleMoves
-          .slice(0, 4)
-          .map(m => capitalise(m.name.replace(/-/g, ' ')))
-        while (moves.length < 4) moves.push(`Move ${moves.length + 1}`)
+          moves = possibleMoves
+            .slice(0, 4)
+            .map(m => capitalise(m.name.replace(/-/g, ' ')))
+        }
+      } catch (e) {
+        console.warn(`Could not fetch learnset for ${p.pokemon}`, e)
       }
-    } catch (e) {
-      console.warn(`Could not fetch learnset for ${p.pokemon}`, e)
     }
+
+    while (moves.length < 4) moves.push(`Move ${moves.length + 1}`)
 
     return `${nickname}${item ? ' @ ' + item : ''}
 Ability: ${ability}
 Level: ${level}
-EVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+EVs: ${evs.hp || 0} HP / ${evs.atk || 0} Atk / ${evs.def || 0} Def / ${evs.spa || 0} SpA / ${evs.spd || 0} SpD / ${evs.spe || 0} Spe
 ${nature} Nature
 IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd} SpD / ${ivs.spe} Spe
 - ${moves[0]}
@@ -546,7 +552,7 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
                   150,
                   ...Object.values(Pokemon[p.pokemon].baseStats)
                 )}
-                moves={[]}
+                moves={p.moves || []}
                 nickname={p.nickname}
                 ability={p.ability}
                 name={Pokemon[p.pokemon].name}
@@ -675,6 +681,21 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
                       src={LearnsetIcon}
                       title="View {p.pokemon} Learnset"
                       on:click={() => openLearnset(p.pokemon)}
+                    />
+                    <IconButton
+                      className="translate-y-1 transform scale-125"
+                      borderless
+                      src={SettingsIcon}
+                      title="Edit {p.pokemon} Details"
+                      on:click={() => {
+                        open(PokemonEditorModal, { 
+                          pokemon: p, 
+                          inventory,
+                          onSave: (updated) => {
+                             gameStore.update(patch({ [p.customId || p.location]: updated }))
+                          }
+                        })
+                      }}
                     />
                     <IconButton
                       className="translate-y-1 transform scale-125"

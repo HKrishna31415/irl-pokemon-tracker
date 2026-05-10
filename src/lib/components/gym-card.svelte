@@ -42,6 +42,40 @@
   import { bossToImage } from '$utils/rewrites'
 
   import Effect from '$lib/components/Effect.svelte'
+  import PokemonEditorModal from '$lib/components/PokemonEditorModal.svelte'
+  import { activeGame, getGameStore, patch, read } from '$lib/store'
+  import { onDestroy, onMount } from 'svelte'
+
+  export let loading = true
+
+  let gameStore, bossOverrides = {}
+  let unsubActive, unsubStore
+
+  onMount(() => {
+    unsubActive = activeGame.subscribe(gid => {
+      if (gid) {
+        gameStore = getGameStore(gid)
+        if (unsubStore) unsubStore()
+        unsubStore = gameStore.subscribe(read(d => {
+          bossOverrides = d.__bossOverrides || {}
+          if (!loading) applyOverrides()
+        }))
+      }
+    })
+  })
+
+  onDestroy(() => {
+    if (unsubActive) unsubActive()
+    if (unsubStore) unsubStore()
+  })
+
+  function applyOverrides() {
+    if (!pokemon.length || !bossOverrides[id]) return
+    pokemon = pokemon.map((p, i) => {
+      const override = bossOverrides[id][i] || {}
+      return { ...p, ...override }
+    })
+  }
 
   const { getLeague } = getContext('game')
   const { open } = getContext('simple-modal')
@@ -59,8 +93,6 @@
     loadmodal().then((modal) => open(modal, { boss, mode: 'compare', id }))
   const openBuilder = () =>
     loadmodal().then((modal) => open(modal, { boss, mode: 'build' }))
-
-  export let loading = true
 
   const fetchData = async (starter) => {
     if (!browser) return
@@ -90,6 +122,8 @@
       effect = data.effect
       info = data.info
       dataLevelCap = data.lvlCap ?? null
+      
+      applyOverrides()
       loading = false
     } catch (e) {
       console.error(e)
@@ -304,34 +338,47 @@ Serious Nature
           sprite={createImgUrl(p, { ext: 'png' })}
           {maxStat}
         >
-          <button
-            class:mt-0={p.moves.length < 3}
-            class="compare z-50 mx-8 mb-2 opacity-25 transition hover:opacity-75"
-            slot="footer"
-            on:click={openCompare(id)}
-          >
-            <span class="absolute -mb-2 h-8 w-8 transform md:scale-75">
-              <Icon
-                inline={true}
-                class="absolute"
-                height="1.4em"
-                icon={Badge}
-              />
-              <Icon
-                inline={true}
-                class="absolute -top-0.5 right-1.5 rounded-full bg-white dark:bg-gray-800"
-                height="0.8em"
-                icon={Ball}
-              />
-              <Icon
-                inline={true}
-                class="absolute bottom-2 -left-0.5 rounded-full bg-white dark:bg-gray-800"
-                height="0.8em"
-                icon={Ball}
-              />
-            </span>
-            <span class="ml-8 md:ml-6 md:text-xs"> Compare </span>
-          </button>
+          <div slot="footer" class="flex items-center justify-between mx-8 mb-2 z-50 transition opacity-25 hover:opacity-75">
+            <button
+              class="compare flex items-center gap-x-2"
+              on:click={openCompare(id)}
+            >
+              <span class="relative h-8 w-8 transform md:scale-75">
+                <Icon inline={true} class="absolute" height="1.4em" icon={Badge} />
+                <Icon inline={true} class="absolute -top-0.5 right-1.5 rounded-full bg-white dark:bg-gray-800" height="0.8em" icon={Ball} />
+                <Icon inline={true} class="absolute bottom-2 -left-0.5 rounded-full bg-white dark:bg-gray-800" height="0.8em" icon={Ball} />
+              </span>
+              <span class="md:text-xs"> Compare </span>
+            </button>
+
+            <button
+              class="flex items-center gap-x-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 px-3 py-1 rounded-full text-xs font-bold"
+              on:click={() => {
+                open(PokemonEditorModal, { 
+                  pokemon: { ...p, pokemon: p.name }, 
+                  onSave: (updated) => {
+                    const bossId = boss.id
+                    const newOverrides = { ...bossOverrides }
+                    if (!newOverrides[bossId]) newOverrides[bossId] = {}
+                    newOverrides[bossId][id] = {
+                      ivs: updated.ivs,
+                      evs: updated.evs,
+                      level: updated.level,
+                      nickname: updated.nickname,
+                      ability: updated.ability,
+                      nature: updated.nature,
+                      moves: updated.moves.map(m => ({ name: m }))
+                    }
+                    gameStore.update(patch({ __bossOverrides: newOverrides }))
+                  }
+                })
+              }}
+            >
+              <Icon inline={true} icon={Settings} />
+              Edit
+            </button>
+          </div>
+
         </Pokemon>
       {/each}
     </div>

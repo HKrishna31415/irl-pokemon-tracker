@@ -59,6 +59,13 @@
   ],
   "tier1": [
     {
+      "name": "Acrobatics",
+      "type": "Flying",
+      "bp": 55,
+      "acc": 100,
+      "alias": "acrobatics"
+    },
+    {
       "name": "Agility",
       "alias": "agility",
       "type": "Psychic",
@@ -150,13 +157,6 @@
       "acc": 100
     },
     {
-      "name": "Heat Wave",
-      "type": "Fire",
-      "bp": 95,
-      "acc": 90,
-      "alias": "heat-wave"
-    },
-    {
       "name": "Ice Beam",
       "alias": "ice-beam",
       "type": "Ice",
@@ -190,6 +190,20 @@
       "type": "Grass",
       "bp": 90,
       "acc": 100
+    },
+    {
+      "name": "Malignant Chain",
+      "type": "Poison",
+      "bp": 77,
+      "acc": 100,
+      "alias": "malignant-chain"
+    },
+    {
+      "name": "Moonblast",
+      "type": "Fairy",
+      "bp": 95,
+      "acc": 100,
+      "alias": "moonblast"
     },
     {
       "name": "Play Rough",
@@ -285,6 +299,13 @@
   ],
   "tier2": [
     {
+      "name": "Aura Sphere",
+      "alias": "aura-sphere",
+      "type": "Fighting",
+      "bp": 80,
+      "acc": 100
+    },
+    {
       "name": "Blast Burn",
       "alias": "blast-burn",
       "type": "Fire",
@@ -299,11 +320,53 @@
       "acc": 70
     },
     {
+      "name": "Body Press",
+      "alias": "body-press",
+      "type": "Fighting",
+      "bp": 80,
+      "acc": 100
+    },
+    {
+      "name": "Breaking Swipe",
+      "alias": "breaking-swipe",
+      "type": "Dragon",
+      "bp": 60,
+      "acc": 100
+    },
+    {
+      "name": "Darkest Lariat",
+      "type": "Dark",
+      "bp": 85,
+      "acc": 100,
+      "alias": "darkest-lariat"
+    },
+    {
+      "name": "Dazzling Gleam",
+      "alias": "dazzling-gleam",
+      "type": "Fairy",
+      "bp": 80,
+      "acc": 100
+    },
+    {
       "name": "Defog",
       "type": "Flying",
       "bp": 0,
       "acc": 100,
       "alias": "defog"
+    },
+    {
+      "name": "Dragon Claw",
+      "alias": "dragon-claw",
+      "type": "Dragon",
+      "bp": 80,
+      "acc": 100
+    },
+    {
+      "name": "Drain Punch",
+      "alias": "drain-punch",
+      "type": "Fighting",
+      "bp": 75,
+      "acc": 100
     },
     {
       "name": "Encore",
@@ -369,6 +432,20 @@
       "acc": 80
     },
     {
+      "name": "Hard Press",
+      "type": "Steel",
+      "bp": 0,
+      "acc": 100,
+      "alias": "hard-press"
+    },
+    {
+      "name": "Heat Wave",
+      "type": "Fire",
+      "bp": 95,
+      "acc": 90,
+      "alias": "heat-wave"
+    },
+    {
       "name": "Hurricane",
       "alias": "hurricane",
       "type": "Flying",
@@ -397,6 +474,13 @@
       "acc": 90
     },
     {
+      "name": "Icicle Crash",
+      "type": "Ice",
+      "bp": 85,
+      "acc": 90,
+      "alias": "icicle-crash"
+    },
+    {
       "name": "Leaf Storm",
       "alias": "leaf-storm",
       "type": "Grass",
@@ -409,6 +493,13 @@
       "type": "Bug",
       "bp": 80,
       "acc": 100
+    },
+    {
+      "name": "Light Screen",
+      "type": "Psychic",
+      "bp": 0,
+      "acc": 100,
+      "alias": "light-screen"
     },
     {
       "name": "Liquidation",
@@ -451,6 +542,20 @@
       "type": "Grass",
       "bp": 120,
       "acc": 85
+    },
+    {
+      "name": "Psychic Noise",
+      "type": "Psychic",
+      "bp": 75,
+      "acc": 100,
+      "alias": "psychic-noise"
+    },
+    {
+      "name": "Reflect",
+      "type": "Psychic",
+      "bp": 0,
+      "acc": 100,
+      "alias": "reflect"
     },
     {
       "name": "Scorching Sands",
@@ -537,6 +642,13 @@
       "acc": 100
     },
     {
+      "name": "Tera Blast",
+      "type": "Normal",
+      "bp": 80,
+      "acc": 100,
+      "alias": "tera-blast"
+    },
+    {
       "name": "Thunder",
       "alias": "thunder",
       "type": "Electric",
@@ -584,6 +696,13 @@
       "type": "Fire",
       "bp": 0,
       "acc": 85
+    },
+    {
+      "name": "X-Scissor",
+      "alias": "x-scissor",
+      "type": "Bug",
+      "bp": 80,
+      "acc": 100
     }
   ],
   "tier3": [
@@ -602,13 +721,6 @@
       "acc": 100
     },
     {
-      "name": "Aura Sphere",
-      "alias": "aura-sphere",
-      "type": "Fighting",
-      "bp": 80,
-      "acc": 100
-    },
-    {
       "name": "Avalanche",
       "alias": "avalanche",
       "type": "Ice",
@@ -623,13 +735,6 @@
       "acc": 100
     },
     {
-      "name": "Body Press",
-      "alias": "body-press",
-      "type": "Fighting",
-      "bp": 80,
-      "acc": 100
-    },
-    {
       "name": "Body Slam",
       "alias": "body-slam",
       "type": "Normal",
@@ -637,11 +742,11 @@
       "acc": 100
     },
     {
-      "name": "Breaking Swipe",
-      "alias": "breaking-swipe",
-      "type": "Dragon",
-      "bp": 60,
-      "acc": 100
+      "name": "Bullet Seed",
+      "type": "Grass",
+      "bp": 25,
+      "acc": 100,
+      "alias": "bullet-seed"
     },
     {
       "name": "Burning Jealousy",
@@ -649,6 +754,13 @@
       "type": "Fire",
       "bp": 70,
       "acc": 100
+    },
+    {
+      "name": "Chilling Water",
+      "type": "Water",
+      "bp": 50,
+      "acc": 100,
+      "alias": "chilling-water"
     },
     {
       "name": "Coaching",
@@ -662,27 +774,6 @@
       "alias": "crunch",
       "type": "Dark",
       "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Dazzling Gleam",
-      "alias": "dazzling-gleam",
-      "type": "Fairy",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Dragon Claw",
-      "alias": "dragon-claw",
-      "type": "Dragon",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Drain Punch",
-      "alias": "drain-punch",
-      "type": "Fighting",
-      "bp": 75,
       "acc": 100
     },
     {
@@ -861,11 +952,25 @@
       "acc": 100
     },
     {
+      "name": "Pin Missile",
+      "type": "Bug",
+      "bp": 25,
+      "acc": 95,
+      "alias": "pin-missile"
+    },
+    {
       "name": "Poison Jab",
       "alias": "poison-jab",
       "type": "Poison",
       "bp": 80,
       "acc": 100
+    },
+    {
+      "name": "Pounce",
+      "type": "Bug",
+      "bp": 50,
+      "acc": 100,
+      "alias": "pounce"
     },
     {
       "name": "Psych Up",
@@ -945,6 +1050,13 @@
       "acc": 100
     },
     {
+      "name": "Smart Strike",
+      "type": "Steel",
+      "bp": 70,
+      "acc": 100,
+      "alias": "smart-strike"
+    },
+    {
       "name": "Snatch",
       "alias": "snatch",
       "type": "Dark",
@@ -973,6 +1085,13 @@
       "acc": 95
     },
     {
+      "name": "Tail Slap",
+      "type": "Normal",
+      "bp": 25,
+      "acc": 85,
+      "alias": "tail-slap"
+    },
+    {
       "name": "Throat Chop",
       "alias": "throat-chop",
       "type": "Dark",
@@ -985,6 +1104,20 @@
       "type": "Electric",
       "bp": 75,
       "acc": 100
+    },
+    {
+      "name": "Trailblaze",
+      "type": "Grass",
+      "bp": 50,
+      "acc": 100,
+      "alias": "trailblaze"
+    },
+    {
+      "name": "Upper Hand",
+      "type": "Fighting",
+      "bp": 65,
+      "acc": 100,
+      "alias": "upper-hand"
     },
     {
       "name": "Vacuum Wave",
@@ -1012,13 +1145,6 @@
       "alias": "work-up",
       "type": "Normal",
       "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "X-Scissor",
-      "alias": "x-scissor",
-      "type": "Bug",
-      "bp": 80,
       "acc": 100
     },
     {

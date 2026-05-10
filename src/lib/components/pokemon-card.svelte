@@ -13,6 +13,7 @@
     stats,
     nature = undefined,
     ivs = {},
+    evs = {},
     minimal = false
 
   import { capitalise, regionise } from '$lib/utils/string'
@@ -164,7 +165,11 @@
             class="my-3 ml-4 grid flex-2 grid-cols-2 gap-x-4 gap-y-0 lg:gap-y-3"
           >
             {#each moves.filter((m) => !isEmpty(m)) as m}
-              <MoveCard {...m} stab={types.includes(m.type)} />
+              {#if typeof m === 'string'}
+                <div class="my-2 text-sm font-medium pt-2 pb-1 text-gray-700 dark:text-gray-300">{capitalise(m.replace(/-/g, ' '))}</div>
+              {:else}
+                <MoveCard {...m} stab={types.includes(m.type)} />
+              {/if}
             {/each}
           </div>
         {/if}
@@ -172,14 +177,15 @@
         {#if $$slots.stats}
           <slot name="stats" />
         {:else}
-          <StatBlock
-            class="mx-4 mt-4 w-auto flex-1 grow grid-cols-20 md:mt-3"
-            col={color(types[0], themeId)}
-            {nature}
-            max={maxStat}
-            {ivs}
-            {...stats}
-          />
+            <StatBlock
+              class="pointer-events-auto h-full pr-12 md:pr-4"
+              col={color1}
+              {maxStat}
+              {nature}
+              {ivs}
+              {evs}
+              {...stats}
+            />
         {/if}
       </div>
 

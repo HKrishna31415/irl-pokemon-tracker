@@ -61,9 +61,13 @@
   }
 
   $: filteredTms = (tierId) => {
+    const s = search.toLowerCase().trim()
+    if (!s) return tms[tierId]
     return tms[tierId].filter(tm => 
-      tm.name.toLowerCase().includes(search.toLowerCase()) ||
-      tm.type.toLowerCase().includes(search.toLowerCase())
+      tm.name.toLowerCase().includes(s) ||
+      tm.type.toLowerCase().includes(s) ||
+      (tm.bp && tm.bp.toString() === s) ||
+      (s === 'status' && tm.bp === 0)
     )
   }
 </script>

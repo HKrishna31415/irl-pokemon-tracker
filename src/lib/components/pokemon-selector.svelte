@@ -43,7 +43,8 @@
   import { createEventDispatcher, onMount, getContext } from 'svelte'
 
   let selected, nickname, status, nature, hidden, death, ability, abilityRoll
-  let level, ivs = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 }
+  let level, ivs = { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 }
+  let evs = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 }
   const stats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
   let prevstatus = 'loading'
 
@@ -152,6 +153,7 @@
     ...(status?.id === 5 && death ? { death } : {}),
     ...(level ? { level } : {}),
     ...(ivs ? { ivs } : {}),
+    ...(evs ? { evs } : {}),
     ...(ability ? { ability } : {})
   });
 
@@ -517,26 +519,26 @@
       </div>
     </AutoCompleteV2>
     
-    <AutoCompleteV2
-      itemF={(_) => Object.values(selected?.abilities || {})}
-      bind:selected={ability}
-      id="{location} Ability"
-      name="{location} Ability"
-      placeholder="Ability"
-      class="col-span-1 {!selected || status?.id === 4 || hidden
-        ? 'hidden sm:block'
-        : ''}"
-    />
-    {#if selected && abilityRoll}
-      <div class="mt-1 text-[10px] font-bold text-blue-500 uppercase flex items-center gap-x-1">
-        <span>🎲</span>
-        Ability Roll: {abilityRoll}
-      </div>
-    {/if}
+    <div class="col-span-1 relative {!selected || status?.id === 4 || hidden ? 'hidden sm:block' : ''}">
+      {#if selected && abilityRoll}
+        <div class="absolute -top-4 left-1 text-[9px] font-bold text-blue-500 uppercase flex items-center gap-x-1 whitespace-nowrap z-10">
+          <span>🎲</span>
+          Roll: {abilityRoll}
+        </div>
+      {/if}
+      <AutoCompleteV2
+        itemF={(_) => Object.values(selected?.abilities || {})}
+        bind:selected={ability}
+        id="{location} Ability"
+        name="{location} Ability"
+        placeholder="Ability"
+        class="w-full"
+      />
+    </div>
 
     {#if selected && status && !hidden}
       <div
-        class="col-span-2 mt-1 flex flex-wrap gap-1 md:col-span-4 lg:col-span-8 lg:justify-end"
+        class="col-span-2 mt-1 flex flex-wrap justify-start gap-1 md:col-span-4 lg:col-span-8"
       >
         <button
           class="flex items-center gap-x-1 rounded-md border border-gray-100 bg-gray-50/50 px-2 py-0.5 text-[9px] font-bold text-gray-400 transition-colors hover:border-lime-200 hover:bg-lime-50/50 hover:text-lime-600 dark:border-gray-800 dark:bg-gray-800/40 dark:hover:border-lime-900/40 dark:hover:text-lime-400"
@@ -583,17 +585,31 @@
         </button>
 
         {#each stats as stat}
-          <div
-            class="flex items-center gap-x-1 rounded-md border border-gray-100 bg-gray-50/50 px-1.5 py-0.5 text-[9px] font-bold transition-colors hover:border-gray-200 dark:border-gray-800 dark:bg-gray-800/40 dark:hover:border-gray-700"
-          >
-            <span class="uppercase text-gray-400 dark:text-gray-500">{stat}</span>
-            <input
-              type="number"
-              min="0"
-              max="31"
-              class="w-7 bg-transparent text-center text-gray-700 focus:outline-none dark:text-gray-200"
-              bind:value={ivs[stat]}
-            />
+          <div class="flex flex-col gap-y-1">
+            <div
+              class="flex items-center gap-x-1 rounded-md border border-gray-100 bg-gray-50/50 px-1.5 py-0.5 text-[9px] font-bold transition-colors hover:border-gray-200 dark:border-gray-800 dark:bg-gray-800/40 dark:hover:border-gray-700"
+            >
+              <span class="uppercase text-gray-400 dark:text-gray-500">IV:{stat}</span>
+              <input
+                type="number"
+                min="0"
+                max="31"
+                class="w-7 bg-transparent text-center text-gray-700 focus:outline-none dark:text-gray-200"
+                bind:value={ivs[stat]}
+              />
+            </div>
+            <div
+              class="flex items-center gap-x-1 rounded-md border border-gray-100 bg-gray-50/50 px-1.5 py-0.5 text-[9px] font-bold transition-colors hover:border-gray-200 dark:border-gray-800 dark:bg-gray-800/40 dark:hover:border-gray-700"
+            >
+              <span class="uppercase text-blue-400 dark:text-blue-500">EV:{stat}</span>
+              <input
+                type="number"
+                min="0"
+                max="252"
+                class="w-7 bg-transparent text-center text-gray-700 focus:outline-none dark:text-gray-200"
+                bind:value={evs[stat]}
+              />
+            </div>
           </div>
         {/each}
       </div>

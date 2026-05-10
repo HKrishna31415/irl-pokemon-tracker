@@ -224,7 +224,7 @@
 
   input {
     /* @apply  sm:text-xs */
-    @apply h-10 w-full rounded-lg border-2 pr-3 text-xxs text-gray-800 placeholder-gray-400 shadow-sm ring-2 ring-transparent transition-colors focus:outline-none sm:text-xs;
+    @apply h-10 w-full rounded-lg border-2 pr-10 text-xxs text-gray-800 placeholder-gray-400 shadow-sm ring-2 ring-transparent transition-colors focus:outline-none sm:text-xs;
     padding-left: var(--auc-inset);
     background-color: var(--input-bg);
     border-color: theme('colors.gray.200');
