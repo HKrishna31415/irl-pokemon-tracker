@@ -130,7 +130,7 @@
           >
             <option value="">Select Nature</option>
             {#each Natures as n}
-              <option value={n}>{n}</option>
+              <option value={n.id}>{n.label}</option>
             {/each}
           </select>
         </div>
