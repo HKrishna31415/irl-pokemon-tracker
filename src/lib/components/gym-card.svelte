@@ -37,7 +37,7 @@
   import { Picture, Icon, PIcon, IconButton, Accordion, Tooltip } from '$c/core'
   import { Wrapper as SettingWrapper } from '$lib/components/Settings'
 
-  import { Loop as Badge, Ball, Info, Download } from '$icons'
+  import { Loop as Badge, Ball, Info, Download, Settings } from '$icons'
   import { Vs } from '$lib/components/BossBattle'
   import { bossToImage } from '$utils/rewrites'
 
@@ -133,7 +133,7 @@
   $: (async () => await fetchData(starter))()
 
   $: derivedLevelCap = pokemon.every(
-    (it) => it.level.startsWith('+') || it.level.startsWith('-')
+    (it) => String(it.level).startsWith('+') || String(it.level).startsWith('-')
   )
     ? null
     : pokemon.reduce((acc, it) => Math.max(acc, it.level), 0)
