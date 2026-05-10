@@ -3,7 +3,7 @@
   import { capitalise } from '$utils/string'
   import { pokeapi } from '$utils/api'
   import { Loader, Icon, IconButton, PIcon } from '$c/core'
-  import { Save, X, Plus, Minus } from '$icons'
+  import { Save, X, Plus, Minus, Info } from '$icons'
   import { Natures, NaturesMap } from '$lib/data/natures'
   import tmsData from '$lib/data/tms.json'
 
@@ -49,7 +49,7 @@
             return detail ? { name: capitalise(m.move.name.replace(/-/g, ' ')), level: detail.level_learned_at } : null
           })
           .filter(m => m && m.level <= level)
-          .map(m => m.name)
+          .map(m => ({ name: m.name, isTM: false }))
 
         // TM moves if in inventory
         const ownedTMs = []
@@ -59,12 +59,33 @@
             // Find move name in tmsData
             for (const tier of Object.values(tmsData)) {
               const tm = tier.find(t => t.alias === moveAlias)
-              if (tm) ownedTMs.push(tm.name)
+              if (tm) ownedTMs.push({ name: tm.name, isTM: true })
             }
           }
         })
 
-        availableMoves = [...new Set([...learnset, ...ownedTMs])].sort()
+        // Egg moves if they have a heart scale
+        const eggMoves = []
+        if (inventory['heart-scale'] > 0) {
+          data.moves.forEach(m => {
+            const detail = m.version_group_details.find(d => d.move_learn_method.name === 'egg')
+            if (detail) {
+              eggMoves.push({ name: capitalise(m.move.name.replace(/-/g, ' ')), isEgg: true })
+            }
+          })
+        }
+
+        const combined = [...learnset, ...ownedTMs, ...eggMoves]
+        const uniqueMovesMap = new Map()
+        combined.forEach(m => {
+           if (uniqueMovesMap.has(m.name)) {
+               if (m.isTM) uniqueMovesMap.get(m.name).isTM = true
+               if (m.isEgg) uniqueMovesMap.get(m.name).isEgg = true
+           } else {
+               uniqueMovesMap.set(m.name, m)
+           }
+        })
+        availableMoves = Array.from(uniqueMovesMap.values()).sort((a,b) => a.name.localeCompare(b.name))
       }
     } catch (e) {
       console.error('Failed to fetch moves', e)
@@ -74,6 +95,29 @@
   }
 
   $: if (level) fetchAvailableMoves()
+
+  let moveDetails = {}
+  async function fetchMoveDetails(moveName) {
+    if (!moveName || moveDetails[moveName] || moveDetails[moveName] === 'loading') return
+    try {
+      moveDetails[moveName] = 'loading'
+      const data = await pokeapi(`move/${moveName.toLowerCase().replace(/ /g, '-')}`)
+      moveDetails[moveName] = {
+        power: data.power,
+        acc: data.accuracy,
+        type: data.type?.name || 'unknown',
+        effect: data.effect_entries?.find(e => e.language.name === 'en')?.short_effect || data.flavor_text_entries?.find(e => e.language.name === 'en')?.flavor_text || ''
+      }
+    } catch (e) {
+      delete moveDetails[moveName]
+    }
+  }
+
+  $: {
+    moves.forEach(m => {
+      if (m) fetchMoveDetails(m)
+    })
+  }
 
   function save() {
     onSave({
@@ -154,15 +198,31 @@
           </div>
         {:else}
           {#each [0, 1, 2, 3] as i}
-            <select 
-              bind:value={moves[i]}
-              class="w-full bg-gray-50 dark:bg-gray-800 border dark:border-gray-700 dark:text-white rounded-lg px-4 py-2 outline-none text-sm"
-            >
-              <option value="">(None)</option>
-              {#each availableMoves as m}
-                <option value={m}>{m}</option>
-              {/each}
-            </select>
+            <div class="flex items-center gap-x-2">
+              <select 
+                bind:value={moves[i]}
+                class="w-full bg-gray-50 dark:bg-gray-800 border dark:border-gray-700 dark:text-white rounded-lg px-4 py-2 outline-none text-sm"
+              >
+                <option value="">(None)</option>
+                {#each availableMoves as m}
+                  <option value={m.name}>{m.name} {m.isTM ? '(TM)' : ''} {m.isEgg ? '(Egg)' : ''}</option>
+                {/each}
+              </select>
+              {#if moves[i] && moveDetails[moves[i]] && moveDetails[moves[i]] !== 'loading'}
+                <span class="cursor-help shrink-0 opacity-50 hover:opacity-100 transition-opacity">
+                  <Icon inline icon={Info} class="text-xl" />
+                  <Tooltip>
+                    <div class="p-2 space-y-1 w-48 text-sm">
+                      <div class="font-bold border-b pb-1 mb-1">{moves[i]}</div>
+                      <div class="capitalize">Type: {moveDetails[moves[i]].type}</div>
+                      {#if moveDetails[moves[i]].power}<div>Power: {moveDetails[moves[i]].power}</div>{/if}
+                      {#if moveDetails[moves[i]].acc}<div>Accuracy: {moveDetails[moves[i]].acc}%</div>{/if}
+                      <div class="text-xs opacity-80 mt-1 leading-tight">{moveDetails[moves[i]].effect}</div>
+                    </div>
+                  </Tooltip>
+                </span>
+              {/if}
+            </div>
           {/each}
         {/if}
       </div>

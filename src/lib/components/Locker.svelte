@@ -28,6 +28,8 @@
     )
   })
 
+  import tmsData from '$lib/data/tms.json'
+
   const checkCompatibility = (itemId) => {
     if (!itemId.startsWith('tm-')) return
     
@@ -40,21 +42,25 @@
     })
   }
 
+  // Pre-flatten TMs for fast lookup
+  const allTms = Object.values(tmsData).flat()
+
   const getItemImage = (id) => {
     const mapping = {
       'encounter-token': 'pass',
       'tera-orb': 'enigma-stone',
       'z-crystal': 'normalium-z',
       'mega-stone': 'key-stone',
-      'type-gem': 'normal-gem',
-      'tm-earthquake': 'ground-tm',
-      'tm-u-turn': 'bug-tm',
-      'tm-volt-switch': 'electric-tm',
-      'tm-flip-turn': 'water-tm',
-      'tm-flare-blitz': 'fire-tm',
-      'tm-close-combat': 'fighting-tm',
-      'tm-brave-bird': 'flying-tm',
-      'tm-knock-off': 'dark-tm'
+      'type-gem': 'normal-gem'
+    }
+
+    if (id.startsWith('tm-')) {
+      const moveNameAlias = id.replace('tm-', '')
+      const tmObj = allTms.find(t => t.alias === moveNameAlias || t.name.toLowerCase().replace(/ /g, '-') === moveNameAlias)
+      if (tmObj && tmObj.type) {
+        return `/assets/img/items/${tmObj.type.toLowerCase()}-tm.png`
+      }
+      return `/assets/img/items/normal-tm.png`
     }
 
     const name = mapping[id] || id
