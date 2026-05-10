@@ -36,6 +36,7 @@
     {
       "type": "route",
       "name": "Pallet Town",
+      "method": "fishing",
       "encounters": [
         "tentacool",
         "binacle",
@@ -97,6 +98,7 @@
     {
       "type": "route",
       "name": "Viridian City",
+      "method": "fishing",
       "encounters": [
         "magikarp"
       ]

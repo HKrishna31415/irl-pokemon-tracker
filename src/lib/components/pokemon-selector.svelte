@@ -5,7 +5,8 @@
     locationName = '',
     type = '',
     infolink = '',
-    cap = 0
+    cap = 0,
+    method = ''
 
   import { nonnull, equal as oEqual } from '$utils/obj'
 
@@ -38,7 +39,8 @@
     Map,
     Search,
     LongGrass,
-    Dice
+    Dice,
+    Hook
   } from '$icons'
 
   import { createEventDispatcher, onMount, getContext } from 'svelte'
@@ -300,7 +302,12 @@
       {#if $$slots.location}
         <slot name="location" />
       {:else}
-        {location}
+        <div class="flex items-center gap-x-1">
+          {#if method === 'fishing'}
+            <Icon icon={Hook} class="text-blue-500" height="0.8rem" />
+          {/if}
+          {location}
+        </div>
       {/if}
     </span>
 

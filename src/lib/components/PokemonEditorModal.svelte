@@ -23,6 +23,8 @@
 
   let availableMoves = []
   let loadingMoves = true
+  let showShowdownImport = false
+  let showdownText = ''
 
   const stats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
 
@@ -125,6 +127,61 @@
     })
   }
 
+  function parseShowdown() {
+    if (!showdownText) return
+    const lines = showdownText.split('\n').map(l => l.trim()).filter(l => l)
+    if (!lines.length) return
+
+    // Level
+    const levelLine = lines.find(l => l.startsWith('Level:'))
+    if (levelLine) level = parseInt(levelLine.replace('Level:', '').trim())
+
+    // Ability
+    const abilityLine = lines.find(l => l.startsWith('Ability:'))
+    if (abilityLine) ability = capitalise(abilityLine.replace('Ability:', '').trim())
+
+    // Nature
+    const natureLine = lines.find(l => l.endsWith('Nature'))
+    if (natureLine) {
+      const n = natureLine.replace('Nature', '').trim().toLowerCase()
+      if (NaturesMap[n]) nature = n
+    }
+
+    // EVs
+    const evLine = lines.find(l => l.startsWith('EVs:'))
+    if (evLine) {
+      const parts = evLine.replace('EVs:', '').split('/')
+      parts.forEach(p => {
+        const [val, stat] = p.trim().split(' ')
+        const s = stat.toLowerCase() === 'spd' ? 'spd' : stat.toLowerCase() === 'spa' ? 'spa' : stat.toLowerCase()
+        if (evs[s] !== undefined) evs[s] = parseInt(val)
+      })
+      evs = evs
+    }
+
+    // IVs
+    const ivLine = lines.find(l => l.startsWith('IVs:'))
+    if (ivLine) {
+      const parts = ivLine.replace('IVs:', '').split('/')
+      parts.forEach(p => {
+        const [val, stat] = p.trim().split(' ')
+        const s = stat.toLowerCase() === 'spd' ? 'spd' : stat.toLowerCase() === 'spa' ? 'spa' : stat.toLowerCase()
+        if (ivs[s] !== undefined) ivs[s] = parseInt(val)
+      })
+      ivs = ivs
+    }
+
+    // Moves
+    const moveLines = lines.filter(l => l.startsWith('-'))
+    if (moveLines.length) {
+      moves = moveLines.map(l => capitalise(l.replace('-', '').trim())).slice(0, 4)
+      while (moves.length < 4) moves.push('')
+    }
+
+    showShowdownImport = false
+    showdownText = ''
+  }
+
   function save() {
     onSave({
       ...pokemon,
@@ -146,8 +203,41 @@
       <PIcon name={pokemon.pokemon} />
       Edit {capitalise(pokemon.pokemon)}
     </h2>
-    <IconButton icon={X} on:click={close} />
+    <div class="flex items-center gap-x-2">
+      <button 
+        on:click={() => showShowdownImport = !showShowdownImport}
+        class="text-[10px] font-bold uppercase tracking-wider bg-gray-100 dark:bg-gray-800 hover:bg-blue-100 dark:hover:bg-blue-900/30 text-gray-500 hover:text-blue-600 px-2 py-1 rounded-md transition-colors"
+      >
+        Import Showdown
+      </button>
+      <IconButton icon={X} on:click={close} />
+    </div>
   </div>
+
+  {#if showShowdownImport}
+    <div class="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800 rounded-xl space-y-3" in:fade>
+      <div class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Paste Showdown Set</div>
+      <textarea 
+        bind:value={showdownText}
+        placeholder="Species @ Item&#10;Ability: ...&#10;Level: 50&#10;EVs: 252 Atk / 252 Spe&#10;Jolly Nature&#10;- Move 1&#10;- Move 2..."
+        class="w-full h-32 bg-white dark:bg-gray-800 border border-blue-200 dark:border-blue-900 rounded-lg p-3 text-sm font-mono outline-none dark:text-white"
+      ></textarea>
+      <div class="flex justify-end gap-x-2">
+        <button 
+          on:click={() => showShowdownImport = false}
+          class="px-3 py-1.5 text-xs font-bold text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+        >
+          Cancel
+        </button>
+        <button 
+          on:click={parseShowdown}
+          class="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-lg shadow-sm"
+        >
+          Parse Set
+        </button>
+      </div>
+    </div>
+  {/if}
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
     <!-- Basic Info -->

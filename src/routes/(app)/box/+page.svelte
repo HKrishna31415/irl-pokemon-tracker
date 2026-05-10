@@ -15,6 +15,7 @@
   import { Modal as AnalysisModal } from '$lib/components/Analysis'
   import LearnsetModal from '$lib/components/LearnsetModal.svelte'
   import PokemonEditorModal from '$lib/components/PokemonEditorModal.svelte'
+  import ShowdownImportModal from '$lib/components/ShowdownImportModal.svelte'
 
   import { capitalise } from '$utils/string'
   import { drag } from '$utils/drag'
@@ -330,6 +331,38 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
       alert(`${p.nickname || capitalise(p.pokemon)} exported to clipboard!`)
     })
   }
+
+  const openImportModal = () => {
+    open(ShowdownImportModal, { onImport: handleBulkImport })
+  }
+
+  const handleBulkImport = (sets) => {
+    const newRawData = { ...rawData }
+    let updatedCount = 0
+
+    sets.forEach(set => {
+      // Find a match in ogbox
+      const match = ogbox.find(p => {
+        const pSpecies = p.pokemon.toLowerCase()
+        const sSpecies = set.species
+        // Match by species AND (nickname if provided, otherwise first match)
+        return pSpecies === sSpecies && (!set.nickname || p.nickname === set.nickname)
+      })
+
+      if (match) {
+        const { species, ...updates } = set
+        newRawData[match.location] = { ...newRawData[match.location], ...updates }
+        updatedCount++
+      }
+    })
+
+    if (updatedCount > 0) {
+      gameStore.update(() => JSON.stringify(newRawData))
+      alert(`Successfully updated ${updatedCount} Pokémon from Showdown!`)
+    } else {
+      alert('No matching Pokémon found in Box to update.')
+    }
+  }
 </script>
 
 {#if loading}
@@ -361,6 +394,10 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
             <IconButton rounded title="Export Entire Box" on:click={exportBox}>
               <Icon class="pl-1" height="1.2em" inline icon={Download} />
               <small class="pl-0.5 pr-2">Full Box</small>
+            </IconButton>
+            <IconButton rounded title="Import from Showdown" on:click={openImportModal}>
+              <Icon class="pl-1" height="1.2em" inline icon={External} />
+              <small class="pl-0.5 pr-2">Import</small>
             </IconButton>
           </div>
 
