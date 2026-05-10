@@ -4,7 +4,8 @@
     location,
     locationName = '',
     type = '',
-    infolink = ''
+    infolink = '',
+    cap = 0
 
   import { nonnull, equal as oEqual } from '$utils/obj'
 
@@ -283,6 +284,10 @@
   }
 
   $: gray = NuzlockeGroups.Unavailable.includes(status?.id)
+
+  $: if (selected && !level && cap) {
+    level = cap
+  }
 </script>
 
 <SettingsWrapper id="nickname-clause" let:setting={nicknames}>

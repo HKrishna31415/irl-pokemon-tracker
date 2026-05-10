@@ -107,6 +107,7 @@
     try {
       moveDetails[moveName] = 'loading'
       const data = await pokeapi(`move/${moveName.toLowerCase().replace(/ /g, '-')}`)
+      if (!data) return
       moveDetails[moveName] = {
         power: data.power,
         acc: data.accuracy,

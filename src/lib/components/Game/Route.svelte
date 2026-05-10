@@ -178,6 +178,7 @@
         <PokemonSelector
           {id}
           {store}
+          cap={5}
           encounters={p.encounters}
           encounterRates={p.encounterRates}
           type="starter"
@@ -227,6 +228,7 @@
           <PokemonSelector
             {id}
             {store}
+            cap={p.cap}
             infolink={toDbLocation(key, p.name)}
             location={p.name}
             encounters={p.encounters}
@@ -238,6 +240,7 @@
           <PokemonSelector
             id="{id}-2"
             {store}
+            cap={p.cap}
             location="{p.name} (Roll 2)"
             locationName="{p.name} (Roll 2)"
             encounters={p.encounters}
@@ -248,6 +251,7 @@
           <PokemonSelector
             id="{id}-3"
             {store}
+            cap={p.cap}
             location="{p.name} (Roll 3)"
             locationName="{p.name} (Roll 3)"
             encounters={p.encounters}
@@ -259,6 +263,7 @@
             <PokemonSelector
               id="{id}-extra-{i}"
               {store}
+              cap={p.cap}
               type="custom"
               location={extra.id}
               locationName={extra.name}
