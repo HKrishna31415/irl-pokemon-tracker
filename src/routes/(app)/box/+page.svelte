@@ -340,13 +340,22 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
     const newRawData = { ...rawData }
     let updatedCount = 0
 
+    const normalizeSpecies = (s) => s.toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[.'’]/g, '')
+      .replace(/jr-/, 'jr')
+      .replace(/mime-/, 'mime')
+
     sets.forEach(set => {
       // Find a match in ogbox
       const match = ogbox.find(p => {
-        const pSpecies = p.pokemon.toLowerCase()
+        const pSpecies = normalizeSpecies(p.pokemon)
         const sSpecies = set.species
+        const pNick = (p.nickname || '').trim()
+        const sNick = (set.nickname || '').trim()
+
         // Match by species AND (nickname if provided, otherwise first match)
-        return pSpecies === sSpecies && (!set.nickname || p.nickname === set.nickname)
+        return pSpecies === sSpecies && (!sNick || pNick === sNick)
       })
 
       if (match) {

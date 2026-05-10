@@ -18,17 +18,40 @@
       if (!lines.length) return null
 
       const firstLine = lines[0]
-      let species = firstLine.split('@')[0].trim()
+      const [pokemonPart] = firstLine.split('@')
+      const part = pokemonPart.trim()
+      
+      let species = part
       let nickname = ''
-      if (species.includes('(')) {
-        const match = species.match(/(.*)\s*\((.*)\)/)
-        if (match) {
-          species = match[2].trim()
-          nickname = match[1].trim()
+      
+      // Handle parentheses (Nickname) (Species) (Gender)
+      const matches = [...part.matchAll(/\((.*?)\)/g)]
+      if (matches.length === 2) {
+        // Nickname (Species) (Gender)
+        nickname = part.split('(')[0].trim()
+        species = matches[0][1]
+      } else if (matches.length === 1) {
+        const content = matches[0][1]
+        if (content === 'M' || content === 'F') {
+          // Species (Gender)
+          species = part.split('(')[0].trim()
+        } else {
+          // Nickname (Species)
+          nickname = part.split('(')[0].trim()
+          species = content
         }
       }
 
-      const updates = { species: species.toLowerCase().replace(/ /g, '-'), nickname }
+      const normalizeSpecies = (s) => s.toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[.'’]/g, '')
+        .replace(/jr-/, 'jr')
+        .replace(/mime-/, 'mime')
+
+      const updates = { 
+        species: normalizeSpecies(species), 
+        nickname: nickname.trim() 
+      }
 
       const levelLine = lines.find(l => l.startsWith('Level:'))
       if (levelLine) updates.level = parseInt(levelLine.replace('Level:', '').trim())

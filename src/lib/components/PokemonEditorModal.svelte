@@ -132,6 +132,21 @@
     const lines = showdownText.split('\n').map(l => l.trim()).filter(l => l)
     if (!lines.length) return
 
+    // Handle Nickname/Species in first line
+    const [pokemonPart] = lines[0].split('@')
+    const part = pokemonPart.trim()
+    const matches = [...part.matchAll(/\((.*?)\)/g)]
+    if (matches.length >= 1) {
+      const content = matches[0][1]
+      if (content !== 'M' && content !== 'F') {
+        // First parenthesis is species, text before is nickname
+        nickname = part.split('(')[0].trim()
+      } else if (matches.length === 2) {
+        // Nickname (Species) (Gender)
+        nickname = part.split('(')[0].trim()
+      }
+    }
+
     // Level
     const levelLine = lines.find(l => l.startsWith('Level:'))
     if (levelLine) level = parseInt(levelLine.replace('Level:', '').trim())
