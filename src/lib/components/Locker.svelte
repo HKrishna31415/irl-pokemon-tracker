@@ -48,7 +48,6 @@
   const getItemImage = (id) => {
     const mapping = {
       'encounter-token': 'pass',
-      'tera-orb': 'enigma-stone',
       'z-crystal': 'normalium-z',
       'mega-stone': 'key-stone',
       'type-gem': 'normal-gem'

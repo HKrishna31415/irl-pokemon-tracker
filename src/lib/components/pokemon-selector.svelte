@@ -294,9 +294,9 @@
 
 <SettingsWrapper id="nickname-clause" let:setting={nicknames}>
   <div
-    class:lg:grid-cols-9={nicknames}
-    class:lg:grid-cols-7={!nicknames}
-    class="relative flex grid w-full grid-cols-2 gap-y-3 gap-x-2 md:grid-cols-4 md:gap-y-2 lg:grid-cols-9 lg:gap-y-0"
+    class:has-nicknames={nicknames}
+    class:no-nicknames={!nicknames}
+    class="selector-grid relative grid w-full grid-cols-2 items-center gap-y-3 gap-x-2 md:grid-cols-4 md:gap-y-2 lg:gap-y-0"
   >
     <span class="location group relative z-50">
       {#if $$slots.location}
@@ -361,7 +361,7 @@
               id="{location} Encounter"
               name="{location} Encounter"
               placeholder="Find encounter"
-              class="col-span-2 w-11/12 sm:w-full"
+              class="encounter-select col-span-2 w-11/12 sm:w-full"
             >
               <span
                 class="flex h-8 items-center px-4 py-5 md:py-6"
@@ -531,7 +531,7 @@
       </div>
     </AutoCompleteV2>
     
-    <div class="col-span-1 relative {!selected || status?.id === 4 || hidden ? 'hidden sm:block' : ''}">
+    <div class="ability-select col-span-1 relative {!selected || status?.id === 4 || hidden ? 'hidden sm:block' : ''}">
       {#if selected && abilityRoll}
         <div class="absolute -top-4 left-1 text-[9px] font-bold text-blue-500 uppercase flex items-center gap-x-1 whitespace-nowrap z-10">
           <span>🎲</span>
@@ -550,7 +550,7 @@
 
     {#if selected && status && !hidden}
       <div
-        class="col-span-2 mt-1 flex flex-wrap justify-start gap-1 md:col-span-4 lg:col-span-8"
+        class="stat-grid col-span-2 mt-1 flex flex-wrap justify-start gap-1 md:col-span-4 lg:col-span-6 lg:col-start-2"
       >
         <button
           class="flex items-center gap-x-1 rounded-md border border-gray-100 bg-gray-50/50 px-2 py-0.5 text-[9px] font-bold text-gray-400 transition-colors hover:border-lime-200 hover:bg-lime-50/50 hover:text-lime-600 dark:border-gray-800 dark:bg-gray-800/40 dark:hover:border-lime-900/40 dark:hover:text-lime-400"
@@ -627,7 +627,7 @@
       </div>
     {/if}
 
-    <span class="inline-flex gap-x-2 text-left">
+    <span class="row-actions col-span-2 inline-flex justify-end gap-2 text-left md:col-span-4 lg:col-span-6 lg:col-start-2">
       {#if !selected && encounters && encounters.length}
         <IconButton
           rounded
@@ -714,7 +714,7 @@
           rounded
           name="poke-ball"
           color="orange"
-          className="-translate-y-0.5"
+          className="action-icon -translate-y-0.5"
           containerClassName={!selected ? 'hidden sm:block' : ''}
           on:click={handleStatus(1)}
           title="Capture {selected.name}"
@@ -725,7 +725,7 @@
         <IconButton
           rounded
           name="dawn-stone"
-          className="-translate-y-0.5"
+          className="action-icon -translate-y-0.5"
           containerClassName={!selected ? 'hidden sm:block' : ''}
           color="green"
           title="Evolve {selected.name}"
@@ -737,7 +737,7 @@
         <IconButton
           rounded
           src={Ball}
-          className="transform scale-125"
+          className="action-icon transform scale-125"
           containerClassName="relative"
           color="sky"
           title="{inteam ? `Remove` : `Add`} {selected.name} {inteam
@@ -755,7 +755,7 @@
 
       <Popover
         title="Open contextual menu"
-        className="absolute top-16 mt-0.5 right-1 sm:top-0 sm:relative "
+        className="action-menu absolute top-16 mt-0.5 right-1 sm:top-0 sm:relative "
       >
         <Icon inline={true} height="1.4em" icon={Dots} class="fill-current" />
 
@@ -914,5 +914,80 @@
   }
   :global(.dark) .popover li:hover :global(.group-bg) {
     @apply bg-orange-500 text-white;
+  }
+
+  @media (min-width: theme('screens.lg')) {
+    .selector-grid {
+      display: grid !important;
+      align-items: center;
+    }
+    .selector-grid.has-nicknames {
+      grid-template-columns:
+        minmax(5.5rem, 7rem)
+        minmax(12rem, 16rem)
+        minmax(7rem, 9rem)
+        minmax(4rem, 5rem)
+        minmax(7rem, 8.5rem)
+        minmax(6.5rem, 8rem)
+        minmax(7rem, 9.5rem) !important;
+    }
+    .selector-grid.no-nicknames {
+      grid-template-columns:
+        minmax(5.5rem, 7rem)
+        minmax(12rem, 18rem)
+        minmax(4rem, 5rem)
+        minmax(7rem, 8.5rem)
+        minmax(6.5rem, 8rem)
+        minmax(7rem, 9.5rem) !important;
+    }
+
+    .selector-grid > :global(.autocomplete),
+    .selector-grid > :global(input),
+    .selector-grid > :global(label + input),
+    .selector-grid > div {
+      min-width: 0;
+    }
+
+    .selector-grid.has-nicknames :global(.encounter-select) {
+      grid-column: 2 / span 1;
+    }
+
+    .selector-grid.no-nicknames :global(.encounter-select) {
+      grid-column: 2 / span 1;
+    }
+
+    .row-actions {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      grid-column: 2 / -1;
+      grid-row: 2;
+      align-content: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      max-width: 100%;
+      justify-self: end;
+      align-self: start;
+      margin-top: -0.25rem;
+    }
+
+    .row-actions > :global(button) {
+      width: 2.5rem;
+      height: 2.5rem;
+      flex: 0 0 auto;
+      justify-content: center;
+    }
+
+    .row-actions > :global(.action-menu) {
+      position: relative;
+      top: auto;
+      right: auto;
+      margin-top: 0;
+    }
+
+    .stat-grid {
+      grid-column: 2 / -1;
+      padding-right: 8rem;
+    }
   }
 </style>

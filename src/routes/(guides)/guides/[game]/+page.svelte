@@ -9,12 +9,14 @@
 
   import { Hero, Links, Summary, Bosses, Aside } from '$c/Guide'
   import { faq } from '$c/Guide/schemas'
+  import { applyStarterToLeague } from '$lib/utils/starter-swaps'
 
   setContext('game', {
     getLeague: (_, starter = 'all') =>
       starter === 'all'
         ? data.data.all || data.data.fire
-        : data.data[starter] || data.data.fire
+        : data.data[starter] ||
+          (data.data.all ? applyStarterToLeague(data.data.all, starter) : data.data.fire)
   })
   setContext('simple-modal', {
     open: false

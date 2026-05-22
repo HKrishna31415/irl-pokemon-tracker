@@ -3,6 +3,7 @@ import { getGen } from '$store'
 
 import { DATA } from '$utils/rewrites'
 import { normalise } from '$utils/string'
+import { applyStarterToLeague } from '$lib/utils/starter-swaps'
 
 const data = {}
 export const fetchData = async () => {
@@ -35,22 +36,6 @@ export const fetchData = async () => {
 }
 
 const league = {}
-const filterLeagueByStarter = (data, starter = 'all') =>
-  Object.entries(data || {}).reduce(
-    (acc, [id, team]) => ({
-      ...acc,
-      [id]:
-        starter === 'all'
-          ? team
-          : {
-              ...team,
-              pokemon: (team.pokemon || []).filter(
-                (p) => !p.starter || p.starter === starter
-              )
-            }
-    }),
-    {}
-  )
 
 const fetchLeagueJson = async (uri) => {
   const res = await fetch(uri, { cache: 'no-store' })
@@ -78,7 +63,7 @@ export const fetchLeague = async (game, starter = 'fire') => {
 
   if (combined) {
     console.time(`league:${id}`)
-    league[id] = filterLeagueByStarter(combined, starter)
+    league[id] = applyStarterToLeague(combined, starter)
     console.timeEnd(`league:${id}`)
     return league[id]
   }

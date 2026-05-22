@@ -1,11 +1,13 @@
 <script>
   import { getContext, onMount } from 'svelte'
-  import { readdata, getGameStore, read, patch, readBox } from '$lib/store'
+  import { readdata, getGameStore, read, patch, readBox, readStarter } from '$lib/store'
+  import { Expanded as Games } from '$lib/data/games.js'
+  import { fetchRoute } from '$lib/utils/fetchers.js'
   import { PIcon, Button, Icon } from '$c/core'
   import { Gift } from '$icons'
   import { capitalise } from '$utils/string'
 
-  const storeItems = [
+  let storeItems = [
     {
       id: 'encounter-token',
       name: 'Extra Encounter Token',
@@ -51,7 +53,7 @@
     {
       id: 'exp-share',
       name: 'Exp. Share',
-      price: 30000,
+      price: 10000,
       description:
         'Shares experience points across the team so all Pokemon autolevel to level cap.',
       type: 'key-item'
@@ -67,7 +69,7 @@
     {
       id: 'tera-orb',
       name: 'Tera Orb',
-      price: 15000,
+      price: 10000,
       description: 'Allows a Pokémon to Terastallize during battle.',
       type: 'key-item'
     },
@@ -681,11 +683,23 @@
     boxData = [],
     money = 0,
     inventory = {}
-  const { getPkmns } = getContext('game')
+  const { getPkmns, getLeague } = getContext('game')
   let loading = true
+  let isHardcore = false
 
   onMount(() => {
-    const [, , id] = readdata()
+    const [, gameKey, id] = readdata()
+    isHardcore = gameKey?.endsWith('_hard') || gameKey?.includes('_hard')
+    
+    // Dynamically update Rare Candy description based on difficulty
+    const candy = storeItems.find((i) => i.id === 'rare-candy')
+    if (candy) {
+      candy.description = isHardcore
+        ? 'Instantly levels a Pokémon up by 1 level.'
+        : 'Instantly levels a Pokémon up to the current level cap.'
+      storeItems = [...storeItems]
+    }
+
     gameStore = getGameStore(id)
     gameStore.subscribe(
       read(async (data) => {
@@ -701,16 +715,91 @@
     )
   })
 
-  const buyRareCandy = (monId, currentLevel) => {
-    if (money < 500) return window.alert('Not enough money!')
-    if (!window.confirm('Buy Rare Candy for $500?')) return
+  const getActiveLevelCap = async () => {
+    if (!rawData) return 100
+    const [, gameKey] = readdata()
+    if (!gameKey) return 100
 
-    gameStore.update(
-      patch({
-        __money: money - 500,
-        [monId]: { ...rawData[monId], level: (currentLevel || 0) + 1 }
-      })
-    )
+    const starter = readStarter(rawData)
+    try {
+      const [league, routeData] = await Promise.all([
+        getLeague(gameKey, starter),
+        fetchRoute(Games[gameKey]?.pid || gameKey)
+      ])
+
+      if (!routeData || !league) return 100
+
+      const defeatedBosses = new Set((rawData.__teams || []).map((t) => t.id))
+      let maxCap = 5
+
+      const KANTO_EARLY_CAPS = {
+        'joey1': 5, 'joey1_hard': 5,
+        'kylie1': 6, 'kylie1_hard': 6,
+        'maven1': 7, 'maven1_hard': 7,
+        'wilson1': 8, 'wilson1_hard': 8,
+        'jerome1': 9, 'jerome1_hard': 9,
+        'joel1': 10, 'joel1_hard': 10,
+        'b1': 11, 'b1_hard': 11
+      }
+
+      for (const p of routeData) {
+        if (p.type === 'route' && p.cap) {
+          maxCap = Math.max(maxCap, p.cap)
+        } else if (p.type === 'gym') {
+          const bossData = league[p.value]
+          let bossCap = 0
+          if (KANTO_EARLY_CAPS[p.value] !== undefined) {
+            bossCap = KANTO_EARLY_CAPS[p.value]
+          } else if (bossData) {
+            bossCap = bossData.lvlCap ?? (bossData.pokemon ? bossData.pokemon.reduce(
+              (acc, it) => Math.max(acc, parseInt(it.level) || 0),
+              0
+            ) : 0)
+          }
+          if (bossCap > 0) {
+            maxCap = Math.max(maxCap, bossCap)
+          }
+          if (!defeatedBosses.has(p.value)) {
+            // Undefeated boss! Break loop.
+            break
+          }
+        }
+      }
+      return maxCap
+    } catch (e) {
+      console.error('Error calculating active level cap:', e)
+      return 100
+    }
+  }
+
+  const buyRareCandy = async (monId, currentLevel) => {
+    if (money < 500) return window.alert('Not enough money!')
+
+    const [, gameKey] = readdata()
+    const isHard = gameKey?.endsWith('_hard') || gameKey?.includes('_hard')
+
+    if (isHard) {
+      if (!window.confirm('Buy Rare Candy for $500?')) return
+      gameStore.update(
+        patch({
+          __money: money - 500,
+          [monId]: { ...rawData[monId], level: (currentLevel || 0) + 1 }
+        })
+      )
+    } else {
+      const cap = await getActiveLevelCap()
+      const lvl = currentLevel || 0
+      if (lvl >= cap) {
+        return window.alert(`This Pokemon is already at or above the current level cap (Lv. ${cap})!`)
+      }
+      if (!window.confirm(`Buy Rare Candy for $500 to level up to the level cap (Lv. ${cap})?`)) return
+      gameStore.update(
+        patch({
+          __money: money - 500,
+          [monId]: { ...rawData[monId], level: cap }
+        })
+      )
+    }
   }
 
   import TypePicker from '$lib/components/TypePicker.svelte'
@@ -789,7 +878,6 @@
   const getItemImage = (id) => {
     const mapping = {
       'encounter-token': 'pass',
-      'tera-orb': 'enigma-stone',
       'z-crystal': 'normalium-z',
       'mega-stone': 'key-stone',
       'type-gem': 'normal-gem',

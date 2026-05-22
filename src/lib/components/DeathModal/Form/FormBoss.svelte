@@ -8,6 +8,7 @@
   import { Expanded as Games } from '$lib/data/games.js'
   import { AutoComplete, Picture, PIcon } from '$c/core'
   import TypeBadge from '$c/type-badge.svelte'
+  import { normaliseTrainerImage } from '$utils/rewrites'
 
   export let bossPlaceholder = 'Opponent Trainer'
   export let pokePlaceholder = 'Opponent Pokémon'
@@ -55,16 +56,7 @@
   }
 
   const bossImage = (data) => {
-    let img = typeof data.img === 'string' ? { src: data.img } : data.img
-
-    if(img.src.startsWith('/leaders/')) {
-      img.src = `/assets/img${img.src}`;
-    }
-    if(img.src.startsWith('/sprite/')) {
-      img.src = `/assets/img/pokemon/base-${img.src.slice(8)}`;
-    }
-
-    return img;
+    return normaliseTrainerImage(data.img)
   }
 
   // Chang detection between the opponent selection & trainer

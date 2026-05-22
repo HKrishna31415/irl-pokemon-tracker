@@ -14,6 +14,7 @@
     nature = undefined,
     ivs = {},
     evs = {},
+    showStatDetails = true,
     minimal = false
 
   import { capitalise, regionise } from '$lib/utils/string'
@@ -33,7 +34,15 @@
   import { UNOWN } from '$utils/rewrites'
   import { Stars as Pattern } from '$utils/pattern'
 
-  const canonname = name.replace(/-(Alola|Galar)/, '')
+  const canonname = (name || '').replace(/-(Alola|Galar)/, '')
+  const itemSlug = (item = '') =>
+    String(item?.name || item || '')
+      .toLowerCase()
+      .trim()
+      .replace(/\.(png|webp)$/i, '')
+      .replace(/[':]/g, '')
+      .replace(/\./g, '')
+      .replace(/\s+/g, '-')
 
   const anim = ['bob'][Math.floor(Math.random() * 1)]
   const animDur = Math.floor(Math.random() * 4) + 4
@@ -41,8 +50,8 @@
 </script>
 
 <SettingWrapper id="theme" let:setting={themeId}>
-  {@const color1 = color(types[0], themeId)}
-  {@const color2 = color(types[1] || types[0], themeId)}
+  {@const color1 = color(types?.[0] || 'normal', themeId)}
+  {@const color2 = color(types?.[1] || types?.[0] || 'normal', themeId)}
   {@const pattern = Pattern(color2)}
   <div
     class="card relative flex flex-col rounded-lg border bg-white dark:border-gray-900 dark:bg-gray-900 dark:shadow-lg {$$restProps.class ||
@@ -59,7 +68,7 @@
           <div class="pointer-events-auto flex flex-col items-center">
             <span class="-mb-2 text-xs">Level</span>
             <span class="text-3xl font-bold">{level}</span>
-            {#if level.startsWith('+') || level.startsWith('-')}
+            {#if String(level).startsWith('+') || String(level).startsWith('-')}
               <Tooltip>
                 Calculated as your party's Max Level {level}
               </Tooltip>
@@ -97,7 +106,7 @@
                 {held.name}: {held.effect?.replace(/^Held: +/g, '')}
               </Tooltip>
               <span>
-                <PIcon type="item" name={held.sprite} />
+                <PIcon type="item" name={held.sprite || itemSlug(held)} />
               </span>
               <Icon
                 inline={true}
@@ -142,13 +151,9 @@
         class:origin-left={minimal}
         class="type-badges absolute top-0 flex -translate-y-1/2 -translate-x-1 transform gap-x-1"
       >
-        {#each types as t}
+        {#each (types || []) as t}
           <TypeBadge type={t} />
         {/each}
-        {#if tera}
-          <TypeBadge tera type={tera} />
-        {/if}
-
         <div class="badges cursor-help" class:bottom-0={minimal}>
           <slot name="badges" />
         </div>
@@ -157,18 +162,18 @@
 
     {#if !minimal}
       <div
-        style="border-color: {color(types[0], themeId)}"
-        class="relative z-10 flex flex-col-reverse rounded-b-lg border-t-2 bg-white dark:bg-gray-900 sm:items-center md:inline-flex md:flex-row"
+        style="border-color: {color(types?.[0] || 'normal', themeId)}"
+        class="card__body relative z-10 rounded-b-lg border-t-2 bg-white dark:bg-gray-900"
       >
         {#if moves && moves.length}
           <div
-            class="my-3 ml-4 grid flex-2 grid-cols-2 gap-x-4 gap-y-0 lg:gap-y-3"
+            class="moves-grid my-3 mx-4 min-w-0"
           >
             {#each moves.filter((m) => !isEmpty(m)) as m}
               {#if typeof m === 'string'}
                 <div class="my-2 text-sm font-medium pt-2 pb-1 text-gray-700 dark:text-gray-300">{capitalise(m.replace(/-/g, ' '))}</div>
               {:else}
-                <MoveCard {...m} stab={types.includes(m.type)} />
+                <MoveCard {...m} stab={(types || []).includes(m.type)} />
               {/if}
             {/each}
           </div>
@@ -178,13 +183,15 @@
           <slot name="stats" />
         {:else}
             <StatBlock
-              class="pointer-events-auto h-full pr-12 md:pr-4"
+              class="pointer-events-auto h-full px-4 pb-4 pt-2 md:py-4"
               col={color1}
-              {maxStat}
+              max={maxStat}
+              {level}
               {nature}
-              {ivs}
-              {evs}
-              {...stats}
+              detailed={showStatDetails}
+              ivs={showStatDetails ? ivs : {}}
+              evs={showStatDetails ? evs : {}}
+              {...(stats || {})}
             />
         {/if}
       </div>
@@ -226,6 +233,19 @@
 
   .card {
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    container-type: inline-size;
+  }
+
+  .card__body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+    align-items: center;
+  }
+
+  .moves-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+    gap: 0.25rem 0.75rem;
   }
 
   .card__header::before {

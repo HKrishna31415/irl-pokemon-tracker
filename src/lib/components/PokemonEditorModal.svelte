@@ -1,8 +1,9 @@
 <script>
   import { getContext, onMount } from 'svelte'
+  import { fade } from 'svelte/transition'
   import { capitalise } from '$utils/string'
   import { pokeapi } from '$utils/api'
-  import { Loader, Icon, IconButton, PIcon } from '$c/core'
+  import { Loader, Icon, IconButton, PIcon, Tooltip } from '$c/core'
   import { Save, X, Plus, Minus, Info } from '$icons'
   import { Natures, NaturesMap } from '$lib/data/natures'
   import tmsData from '$lib/data/tms.json'

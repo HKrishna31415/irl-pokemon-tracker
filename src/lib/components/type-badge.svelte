@@ -16,31 +16,30 @@
     special: Special
   }
 
-  if (!type) debugger
-
-  const content = type.toUpperCase()
-  const icon = IconMap[type.toLowerCase()]
+  $: displayType = type || '???'
+  $: content = displayType.toUpperCase()
+  $: icon = IconMap[displayType.toLowerCase()]
 </script>
 
 <SettingWrapper id="theme" let:setting={themeId}>
   {#if icon}
     <div
-      style="--badge-color: {color(type, themeId)[0]}; padding: 4px {type ===
+      style="--badge-color: {color(displayType, themeId)[0]}; padding: 4px {displayType ===
       'physical'
         ? 6.5
         : 5}px;"
       class={className}
     >
-      <Icon inline={true} {icon} color={color(type, themeId)[1]} />
+      <Icon inline={true} {icon} color={color(displayType, themeId)[1]} />
     </div>
   {:else if $$slots.content}
-    <div style="--badge-color: {color(type, themeId)};" class={className}>
+    <div style="--badge-color: {color(displayType, themeId)};" class={className}>
       <slot name="content" />
     </div>
   {:else}
     <div
       style="--badge-color: {color(
-        type,
+        displayType,
         themeId
       )}; --badge-content: '{content}'"
       class={className}

@@ -11,9 +11,9 @@
 
 </script>
 
-<div class='my-2'>
-  <p class='text-sm overflow-ellipsis mb-1 relative items-center flex flex-row space-x-1'>
-    <span class='w-auto relative {effect ? 'mr-2 cursor-help' : ''}'>
+<div class='my-2 min-w-0'>
+  <p class='mb-1 flex min-w-0 flex-wrap items-center gap-x-1 text-sm leading-tight'>
+    <span class='relative min-w-0 {effect ? 'mr-2 cursor-help' : ''}'>
 
       {#if effect}
         <Tooltip>{effect}</Tooltip>
@@ -26,7 +26,7 @@
       {/if}
 
 
-      <span class='font-medium'>
+      <span class='move-name font-medium'>
         {capitalise(name)}
       </span>
     </span>
@@ -63,7 +63,7 @@
 
   </p>
 
-  <div class='flex gap-x-1 justify-start items-center'>
+  <div class='flex flex-wrap gap-x-1 gap-y-1 justify-start items-center'>
     <TypeBadge type={damage_class} />
     <TypeBadge type={type} />
     <!-- Priority icons -->
@@ -84,3 +84,11 @@
     {/if}
   </div>
 </div>
+
+<style lang="postcss">
+  .move-name {
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: manual;
+  }
+</style>

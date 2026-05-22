@@ -6,7 +6,8 @@
     addlocation,
     removelocation,
     hidelocation,
-    read
+    read,
+    readStarter
   } from '$lib/store'
   import { Gift } from '$icons'
   import { Icon } from '$c/core'
@@ -44,7 +45,7 @@
     className = ''
   const { store, key, data } = game
 
-  let starter = data.__starter || 'fire'
+  let starter = readStarter(data)
   let element
 
   /** Custom route handlers & Empty routes */
@@ -65,6 +66,7 @@
       encounterTokens = d.__encounterTokens || 0
       routeRolls = d.__routeRolls || {}
       hideRoute = hideRouteF(d)
+      starter = readStarter(d)
     })
   )
 
@@ -160,6 +162,12 @@
 
   $: routeList = insertList(route, custom).filter(p => !p.parentId)
   $: getExtras = (routeName) => custom.filter(c => c.parentId === routeName || (c.name && c.name.startsWith(routeName) && c.name.includes('(Extra')))
+  $: firstUndefeatedLeaderIndex = routeList.findIndex((p) =>
+    isGym(p) && p.group === 'gym-leader' && !bossTeamIds.includes(p.value)
+  )
+  $: isProgressLocked = (id) =>
+    firstUndefeatedLeaderIndex >= 0 &&
+    id > firstUndefeatedLeaderIndex
 
 </script>
 
@@ -193,7 +201,7 @@
             <StarterType {key} on:select={setstarter} bind:starter />
             <p>
               Starter* <Tooltip
-                >Selecting a starter type modifies Rival encounters.</Tooltip
+                >Selecting a starter species modifies Rival encounters.</Tooltip
               >
             </p>
           </div>
@@ -201,11 +209,11 @@
       </li>
     {:else if isRoute(p)}
       <li
-        class="location-group mb-4 lg:mb-6 flex flex-col gap-y-2 rounded-2xl border border-gray-100 bg-white/40 p-3 shadow-sm transition-all hover:bg-white/60 dark:border-gray-800/50 dark:bg-gray-900/20 dark:hover:bg-gray-900/40"
+        class="location-group mb-4 flex w-full flex-col gap-y-2 rounded-2xl border border-gray-100 bg-white/40 p-3 shadow-sm transition-all hover:bg-white/60 dark:border-gray-800/50 dark:bg-gray-900/20 dark:hover:bg-gray-900/40 lg:mb-6"
         id="route-{p.name}"
         in:fade
         out:fade={{ duration: 100 }}
-        class:hidden={hidden || !showRoute(p, filters, hideRoute)}
+        class:hidden={hidden || isProgressLocked(id) || !showRoute(p, filters, hideRoute)}
       >
         <div class="flex items-center justify-between px-1">
           <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">
@@ -285,7 +293,7 @@
         id="custom-{p.index}"
         in:fade
         out:fade={{ duration: 100 }}
-        class:hidden={hidden || !showCustom(p, filters, hideRoute)}
+        class:hidden={hidden || isProgressLocked(id) || !showCustom(p, filters, hideRoute)}
       >
         <PokemonSelector
           type="custom"
@@ -306,7 +314,7 @@
     {:else if isGym(p)}
       <li
         class="boss -mb-4 md:my-2"
-        class:hidden={hidden || !showGym(p, filters)}
+        class:hidden={hidden || isProgressLocked(id) || !showGym(p, filters)}
         id="boss-{id}"
         in:fade
         out:fade={{ duration: 100 }}

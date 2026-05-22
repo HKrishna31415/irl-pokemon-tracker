@@ -63,7 +63,88 @@ export const toId = {
 }
 
 export const toList = (arr, f = (i) => i, and = '&') => {
+  if (!arr || arr.length === 0) return ''
   const front = arr.slice(0, -1)
   const last = arr.slice(-1)[0]
   return front.map(f).join(', ') + (front.length ? ` ${and} ` : '') + f(last)
+}
+
+export const toShowdownName = (name) => {
+  if (!name) return ''
+  const lower = name.toLowerCase().trim()
+  
+  // Special spelling/casing cases in Showdown:
+  if (lower === 'mr-mime') return 'Mr. Mime'
+  if (lower === 'mr-rime') return 'Mr. Rime'
+  if (lower === 'mime-jr') return 'Mime Jr.'
+  if (lower === 'type-null') return 'Type: Null'
+  if (lower === 'farfetchd') return "Farfetch'd"
+  if (lower === 'sirfetchd') return "Sirfetch'd"
+  if (lower === 'ho-oh') return 'Ho-Oh'
+  if (lower === 'porygon-z') return 'Porygon-Z'
+  if (lower === 'flabebe') return 'Flabébé'
+  
+  // Regional forms
+  if (lower.endsWith('-alola')) {
+    return capitalise(lower.replace('-alola', '')) + '-Alola'
+  }
+  if (lower.endsWith('-galar')) {
+    return capitalise(lower.replace('-galar', '')) + '-Galar'
+  }
+  if (lower.endsWith('-hisui')) {
+    return capitalise(lower.replace('-hisui', '')) + '-Hisui'
+  }
+  if (lower.endsWith('-paldea')) {
+    return capitalise(lower.replace('-paldea', '')) + '-Paldea'
+  }
+  if (lower.endsWith('-sevii')) {
+    return capitalise(lower.replace('-sevii', '')) + '-Sevii'
+  }
+  if (lower.endsWith('-mega')) {
+    return capitalise(lower.replace('-mega', '')) + '-Mega'
+  }
+  if (lower.endsWith('-gmax')) {
+    return capitalise(lower.replace('-gmax', '')) + '-Gmax'
+  }
+
+  // Tapu Koko, Tapu Lele, etc.
+  if (lower.startsWith('tapu-')) {
+    return 'Tapu ' + capitalise(lower.replace('tapu-', ''))
+  }
+
+  // O-M, etc. (Jangmo-o, Hakamo-o, Kommo-o)
+  if (lower === 'jangmo-o') return 'Jangmo-o'
+  if (lower === 'hakamo-o') return 'Hakamo-o'
+  if (lower === 'kommo-o') return 'Kommo-o'
+
+  // Hyphenated forms/names that capitalise both parts in Showdown
+  if (lower.includes('-')) {
+    return lower.split('-').map(p => capitalise(p)).join('-')
+  }
+
+  return capitalise(lower)
+}
+
+export const toShowdownMove = (moveName) => {
+  if (!moveName) return ''
+  return moveName
+    .split(/[\s-]+/)
+    .map(word => capitalise(word))
+    .join(' ')
+}
+
+export const toShowdownAbility = (abilityName) => {
+  if (!abilityName) return ''
+  return abilityName
+    .split(/[\s-]+/)
+    .map(word => capitalise(word))
+    .join(' ')
+}
+
+export const toShowdownItem = (itemName) => {
+  if (!itemName) return ''
+  return itemName
+    .split(/[\s-]+/)
+    .map(word => capitalise(word))
+    .join(' ')
 }

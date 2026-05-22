@@ -370,8 +370,8 @@ console.log('✓ routes.json updated\n');
 
 // ── 2. LEAGUE JSONS ─────────────────────────────────────────────
 const leagueFiles = [
-  'kantoirl.fire','kantoirl.water','kantoirl.grass',
-  'kantoirl_hard.fire','kantoirl_hard.water','kantoirl_hard.grass'
+  'kantoirl',
+  'kantoirl_hard'
 ];
 
 const joey1 = {
@@ -585,9 +585,9 @@ const misty1 = {
   pokemon: [
     mon({ name:'gyarados', level:24, moves:['dragondance', 'waterfall', 'icefang', 'earthquake'], abilityName:'Intimidate', heldItem:'gyaradosite' }),
     mon({ name:'starmie', level:24, moves:['hydropump', 'icebeam', 'psyshock', 'rapidspin'], abilityName:'Analytic', heldItem:'colburberry' }),
-    mon({ name:'golduck', level:24, moves:['raindance', 'hydropump', 'icebeam', { name:'Hidden Power [Grass]', power: 60, type:'grass', damage_class:'special' }], abilityName:'Swift Swim', heldItem:'lifeorb' }),
+    mon({ name:'psyduck', level:24, moves:['raindance', 'hydropump', 'icebeam', { name:'Hidden Power [Grass]', power: 60, type:'grass', damage_class:'special' }], abilityName:'Swift Swim', heldItem:'lifeorb' }),
     mon({ name:'togekiss', level:24, moves:['nastyplot', 'airslash', 'aurasphere', 'roost'], abilityName:'Serene Grace', heldItem:'leftovers' }),
-    mon({ name:'lanturn', level:24, moves:['scald', 'voltswitch', 'icebeam', { name:'Hidden Power [Fire]', power: 60, type:'fire', damage_class:'special' }], abilityName:'Volt Absorb', heldItem:'assaultvest' }),
+    mon({ name:'chinchou', level:24, moves:['scald', 'voltswitch', 'icebeam', { name:'Hidden Power [Fire]', power: 60, type:'fire', damage_class:'special' }], abilityName:'Volt Absorb', heldItem:'assaultvest' }),
     mon({ name:'politoed', level:24, moves:['scald', 'encore', 'icebeam', 'rest'], abilityName:'Drizzle', heldItem:'damprock' })
   ]
 };

@@ -23,6 +23,10 @@
   const champAce = champData.pokemon.slice(-1)[0] || { name: 'Pokemon' }
 
   let starter = 'fire'
+  $: starterOptions = data?.starterSpecies || []
+  $: if (starterOptions.length && !starterOptions.includes(starter)) {
+    starter = starterOptions[0]
+  }
   const setstarter = type => _ => starter = type
 </script>
 
@@ -44,10 +48,8 @@
     </p>
     <p>
       These can be a challenge, especially when your dear nicknamed
-      nuzlocke mons are at risk. So below we've listed detailed
-      overviews of all these fights! Giving you all the information you'll need to
-      face everything from <b>{rivalData.name}'s {capitalise(rivalLead.name)}</b> to
-      <b>{champData.name}'s {capitalise(champAce.name)}</b>.
+      nuzlocke mons are at risk. Below we've listed detailed overviews of all these fights!
+      <b>Click any boss card to expand a detailed Strategy Guide</b> explaining exactly how and why they use their team structure, and use our **one-click Pokémon Showdown Export tools** to export their exact team setup for quick practice and battle simulation.
     </p>
   </div>
   <div>
@@ -80,12 +82,24 @@
       fire type to take advantage!
     </p>
   </section>
+{:else if starterOptions.length}
+  <section class=starter>
+    <h3>Select your starter</h3>
+    <label class="species-select">
+      <PIcon name={starter} className="starter-species-icon" />
+      <select bind:value={starter} aria-label="Select your starter species">
+        {#each starterOptions as species}
+          <option value={species}>{capitalise(species.replace(/-/g, ' '))}</option>
+        {/each}
+      </select>
+    </label>
+    <p>
+      Select your exact starter species to update starter-dependent boss teams.
+    </p>
+  </section>
 {:else}
   <section class=starter>
-    <p>
-      Starter-dependent rival fights are shown as separate entries here, so you can
-      compare Rival A, B and C without switching views.
-    </p>
+    <p>Starter-dependent boss teams are included below.</p>
   </section>
 {/if}
 
@@ -178,6 +192,22 @@
 
   .starter p {
     @apply md:text-center
+  }
+
+  .species-select {
+    @apply my-4 inline-flex items-center gap-x-3 rounded-lg border border-gray-200 bg-white px-4 py-2 shadow-sm;
+  }
+
+  :global(.dark) .species-select {
+    @apply border-gray-800 bg-gray-900;
+  }
+
+  .species-select select {
+    @apply bg-transparent text-sm font-bold capitalize tracking-widest outline-none;
+  }
+
+  :global(.starter-species-icon) {
+    @apply -m-3 scale-75;
   }
 
   .starter li { @apply transform scale-50 -my-8 md:scale-100 md:my-0 cursor-pointer; }

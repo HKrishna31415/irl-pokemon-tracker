@@ -3,6 +3,7 @@ import { toSlug, normalise } from '$lib/utils/string'
 
 import { Expanded as Games } from '$lib/data/games.js'
 import Themes from '$lib/data/theme.json'
+import { applyStarterToLeague, applyStarterToTeam } from '$lib/utils/starter-swaps'
 
 export const csr = true
 export const prerender = true
@@ -13,24 +14,6 @@ const STARTER_LABELS = {
   water: 'B',
   grass: 'C'
 }
-
-const filterTeamByStarter = (team, starter = 'all') => {
-  if (!team?.pokemon?.length || starter === 'all') return team
-
-  return {
-    ...team,
-    pokemon: team.pokemon.filter((p) => !p.starter || p.starter === starter)
-  }
-}
-
-const filterLeagueByStarter = (league, starter = 'all') =>
-  Object.entries(league || {}).reduce(
-    (acc, [id, team]) => ({
-      ...acc,
-      [id]: filterTeamByStarter(team, starter)
-    }),
-    {}
-  )
 
 const formatEncounterLocation = (route, encounter) => {
   const rate = route.encounterRates?.[encounter]
@@ -104,9 +87,9 @@ export async function load({ params, url, fetch }) {
     ? {
         combined: true,
         all: combinedLeague,
-        fire: filterLeagueByStarter(combinedLeague, 'fire'),
-        water: filterLeagueByStarter(combinedLeague, 'water'),
-        grass: filterLeagueByStarter(combinedLeague, 'grass')
+        fire: applyStarterToLeague(combinedLeague, 'fire'),
+        water: applyStarterToLeague(combinedLeague, 'water'),
+        grass: applyStarterToLeague(combinedLeague, 'grass')
       }
     : (() => {
         const files = STARTER_ORDER.map((starter) =>
@@ -121,6 +104,10 @@ export async function load({ params, url, fetch }) {
         }))
       })()
   const { combined, all, fire, water, grass } = await league
+  const starterSpecies = route.find((r) => r.name === 'Starter')?.encounters || []
+  const hasSpeciesStarterSwaps = Object.values(all || {}).some(
+    (team) => team?.starterSwaps || team?.rivalStarterSwap
+  )
 
   const findPokemon = (id) =>
     pokemon.find(
@@ -195,7 +182,7 @@ export async function load({ params, url, fetch }) {
 
   const leagueData = all || fire
   const expandGym = (gym) => {
-    if (!combined) return [gym]
+    if (!combined || hasSpeciesStarterSwaps) return [gym]
 
     const starters = STARTER_ORDER.filter((starter) =>
       leagueData[gym.value]?.pokemon?.some((p) => p.starter === starter)
@@ -218,8 +205,8 @@ export async function load({ params, url, fetch }) {
     .flatMap(expandGym)
     .reduce((acc, g) => {
       const team =
-        (g.starter ? filterTeamByStarter(leagueData[g.value], g.starter) : null) ||
-        fire[g.value]
+      (g.starter ? applyStarterToTeam(leagueData[g.value], g.starter) : null) ||
+      fire[g.value]
 
       return {
         ...acc,
@@ -247,6 +234,13 @@ export async function load({ params, url, fetch }) {
       encounters: encounterdata,
       encounterMap
     },
-    data: { combined, all, fire, water, grass }
+    data: {
+      combined,
+      all,
+      fire,
+      water,
+      grass,
+      starterSpecies: hasSpeciesStarterSwaps ? starterSpecies : []
+    }
   }
 }
