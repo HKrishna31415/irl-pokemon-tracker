@@ -1,4 +1,5 @@
 import Pokemon from './_pokemon.json';
+import SmogonExtra from './_smogon-extra.json';
 import { pick } from 'ramda';
 
 export const format = ({ name, alias }) => {
@@ -11,7 +12,9 @@ export const format = ({ name, alias }) => {
 
 export const sumObj = (o) => Object.values(o).reduce((acc, it) => acc + it, 0);
 
-export default Pokemon.map(
+const PokemonData = Pokemon.concat(SmogonExtra)
+
+export default PokemonData.map(
   (pkmn) => ({
     ...pkmn,
     imgId: pkmn.imgId,

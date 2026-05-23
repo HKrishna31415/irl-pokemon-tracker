@@ -10,6 +10,7 @@ let pokemon = import.meta.glob(
 )
 
 import pokemonData from '../../../data/pokemon.json'
+import nationalDex from '../../../../../lib/data/national-dex.json'
 
 const toSpriteKey = (value = '') =>
   String(value)
@@ -26,6 +27,167 @@ const spriteMap = Object.values(pokemonData).reduce((acc, p) => {
 
   for (const key of [p.alias, p.sprite, p.name, spriteId]) {
     if (key) acc[toSpriteKey(key)] = String(spriteId)
+  }
+
+  return acc
+}, {})
+
+const compactSpriteKey = (value = '') =>
+  toSpriteKey(value)
+    .replace(/-/g, '')
+
+const formMarkerPattern =
+  /-(mega(?:-[xy])?|gmax|totem|alola(?:-totem)?|galar(?:-zen)?|hisui|paldea(?:-(?:aqua|blaze|combat))?|origin|hero|crowned|therian|incarnate|sky|white|black|dusk|dawn|blade|shield|school|solo|sunny|rainy|snowy|red|blue|white-striped|female|male|f|m|x|y)$/i
+
+const compactFormSuffixes = [
+  'megax',
+  'megay',
+  'mega',
+  'gmax',
+  'alolatotem',
+  'alola',
+  'galarzen',
+  'galar',
+  'hisui',
+  'paldeaaqua',
+  'paldeablaze',
+  'paldeacombat',
+  'paldea',
+  'origin',
+  'hero',
+  'crowned',
+  'therian',
+  'incarnate',
+  'sky',
+  'white',
+  'black',
+  'dusk',
+  'dawn',
+  'blade',
+  'shield',
+  'school',
+  'solo',
+  'red',
+  'blue',
+  'whitestriped',
+  'female',
+  'male'
+]
+
+const baseSpriteKey = (value = '') => {
+  const display = toSpriteKey(value)
+  const hyphenBase = display.replace(formMarkerPattern, '')
+  if (hyphenBase !== display) return hyphenBase
+
+  const compact = compactSpriteKey(value)
+  const suffix = compactFormSuffixes.find((ending) => compact.endsWith(ending) && compact.length > ending.length)
+  return suffix ? compact.slice(0, -suffix.length) : display
+}
+
+const dexDisplaySpriteKey = (pokemon = {}) => {
+  const display = toSpriteKey(pokemon.name || pokemon.label || pokemon.alias || pokemon.sprite)
+  const compact = compactSpriteKey(pokemon.alias || pokemon.sprite || pokemon.name)
+  const isForm =
+    formMarkerPattern.test(display) ||
+    display.includes('-paldea-') ||
+    display.includes('-alola-') ||
+    display.includes('-galar-') ||
+    display.includes('-hisui-')
+
+  if (display.startsWith('tauros-paldea-')) {
+    return display.replace('tauros-paldea-', 'tauros-paldea')
+  }
+
+  if (isForm) return display
+  return compact || display
+}
+
+const showdownSpriteName = (spriteName = '') =>
+  toSpriteKey(spriteName)
+    .replace(/-mega-x$/, '-megax')
+    .replace(/-mega-y$/, '-megay')
+    .replace(/-paldea-aqua$/, '-paldeaaqua')
+    .replace(/-paldea-blaze$/, '-paldeablaze')
+    .replace(/-paldea-combat$/, '-paldeacombat')
+    .replace(/-white-striped$/, '-whitestriped')
+    .replace(/-blue-striped$/, '-bluestriped')
+    .replace(/-red-striped$/, '-redstriped')
+
+const officialMegaSprites = new Set([
+  'venusaur-mega',
+  'charizard-mega-x',
+  'charizard-mega-y',
+  'blastoise-mega',
+  'beedrill-mega',
+  'pidgeot-mega',
+  'alakazam-mega',
+  'slowbro-mega',
+  'gengar-mega',
+  'kangaskhan-mega',
+  'pinsir-mega',
+  'gyarados-mega',
+  'aerodactyl-mega',
+  'mewtwo-mega-x',
+  'mewtwo-mega-y',
+  'ampharos-mega',
+  'steelix-mega',
+  'scizor-mega',
+  'heracross-mega',
+  'houndoom-mega',
+  'tyranitar-mega',
+  'sceptile-mega',
+  'blaziken-mega',
+  'swampert-mega',
+  'gardevoir-mega',
+  'sableye-mega',
+  'mawile-mega',
+  'aggron-mega',
+  'medicham-mega',
+  'manectric-mega',
+  'sharpedo-mega',
+  'camerupt-mega',
+  'altaria-mega',
+  'banette-mega',
+  'absol-mega',
+  'glalie-mega',
+  'salamence-mega',
+  'metagross-mega',
+  'latias-mega',
+  'latios-mega',
+  'rayquaza-mega',
+  'lopunny-mega',
+  'garchomp-mega',
+  'lucario-mega',
+  'abomasnow-mega',
+  'gallade-mega',
+  'audino-mega',
+  'diancie-mega'
+])
+
+const nationalDexSpriteMap = nationalDex.reduce((acc, pokemon) => {
+  const sprite = dexDisplaySpriteKey(pokemon)
+  const baseSprite = baseSpriteKey(pokemon.name || pokemon.alias || pokemon.sprite)
+  const keys = [
+    pokemon.name,
+    pokemon.label,
+    pokemon.alias,
+    pokemon.sprite,
+    toSpriteKey(pokemon.name),
+    compactSpriteKey(pokemon.name),
+    compactSpriteKey(pokemon.alias),
+    compactSpriteKey(pokemon.sprite)
+  ]
+
+  for (const key of keys) {
+    const normalized = toSpriteKey(key)
+    if (normalized && sprite) {
+      acc[normalized] = {
+        sprite,
+        baseSprite,
+        isGmax: sprite.endsWith('-gmax'),
+        isCustomMega: sprite.includes('-mega') && !officialMegaSprites.has(sprite)
+      }
+    }
   }
 
   return acc
@@ -173,12 +335,17 @@ const fallbackSpriteMap = {
   sneasler: '903',
   'scream-tail': '985',
   'tauros-paldea-aqua': '10251',
+  taurospaldeaaqua: '10251',
   'ting-lu': '1003',
   tinkatink: '957',
   ursaluna: '901',
   wiglett: '960',
   wugtrio: '961',
-  wyrdeer: '899'
+  wyrdeer: '899',
+  nidoranf: '29',
+  'nidoran-f': '29',
+  nidoranm: '32',
+  'nidoran-m': '32'
 }
 
 const pokeApiFormSpriteMap = {
@@ -190,6 +357,10 @@ const pokeApiFormSpriteMap = {
   arcaninehisui: '10230',
   'charizard-mega-x': '10034',
   charizardmegax: '10034',
+  nidoranf: '29',
+  'nidoran-f': '29',
+  nidoranm: '32',
+  'nidoran-m': '32',
   clodsire: '980',
   'corsola-galar': '10173',
   corsolagalar: '10173',
@@ -206,6 +377,8 @@ const pokeApiFormSpriteMap = {
   basculegion: '902',
   'basculegion-male': '902',
   basculegionmale: '902',
+  'basculegion-f': '10248',
+  basculegionf: '10248',
   'basculegion-female': '10248',
   basculegionfemale: '10248',
   'basculin-blue-striped': '10016',
@@ -223,6 +396,9 @@ const pokeApiFormSpriteMap = {
   zoroarkhisui: '10239'
 }
 
+const customFormSpriteMap = {
+}
+
 const showdownSpriteMap = {
   'aerodactyl-mega': 'aerodactyl-mega',
   'alakazam-mega': 'alakazam-mega',
@@ -231,12 +407,31 @@ const showdownSpriteMap = {
   basculegion: 'basculegion',
   'blastoise-mega': 'blastoise-mega',
   'brute-bonnet': 'brutebonnet',
+  'calyrex-ice': 'calyrex-ice',
+  calyrexice: 'calyrex-ice',
   'calyrex-shadow': 'calyrex-shadow',
+  calyrexshadow: 'calyrex-shadow',
   caribolt: 'caribolt',
+  'castform-rainy': 'castform-rainy',
+  castformrainy: 'castform-rainy',
+  'castform-snowy': 'castform-snowy',
+  castformsnowy: 'castform-snowy',
+  'castform-sunny': 'castform-sunny',
+  castformsunny: 'castform-sunny',
+  'charizard-gmax': 'charizard-gmax',
+  charizardgmax: 'charizard-gmax',
+  'charizard-mega-x': 'charizard-megax',
+  charizardmegax: 'charizard-megax',
+  'charizard-mega-y': 'charizard-megay',
+  charizardmegay: 'charizard-megay',
   'chi-yu': 'chiyu',
   'chien-pao': 'chienpao',
   equilibra: 'equilibra',
   'flutter-mane': 'fluttermane',
+  'gengar-gmax': 'gengar-gmax',
+  gengargmax: 'gengar-gmax',
+  'gengar-mega': 'gengar-mega',
+  gengarmega: 'gengar-mega',
   'gouging-fire': 'gougingfire',
   gholdengo: 'gholdengo',
   'great-tusk': 'greattusk',
@@ -254,6 +449,10 @@ const showdownSpriteMap = {
   koraidon: 'koraidon',
   'kyurem-white': 'kyurem-white',
   'meganium-mega': 'meganium-mega',
+  'mewtwo-mega-x': 'mewtwo-megax',
+  mewtwomegax: 'mewtwo-megax',
+  'mewtwo-mega-y': 'mewtwo-megay',
+  mewtwomegay: 'mewtwo-megay',
   miraidon: 'miraidon',
   'necrozma-dusk-mane': 'necrozma-duskmane',
   naviathan: 'naviathan',
@@ -262,6 +461,38 @@ const showdownSpriteMap = {
   'palkia-origin': 'palkia-origin',
   'palafin-hero': 'palafin-hero',
   'pidgeot-mega': 'pidgeot-mega',
+  'pikachu-alola': 'pikachu-alola',
+  pikachualola: 'pikachu-alola',
+  'pikachu-belle': 'pikachu-belle',
+  pikachubelle: 'pikachu-belle',
+  'pikachu-cosplay': 'pikachu-cosplay',
+  pikachucosplay: 'pikachu-cosplay',
+  'pikachu-gmax': 'pikachu-gmax',
+  pikachugmax: 'pikachu-gmax',
+  'pikachu-hoenn': 'pikachu-hoenn',
+  pikachuhoenn: 'pikachu-hoenn',
+  'pikachu-kalos': 'pikachu-kalos',
+  pikachukalos: 'pikachu-kalos',
+  'pikachu-libre': 'pikachu-libre',
+  pikachulibre: 'pikachu-libre',
+  'pikachu-original': 'pikachu-original',
+  pikachuoriginal: 'pikachu-original',
+  'pikachu-partner': 'pikachu-partner',
+  pikachupartner: 'pikachu-partner',
+  'pikachu-phd': 'pikachu-phd',
+  pikachuphd: 'pikachu-phd',
+  'pikachu-pop-star': 'pikachu-popstar',
+  pikachupopstar: 'pikachu-popstar',
+  'pikachu-rock-star': 'pikachu-rockstar',
+  pikachurockstar: 'pikachu-rockstar',
+  'pikachu-sinnoh': 'pikachu-sinnoh',
+  pikachusinnoh: 'pikachu-sinnoh',
+  'pikachu-starter': 'pikachu-starter',
+  pikachustarter: 'pikachu-starter',
+  'pikachu-unova': 'pikachu-unova',
+  pikachuunova: 'pikachu-unova',
+  'pikachu-world': 'pikachu-world',
+  pikachuworld: 'pikachu-world',
   'rayquaza-mega': 'rayquaza-mega',
   'raging-bolt': 'ragingbolt',
   regidrago: 'regidrago',
@@ -340,6 +571,18 @@ const keyToBase64 = async (spriteName, shiny) => {
   return await sprite();
 }
 
+const redirectShowdown = (folder, spriteName, shiny) =>
+  Response.redirect(
+    `https://play.pokemonshowdown.com/sprites/${folder}${shiny ? '-shiny' : ''}/${spriteName}.png`,
+    302
+  )
+
+const redirectPokeApi = (spriteId) =>
+  Response.redirect(
+    `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${spriteId}.png`,
+    302
+  )
+
 export async function GET({ params }) {
 
   const {id, variant} = params;
@@ -350,32 +593,49 @@ export async function GET({ params }) {
   }
 
   const gen8SpriteName = toSpriteKey(id)
+  const dexSprite = nationalDexSpriteMap[gen8SpriteName]
+  const customSprite = customFormSpriteMap[gen8SpriteName] || (dexSprite && customFormSpriteMap[dexSprite.sprite])
+
+  if (customSprite) {
+    return Response.redirect(customSprite, 302)
+  }
+
   if (showdownSpriteMap[gen8SpriteName]) {
-    return Response.redirect(
-      `https://play.pokemonshowdown.com/sprites/gen5${shiny ? '-shiny' : ''}/${showdownSpriteMap[gen8SpriteName]}.png`,
-      302
-    )
+    return redirectShowdown('gen5', showdownSpriteMap[gen8SpriteName], shiny)
   }
 
   if (pokeApiFormSpriteMap[gen8SpriteName]) {
-    return Response.redirect(
-      `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeApiFormSpriteMap[gen8SpriteName]}.png`,
-      302
-    )
+    return redirectPokeApi(pokeApiFormSpriteMap[gen8SpriteName])
   }
 
   if (variant === 'gen8' && gen8SpriteNames.has(gen8SpriteName)) {
-    return Response.redirect(`https://play.pokemonshowdown.com/sprites/gen8${shiny ? '-shiny' : ''}/${gen8SpriteName}.png`, 302)
+    return redirectShowdown('gen5', gen8SpriteName, shiny)
+  }
+
+  if (dexSprite?.isGmax || gen8SpriteNames.has(dexSprite?.sprite)) {
+    return redirectShowdown('gen5', showdownSpriteName(dexSprite.sprite), shiny)
+  }
+
+  if (dexSprite?.sprite?.includes('-')) {
+    return redirectShowdown('gen5', showdownSpriteName(dexSprite.sprite), shiny)
   }
 
   let sprite = await keyToBase64(id, shiny);
   if (!sprite) {
+    if (dexSprite) {
+      if (dexSprite.isGmax || gen8SpriteNames.has(dexSprite.sprite)) {
+        return redirectShowdown('gen5', showdownSpriteName(dexSprite.sprite), shiny)
+      }
+
+      return redirectShowdown('gen5', showdownSpriteName(dexSprite.sprite), shiny)
+    }
+
     if (gen8SpriteNames.has(gen8SpriteName)) {
-      return Response.redirect(`https://play.pokemonshowdown.com/sprites/gen8${shiny ? '-shiny' : ''}/${gen8SpriteName}.png`, 302)
+      return redirectShowdown('gen5', gen8SpriteName, shiny)
     }
 
     const fallbackId = fallbackSpriteMap[toSpriteKey(id)] || toSpriteKey(id)
-    return Response.redirect(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${fallbackId}.png`, 302)
+    return redirectPokeApi(fallbackId)
   }
 
   return new Response(Buffer.from(sprite, 'base64'), {

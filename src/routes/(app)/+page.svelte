@@ -29,7 +29,8 @@
   let links = [
     { title: 'New Game', href: '/new', color: 'blue' },
     { title: 'Load Game', href: '/saves', color: 'pink' },
-    { title: 'Guides', href: '/guides', color: 'green' }
+    { title: 'Guides', href: '/guides', color: 'green' },
+    { title: 'Dex', href: '/dex', color: 'yellow' }
   ]
 
   onMount(() => {

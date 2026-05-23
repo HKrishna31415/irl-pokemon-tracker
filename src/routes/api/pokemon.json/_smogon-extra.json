@@ -1,0 +1,6222 @@
+[
+  {
+    "name": "Venusaur-Gmax",
+    "displayName": "Venusaur-Gmax",
+    "label": "Venusaur-Gmax",
+    "sprite": "venusaurgmax",
+    "alias": "venusaurgmax",
+    "evoline": "bulbasaur",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 3,
+    "num": 3,
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "total": 525,
+    "baseStats": {
+      "hp": 80,
+      "atk": 82,
+      "def": 83,
+      "spa": 100,
+      "spd": 100,
+      "spe": 80
+    }
+  },
+  {
+    "name": "Charizard-Gmax",
+    "displayName": "Charizard-Gmax",
+    "label": "Charizard-Gmax",
+    "sprite": "charizardgmax",
+    "alias": "charizardgmax",
+    "evoline": "charmander",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 6,
+    "num": 6,
+    "types": [
+      "fire",
+      "flying"
+    ],
+    "total": 534,
+    "baseStats": {
+      "hp": 78,
+      "atk": 84,
+      "def": 78,
+      "spa": 109,
+      "spd": 85,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Blastoise-Gmax",
+    "displayName": "Blastoise-Gmax",
+    "label": "Blastoise-Gmax",
+    "sprite": "blastoisegmax",
+    "alias": "blastoisegmax",
+    "evoline": "squirtle",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 9,
+    "num": 9,
+    "types": [
+      "water"
+    ],
+    "total": 530,
+    "baseStats": {
+      "hp": 79,
+      "atk": 83,
+      "def": 100,
+      "spa": 85,
+      "spd": 105,
+      "spe": 78
+    }
+  },
+  {
+    "name": "Butterfree-Gmax",
+    "displayName": "Butterfree-Gmax",
+    "label": "Butterfree-Gmax",
+    "sprite": "butterfreegmax",
+    "alias": "butterfreegmax",
+    "evoline": "caterpie",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 12,
+    "num": 12,
+    "types": [
+      "bug",
+      "flying"
+    ],
+    "total": 395,
+    "baseStats": {
+      "hp": 60,
+      "atk": 45,
+      "def": 50,
+      "spa": 90,
+      "spd": 80,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Pidgeot-Mega",
+    "displayName": "Pidgeot-Mega",
+    "label": "Pidgeot-Mega",
+    "sprite": "pidgeotmega",
+    "alias": "pidgeotmega",
+    "evoline": "pidgey",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 18,
+    "num": 18,
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "total": 579,
+    "baseStats": {
+      "hp": 83,
+      "atk": 80,
+      "def": 80,
+      "spa": 135,
+      "spd": 80,
+      "spe": 121
+    }
+  },
+  {
+    "name": "Raticate-Alola-Totem",
+    "displayName": "Raticate-Alola-Totem",
+    "label": "Raticate-Alola-Totem",
+    "sprite": "raticatealolatotem",
+    "alias": "raticatealolatotem",
+    "evoline": "rattata",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 20,
+    "num": 20,
+    "types": [
+      "dark",
+      "normal"
+    ],
+    "total": 413,
+    "baseStats": {
+      "hp": 75,
+      "atk": 71,
+      "def": 70,
+      "spa": 40,
+      "spd": 80,
+      "spe": 77
+    }
+  },
+  {
+    "name": "Pikachu-Alola",
+    "displayName": "Pikachu-Alola",
+    "label": "Pikachu-Alola",
+    "sprite": "pikachualola",
+    "alias": "pikachualola",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 320,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Pikachu-Gmax",
+    "displayName": "Pikachu-Gmax",
+    "label": "Pikachu-Gmax",
+    "sprite": "pikachugmax",
+    "alias": "pikachugmax",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 320,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Pikachu-Hoenn",
+    "displayName": "Pikachu-Hoenn",
+    "label": "Pikachu-Hoenn",
+    "sprite": "pikachuhoenn",
+    "alias": "pikachuhoenn",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 320,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Pikachu-Kalos",
+    "displayName": "Pikachu-Kalos",
+    "label": "Pikachu-Kalos",
+    "sprite": "pikachukalos",
+    "alias": "pikachukalos",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 320,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Pikachu-Original",
+    "displayName": "Pikachu-Original",
+    "label": "Pikachu-Original",
+    "sprite": "pikachuoriginal",
+    "alias": "pikachuoriginal",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 320,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Pikachu-Partner",
+    "displayName": "Pikachu-Partner",
+    "label": "Pikachu-Partner",
+    "sprite": "pikachupartner",
+    "alias": "pikachupartner",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 320,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Pikachu-Sinnoh",
+    "displayName": "Pikachu-Sinnoh",
+    "label": "Pikachu-Sinnoh",
+    "sprite": "pikachusinnoh",
+    "alias": "pikachusinnoh",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 320,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Pikachu-Starter",
+    "displayName": "Pikachu-Starter",
+    "label": "Pikachu-Starter",
+    "sprite": "pikachustarter",
+    "alias": "pikachustarter",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 430,
+    "baseStats": {
+      "hp": 45,
+      "atk": 80,
+      "def": 50,
+      "spa": 75,
+      "spd": 60,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Pikachu-Unova",
+    "displayName": "Pikachu-Unova",
+    "label": "Pikachu-Unova",
+    "sprite": "pikachuunova",
+    "alias": "pikachuunova",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 320,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Pikachu-World",
+    "displayName": "Pikachu-World",
+    "label": "Pikachu-World",
+    "sprite": "pikachuworld",
+    "alias": "pikachuworld",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 25,
+    "num": 25,
+    "types": [
+      "electric"
+    ],
+    "total": 320,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Raichu-Mega-X",
+    "displayName": "Raichu-Mega-X",
+    "label": "Raichu-Mega-X",
+    "sprite": "raichumegax",
+    "alias": "raichumegax",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 26,
+    "num": 26,
+    "types": [
+      "electric"
+    ],
+    "total": 585,
+    "baseStats": {
+      "hp": 60,
+      "atk": 135,
+      "def": 95,
+      "spa": 90,
+      "spd": 95,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Raichu-Mega-Y",
+    "displayName": "Raichu-Mega-Y",
+    "label": "Raichu-Mega-Y",
+    "sprite": "raichumegay",
+    "alias": "raichumegay",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 26,
+    "num": 26,
+    "types": [
+      "electric"
+    ],
+    "total": 585,
+    "baseStats": {
+      "hp": 60,
+      "atk": 100,
+      "def": 55,
+      "spa": 160,
+      "spd": 80,
+      "spe": 130
+    }
+  },
+  {
+    "name": "Clefable-Mega",
+    "displayName": "Clefable-Mega",
+    "label": "Clefable-Mega",
+    "sprite": "clefablemega",
+    "alias": "clefablemega",
+    "evoline": "cleffa",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 36,
+    "num": 36,
+    "types": [
+      "fairy",
+      "flying"
+    ],
+    "total": 583,
+    "baseStats": {
+      "hp": 95,
+      "atk": 80,
+      "def": 93,
+      "spa": 135,
+      "spd": 110,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Meowth-Gmax",
+    "displayName": "Meowth-Gmax",
+    "label": "Meowth-Gmax",
+    "sprite": "meowthgmax",
+    "alias": "meowthgmax",
+    "evoline": "meowth",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 52,
+    "num": 52,
+    "types": [
+      "normal"
+    ],
+    "total": 290,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 35,
+      "spa": 40,
+      "spd": 40,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Alakazam-Mega",
+    "displayName": "Alakazam-Mega",
+    "label": "Alakazam-Mega",
+    "sprite": "alakazammega",
+    "alias": "alakazammega",
+    "evoline": "abra",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 65,
+    "num": 65,
+    "types": [
+      "psychic"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 55,
+      "atk": 50,
+      "def": 65,
+      "spa": 175,
+      "spd": 105,
+      "spe": 150
+    }
+  },
+  {
+    "name": "Machamp-Gmax",
+    "displayName": "Machamp-Gmax",
+    "label": "Machamp-Gmax",
+    "sprite": "machampgmax",
+    "alias": "machampgmax",
+    "evoline": "machop",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 68,
+    "num": 68,
+    "types": [
+      "fighting"
+    ],
+    "total": 505,
+    "baseStats": {
+      "hp": 90,
+      "atk": 130,
+      "def": 80,
+      "spa": 65,
+      "spd": 85,
+      "spe": 55
+    }
+  },
+  {
+    "name": "Victreebel-Mega",
+    "displayName": "Victreebel-Mega",
+    "label": "Victreebel-Mega",
+    "sprite": "victreebelmega",
+    "alias": "victreebelmega",
+    "evoline": "bellsprout",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 71,
+    "num": 71,
+    "types": [
+      "grass",
+      "poison"
+    ],
+    "total": 590,
+    "baseStats": {
+      "hp": 80,
+      "atk": 125,
+      "def": 85,
+      "spa": 135,
+      "spd": 95,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Gengar-Gmax",
+    "displayName": "Gengar-Gmax",
+    "label": "Gengar-Gmax",
+    "sprite": "gengargmax",
+    "alias": "gengargmax",
+    "evoline": "gastly",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 94,
+    "num": 94,
+    "types": [
+      "ghost",
+      "poison"
+    ],
+    "total": 500,
+    "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 60,
+      "spa": 130,
+      "spd": 75,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Gengar-Mega",
+    "displayName": "Gengar-Mega",
+    "label": "Gengar-Mega",
+    "sprite": "gengarmega",
+    "alias": "gengarmega",
+    "evoline": "gastly",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 94,
+    "num": 94,
+    "types": [
+      "ghost",
+      "poison"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 80,
+      "spa": 170,
+      "spd": 95,
+      "spe": 130
+    }
+  },
+  {
+    "name": "Kingler-Gmax",
+    "displayName": "Kingler-Gmax",
+    "label": "Kingler-Gmax",
+    "sprite": "kinglergmax",
+    "alias": "kinglergmax",
+    "evoline": "krabby",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 99,
+    "num": 99,
+    "types": [
+      "water"
+    ],
+    "total": 475,
+    "baseStats": {
+      "hp": 55,
+      "atk": 130,
+      "def": 115,
+      "spa": 50,
+      "spd": 50,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Marowak-Alola-Totem",
+    "displayName": "Marowak-Alola-Totem",
+    "label": "Marowak-Alola-Totem",
+    "sprite": "marowakalolatotem",
+    "alias": "marowakalolatotem",
+    "evoline": "cubone",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 105,
+    "num": 105,
+    "types": [
+      "fire",
+      "ghost"
+    ],
+    "total": 425,
+    "baseStats": {
+      "hp": 60,
+      "atk": 80,
+      "def": 110,
+      "spa": 50,
+      "spd": 80,
+      "spe": 45
+    }
+  },
+  {
+    "name": "Starmie-Mega",
+    "displayName": "Starmie-Mega",
+    "label": "Starmie-Mega",
+    "sprite": "starmiemega",
+    "alias": "starmiemega",
+    "evoline": "staryu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 121,
+    "num": 121,
+    "types": [
+      "water",
+      "psychic"
+    ],
+    "total": 620,
+    "baseStats": {
+      "hp": 60,
+      "atk": 100,
+      "def": 105,
+      "spa": 130,
+      "spd": 105,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Pinsir-Mega",
+    "displayName": "Pinsir-Mega",
+    "label": "Pinsir-Mega",
+    "sprite": "pinsirmega",
+    "alias": "pinsirmega",
+    "evoline": "pinsir",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 127,
+    "num": 127,
+    "types": [
+      "bug",
+      "flying"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 65,
+      "atk": 155,
+      "def": 120,
+      "spa": 65,
+      "spd": 90,
+      "spe": 105
+    }
+  },
+  {
+    "name": "Tauros-Paldea-Aqua",
+    "displayName": "Tauros-Paldea-Aqua",
+    "label": "Tauros-Paldea-Aqua",
+    "sprite": "taurospaldeaaqua",
+    "alias": "taurospaldeaaqua",
+    "evoline": "tauros",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 128,
+    "num": 128,
+    "types": [
+      "fighting",
+      "water"
+    ],
+    "total": 490,
+    "baseStats": {
+      "hp": 75,
+      "atk": 110,
+      "def": 105,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Tauros-Paldea-Blaze",
+    "displayName": "Tauros-Paldea-Blaze",
+    "label": "Tauros-Paldea-Blaze",
+    "sprite": "taurospaldeablaze",
+    "alias": "taurospaldeablaze",
+    "evoline": "tauros",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 128,
+    "num": 128,
+    "types": [
+      "fighting",
+      "fire"
+    ],
+    "total": 490,
+    "baseStats": {
+      "hp": 75,
+      "atk": 110,
+      "def": 105,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Tauros-Paldea-Combat",
+    "displayName": "Tauros-Paldea-Combat",
+    "label": "Tauros-Paldea-Combat",
+    "sprite": "taurospaldeacombat",
+    "alias": "taurospaldeacombat",
+    "evoline": "tauros",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 128,
+    "num": 128,
+    "types": [
+      "fighting"
+    ],
+    "total": 490,
+    "baseStats": {
+      "hp": 75,
+      "atk": 110,
+      "def": 105,
+      "spa": 30,
+      "spd": 70,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Lapras-Gmax",
+    "displayName": "Lapras-Gmax",
+    "label": "Lapras-Gmax",
+    "sprite": "laprasgmax",
+    "alias": "laprasgmax",
+    "evoline": "lapras",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 131,
+    "num": 131,
+    "types": [
+      "water",
+      "ice"
+    ],
+    "total": 535,
+    "baseStats": {
+      "hp": 130,
+      "atk": 85,
+      "def": 80,
+      "spa": 85,
+      "spd": 95,
+      "spe": 60
+    }
+  },
+  {
+    "name": "Eevee-Gmax",
+    "displayName": "Eevee-Gmax",
+    "label": "Eevee-Gmax",
+    "sprite": "eeveegmax",
+    "alias": "eeveegmax",
+    "evoline": "eevee",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 133,
+    "num": 133,
+    "types": [
+      "normal"
+    ],
+    "total": 325,
+    "baseStats": {
+      "hp": 55,
+      "atk": 55,
+      "def": 50,
+      "spa": 45,
+      "spd": 65,
+      "spe": 55
+    }
+  },
+  {
+    "name": "Eevee-Starter",
+    "displayName": "Eevee-Starter",
+    "label": "Eevee-Starter",
+    "sprite": "eeveestarter",
+    "alias": "eeveestarter",
+    "evoline": "eevee",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 133,
+    "num": 133,
+    "types": [
+      "normal"
+    ],
+    "total": 435,
+    "baseStats": {
+      "hp": 65,
+      "atk": 75,
+      "def": 70,
+      "spa": 65,
+      "spd": 85,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Snorlax-Gmax",
+    "displayName": "Snorlax-Gmax",
+    "label": "Snorlax-Gmax",
+    "sprite": "snorlaxgmax",
+    "alias": "snorlaxgmax",
+    "evoline": "munchlax",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 143,
+    "num": 143,
+    "types": [
+      "normal"
+    ],
+    "total": 540,
+    "baseStats": {
+      "hp": 160,
+      "atk": 110,
+      "def": 65,
+      "spa": 65,
+      "spd": 110,
+      "spe": 30
+    }
+  },
+  {
+    "name": "Dragonite-Mega",
+    "displayName": "Dragonite-Mega",
+    "label": "Dragonite-Mega",
+    "sprite": "dragonitemega",
+    "alias": "dragonitemega",
+    "evoline": "dratini",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 149,
+    "num": 149,
+    "types": [
+      "dragon",
+      "flying"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 91,
+      "atk": 124,
+      "def": 115,
+      "spa": 145,
+      "spd": 125,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Meganium-Mega",
+    "displayName": "Meganium-Mega",
+    "label": "Meganium-Mega",
+    "sprite": "meganiummega",
+    "alias": "meganiummega",
+    "evoline": "chikorita",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 154,
+    "num": 154,
+    "types": [
+      "grass",
+      "fairy"
+    ],
+    "total": 625,
+    "baseStats": {
+      "hp": 80,
+      "atk": 92,
+      "def": 115,
+      "spa": 143,
+      "spd": 115,
+      "spe": 80
+    }
+  },
+  {
+    "name": "Feraligatr-Mega",
+    "displayName": "Feraligatr-Mega",
+    "label": "Feraligatr-Mega",
+    "sprite": "feraligatrmega",
+    "alias": "feraligatrmega",
+    "evoline": "totodile",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 160,
+    "num": 160,
+    "types": [
+      "water",
+      "dragon"
+    ],
+    "total": 630,
+    "baseStats": {
+      "hp": 85,
+      "atk": 160,
+      "def": 125,
+      "spa": 89,
+      "spd": 93,
+      "spe": 78
+    }
+  },
+  {
+    "name": "Pichu-Spiky-eared",
+    "displayName": "Pichu-Spiky-eared",
+    "label": "Pichu-Spiky-eared",
+    "sprite": "pichuspikyeared",
+    "alias": "pichuspikyeared",
+    "evoline": "pichu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 172,
+    "num": 172,
+    "types": [
+      "electric"
+    ],
+    "total": 205,
+    "baseStats": {
+      "hp": 20,
+      "atk": 40,
+      "def": 15,
+      "spa": 35,
+      "spd": 35,
+      "spe": 60
+    }
+  },
+  {
+    "name": "Scizor-Mega",
+    "displayName": "Scizor-Mega",
+    "label": "Scizor-Mega",
+    "sprite": "scizormega",
+    "alias": "scizormega",
+    "evoline": "scyther",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 212,
+    "num": 212,
+    "types": [
+      "bug",
+      "steel"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 70,
+      "atk": 150,
+      "def": 140,
+      "spa": 65,
+      "spd": 100,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Heracross-Mega",
+    "displayName": "Heracross-Mega",
+    "label": "Heracross-Mega",
+    "sprite": "heracrossmega",
+    "alias": "heracrossmega",
+    "evoline": "heracross",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 214,
+    "num": 214,
+    "types": [
+      "bug",
+      "fighting"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 80,
+      "atk": 185,
+      "def": 115,
+      "spa": 40,
+      "spd": 105,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Skarmory-Mega",
+    "displayName": "Skarmory-Mega",
+    "label": "Skarmory-Mega",
+    "sprite": "skarmorymega",
+    "alias": "skarmorymega",
+    "evoline": "skarmory",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 227,
+    "num": 227,
+    "types": [
+      "steel",
+      "flying"
+    ],
+    "total": 565,
+    "baseStats": {
+      "hp": 65,
+      "atk": 140,
+      "def": 110,
+      "spa": 40,
+      "spd": 100,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Tyranitar-Mega",
+    "displayName": "Tyranitar-Mega",
+    "label": "Tyranitar-Mega",
+    "sprite": "tyranitarmega",
+    "alias": "tyranitarmega",
+    "evoline": "larvitar",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 248,
+    "num": 248,
+    "types": [
+      "rock",
+      "dark"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 100,
+      "atk": 164,
+      "def": 150,
+      "spa": 95,
+      "spd": 120,
+      "spe": 71
+    }
+  },
+  {
+    "name": "Gardevoir-Mega",
+    "displayName": "Gardevoir-Mega",
+    "label": "Gardevoir-Mega",
+    "sprite": "gardevoirmega",
+    "alias": "gardevoirmega",
+    "evoline": "ralts",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 282,
+    "num": 282,
+    "types": [
+      "psychic",
+      "fairy"
+    ],
+    "total": 618,
+    "baseStats": {
+      "hp": 68,
+      "atk": 85,
+      "def": 65,
+      "spa": 165,
+      "spd": 135,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Sableye-Mega",
+    "displayName": "Sableye-Mega",
+    "label": "Sableye-Mega",
+    "sprite": "sableyemega",
+    "alias": "sableyemega",
+    "evoline": "sableye",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 302,
+    "num": 302,
+    "types": [
+      "dark",
+      "ghost"
+    ],
+    "total": 480,
+    "baseStats": {
+      "hp": 50,
+      "atk": 85,
+      "def": 125,
+      "spa": 85,
+      "spd": 115,
+      "spe": 20
+    }
+  },
+  {
+    "name": "Mawile-Mega",
+    "displayName": "Mawile-Mega",
+    "label": "Mawile-Mega",
+    "sprite": "mawilemega",
+    "alias": "mawilemega",
+    "evoline": "mawile",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 303,
+    "num": 303,
+    "types": [
+      "steel",
+      "fairy"
+    ],
+    "total": 480,
+    "baseStats": {
+      "hp": 50,
+      "atk": 105,
+      "def": 125,
+      "spa": 55,
+      "spd": 95,
+      "spe": 50
+    }
+  },
+  {
+    "name": "Aggron-Mega",
+    "displayName": "Aggron-Mega",
+    "label": "Aggron-Mega",
+    "sprite": "aggronmega",
+    "alias": "aggronmega",
+    "evoline": "aron",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 306,
+    "num": 306,
+    "types": [
+      "steel"
+    ],
+    "total": 630,
+    "baseStats": {
+      "hp": 70,
+      "atk": 140,
+      "def": 230,
+      "spa": 60,
+      "spd": 80,
+      "spe": 50
+    }
+  },
+  {
+    "name": "Castform-Rainy",
+    "displayName": "Castform-Rainy",
+    "label": "Castform-Rainy",
+    "sprite": "castformrainy",
+    "alias": "castformrainy",
+    "evoline": "castform",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 351,
+    "num": 351,
+    "types": [
+      "water"
+    ],
+    "total": 420,
+    "baseStats": {
+      "hp": 70,
+      "atk": 70,
+      "def": 70,
+      "spa": 70,
+      "spd": 70,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Castform-Snowy",
+    "displayName": "Castform-Snowy",
+    "label": "Castform-Snowy",
+    "sprite": "castformsnowy",
+    "alias": "castformsnowy",
+    "evoline": "castform",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 351,
+    "num": 351,
+    "types": [
+      "ice"
+    ],
+    "total": 420,
+    "baseStats": {
+      "hp": 70,
+      "atk": 70,
+      "def": 70,
+      "spa": 70,
+      "spd": 70,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Castform-Sunny",
+    "displayName": "Castform-Sunny",
+    "label": "Castform-Sunny",
+    "sprite": "castformsunny",
+    "alias": "castformsunny",
+    "evoline": "castform",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 351,
+    "num": 351,
+    "types": [
+      "fire"
+    ],
+    "total": 420,
+    "baseStats": {
+      "hp": 70,
+      "atk": 70,
+      "def": 70,
+      "spa": 70,
+      "spd": 70,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Chimecho-Mega",
+    "displayName": "Chimecho-Mega",
+    "label": "Chimecho-Mega",
+    "sprite": "chimechomega",
+    "alias": "chimechomega",
+    "evoline": "chingling",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 358,
+    "num": 358,
+    "types": [
+      "psychic",
+      "steel"
+    ],
+    "total": 555,
+    "baseStats": {
+      "hp": 75,
+      "atk": 50,
+      "def": 110,
+      "spa": 135,
+      "spd": 120,
+      "spe": 65
+    }
+  },
+  {
+    "name": "Absol-Mega-Z",
+    "displayName": "Absol-Mega-Z",
+    "label": "Absol-Mega-Z",
+    "sprite": "absolmegaz",
+    "alias": "absolmegaz",
+    "evoline": "absol",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 359,
+    "num": 359,
+    "types": [
+      "dark",
+      "ghost"
+    ],
+    "total": 565,
+    "baseStats": {
+      "hp": 65,
+      "atk": 154,
+      "def": 60,
+      "spa": 75,
+      "spd": 60,
+      "spe": 151
+    }
+  },
+  {
+    "name": "Latias-Mega",
+    "displayName": "Latias-Mega",
+    "label": "Latias-Mega",
+    "sprite": "latiasmega",
+    "alias": "latiasmega",
+    "evoline": "latias",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 380,
+    "num": 380,
+    "types": [
+      "dragon",
+      "psychic"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 80,
+      "atk": 100,
+      "def": 120,
+      "spa": 140,
+      "spd": 150,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Latios-Mega",
+    "displayName": "Latios-Mega",
+    "label": "Latios-Mega",
+    "sprite": "latiosmega",
+    "alias": "latiosmega",
+    "evoline": "latios",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 381,
+    "num": 381,
+    "types": [
+      "dragon",
+      "psychic"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 80,
+      "atk": 130,
+      "def": 100,
+      "spa": 160,
+      "spd": 120,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Deoxys-Defense",
+    "displayName": "Deoxys-Defense",
+    "label": "Deoxys-Defense",
+    "sprite": "deoxysdefense",
+    "alias": "deoxysdefense",
+    "evoline": "deoxys",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 386,
+    "num": 386,
+    "types": [
+      "psychic"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 50,
+      "atk": 70,
+      "def": 160,
+      "spa": 70,
+      "spd": 160,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Staraptor-Mega",
+    "displayName": "Staraptor-Mega",
+    "label": "Staraptor-Mega",
+    "sprite": "staraptormega",
+    "alias": "staraptormega",
+    "evoline": "starly",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 398,
+    "num": 398,
+    "types": [
+      "fighting",
+      "flying"
+    ],
+    "total": 585,
+    "baseStats": {
+      "hp": 85,
+      "atk": 140,
+      "def": 100,
+      "spa": 60,
+      "spd": 90,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Cherrim-Sunshine",
+    "displayName": "Cherrim-Sunshine",
+    "label": "Cherrim-Sunshine",
+    "sprite": "cherrimsunshine",
+    "alias": "cherrimsunshine",
+    "evoline": "cherubi",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 421,
+    "num": 421,
+    "types": [
+      "grass"
+    ],
+    "total": 450,
+    "baseStats": {
+      "hp": 70,
+      "atk": 60,
+      "def": 70,
+      "spa": 87,
+      "spd": 78,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Lopunny-Mega",
+    "displayName": "Lopunny-Mega",
+    "label": "Lopunny-Mega",
+    "sprite": "lopunnymega",
+    "alias": "lopunnymega",
+    "evoline": "buneary",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 428,
+    "num": 428,
+    "types": [
+      "normal",
+      "fighting"
+    ],
+    "total": 580,
+    "baseStats": {
+      "hp": 65,
+      "atk": 136,
+      "def": 94,
+      "spa": 54,
+      "spd": 96,
+      "spe": 135
+    }
+  },
+  {
+    "name": "Garchomp-Mega",
+    "displayName": "Garchomp-Mega",
+    "label": "Garchomp-Mega",
+    "sprite": "garchompmega",
+    "alias": "garchompmega",
+    "evoline": "gible",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 445,
+    "num": 445,
+    "types": [
+      "dragon",
+      "ground"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 108,
+      "atk": 170,
+      "def": 115,
+      "spa": 120,
+      "spd": 95,
+      "spe": 92
+    }
+  },
+  {
+    "name": "Garchomp-Mega-Z",
+    "displayName": "Garchomp-Mega-Z",
+    "label": "Garchomp-Mega-Z",
+    "sprite": "garchompmegaz",
+    "alias": "garchompmegaz",
+    "evoline": "gible",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 445,
+    "num": 445,
+    "types": [
+      "dragon"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 108,
+      "atk": 130,
+      "def": 85,
+      "spa": 141,
+      "spd": 85,
+      "spe": 151
+    }
+  },
+  {
+    "name": "Lucario-Mega-Z",
+    "displayName": "Lucario-Mega-Z",
+    "label": "Lucario-Mega-Z",
+    "sprite": "lucariomegaz",
+    "alias": "lucariomegaz",
+    "evoline": "riolu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 448,
+    "num": 448,
+    "types": [
+      "fighting",
+      "steel"
+    ],
+    "total": 625,
+    "baseStats": {
+      "hp": 70,
+      "atk": 100,
+      "def": 70,
+      "spa": 164,
+      "spd": 70,
+      "spe": 151
+    }
+  },
+  {
+    "name": "Froslass-Mega",
+    "displayName": "Froslass-Mega",
+    "label": "Froslass-Mega",
+    "sprite": "froslassmega",
+    "alias": "froslassmega",
+    "evoline": "snorunt",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 478,
+    "num": 478,
+    "types": [
+      "ice",
+      "ghost"
+    ],
+    "total": 580,
+    "baseStats": {
+      "hp": 70,
+      "atk": 80,
+      "def": 70,
+      "spa": 140,
+      "spd": 100,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Palkia-Origin",
+    "displayName": "Palkia-Origin",
+    "label": "Palkia-Origin",
+    "sprite": "palkiaorigin",
+    "alias": "palkiaorigin",
+    "evoline": "palkia",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 484,
+    "num": 484,
+    "types": [
+      "water",
+      "dragon"
+    ],
+    "total": 680,
+    "baseStats": {
+      "hp": 90,
+      "atk": 100,
+      "def": 100,
+      "spa": 150,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Heatran-Mega",
+    "displayName": "Heatran-Mega",
+    "label": "Heatran-Mega",
+    "sprite": "heatranmega",
+    "alias": "heatranmega",
+    "evoline": "heatran",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 485,
+    "num": 485,
+    "types": [
+      "fire",
+      "steel"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 91,
+      "atk": 120,
+      "def": 106,
+      "spa": 175,
+      "spd": 141,
+      "spe": 67
+    }
+  },
+  {
+    "name": "Darkrai-Mega",
+    "displayName": "Darkrai-Mega",
+    "label": "Darkrai-Mega",
+    "sprite": "darkraimega",
+    "alias": "darkraimega",
+    "evoline": "darkrai",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 491,
+    "num": 491,
+    "types": [
+      "dark"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 70,
+      "atk": 120,
+      "def": 130,
+      "spa": 165,
+      "spd": 130,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Shaymin",
+    "displayName": "Shaymin",
+    "label": "Shaymin",
+    "sprite": "shaymin",
+    "alias": "shaymin",
+    "evoline": "shaymin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 492,
+    "num": 492,
+    "types": [
+      "grass"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 100,
+      "spa": 100,
+      "spd": 100,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Arceus-Bug",
+    "displayName": "Arceus-Bug",
+    "label": "Arceus-Bug",
+    "sprite": "arceusbug",
+    "alias": "arceusbug",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "bug"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Dark",
+    "displayName": "Arceus-Dark",
+    "label": "Arceus-Dark",
+    "sprite": "arceusdark",
+    "alias": "arceusdark",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "dark"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Dragon",
+    "displayName": "Arceus-Dragon",
+    "label": "Arceus-Dragon",
+    "sprite": "arceusdragon",
+    "alias": "arceusdragon",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "dragon"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Electric",
+    "displayName": "Arceus-Electric",
+    "label": "Arceus-Electric",
+    "sprite": "arceuselectric",
+    "alias": "arceuselectric",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "electric"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Fairy",
+    "displayName": "Arceus-Fairy",
+    "label": "Arceus-Fairy",
+    "sprite": "arceusfairy",
+    "alias": "arceusfairy",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "fairy"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Fighting",
+    "displayName": "Arceus-Fighting",
+    "label": "Arceus-Fighting",
+    "sprite": "arceusfighting",
+    "alias": "arceusfighting",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "fighting"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Fire",
+    "displayName": "Arceus-Fire",
+    "label": "Arceus-Fire",
+    "sprite": "arceusfire",
+    "alias": "arceusfire",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "fire"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Flying",
+    "displayName": "Arceus-Flying",
+    "label": "Arceus-Flying",
+    "sprite": "arceusflying",
+    "alias": "arceusflying",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "flying"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Ghost",
+    "displayName": "Arceus-Ghost",
+    "label": "Arceus-Ghost",
+    "sprite": "arceusghost",
+    "alias": "arceusghost",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "ghost"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Grass",
+    "displayName": "Arceus-Grass",
+    "label": "Arceus-Grass",
+    "sprite": "arceusgrass",
+    "alias": "arceusgrass",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "grass"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Ground",
+    "displayName": "Arceus-Ground",
+    "label": "Arceus-Ground",
+    "sprite": "arceusground",
+    "alias": "arceusground",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "ground"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Ice",
+    "displayName": "Arceus-Ice",
+    "label": "Arceus-Ice",
+    "sprite": "arceusice",
+    "alias": "arceusice",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "ice"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Poison",
+    "displayName": "Arceus-Poison",
+    "label": "Arceus-Poison",
+    "sprite": "arceuspoison",
+    "alias": "arceuspoison",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "poison"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Psychic",
+    "displayName": "Arceus-Psychic",
+    "label": "Arceus-Psychic",
+    "sprite": "arceuspsychic",
+    "alias": "arceuspsychic",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "psychic"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Rock",
+    "displayName": "Arceus-Rock",
+    "label": "Arceus-Rock",
+    "sprite": "arceusrock",
+    "alias": "arceusrock",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "rock"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Steel",
+    "displayName": "Arceus-Steel",
+    "label": "Arceus-Steel",
+    "sprite": "arceussteel",
+    "alias": "arceussteel",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "steel"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Arceus-Water",
+    "displayName": "Arceus-Water",
+    "label": "Arceus-Water",
+    "sprite": "arceuswater",
+    "alias": "arceuswater",
+    "evoline": "arceus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 493,
+    "num": 493,
+    "types": [
+      "water"
+    ],
+    "total": 720,
+    "baseStats": {
+      "hp": 120,
+      "atk": 120,
+      "def": 120,
+      "spa": 120,
+      "spd": 120,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Emboar-Mega",
+    "displayName": "Emboar-Mega",
+    "label": "Emboar-Mega",
+    "sprite": "emboarmega",
+    "alias": "emboarmega",
+    "evoline": "tepig",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 500,
+    "num": 500,
+    "types": [
+      "fire",
+      "fighting"
+    ],
+    "total": 628,
+    "baseStats": {
+      "hp": 110,
+      "atk": 148,
+      "def": 75,
+      "spa": 110,
+      "spd": 110,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Excadrill-Mega",
+    "displayName": "Excadrill-Mega",
+    "label": "Excadrill-Mega",
+    "sprite": "excadrillmega",
+    "alias": "excadrillmega",
+    "evoline": "drilbur",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 530,
+    "num": 530,
+    "types": [
+      "ground",
+      "steel"
+    ],
+    "total": 608,
+    "baseStats": {
+      "hp": 110,
+      "atk": 165,
+      "def": 100,
+      "spa": 65,
+      "spd": 65,
+      "spe": 103
+    }
+  },
+  {
+    "name": "Audino-Mega",
+    "displayName": "Audino-Mega",
+    "label": "Audino-Mega",
+    "sprite": "audinomega",
+    "alias": "audinomega",
+    "evoline": "audino",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 531,
+    "num": 531,
+    "types": [
+      "normal",
+      "fairy"
+    ],
+    "total": 545,
+    "baseStats": {
+      "hp": 103,
+      "atk": 60,
+      "def": 126,
+      "spa": 80,
+      "spd": 126,
+      "spe": 50
+    }
+  },
+  {
+    "name": "Scolipede-Mega",
+    "displayName": "Scolipede-Mega",
+    "label": "Scolipede-Mega",
+    "sprite": "scolipedemega",
+    "alias": "scolipedemega",
+    "evoline": "venipede",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 545,
+    "num": 545,
+    "types": [
+      "bug",
+      "poison"
+    ],
+    "total": 585,
+    "baseStats": {
+      "hp": 60,
+      "atk": 140,
+      "def": 149,
+      "spa": 75,
+      "spd": 99,
+      "spe": 62
+    }
+  },
+  {
+    "name": "Basculin-Blue-Striped",
+    "displayName": "Basculin-Blue-Striped",
+    "label": "Basculin-Blue-Striped",
+    "sprite": "basculinbluestriped",
+    "alias": "basculinbluestriped",
+    "evoline": "basculin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 550,
+    "num": 550,
+    "types": [
+      "water"
+    ],
+    "total": 460,
+    "baseStats": {
+      "hp": 70,
+      "atk": 92,
+      "def": 65,
+      "spa": 80,
+      "spd": 55,
+      "spe": 98
+    }
+  },
+  {
+    "name": "Basculin-White-Striped",
+    "displayName": "Basculin-White-Striped",
+    "label": "Basculin-White-Striped",
+    "sprite": "basculinwhitestriped",
+    "alias": "basculinwhitestriped",
+    "evoline": "basculin",
+    "canEncounter": true,
+    "evos": [
+      "basculegion",
+      "basculegionf"
+    ],
+    "imgId": 550,
+    "num": 550,
+    "types": [
+      "water"
+    ],
+    "total": 460,
+    "baseStats": {
+      "hp": 70,
+      "atk": 92,
+      "def": 65,
+      "spa": 80,
+      "spd": 55,
+      "spe": 98
+    }
+  },
+  {
+    "name": "Darmanitan-Galar-Zen",
+    "displayName": "Darmanitan-Galar-Zen",
+    "label": "Darmanitan-Galar-Zen",
+    "sprite": "darmanitangalarzen",
+    "alias": "darmanitangalarzen",
+    "evoline": "darumaka",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 555,
+    "num": 555,
+    "types": [
+      "ice",
+      "fire"
+    ],
+    "total": 540,
+    "baseStats": {
+      "hp": 105,
+      "atk": 160,
+      "def": 55,
+      "spa": 30,
+      "spd": 55,
+      "spe": 135
+    }
+  },
+  {
+    "name": "Scrafty-Mega",
+    "displayName": "Scrafty-Mega",
+    "label": "Scrafty-Mega",
+    "sprite": "scraftymega",
+    "alias": "scraftymega",
+    "evoline": "scraggy",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 560,
+    "num": 560,
+    "types": [
+      "dark",
+      "fighting"
+    ],
+    "total": 588,
+    "baseStats": {
+      "hp": 65,
+      "atk": 130,
+      "def": 135,
+      "spa": 55,
+      "spd": 135,
+      "spe": 68
+    }
+  },
+  {
+    "name": "Garbodor-Gmax",
+    "displayName": "Garbodor-Gmax",
+    "label": "Garbodor-Gmax",
+    "sprite": "garbodorgmax",
+    "alias": "garbodorgmax",
+    "evoline": "trubbish",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 569,
+    "num": 569,
+    "types": [
+      "poison"
+    ],
+    "total": 474,
+    "baseStats": {
+      "hp": 80,
+      "atk": 95,
+      "def": 82,
+      "spa": 60,
+      "spd": 82,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Eelektross-Mega",
+    "displayName": "Eelektross-Mega",
+    "label": "Eelektross-Mega",
+    "sprite": "eelektrossmega",
+    "alias": "eelektrossmega",
+    "evoline": "tynamo",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 604,
+    "num": 604,
+    "types": [
+      "electric"
+    ],
+    "total": 615,
+    "baseStats": {
+      "hp": 85,
+      "atk": 145,
+      "def": 80,
+      "spa": 135,
+      "spd": 90,
+      "spe": 80
+    }
+  },
+  {
+    "name": "Chandelure-Mega",
+    "displayName": "Chandelure-Mega",
+    "label": "Chandelure-Mega",
+    "sprite": "chandeluremega",
+    "alias": "chandeluremega",
+    "evoline": "litwick",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 609,
+    "num": 609,
+    "types": [
+      "ghost",
+      "fire"
+    ],
+    "total": 620,
+    "baseStats": {
+      "hp": 60,
+      "atk": 75,
+      "def": 110,
+      "spa": 175,
+      "spd": 110,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Golurk-Mega",
+    "displayName": "Golurk-Mega",
+    "label": "Golurk-Mega",
+    "sprite": "golurkmega",
+    "alias": "golurkmega",
+    "evoline": "golett",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 623,
+    "num": 623,
+    "types": [
+      "ground",
+      "ghost"
+    ],
+    "total": 583,
+    "baseStats": {
+      "hp": 89,
+      "atk": 159,
+      "def": 105,
+      "spa": 70,
+      "spd": 105,
+      "spe": 55
+    }
+  },
+  {
+    "name": "Thundurus",
+    "displayName": "Thundurus",
+    "label": "Thundurus",
+    "sprite": "thundurus",
+    "alias": "thundurus",
+    "evoline": "thundurus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 642,
+    "num": 642,
+    "types": [
+      "electric",
+      "flying"
+    ],
+    "total": 580,
+    "baseStats": {
+      "hp": 79,
+      "atk": 115,
+      "def": 70,
+      "spa": 125,
+      "spd": 80,
+      "spe": 111
+    }
+  },
+  {
+    "name": "Landorus",
+    "displayName": "Landorus",
+    "label": "Landorus",
+    "sprite": "landorus",
+    "alias": "landorus",
+    "evoline": "landorus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 645,
+    "num": 645,
+    "types": [
+      "ground",
+      "flying"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 89,
+      "atk": 125,
+      "def": 90,
+      "spa": 115,
+      "spd": 80,
+      "spe": 101
+    }
+  },
+  {
+    "name": "Keldeo",
+    "displayName": "Keldeo",
+    "label": "Keldeo",
+    "sprite": "keldeo",
+    "alias": "keldeo",
+    "evoline": "keldeo",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 647,
+    "num": 647,
+    "types": [
+      "water",
+      "fighting"
+    ],
+    "total": 580,
+    "baseStats": {
+      "hp": 91,
+      "atk": 72,
+      "def": 90,
+      "spa": 129,
+      "spd": 90,
+      "spe": 108
+    }
+  },
+  {
+    "name": "Keldeo-Resolute",
+    "displayName": "Keldeo-Resolute",
+    "label": "Keldeo-Resolute",
+    "sprite": "keldeoresolute",
+    "alias": "keldeoresolute",
+    "evoline": "keldeo",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 647,
+    "num": 647,
+    "types": [
+      "water",
+      "fighting"
+    ],
+    "total": 580,
+    "baseStats": {
+      "hp": 91,
+      "atk": 72,
+      "def": 90,
+      "spa": 129,
+      "spd": 90,
+      "spe": 108
+    }
+  },
+  {
+    "name": "Meloetta",
+    "displayName": "Meloetta",
+    "label": "Meloetta",
+    "sprite": "meloetta",
+    "alias": "meloetta",
+    "evoline": "meloetta",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 648,
+    "num": 648,
+    "types": [
+      "normal",
+      "psychic"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 100,
+      "atk": 77,
+      "def": 77,
+      "spa": 128,
+      "spd": 128,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Meloetta-Pirouette",
+    "displayName": "Meloetta-Pirouette",
+    "label": "Meloetta-Pirouette",
+    "sprite": "meloettapirouette",
+    "alias": "meloettapirouette",
+    "evoline": "meloetta",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 648,
+    "num": 648,
+    "types": [
+      "normal",
+      "fighting"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 100,
+      "atk": 128,
+      "def": 90,
+      "spa": 77,
+      "spd": 77,
+      "spe": 128
+    }
+  },
+  {
+    "name": "Genesect-Burn",
+    "displayName": "Genesect-Burn",
+    "label": "Genesect-Burn",
+    "sprite": "genesectburn",
+    "alias": "genesectburn",
+    "evoline": "genesect",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 649,
+    "num": 649,
+    "types": [
+      "bug",
+      "steel"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 71,
+      "atk": 120,
+      "def": 95,
+      "spa": 120,
+      "spd": 95,
+      "spe": 99
+    }
+  },
+  {
+    "name": "Genesect-Chill",
+    "displayName": "Genesect-Chill",
+    "label": "Genesect-Chill",
+    "sprite": "genesectchill",
+    "alias": "genesectchill",
+    "evoline": "genesect",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 649,
+    "num": 649,
+    "types": [
+      "bug",
+      "steel"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 71,
+      "atk": 120,
+      "def": 95,
+      "spa": 120,
+      "spd": 95,
+      "spe": 99
+    }
+  },
+  {
+    "name": "Genesect-Douse",
+    "displayName": "Genesect-Douse",
+    "label": "Genesect-Douse",
+    "sprite": "genesectdouse",
+    "alias": "genesectdouse",
+    "evoline": "genesect",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 649,
+    "num": 649,
+    "types": [
+      "bug",
+      "steel"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 71,
+      "atk": 120,
+      "def": 95,
+      "spa": 120,
+      "spd": 95,
+      "spe": 99
+    }
+  },
+  {
+    "name": "Genesect-Shock",
+    "displayName": "Genesect-Shock",
+    "label": "Genesect-Shock",
+    "sprite": "genesectshock",
+    "alias": "genesectshock",
+    "evoline": "genesect",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 649,
+    "num": 649,
+    "types": [
+      "bug",
+      "steel"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 71,
+      "atk": 120,
+      "def": 95,
+      "spa": 120,
+      "spd": 95,
+      "spe": 99
+    }
+  },
+  {
+    "name": "Chesnaught-Mega",
+    "displayName": "Chesnaught-Mega",
+    "label": "Chesnaught-Mega",
+    "sprite": "chesnaughtmega",
+    "alias": "chesnaughtmega",
+    "evoline": "chespin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 652,
+    "num": 652,
+    "types": [
+      "grass",
+      "fighting"
+    ],
+    "total": 630,
+    "baseStats": {
+      "hp": 88,
+      "atk": 137,
+      "def": 172,
+      "spa": 74,
+      "spd": 115,
+      "spe": 44
+    }
+  },
+  {
+    "name": "Delphox-Mega",
+    "displayName": "Delphox-Mega",
+    "label": "Delphox-Mega",
+    "sprite": "delphoxmega",
+    "alias": "delphoxmega",
+    "evoline": "fennekin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 655,
+    "num": 655,
+    "types": [
+      "fire",
+      "psychic"
+    ],
+    "total": 634,
+    "baseStats": {
+      "hp": 75,
+      "atk": 69,
+      "def": 72,
+      "spa": 159,
+      "spd": 125,
+      "spe": 134
+    }
+  },
+  {
+    "name": "Greninja-Ash",
+    "displayName": "Greninja-Ash",
+    "label": "Greninja-Ash",
+    "sprite": "greninjaash",
+    "alias": "greninjaash",
+    "evoline": "froakie",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 658,
+    "num": 658,
+    "types": [
+      "water",
+      "dark"
+    ],
+    "total": 640,
+    "baseStats": {
+      "hp": 72,
+      "atk": 145,
+      "def": 67,
+      "spa": 153,
+      "spd": 71,
+      "spe": 132
+    }
+  },
+  {
+    "name": "Greninja-Bond",
+    "displayName": "Greninja-Bond",
+    "label": "Greninja-Bond",
+    "sprite": "greninjabond",
+    "alias": "greninjabond",
+    "evoline": "froakie",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 658,
+    "num": 658,
+    "types": [
+      "water",
+      "dark"
+    ],
+    "total": 530,
+    "baseStats": {
+      "hp": 72,
+      "atk": 95,
+      "def": 67,
+      "spa": 103,
+      "spd": 71,
+      "spe": 122
+    }
+  },
+  {
+    "name": "Greninja-Mega",
+    "displayName": "Greninja-Mega",
+    "label": "Greninja-Mega",
+    "sprite": "greninjamega",
+    "alias": "greninjamega",
+    "evoline": "froakie",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 658,
+    "num": 658,
+    "types": [
+      "water",
+      "dark"
+    ],
+    "total": 630,
+    "baseStats": {
+      "hp": 72,
+      "atk": 125,
+      "def": 77,
+      "spa": 133,
+      "spd": 81,
+      "spe": 142
+    }
+  },
+  {
+    "name": "Vivillon-Fancy",
+    "displayName": "Vivillon-Fancy",
+    "label": "Vivillon-Fancy",
+    "sprite": "vivillonfancy",
+    "alias": "vivillonfancy",
+    "evoline": "scatterbug",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 666,
+    "num": 666,
+    "types": [
+      "bug",
+      "flying"
+    ],
+    "total": 411,
+    "baseStats": {
+      "hp": 80,
+      "atk": 52,
+      "def": 50,
+      "spa": 90,
+      "spd": 50,
+      "spe": 89
+    }
+  },
+  {
+    "name": "Vivillon-Pokeball",
+    "displayName": "Vivillon-Pokeball",
+    "label": "Vivillon-Pokeball",
+    "sprite": "vivillonpokeball",
+    "alias": "vivillonpokeball",
+    "evoline": "scatterbug",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 666,
+    "num": 666,
+    "types": [
+      "bug",
+      "flying"
+    ],
+    "total": 411,
+    "baseStats": {
+      "hp": 80,
+      "atk": 52,
+      "def": 50,
+      "spa": 90,
+      "spd": 50,
+      "spe": 89
+    }
+  },
+  {
+    "name": "Pyroar-Mega",
+    "displayName": "Pyroar-Mega",
+    "label": "Pyroar-Mega",
+    "sprite": "pyroarmega",
+    "alias": "pyroarmega",
+    "evoline": "litleo",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 668,
+    "num": 668,
+    "types": [
+      "fire",
+      "normal"
+    ],
+    "total": 607,
+    "baseStats": {
+      "hp": 86,
+      "atk": 88,
+      "def": 92,
+      "spa": 129,
+      "spd": 86,
+      "spe": 126
+    }
+  },
+  {
+    "name": "Floette-Mega",
+    "displayName": "Floette-Mega",
+    "label": "Floette-Mega",
+    "sprite": "floettemega",
+    "alias": "floettemega",
+    "evoline": "flabebe",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 670,
+    "num": 670,
+    "types": [
+      "fairy"
+    ],
+    "total": 651,
+    "baseStats": {
+      "hp": 74,
+      "atk": 85,
+      "def": 87,
+      "spa": 155,
+      "spd": 148,
+      "spe": 102
+    }
+  },
+  {
+    "name": "Meowstic",
+    "displayName": "Meowstic",
+    "label": "Meowstic",
+    "sprite": "meowstic",
+    "alias": "meowstic",
+    "evoline": "espurr",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 678,
+    "num": 678,
+    "types": [
+      "psychic"
+    ],
+    "total": 466,
+    "baseStats": {
+      "hp": 74,
+      "atk": 48,
+      "def": 76,
+      "spa": 83,
+      "spd": 81,
+      "spe": 104
+    }
+  },
+  {
+    "name": "Meowstic-F",
+    "displayName": "Meowstic-F",
+    "label": "Meowstic-F",
+    "sprite": "meowsticf",
+    "alias": "meowsticf",
+    "evoline": "espurr",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 678,
+    "num": 678,
+    "types": [
+      "psychic"
+    ],
+    "total": 466,
+    "baseStats": {
+      "hp": 74,
+      "atk": 48,
+      "def": 76,
+      "spa": 83,
+      "spd": 81,
+      "spe": 104
+    }
+  },
+  {
+    "name": "Meowstic-F-Mega",
+    "displayName": "Meowstic-F-Mega",
+    "label": "Meowstic-F-Mega",
+    "sprite": "meowsticfmega",
+    "alias": "meowsticfmega",
+    "evoline": "espurr",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 678,
+    "num": 678,
+    "types": [
+      "psychic"
+    ],
+    "total": 566,
+    "baseStats": {
+      "hp": 74,
+      "atk": 48,
+      "def": 76,
+      "spa": 143,
+      "spd": 101,
+      "spe": 124
+    }
+  },
+  {
+    "name": "Meowstic-M-Mega",
+    "displayName": "Meowstic-M-Mega",
+    "label": "Meowstic-M-Mega",
+    "sprite": "meowsticmmega",
+    "alias": "meowsticmmega",
+    "evoline": "espurr",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 678,
+    "num": 678,
+    "types": [
+      "psychic"
+    ],
+    "total": 566,
+    "baseStats": {
+      "hp": 74,
+      "atk": 48,
+      "def": 76,
+      "spa": 143,
+      "spd": 101,
+      "spe": 124
+    }
+  },
+  {
+    "name": "Aegislash",
+    "displayName": "Aegislash",
+    "label": "Aegislash",
+    "sprite": "aegislash",
+    "alias": "aegislash",
+    "evoline": "honedge",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 681,
+    "num": 681,
+    "types": [
+      "steel",
+      "ghost"
+    ],
+    "total": 500,
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 140,
+      "spa": 50,
+      "spd": 140,
+      "spe": 60
+    }
+  },
+  {
+    "name": "Malamar-Mega",
+    "displayName": "Malamar-Mega",
+    "label": "Malamar-Mega",
+    "sprite": "malamarmega",
+    "alias": "malamarmega",
+    "evoline": "inkay",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 687,
+    "num": 687,
+    "types": [
+      "dark",
+      "psychic"
+    ],
+    "total": 582,
+    "baseStats": {
+      "hp": 86,
+      "atk": 102,
+      "def": 88,
+      "spa": 98,
+      "spd": 120,
+      "spe": 88
+    }
+  },
+  {
+    "name": "Barbaracle-Mega",
+    "displayName": "Barbaracle-Mega",
+    "label": "Barbaracle-Mega",
+    "sprite": "barbaraclemega",
+    "alias": "barbaraclemega",
+    "evoline": "binacle",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 689,
+    "num": 689,
+    "types": [
+      "rock",
+      "fighting"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 72,
+      "atk": 140,
+      "def": 130,
+      "spa": 64,
+      "spd": 106,
+      "spe": 88
+    }
+  },
+  {
+    "name": "Dragalge-Mega",
+    "displayName": "Dragalge-Mega",
+    "label": "Dragalge-Mega",
+    "sprite": "dragalgemega",
+    "alias": "dragalgemega",
+    "evoline": "skrelp",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 691,
+    "num": 691,
+    "types": [
+      "poison",
+      "dragon"
+    ],
+    "total": 594,
+    "baseStats": {
+      "hp": 65,
+      "atk": 85,
+      "def": 105,
+      "spa": 132,
+      "spd": 163,
+      "spe": 44
+    }
+  },
+  {
+    "name": "Hawlucha-Mega",
+    "displayName": "Hawlucha-Mega",
+    "label": "Hawlucha-Mega",
+    "sprite": "hawluchamega",
+    "alias": "hawluchamega",
+    "evoline": "hawlucha",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 701,
+    "num": 701,
+    "types": [
+      "fighting",
+      "flying"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 78,
+      "atk": 137,
+      "def": 100,
+      "spa": 74,
+      "spd": 93,
+      "spe": 118
+    }
+  },
+  {
+    "name": "Pumpkaboo-Large",
+    "displayName": "Pumpkaboo-Large",
+    "label": "Pumpkaboo-Large",
+    "sprite": "pumpkaboolarge",
+    "alias": "pumpkaboolarge",
+    "evoline": "pumpkaboo",
+    "canEncounter": true,
+    "evos": [
+      "gourgeistlarge"
+    ],
+    "imgId": 710,
+    "num": 710,
+    "types": [
+      "ghost",
+      "grass"
+    ],
+    "total": 335,
+    "baseStats": {
+      "hp": 54,
+      "atk": 66,
+      "def": 70,
+      "spa": 44,
+      "spd": 55,
+      "spe": 46
+    }
+  },
+  {
+    "name": "Pumpkaboo-Small",
+    "displayName": "Pumpkaboo-Small",
+    "label": "Pumpkaboo-Small",
+    "sprite": "pumpkaboosmall",
+    "alias": "pumpkaboosmall",
+    "evoline": "pumpkaboo",
+    "canEncounter": true,
+    "evos": [
+      "gourgeistsmall"
+    ],
+    "imgId": 710,
+    "num": 710,
+    "types": [
+      "ghost",
+      "grass"
+    ],
+    "total": 335,
+    "baseStats": {
+      "hp": 44,
+      "atk": 66,
+      "def": 70,
+      "spa": 44,
+      "spd": 55,
+      "spe": 56
+    }
+  },
+  {
+    "name": "Pumpkaboo-Super",
+    "displayName": "Pumpkaboo-Super",
+    "label": "Pumpkaboo-Super",
+    "sprite": "pumpkaboosuper",
+    "alias": "pumpkaboosuper",
+    "evoline": "pumpkaboo",
+    "canEncounter": true,
+    "evos": [
+      "gourgeistsuper"
+    ],
+    "imgId": 710,
+    "num": 710,
+    "types": [
+      "ghost",
+      "grass"
+    ],
+    "total": 335,
+    "baseStats": {
+      "hp": 59,
+      "atk": 66,
+      "def": 70,
+      "spa": 44,
+      "spd": 55,
+      "spe": 41
+    }
+  },
+  {
+    "name": "Gourgeist-Small",
+    "displayName": "Gourgeist-Small",
+    "label": "Gourgeist-Small",
+    "sprite": "gourgeistsmall",
+    "alias": "gourgeistsmall",
+    "evoline": "pumpkaboo",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 711,
+    "num": 711,
+    "types": [
+      "ghost",
+      "grass"
+    ],
+    "total": 494,
+    "baseStats": {
+      "hp": 55,
+      "atk": 85,
+      "def": 122,
+      "spa": 58,
+      "spd": 75,
+      "spe": 99
+    }
+  },
+  {
+    "name": "Gourgeist-Super",
+    "displayName": "Gourgeist-Super",
+    "label": "Gourgeist-Super",
+    "sprite": "gourgeistsuper",
+    "alias": "gourgeistsuper",
+    "evoline": "pumpkaboo",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 711,
+    "num": 711,
+    "types": [
+      "ghost",
+      "grass"
+    ],
+    "total": 494,
+    "baseStats": {
+      "hp": 85,
+      "atk": 100,
+      "def": 122,
+      "spa": 58,
+      "spd": 75,
+      "spe": 54
+    }
+  },
+  {
+    "name": "Xerneas-Neutral",
+    "displayName": "Xerneas-Neutral",
+    "label": "Xerneas-Neutral",
+    "sprite": "xerneasneutral",
+    "alias": "xerneasneutral",
+    "evoline": "xerneas",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 716,
+    "num": 716,
+    "types": [
+      "fairy"
+    ],
+    "total": 680,
+    "baseStats": {
+      "hp": 126,
+      "atk": 131,
+      "def": 95,
+      "spa": 131,
+      "spd": 98,
+      "spe": 99
+    }
+  },
+  {
+    "name": "Zygarde-Complete",
+    "displayName": "Zygarde-Complete",
+    "label": "Zygarde-Complete",
+    "sprite": "zygardecomplete",
+    "alias": "zygardecomplete",
+    "evoline": "zygarde",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 718,
+    "num": 718,
+    "types": [
+      "dragon",
+      "ground"
+    ],
+    "total": 708,
+    "baseStats": {
+      "hp": 216,
+      "atk": 100,
+      "def": 121,
+      "spa": 91,
+      "spd": 95,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Zygarde-Mega",
+    "displayName": "Zygarde-Mega",
+    "label": "Zygarde-Mega",
+    "sprite": "zygardemega",
+    "alias": "zygardemega",
+    "evoline": "zygarde",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 718,
+    "num": 718,
+    "types": [
+      "dragon",
+      "ground"
+    ],
+    "total": 778,
+    "baseStats": {
+      "hp": 216,
+      "atk": 70,
+      "def": 91,
+      "spa": 216,
+      "spd": 85,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Diancie-Mega",
+    "displayName": "Diancie-Mega",
+    "label": "Diancie-Mega",
+    "sprite": "dianciemega",
+    "alias": "dianciemega",
+    "evoline": "diancie",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 719,
+    "num": 719,
+    "types": [
+      "rock",
+      "fairy"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 50,
+      "atk": 160,
+      "def": 110,
+      "spa": 160,
+      "spd": 110,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Gumshoos-Totem",
+    "displayName": "Gumshoos-Totem",
+    "label": "Gumshoos-Totem",
+    "sprite": "gumshoostotem",
+    "alias": "gumshoostotem",
+    "evoline": "yungoos",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 735,
+    "num": 735,
+    "types": [
+      "normal"
+    ],
+    "total": 418,
+    "baseStats": {
+      "hp": 88,
+      "atk": 110,
+      "def": 60,
+      "spa": 55,
+      "spd": 60,
+      "spe": 45
+    }
+  },
+  {
+    "name": "Vikavolt-Totem",
+    "displayName": "Vikavolt-Totem",
+    "label": "Vikavolt-Totem",
+    "sprite": "vikavolttotem",
+    "alias": "vikavolttotem",
+    "evoline": "grubbin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 738,
+    "num": 738,
+    "types": [
+      "bug",
+      "electric"
+    ],
+    "total": 500,
+    "baseStats": {
+      "hp": 77,
+      "atk": 70,
+      "def": 90,
+      "spa": 145,
+      "spd": 75,
+      "spe": 43
+    }
+  },
+  {
+    "name": "Crabominable-Mega",
+    "displayName": "Crabominable-Mega",
+    "label": "Crabominable-Mega",
+    "sprite": "crabominablemega",
+    "alias": "crabominablemega",
+    "evoline": "crabrawler",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 740,
+    "num": 740,
+    "types": [
+      "fighting",
+      "ice"
+    ],
+    "total": 578,
+    "baseStats": {
+      "hp": 97,
+      "atk": 157,
+      "def": 122,
+      "spa": 62,
+      "spd": 107,
+      "spe": 33
+    }
+  },
+  {
+    "name": "Ribombee-Totem",
+    "displayName": "Ribombee-Totem",
+    "label": "Ribombee-Totem",
+    "sprite": "ribombeetotem",
+    "alias": "ribombeetotem",
+    "evoline": "cutiefly",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 743,
+    "num": 743,
+    "types": [
+      "bug",
+      "fairy"
+    ],
+    "total": 464,
+    "baseStats": {
+      "hp": 60,
+      "atk": 55,
+      "def": 60,
+      "spa": 95,
+      "spd": 70,
+      "spe": 124
+    }
+  },
+  {
+    "name": "Rockruff-Dusk",
+    "displayName": "Rockruff-Dusk",
+    "label": "Rockruff-Dusk",
+    "sprite": "rockruffdusk",
+    "alias": "rockruffdusk",
+    "evoline": "rockruff",
+    "canEncounter": true,
+    "evos": [
+      "lycanrocdusk"
+    ],
+    "imgId": 744,
+    "num": 744,
+    "types": [
+      "rock"
+    ],
+    "total": 280,
+    "baseStats": {
+      "hp": 45,
+      "atk": 65,
+      "def": 40,
+      "spa": 30,
+      "spd": 40,
+      "spe": 60
+    }
+  },
+  {
+    "name": "Lycanroc",
+    "displayName": "Lycanroc",
+    "label": "Lycanroc",
+    "sprite": "lycanroc",
+    "alias": "lycanroc",
+    "evoline": "rockruff",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 745,
+    "num": 745,
+    "types": [
+      "rock"
+    ],
+    "total": 487,
+    "baseStats": {
+      "hp": 75,
+      "atk": 115,
+      "def": 65,
+      "spa": 55,
+      "spd": 65,
+      "spe": 112
+    }
+  },
+  {
+    "name": "Araquanid-Totem",
+    "displayName": "Araquanid-Totem",
+    "label": "Araquanid-Totem",
+    "sprite": "araquanidtotem",
+    "alias": "araquanidtotem",
+    "evoline": "dewpider",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 752,
+    "num": 752,
+    "types": [
+      "water",
+      "bug"
+    ],
+    "total": 454,
+    "baseStats": {
+      "hp": 68,
+      "atk": 70,
+      "def": 92,
+      "spa": 50,
+      "spd": 132,
+      "spe": 42
+    }
+  },
+  {
+    "name": "Lurantis-Totem",
+    "displayName": "Lurantis-Totem",
+    "label": "Lurantis-Totem",
+    "sprite": "lurantistotem",
+    "alias": "lurantistotem",
+    "evoline": "fomantis",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 754,
+    "num": 754,
+    "types": [
+      "grass"
+    ],
+    "total": 480,
+    "baseStats": {
+      "hp": 70,
+      "atk": 105,
+      "def": 90,
+      "spa": 80,
+      "spd": 90,
+      "spe": 45
+    }
+  },
+  {
+    "name": "Salazzle-Totem",
+    "displayName": "Salazzle-Totem",
+    "label": "Salazzle-Totem",
+    "sprite": "salazzletotem",
+    "alias": "salazzletotem",
+    "evoline": "salandit",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 758,
+    "num": 758,
+    "types": [
+      "poison",
+      "fire"
+    ],
+    "total": 480,
+    "baseStats": {
+      "hp": 68,
+      "atk": 64,
+      "def": 60,
+      "spa": 111,
+      "spd": 60,
+      "spe": 117
+    }
+  },
+  {
+    "name": "Golisopod-Mega",
+    "displayName": "Golisopod-Mega",
+    "label": "Golisopod-Mega",
+    "sprite": "golisopodmega",
+    "alias": "golisopodmega",
+    "evoline": "wimpod",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 768,
+    "num": 768,
+    "types": [
+      "bug",
+      "steel"
+    ],
+    "total": 630,
+    "baseStats": {
+      "hp": 75,
+      "atk": 150,
+      "def": 175,
+      "spa": 70,
+      "spd": 120,
+      "spe": 40
+    }
+  },
+  {
+    "name": "Silvally-Bug",
+    "displayName": "Silvally-Bug",
+    "label": "Silvally-Bug",
+    "sprite": "silvallybug",
+    "alias": "silvallybug",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "bug"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Dark",
+    "displayName": "Silvally-Dark",
+    "label": "Silvally-Dark",
+    "sprite": "silvallydark",
+    "alias": "silvallydark",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "dark"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Dragon",
+    "displayName": "Silvally-Dragon",
+    "label": "Silvally-Dragon",
+    "sprite": "silvallydragon",
+    "alias": "silvallydragon",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "dragon"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Electric",
+    "displayName": "Silvally-Electric",
+    "label": "Silvally-Electric",
+    "sprite": "silvallyelectric",
+    "alias": "silvallyelectric",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "electric"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Fairy",
+    "displayName": "Silvally-Fairy",
+    "label": "Silvally-Fairy",
+    "sprite": "silvallyfairy",
+    "alias": "silvallyfairy",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "fairy"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Fighting",
+    "displayName": "Silvally-Fighting",
+    "label": "Silvally-Fighting",
+    "sprite": "silvallyfighting",
+    "alias": "silvallyfighting",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "fighting"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Fire",
+    "displayName": "Silvally-Fire",
+    "label": "Silvally-Fire",
+    "sprite": "silvallyfire",
+    "alias": "silvallyfire",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "fire"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Flying",
+    "displayName": "Silvally-Flying",
+    "label": "Silvally-Flying",
+    "sprite": "silvallyflying",
+    "alias": "silvallyflying",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "flying"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Ghost",
+    "displayName": "Silvally-Ghost",
+    "label": "Silvally-Ghost",
+    "sprite": "silvallyghost",
+    "alias": "silvallyghost",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "ghost"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Grass",
+    "displayName": "Silvally-Grass",
+    "label": "Silvally-Grass",
+    "sprite": "silvallygrass",
+    "alias": "silvallygrass",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "grass"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Ground",
+    "displayName": "Silvally-Ground",
+    "label": "Silvally-Ground",
+    "sprite": "silvallyground",
+    "alias": "silvallyground",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "ground"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Ice",
+    "displayName": "Silvally-Ice",
+    "label": "Silvally-Ice",
+    "sprite": "silvallyice",
+    "alias": "silvallyice",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "ice"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Poison",
+    "displayName": "Silvally-Poison",
+    "label": "Silvally-Poison",
+    "sprite": "silvallypoison",
+    "alias": "silvallypoison",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "poison"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Psychic",
+    "displayName": "Silvally-Psychic",
+    "label": "Silvally-Psychic",
+    "sprite": "silvallypsychic",
+    "alias": "silvallypsychic",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "psychic"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Rock",
+    "displayName": "Silvally-Rock",
+    "label": "Silvally-Rock",
+    "sprite": "silvallyrock",
+    "alias": "silvallyrock",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "rock"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Steel",
+    "displayName": "Silvally-Steel",
+    "label": "Silvally-Steel",
+    "sprite": "silvallysteel",
+    "alias": "silvallysteel",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "steel"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Silvally-Water",
+    "displayName": "Silvally-Water",
+    "label": "Silvally-Water",
+    "sprite": "silvallywater",
+    "alias": "silvallywater",
+    "evoline": "typenull",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 773,
+    "num": 773,
+    "types": [
+      "water"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Minior-Meteor",
+    "displayName": "Minior-Meteor",
+    "label": "Minior-Meteor",
+    "sprite": "miniormeteor",
+    "alias": "miniormeteor",
+    "evoline": "minior",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 774,
+    "num": 774,
+    "types": [
+      "rock",
+      "flying"
+    ],
+    "total": 440,
+    "baseStats": {
+      "hp": 60,
+      "atk": 60,
+      "def": 100,
+      "spa": 60,
+      "spd": 100,
+      "spe": 60
+    }
+  },
+  {
+    "name": "Togedemaru-Totem",
+    "displayName": "Togedemaru-Totem",
+    "label": "Togedemaru-Totem",
+    "sprite": "togedemarutotem",
+    "alias": "togedemarutotem",
+    "evoline": "togedemaru",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 777,
+    "num": 777,
+    "types": [
+      "electric",
+      "steel"
+    ],
+    "total": 435,
+    "baseStats": {
+      "hp": 65,
+      "atk": 98,
+      "def": 63,
+      "spa": 40,
+      "spd": 73,
+      "spe": 96
+    }
+  },
+  {
+    "name": "Mimikyu-Busted",
+    "displayName": "Mimikyu-Busted",
+    "label": "Mimikyu-Busted",
+    "sprite": "mimikyubusted",
+    "alias": "mimikyubusted",
+    "evoline": "mimikyu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 778,
+    "num": 778,
+    "types": [
+      "ghost",
+      "fairy"
+    ],
+    "total": 476,
+    "baseStats": {
+      "hp": 55,
+      "atk": 90,
+      "def": 80,
+      "spa": 50,
+      "spd": 105,
+      "spe": 96
+    }
+  },
+  {
+    "name": "Mimikyu-Busted-Totem",
+    "displayName": "Mimikyu-Busted-Totem",
+    "label": "Mimikyu-Busted-Totem",
+    "sprite": "mimikyubustedtotem",
+    "alias": "mimikyubustedtotem",
+    "evoline": "mimikyu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 778,
+    "num": 778,
+    "types": [
+      "ghost",
+      "fairy"
+    ],
+    "total": 476,
+    "baseStats": {
+      "hp": 55,
+      "atk": 90,
+      "def": 80,
+      "spa": 50,
+      "spd": 105,
+      "spe": 96
+    }
+  },
+  {
+    "name": "Mimikyu-Totem",
+    "displayName": "Mimikyu-Totem",
+    "label": "Mimikyu-Totem",
+    "sprite": "mimikyutotem",
+    "alias": "mimikyutotem",
+    "evoline": "mimikyu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 778,
+    "num": 778,
+    "types": [
+      "ghost",
+      "fairy"
+    ],
+    "total": 476,
+    "baseStats": {
+      "hp": 55,
+      "atk": 90,
+      "def": 80,
+      "spa": 50,
+      "spd": 105,
+      "spe": 96
+    }
+  },
+  {
+    "name": "Drampa-Mega",
+    "displayName": "Drampa-Mega",
+    "label": "Drampa-Mega",
+    "sprite": "drampamega",
+    "alias": "drampamega",
+    "evoline": "drampa",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 780,
+    "num": 780,
+    "types": [
+      "normal",
+      "dragon"
+    ],
+    "total": 585,
+    "baseStats": {
+      "hp": 78,
+      "atk": 85,
+      "def": 110,
+      "spa": 160,
+      "spd": 116,
+      "spe": 36
+    }
+  },
+  {
+    "name": "Kommo-o-Totem",
+    "displayName": "Kommo-o-Totem",
+    "label": "Kommo-o-Totem",
+    "sprite": "kommoototem",
+    "alias": "kommoototem",
+    "evoline": "jangmoo",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 784,
+    "num": 784,
+    "types": [
+      "dragon",
+      "fighting"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 75,
+      "atk": 110,
+      "def": 125,
+      "spa": 100,
+      "spd": 105,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Necrozma-Dawn-Wings",
+    "displayName": "Necrozma-Dawn-Wings",
+    "label": "Necrozma-Dawn-Wings",
+    "sprite": "necrozmadawnwings",
+    "alias": "necrozmadawnwings",
+    "evoline": "necrozma",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 800,
+    "num": 800,
+    "types": [
+      "psychic",
+      "ghost"
+    ],
+    "total": 680,
+    "baseStats": {
+      "hp": 97,
+      "atk": 113,
+      "def": 109,
+      "spa": 157,
+      "spd": 127,
+      "spe": 77
+    }
+  },
+  {
+    "name": "Necrozma-Dusk-Mane",
+    "displayName": "Necrozma-Dusk-Mane",
+    "label": "Necrozma-Dusk-Mane",
+    "sprite": "necrozmaduskmane",
+    "alias": "necrozmaduskmane",
+    "evoline": "necrozma",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 800,
+    "num": 800,
+    "types": [
+      "psychic",
+      "steel"
+    ],
+    "total": 680,
+    "baseStats": {
+      "hp": 97,
+      "atk": 157,
+      "def": 127,
+      "spa": 113,
+      "spd": 109,
+      "spe": 77
+    }
+  },
+  {
+    "name": "Magearna-Mega",
+    "displayName": "Magearna-Mega",
+    "label": "Magearna-Mega",
+    "sprite": "magearnamega",
+    "alias": "magearnamega",
+    "evoline": "magearna",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 801,
+    "num": 801,
+    "types": [
+      "steel",
+      "fairy"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 80,
+      "atk": 125,
+      "def": 115,
+      "spa": 170,
+      "spd": 115,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Magearna-Original",
+    "displayName": "Magearna-Original",
+    "label": "Magearna-Original",
+    "sprite": "magearnaoriginal",
+    "alias": "magearnaoriginal",
+    "evoline": "magearna",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 801,
+    "num": 801,
+    "types": [
+      "steel",
+      "fairy"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 80,
+      "atk": 95,
+      "def": 115,
+      "spa": 130,
+      "spd": 115,
+      "spe": 65
+    }
+  },
+  {
+    "name": "Magearna-Original-Mega",
+    "displayName": "Magearna-Original-Mega",
+    "label": "Magearna-Original-Mega",
+    "sprite": "magearnaoriginalmega",
+    "alias": "magearnaoriginalmega",
+    "evoline": "magearna",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 801,
+    "num": 801,
+    "types": [
+      "steel",
+      "fairy"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 80,
+      "atk": 125,
+      "def": 115,
+      "spa": 170,
+      "spd": 115,
+      "spe": 95
+    }
+  },
+  {
+    "name": "Zeraora-Mega",
+    "displayName": "Zeraora-Mega",
+    "label": "Zeraora-Mega",
+    "sprite": "zeraoramega",
+    "alias": "zeraoramega",
+    "evoline": "zeraora",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 807,
+    "num": 807,
+    "types": [
+      "electric"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 88,
+      "atk": 157,
+      "def": 75,
+      "spa": 147,
+      "spd": 80,
+      "spe": 153
+    }
+  },
+  {
+    "name": "Melmetal-Gmax",
+    "displayName": "Melmetal-Gmax",
+    "label": "Melmetal-Gmax",
+    "sprite": "melmetalgmax",
+    "alias": "melmetalgmax",
+    "evoline": "melmetal",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 809,
+    "num": 809,
+    "types": [
+      "steel"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 135,
+      "atk": 143,
+      "def": 143,
+      "spa": 80,
+      "spd": 65,
+      "spe": 34
+    }
+  },
+  {
+    "name": "Rillaboom-Gmax",
+    "displayName": "Rillaboom-Gmax",
+    "label": "Rillaboom-Gmax",
+    "sprite": "rillaboomgmax",
+    "alias": "rillaboomgmax",
+    "evoline": "grookey",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 812,
+    "num": 812,
+    "types": [
+      "grass"
+    ],
+    "total": 530,
+    "baseStats": {
+      "hp": 100,
+      "atk": 125,
+      "def": 90,
+      "spa": 60,
+      "spd": 70,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Cinderace-Gmax",
+    "displayName": "Cinderace-Gmax",
+    "label": "Cinderace-Gmax",
+    "sprite": "cinderacegmax",
+    "alias": "cinderacegmax",
+    "evoline": "scorbunny",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 815,
+    "num": 815,
+    "types": [
+      "fire"
+    ],
+    "total": 530,
+    "baseStats": {
+      "hp": 80,
+      "atk": 116,
+      "def": 75,
+      "spa": 65,
+      "spd": 75,
+      "spe": 119
+    }
+  },
+  {
+    "name": "Inteleon-Gmax",
+    "displayName": "Inteleon-Gmax",
+    "label": "Inteleon-Gmax",
+    "sprite": "inteleongmax",
+    "alias": "inteleongmax",
+    "evoline": "sobble",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 818,
+    "num": 818,
+    "types": [
+      "water"
+    ],
+    "total": 530,
+    "baseStats": {
+      "hp": 70,
+      "atk": 85,
+      "def": 65,
+      "spa": 125,
+      "spd": 65,
+      "spe": 120
+    }
+  },
+  {
+    "name": "Corviknight-Gmax",
+    "displayName": "Corviknight-Gmax",
+    "label": "Corviknight-Gmax",
+    "sprite": "corviknightgmax",
+    "alias": "corviknightgmax",
+    "evoline": "rookidee",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 823,
+    "num": 823,
+    "types": [
+      "flying",
+      "steel"
+    ],
+    "total": 495,
+    "baseStats": {
+      "hp": 98,
+      "atk": 87,
+      "def": 105,
+      "spa": 53,
+      "spd": 85,
+      "spe": 67
+    }
+  },
+  {
+    "name": "Orbeetle-Gmax",
+    "displayName": "Orbeetle-Gmax",
+    "label": "Orbeetle-Gmax",
+    "sprite": "orbeetlegmax",
+    "alias": "orbeetlegmax",
+    "evoline": "blipbug",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 826,
+    "num": 826,
+    "types": [
+      "bug",
+      "psychic"
+    ],
+    "total": 505,
+    "baseStats": {
+      "hp": 60,
+      "atk": 45,
+      "def": 110,
+      "spa": 80,
+      "spd": 120,
+      "spe": 90
+    }
+  },
+  {
+    "name": "Drednaw-Gmax",
+    "displayName": "Drednaw-Gmax",
+    "label": "Drednaw-Gmax",
+    "sprite": "drednawgmax",
+    "alias": "drednawgmax",
+    "evoline": "chewtle",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 834,
+    "num": 834,
+    "types": [
+      "water",
+      "rock"
+    ],
+    "total": 485,
+    "baseStats": {
+      "hp": 90,
+      "atk": 115,
+      "def": 90,
+      "spa": 48,
+      "spd": 68,
+      "spe": 74
+    }
+  },
+  {
+    "name": "Coalossal-Gmax",
+    "displayName": "Coalossal-Gmax",
+    "label": "Coalossal-Gmax",
+    "sprite": "coalossalgmax",
+    "alias": "coalossalgmax",
+    "evoline": "rolycoly",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 839,
+    "num": 839,
+    "types": [
+      "rock",
+      "fire"
+    ],
+    "total": 510,
+    "baseStats": {
+      "hp": 110,
+      "atk": 80,
+      "def": 120,
+      "spa": 80,
+      "spd": 90,
+      "spe": 30
+    }
+  },
+  {
+    "name": "Flapple-Gmax",
+    "displayName": "Flapple-Gmax",
+    "label": "Flapple-Gmax",
+    "sprite": "flapplegmax",
+    "alias": "flapplegmax",
+    "evoline": "applin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 841,
+    "num": 841,
+    "types": [
+      "grass",
+      "dragon"
+    ],
+    "total": 485,
+    "baseStats": {
+      "hp": 70,
+      "atk": 110,
+      "def": 80,
+      "spa": 95,
+      "spd": 60,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Appletun-Gmax",
+    "displayName": "Appletun-Gmax",
+    "label": "Appletun-Gmax",
+    "sprite": "appletungmax",
+    "alias": "appletungmax",
+    "evoline": "applin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 842,
+    "num": 842,
+    "types": [
+      "grass",
+      "dragon"
+    ],
+    "total": 485,
+    "baseStats": {
+      "hp": 110,
+      "atk": 85,
+      "def": 80,
+      "spa": 100,
+      "spd": 80,
+      "spe": 30
+    }
+  },
+  {
+    "name": "Sandaconda-Gmax",
+    "displayName": "Sandaconda-Gmax",
+    "label": "Sandaconda-Gmax",
+    "sprite": "sandacondagmax",
+    "alias": "sandacondagmax",
+    "evoline": "silicobra",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 844,
+    "num": 844,
+    "types": [
+      "ground"
+    ],
+    "total": 510,
+    "baseStats": {
+      "hp": 72,
+      "atk": 107,
+      "def": 125,
+      "spa": 65,
+      "spd": 70,
+      "spe": 71
+    }
+  },
+  {
+    "name": "Cramorant-Gorging",
+    "displayName": "Cramorant-Gorging",
+    "label": "Cramorant-Gorging",
+    "sprite": "cramorantgorging",
+    "alias": "cramorantgorging",
+    "evoline": "cramorant",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 845,
+    "num": 845,
+    "types": [
+      "flying",
+      "water"
+    ],
+    "total": 475,
+    "baseStats": {
+      "hp": 70,
+      "atk": 85,
+      "def": 55,
+      "spa": 85,
+      "spd": 95,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Cramorant-Gulping",
+    "displayName": "Cramorant-Gulping",
+    "label": "Cramorant-Gulping",
+    "sprite": "cramorantgulping",
+    "alias": "cramorantgulping",
+    "evoline": "cramorant",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 845,
+    "num": 845,
+    "types": [
+      "flying",
+      "water"
+    ],
+    "total": 475,
+    "baseStats": {
+      "hp": 70,
+      "atk": 85,
+      "def": 55,
+      "spa": 85,
+      "spd": 95,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Toxtricity-Gmax",
+    "displayName": "Toxtricity-Gmax",
+    "label": "Toxtricity-Gmax",
+    "sprite": "toxtricitygmax",
+    "alias": "toxtricitygmax",
+    "evoline": "toxel",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 849,
+    "num": 849,
+    "types": [
+      "electric",
+      "poison"
+    ],
+    "total": 502,
+    "baseStats": {
+      "hp": 75,
+      "atk": 98,
+      "def": 70,
+      "spa": 114,
+      "spd": 70,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Toxtricity-Low-Key-Gmax",
+    "displayName": "Toxtricity-Low-Key-Gmax",
+    "label": "Toxtricity-Low-Key-Gmax",
+    "sprite": "toxtricitylowkeygmax",
+    "alias": "toxtricitylowkeygmax",
+    "evoline": "toxel",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 849,
+    "num": 849,
+    "types": [
+      "electric",
+      "poison"
+    ],
+    "total": 502,
+    "baseStats": {
+      "hp": 75,
+      "atk": 98,
+      "def": 70,
+      "spa": 114,
+      "spd": 70,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Centiskorch-Gmax",
+    "displayName": "Centiskorch-Gmax",
+    "label": "Centiskorch-Gmax",
+    "sprite": "centiskorchgmax",
+    "alias": "centiskorchgmax",
+    "evoline": "sizzlipede",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 851,
+    "num": 851,
+    "types": [
+      "fire",
+      "bug"
+    ],
+    "total": 525,
+    "baseStats": {
+      "hp": 100,
+      "atk": 115,
+      "def": 65,
+      "spa": 90,
+      "spd": 90,
+      "spe": 65
+    }
+  },
+  {
+    "name": "Sinistea-Antique",
+    "displayName": "Sinistea-Antique",
+    "label": "Sinistea-Antique",
+    "sprite": "sinisteaantique",
+    "alias": "sinisteaantique",
+    "evoline": "sinistea",
+    "canEncounter": true,
+    "evos": [
+      "polteageistantique"
+    ],
+    "imgId": 854,
+    "num": 854,
+    "types": [
+      "ghost"
+    ],
+    "total": 308,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 45,
+      "spa": 74,
+      "spd": 54,
+      "spe": 50
+    }
+  },
+  {
+    "name": "Polteageist-Antique",
+    "displayName": "Polteageist-Antique",
+    "label": "Polteageist-Antique",
+    "sprite": "polteageistantique",
+    "alias": "polteageistantique",
+    "evoline": "sinistea",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 855,
+    "num": 855,
+    "types": [
+      "ghost"
+    ],
+    "total": 508,
+    "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 65,
+      "spa": 134,
+      "spd": 114,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Hatterene-Gmax",
+    "displayName": "Hatterene-Gmax",
+    "label": "Hatterene-Gmax",
+    "sprite": "hatterenegmax",
+    "alias": "hatterenegmax",
+    "evoline": "hatenna",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 858,
+    "num": 858,
+    "types": [
+      "psychic",
+      "fairy"
+    ],
+    "total": 510,
+    "baseStats": {
+      "hp": 57,
+      "atk": 90,
+      "def": 95,
+      "spa": 136,
+      "spd": 103,
+      "spe": 29
+    }
+  },
+  {
+    "name": "Grimmsnarl-Gmax",
+    "displayName": "Grimmsnarl-Gmax",
+    "label": "Grimmsnarl-Gmax",
+    "sprite": "grimmsnarlgmax",
+    "alias": "grimmsnarlgmax",
+    "evoline": "impidimp",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 861,
+    "num": 861,
+    "types": [
+      "dark",
+      "fairy"
+    ],
+    "total": 510,
+    "baseStats": {
+      "hp": 95,
+      "atk": 120,
+      "def": 65,
+      "spa": 95,
+      "spd": 75,
+      "spe": 60
+    }
+  },
+  {
+    "name": "Alcremie-Gmax",
+    "displayName": "Alcremie-Gmax",
+    "label": "Alcremie-Gmax",
+    "sprite": "alcremiegmax",
+    "alias": "alcremiegmax",
+    "evoline": "milcery",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 869,
+    "num": 869,
+    "types": [
+      "fairy"
+    ],
+    "total": 495,
+    "baseStats": {
+      "hp": 65,
+      "atk": 60,
+      "def": 75,
+      "spa": 110,
+      "spd": 121,
+      "spe": 64
+    }
+  },
+  {
+    "name": "Falinks-Mega",
+    "displayName": "Falinks-Mega",
+    "label": "Falinks-Mega",
+    "sprite": "falinksmega",
+    "alias": "falinksmega",
+    "evoline": "falinks",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 870,
+    "num": 870,
+    "types": [
+      "fighting"
+    ],
+    "total": 570,
+    "baseStats": {
+      "hp": 65,
+      "atk": 135,
+      "def": 135,
+      "spa": 70,
+      "spd": 65,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Eiscue-Noice",
+    "displayName": "Eiscue-Noice",
+    "label": "Eiscue-Noice",
+    "sprite": "eiscuenoice",
+    "alias": "eiscuenoice",
+    "evoline": "eiscue",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 875,
+    "num": 875,
+    "types": [
+      "ice"
+    ],
+    "total": 470,
+    "baseStats": {
+      "hp": 75,
+      "atk": 80,
+      "def": 70,
+      "spa": 65,
+      "spd": 50,
+      "spe": 130
+    }
+  },
+  {
+    "name": "Morpeko",
+    "displayName": "Morpeko",
+    "label": "Morpeko",
+    "sprite": "morpeko",
+    "alias": "morpeko",
+    "evoline": "morpeko",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 877,
+    "num": 877,
+    "types": [
+      "electric",
+      "dark"
+    ],
+    "total": 436,
+    "baseStats": {
+      "hp": 58,
+      "atk": 95,
+      "def": 58,
+      "spa": 70,
+      "spd": 58,
+      "spe": 97
+    }
+  },
+  {
+    "name": "Morpeko-Hangry",
+    "displayName": "Morpeko-Hangry",
+    "label": "Morpeko-Hangry",
+    "sprite": "morpekohangry",
+    "alias": "morpekohangry",
+    "evoline": "morpeko",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 877,
+    "num": 877,
+    "types": [
+      "electric",
+      "dark"
+    ],
+    "total": 436,
+    "baseStats": {
+      "hp": 58,
+      "atk": 95,
+      "def": 58,
+      "spa": 70,
+      "spd": 58,
+      "spe": 97
+    }
+  },
+  {
+    "name": "Copperajah-Gmax",
+    "displayName": "Copperajah-Gmax",
+    "label": "Copperajah-Gmax",
+    "sprite": "copperajahgmax",
+    "alias": "copperajahgmax",
+    "evoline": "cufant",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 879,
+    "num": 879,
+    "types": [
+      "steel"
+    ],
+    "total": 500,
+    "baseStats": {
+      "hp": 122,
+      "atk": 130,
+      "def": 69,
+      "spa": 80,
+      "spd": 69,
+      "spe": 30
+    }
+  },
+  {
+    "name": "Duraludon-Gmax",
+    "displayName": "Duraludon-Gmax",
+    "label": "Duraludon-Gmax",
+    "sprite": "duraludongmax",
+    "alias": "duraludongmax",
+    "evoline": "duraludon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 884,
+    "num": 884,
+    "types": [
+      "steel",
+      "dragon"
+    ],
+    "total": 535,
+    "baseStats": {
+      "hp": 70,
+      "atk": 95,
+      "def": 115,
+      "spa": 120,
+      "spd": 50,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Urshifu",
+    "displayName": "Urshifu",
+    "label": "Urshifu",
+    "sprite": "urshifu",
+    "alias": "urshifu",
+    "evoline": "kubfu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 892,
+    "num": 892,
+    "types": [
+      "fighting",
+      "dark"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 100,
+      "atk": 130,
+      "def": 100,
+      "spa": 63,
+      "spd": 60,
+      "spe": 97
+    }
+  },
+  {
+    "name": "Urshifu-Gmax",
+    "displayName": "Urshifu-Gmax",
+    "label": "Urshifu-Gmax",
+    "sprite": "urshifugmax",
+    "alias": "urshifugmax",
+    "evoline": "kubfu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 892,
+    "num": 892,
+    "types": [
+      "fighting",
+      "dark"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 100,
+      "atk": 130,
+      "def": 100,
+      "spa": 63,
+      "spd": 60,
+      "spe": 97
+    }
+  },
+  {
+    "name": "Urshifu-Rapid-Strike-Gmax",
+    "displayName": "Urshifu-Rapid-Strike-Gmax",
+    "label": "Urshifu-Rapid-Strike-Gmax",
+    "sprite": "urshifurapidstrikegmax",
+    "alias": "urshifurapidstrikegmax",
+    "evoline": "kubfu",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 892,
+    "num": 892,
+    "types": [
+      "fighting",
+      "water"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 100,
+      "atk": 130,
+      "def": 100,
+      "spa": 63,
+      "spd": 60,
+      "spe": 97
+    }
+  },
+  {
+    "name": "Zarude-Dada",
+    "displayName": "Zarude-Dada",
+    "label": "Zarude-Dada",
+    "sprite": "zarudedada",
+    "alias": "zarudedada",
+    "evoline": "zarude",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 893,
+    "num": 893,
+    "types": [
+      "dark",
+      "grass"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 105,
+      "atk": 120,
+      "def": 105,
+      "spa": 70,
+      "spd": 95,
+      "spe": 105
+    }
+  },
+  {
+    "name": "Ursaluna-Bloodmoon",
+    "displayName": "Ursaluna-Bloodmoon",
+    "label": "Ursaluna-Bloodmoon",
+    "sprite": "ursalunabloodmoon",
+    "alias": "ursalunabloodmoon",
+    "evoline": "teddiursa",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 901,
+    "num": 901,
+    "types": [
+      "ground",
+      "normal"
+    ],
+    "total": 555,
+    "baseStats": {
+      "hp": 113,
+      "atk": 70,
+      "def": 120,
+      "spa": 135,
+      "spd": 65,
+      "spe": 52
+    }
+  },
+  {
+    "name": "Basculegion",
+    "displayName": "Basculegion",
+    "label": "Basculegion",
+    "sprite": "basculegion",
+    "alias": "basculegion",
+    "evoline": "basculin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 902,
+    "num": 902,
+    "types": [
+      "water",
+      "ghost"
+    ],
+    "total": 530,
+    "baseStats": {
+      "hp": 120,
+      "atk": 112,
+      "def": 65,
+      "spa": 80,
+      "spd": 75,
+      "spe": 78
+    }
+  },
+  {
+    "name": "Basculegion-F",
+    "displayName": "Basculegion-F",
+    "label": "Basculegion-F",
+    "sprite": "basculegionf",
+    "alias": "basculegionf",
+    "evoline": "basculin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 902,
+    "num": 902,
+    "types": [
+      "water",
+      "ghost"
+    ],
+    "total": 530,
+    "baseStats": {
+      "hp": 120,
+      "atk": 92,
+      "def": 65,
+      "spa": 100,
+      "spd": 75,
+      "spe": 78
+    }
+  },
+  {
+    "name": "Enamorus",
+    "displayName": "Enamorus",
+    "label": "Enamorus",
+    "sprite": "enamorus",
+    "alias": "enamorus",
+    "evoline": "enamorus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 905,
+    "num": 905,
+    "types": [
+      "fairy",
+      "flying"
+    ],
+    "total": 580,
+    "baseStats": {
+      "hp": 74,
+      "atk": 115,
+      "def": 70,
+      "spa": 135,
+      "spd": 80,
+      "spe": 106
+    }
+  },
+  {
+    "name": "Oinkologne-F",
+    "displayName": "Oinkologne-F",
+    "label": "Oinkologne-F",
+    "sprite": "oinkolognef",
+    "alias": "oinkolognef",
+    "evoline": "lechonk",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 916,
+    "num": 916,
+    "types": [
+      "normal"
+    ],
+    "total": 489,
+    "baseStats": {
+      "hp": 115,
+      "atk": 90,
+      "def": 70,
+      "spa": 59,
+      "spd": 90,
+      "spe": 65
+    }
+  },
+  {
+    "name": "Maushold-Four",
+    "displayName": "Maushold-Four",
+    "label": "Maushold-Four",
+    "sprite": "mausholdfour",
+    "alias": "mausholdfour",
+    "evoline": "tandemaus",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 925,
+    "num": 925,
+    "types": [
+      "normal"
+    ],
+    "total": 470,
+    "baseStats": {
+      "hp": 74,
+      "atk": 75,
+      "def": 70,
+      "spa": 65,
+      "spd": 75,
+      "spe": 111
+    }
+  },
+  {
+    "name": "Squawkabilly-Blue",
+    "displayName": "Squawkabilly-Blue",
+    "label": "Squawkabilly-Blue",
+    "sprite": "squawkabillyblue",
+    "alias": "squawkabillyblue",
+    "evoline": "squawkabilly",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 931,
+    "num": 931,
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "total": 417,
+    "baseStats": {
+      "hp": 82,
+      "atk": 96,
+      "def": 51,
+      "spa": 45,
+      "spd": 51,
+      "spe": 92
+    }
+  },
+  {
+    "name": "Squawkabilly-White",
+    "displayName": "Squawkabilly-White",
+    "label": "Squawkabilly-White",
+    "sprite": "squawkabillywhite",
+    "alias": "squawkabillywhite",
+    "evoline": "squawkabilly",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 931,
+    "num": 931,
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "total": 417,
+    "baseStats": {
+      "hp": 82,
+      "atk": 96,
+      "def": 51,
+      "spa": 45,
+      "spd": 51,
+      "spe": 92
+    }
+  },
+  {
+    "name": "Squawkabilly-Yellow",
+    "displayName": "Squawkabilly-Yellow",
+    "label": "Squawkabilly-Yellow",
+    "sprite": "squawkabillyyellow",
+    "alias": "squawkabillyyellow",
+    "evoline": "squawkabilly",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 931,
+    "num": 931,
+    "types": [
+      "normal",
+      "flying"
+    ],
+    "total": 417,
+    "baseStats": {
+      "hp": 82,
+      "atk": 96,
+      "def": 51,
+      "spa": 45,
+      "spd": 51,
+      "spe": 92
+    }
+  },
+  {
+    "name": "Scovillain-Mega",
+    "displayName": "Scovillain-Mega",
+    "label": "Scovillain-Mega",
+    "sprite": "scovillainmega",
+    "alias": "scovillainmega",
+    "evoline": "capsakid",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 952,
+    "num": 952,
+    "types": [
+      "grass",
+      "fire"
+    ],
+    "total": 586,
+    "baseStats": {
+      "hp": 65,
+      "atk": 138,
+      "def": 85,
+      "spa": 138,
+      "spd": 85,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Palafin-Hero",
+    "displayName": "Palafin-Hero",
+    "label": "Palafin-Hero",
+    "sprite": "palafinhero",
+    "alias": "palafinhero",
+    "evoline": "finizen",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 964,
+    "num": 964,
+    "types": [
+      "water"
+    ],
+    "total": 650,
+    "baseStats": {
+      "hp": 100,
+      "atk": 160,
+      "def": 97,
+      "spa": 106,
+      "spd": 87,
+      "spe": 100
+    }
+  },
+  {
+    "name": "Glimmora-Mega",
+    "displayName": "Glimmora-Mega",
+    "label": "Glimmora-Mega",
+    "sprite": "glimmoramega",
+    "alias": "glimmoramega",
+    "evoline": "glimmet",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 970,
+    "num": 970,
+    "types": [
+      "rock",
+      "poison"
+    ],
+    "total": 625,
+    "baseStats": {
+      "hp": 83,
+      "atk": 90,
+      "def": 105,
+      "spa": 150,
+      "spd": 96,
+      "spe": 101
+    }
+  },
+  {
+    "name": "Tatsugiri-Curly-Mega",
+    "displayName": "Tatsugiri-Curly-Mega",
+    "label": "Tatsugiri-Curly-Mega",
+    "sprite": "tatsugiricurlymega",
+    "alias": "tatsugiricurlymega",
+    "evoline": "tatsugiri",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 978,
+    "num": 978,
+    "types": [
+      "dragon",
+      "water"
+    ],
+    "total": 575,
+    "baseStats": {
+      "hp": 68,
+      "atk": 65,
+      "def": 90,
+      "spa": 135,
+      "spd": 125,
+      "spe": 92
+    }
+  },
+  {
+    "name": "Tatsugiri-Droopy",
+    "displayName": "Tatsugiri-Droopy",
+    "label": "Tatsugiri-Droopy",
+    "sprite": "tatsugiridroopy",
+    "alias": "tatsugiridroopy",
+    "evoline": "tatsugiri",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 978,
+    "num": 978,
+    "types": [
+      "dragon",
+      "water"
+    ],
+    "total": 475,
+    "baseStats": {
+      "hp": 68,
+      "atk": 50,
+      "def": 60,
+      "spa": 120,
+      "spd": 95,
+      "spe": 82
+    }
+  },
+  {
+    "name": "Tatsugiri-Droopy-Mega",
+    "displayName": "Tatsugiri-Droopy-Mega",
+    "label": "Tatsugiri-Droopy-Mega",
+    "sprite": "tatsugiridroopymega",
+    "alias": "tatsugiridroopymega",
+    "evoline": "tatsugiri",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 978,
+    "num": 978,
+    "types": [
+      "dragon",
+      "water"
+    ],
+    "total": 575,
+    "baseStats": {
+      "hp": 68,
+      "atk": 65,
+      "def": 90,
+      "spa": 135,
+      "spd": 125,
+      "spe": 92
+    }
+  },
+  {
+    "name": "Tatsugiri-Stretchy",
+    "displayName": "Tatsugiri-Stretchy",
+    "label": "Tatsugiri-Stretchy",
+    "sprite": "tatsugiristretchy",
+    "alias": "tatsugiristretchy",
+    "evoline": "tatsugiri",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 978,
+    "num": 978,
+    "types": [
+      "dragon",
+      "water"
+    ],
+    "total": 475,
+    "baseStats": {
+      "hp": 68,
+      "atk": 50,
+      "def": 60,
+      "spa": 120,
+      "spd": 95,
+      "spe": 82
+    }
+  },
+  {
+    "name": "Tatsugiri-Stretchy-Mega",
+    "displayName": "Tatsugiri-Stretchy-Mega",
+    "label": "Tatsugiri-Stretchy-Mega",
+    "sprite": "tatsugiristretchymega",
+    "alias": "tatsugiristretchymega",
+    "evoline": "tatsugiri",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 978,
+    "num": 978,
+    "types": [
+      "dragon",
+      "water"
+    ],
+    "total": 575,
+    "baseStats": {
+      "hp": 68,
+      "atk": 65,
+      "def": 90,
+      "spa": 135,
+      "spd": 125,
+      "spe": 92
+    }
+  },
+  {
+    "name": "Dudunsparce-Three-Segment",
+    "displayName": "Dudunsparce-Three-Segment",
+    "label": "Dudunsparce-Three-Segment",
+    "sprite": "dudunsparcethreesegment",
+    "alias": "dudunsparcethreesegment",
+    "evoline": "dunsparce",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 982,
+    "num": 982,
+    "types": [
+      "normal"
+    ],
+    "total": 520,
+    "baseStats": {
+      "hp": 125,
+      "atk": 100,
+      "def": 80,
+      "spa": 85,
+      "spd": 75,
+      "spe": 55
+    }
+  },
+  {
+    "name": "Baxcalibur-Mega",
+    "displayName": "Baxcalibur-Mega",
+    "label": "Baxcalibur-Mega",
+    "sprite": "baxcaliburmega",
+    "alias": "baxcaliburmega",
+    "evoline": "frigibax",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 998,
+    "num": 998,
+    "types": [
+      "dragon",
+      "ice"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 115,
+      "atk": 175,
+      "def": 117,
+      "spa": 105,
+      "spd": 101,
+      "spe": 87
+    }
+  },
+  {
+    "name": "Gimmighoul-Roaming",
+    "displayName": "Gimmighoul-Roaming",
+    "label": "Gimmighoul-Roaming",
+    "sprite": "gimmighoulroaming",
+    "alias": "gimmighoulroaming",
+    "evoline": "gimmighoul",
+    "canEncounter": true,
+    "evos": [
+      "gholdengo"
+    ],
+    "imgId": 999,
+    "num": 999,
+    "types": [
+      "ghost"
+    ],
+    "total": 300,
+    "baseStats": {
+      "hp": 45,
+      "atk": 30,
+      "def": 25,
+      "spa": 75,
+      "spd": 45,
+      "spe": 80
+    }
+  },
+  {
+    "name": "Walking Wake",
+    "displayName": "Walking Wake",
+    "label": "Walking Wake",
+    "sprite": "walkingwake",
+    "alias": "walkingwake",
+    "evoline": "walkingwake",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1009,
+    "num": 1009,
+    "types": [
+      "water",
+      "dragon"
+    ],
+    "total": 590,
+    "baseStats": {
+      "hp": 99,
+      "atk": 83,
+      "def": 91,
+      "spa": 125,
+      "spd": 83,
+      "spe": 109
+    }
+  },
+  {
+    "name": "Iron Leaves",
+    "displayName": "Iron Leaves",
+    "label": "Iron Leaves",
+    "sprite": "ironleaves",
+    "alias": "ironleaves",
+    "evoline": "ironleaves",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1010,
+    "num": 1010,
+    "types": [
+      "grass",
+      "psychic"
+    ],
+    "total": 590,
+    "baseStats": {
+      "hp": 90,
+      "atk": 130,
+      "def": 88,
+      "spa": 70,
+      "spd": 108,
+      "spe": 104
+    }
+  },
+  {
+    "name": "Dipplin",
+    "displayName": "Dipplin",
+    "label": "Dipplin",
+    "sprite": "dipplin",
+    "alias": "dipplin",
+    "evoline": "applin",
+    "canEncounter": true,
+    "evos": [
+      "hydrapple"
+    ],
+    "imgId": 1011,
+    "num": 1011,
+    "types": [
+      "grass",
+      "dragon"
+    ],
+    "total": 485,
+    "baseStats": {
+      "hp": 80,
+      "atk": 80,
+      "def": 110,
+      "spa": 95,
+      "spd": 80,
+      "spe": 40
+    }
+  },
+  {
+    "name": "Poltchageist",
+    "displayName": "Poltchageist",
+    "label": "Poltchageist",
+    "sprite": "poltchageist",
+    "alias": "poltchageist",
+    "evoline": "poltchageist",
+    "canEncounter": true,
+    "evos": [
+      "sinistcha"
+    ],
+    "imgId": 1012,
+    "num": 1012,
+    "types": [
+      "grass",
+      "ghost"
+    ],
+    "total": 308,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 45,
+      "spa": 74,
+      "spd": 54,
+      "spe": 50
+    }
+  },
+  {
+    "name": "Poltchageist-Artisan",
+    "displayName": "Poltchageist-Artisan",
+    "label": "Poltchageist-Artisan",
+    "sprite": "poltchageistartisan",
+    "alias": "poltchageistartisan",
+    "evoline": "poltchageist",
+    "canEncounter": true,
+    "evos": [
+      "sinistchamasterpiece"
+    ],
+    "imgId": 1012,
+    "num": 1012,
+    "types": [
+      "grass",
+      "ghost"
+    ],
+    "total": 308,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 45,
+      "spa": 74,
+      "spd": 54,
+      "spe": 50
+    }
+  },
+  {
+    "name": "Sinistcha",
+    "displayName": "Sinistcha",
+    "label": "Sinistcha",
+    "sprite": "sinistcha",
+    "alias": "sinistcha",
+    "evoline": "poltchageist",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1013,
+    "num": 1013,
+    "types": [
+      "grass",
+      "ghost"
+    ],
+    "total": 508,
+    "baseStats": {
+      "hp": 71,
+      "atk": 60,
+      "def": 106,
+      "spa": 121,
+      "spd": 80,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Sinistcha-Masterpiece",
+    "displayName": "Sinistcha-Masterpiece",
+    "label": "Sinistcha-Masterpiece",
+    "sprite": "sinistchamasterpiece",
+    "alias": "sinistchamasterpiece",
+    "evoline": "poltchageist",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1013,
+    "num": 1013,
+    "types": [
+      "grass",
+      "ghost"
+    ],
+    "total": 508,
+    "baseStats": {
+      "hp": 71,
+      "atk": 60,
+      "def": 106,
+      "spa": 121,
+      "spd": 80,
+      "spe": 70
+    }
+  },
+  {
+    "name": "Okidogi",
+    "displayName": "Okidogi",
+    "label": "Okidogi",
+    "sprite": "okidogi",
+    "alias": "okidogi",
+    "evoline": "okidogi",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1014,
+    "num": 1014,
+    "types": [
+      "poison",
+      "fighting"
+    ],
+    "total": 555,
+    "baseStats": {
+      "hp": 88,
+      "atk": 128,
+      "def": 115,
+      "spa": 58,
+      "spd": 86,
+      "spe": 80
+    }
+  },
+  {
+    "name": "Munkidori",
+    "displayName": "Munkidori",
+    "label": "Munkidori",
+    "sprite": "munkidori",
+    "alias": "munkidori",
+    "evoline": "munkidori",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1015,
+    "num": 1015,
+    "types": [
+      "poison",
+      "psychic"
+    ],
+    "total": 555,
+    "baseStats": {
+      "hp": 88,
+      "atk": 75,
+      "def": 66,
+      "spa": 130,
+      "spd": 90,
+      "spe": 106
+    }
+  },
+  {
+    "name": "Fezandipiti",
+    "displayName": "Fezandipiti",
+    "label": "Fezandipiti",
+    "sprite": "fezandipiti",
+    "alias": "fezandipiti",
+    "evoline": "fezandipiti",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1016,
+    "num": 1016,
+    "types": [
+      "poison",
+      "fairy"
+    ],
+    "total": 555,
+    "baseStats": {
+      "hp": 88,
+      "atk": 91,
+      "def": 82,
+      "spa": 70,
+      "spd": 125,
+      "spe": 99
+    }
+  },
+  {
+    "name": "Ogerpon",
+    "displayName": "Ogerpon",
+    "label": "Ogerpon",
+    "sprite": "ogerpon",
+    "alias": "ogerpon",
+    "evoline": "ogerpon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1017,
+    "num": 1017,
+    "types": [
+      "grass"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 84,
+      "spa": 60,
+      "spd": 96,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Ogerpon-Cornerstone",
+    "displayName": "Ogerpon-Cornerstone",
+    "label": "Ogerpon-Cornerstone",
+    "sprite": "ogerponcornerstone",
+    "alias": "ogerponcornerstone",
+    "evoline": "ogerpon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1017,
+    "num": 1017,
+    "types": [
+      "grass",
+      "rock"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 84,
+      "spa": 60,
+      "spd": 96,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Ogerpon-Cornerstone-Tera",
+    "displayName": "Ogerpon-Cornerstone-Tera",
+    "label": "Ogerpon-Cornerstone-Tera",
+    "sprite": "ogerponcornerstonetera",
+    "alias": "ogerponcornerstonetera",
+    "evoline": "ogerpon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1017,
+    "num": 1017,
+    "types": [
+      "grass",
+      "rock"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 84,
+      "spa": 60,
+      "spd": 96,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Ogerpon-Hearthflame",
+    "displayName": "Ogerpon-Hearthflame",
+    "label": "Ogerpon-Hearthflame",
+    "sprite": "ogerponhearthflame",
+    "alias": "ogerponhearthflame",
+    "evoline": "ogerpon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1017,
+    "num": 1017,
+    "types": [
+      "grass",
+      "fire"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 84,
+      "spa": 60,
+      "spd": 96,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Ogerpon-Hearthflame-Tera",
+    "displayName": "Ogerpon-Hearthflame-Tera",
+    "label": "Ogerpon-Hearthflame-Tera",
+    "sprite": "ogerponhearthflametera",
+    "alias": "ogerponhearthflametera",
+    "evoline": "ogerpon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1017,
+    "num": 1017,
+    "types": [
+      "grass",
+      "fire"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 84,
+      "spa": 60,
+      "spd": 96,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Ogerpon-Teal-Tera",
+    "displayName": "Ogerpon-Teal-Tera",
+    "label": "Ogerpon-Teal-Tera",
+    "sprite": "ogerpontealtera",
+    "alias": "ogerpontealtera",
+    "evoline": "ogerpon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1017,
+    "num": 1017,
+    "types": [
+      "grass"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 84,
+      "spa": 60,
+      "spd": 96,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Ogerpon-Wellspring",
+    "displayName": "Ogerpon-Wellspring",
+    "label": "Ogerpon-Wellspring",
+    "sprite": "ogerponwellspring",
+    "alias": "ogerponwellspring",
+    "evoline": "ogerpon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1017,
+    "num": 1017,
+    "types": [
+      "grass",
+      "water"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 84,
+      "spa": 60,
+      "spd": 96,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Ogerpon-Wellspring-Tera",
+    "displayName": "Ogerpon-Wellspring-Tera",
+    "label": "Ogerpon-Wellspring-Tera",
+    "sprite": "ogerponwellspringtera",
+    "alias": "ogerponwellspringtera",
+    "evoline": "ogerpon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1017,
+    "num": 1017,
+    "types": [
+      "grass",
+      "water"
+    ],
+    "total": 550,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 84,
+      "spa": 60,
+      "spd": 96,
+      "spe": 110
+    }
+  },
+  {
+    "name": "Archaludon",
+    "displayName": "Archaludon",
+    "label": "Archaludon",
+    "sprite": "archaludon",
+    "alias": "archaludon",
+    "evoline": "duraludon",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1018,
+    "num": 1018,
+    "types": [
+      "steel",
+      "dragon"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 90,
+      "atk": 105,
+      "def": 130,
+      "spa": 125,
+      "spd": 65,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Hydrapple",
+    "displayName": "Hydrapple",
+    "label": "Hydrapple",
+    "sprite": "hydrapple",
+    "alias": "hydrapple",
+    "evoline": "applin",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1019,
+    "num": 1019,
+    "types": [
+      "grass",
+      "dragon"
+    ],
+    "total": 540,
+    "baseStats": {
+      "hp": 106,
+      "atk": 80,
+      "def": 110,
+      "spa": 120,
+      "spd": 80,
+      "spe": 44
+    }
+  },
+  {
+    "name": "Gouging Fire",
+    "displayName": "Gouging Fire",
+    "label": "Gouging Fire",
+    "sprite": "gougingfire",
+    "alias": "gougingfire",
+    "evoline": "gougingfire",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1020,
+    "num": 1020,
+    "types": [
+      "fire",
+      "dragon"
+    ],
+    "total": 590,
+    "baseStats": {
+      "hp": 105,
+      "atk": 115,
+      "def": 121,
+      "spa": 65,
+      "spd": 93,
+      "spe": 91
+    }
+  },
+  {
+    "name": "Raging Bolt",
+    "displayName": "Raging Bolt",
+    "label": "Raging Bolt",
+    "sprite": "ragingbolt",
+    "alias": "ragingbolt",
+    "evoline": "ragingbolt",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1021,
+    "num": 1021,
+    "types": [
+      "electric",
+      "dragon"
+    ],
+    "total": 590,
+    "baseStats": {
+      "hp": 125,
+      "atk": 73,
+      "def": 91,
+      "spa": 137,
+      "spd": 89,
+      "spe": 75
+    }
+  },
+  {
+    "name": "Iron Boulder",
+    "displayName": "Iron Boulder",
+    "label": "Iron Boulder",
+    "sprite": "ironboulder",
+    "alias": "ironboulder",
+    "evoline": "ironboulder",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1022,
+    "num": 1022,
+    "types": [
+      "rock",
+      "psychic"
+    ],
+    "total": 590,
+    "baseStats": {
+      "hp": 90,
+      "atk": 120,
+      "def": 80,
+      "spa": 68,
+      "spd": 108,
+      "spe": 124
+    }
+  },
+  {
+    "name": "Iron Crown",
+    "displayName": "Iron Crown",
+    "label": "Iron Crown",
+    "sprite": "ironcrown",
+    "alias": "ironcrown",
+    "evoline": "ironcrown",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1023,
+    "num": 1023,
+    "types": [
+      "steel",
+      "psychic"
+    ],
+    "total": 590,
+    "baseStats": {
+      "hp": 90,
+      "atk": 72,
+      "def": 100,
+      "spa": 122,
+      "spd": 108,
+      "spe": 98
+    }
+  },
+  {
+    "name": "Terapagos",
+    "displayName": "Terapagos",
+    "label": "Terapagos",
+    "sprite": "terapagos",
+    "alias": "terapagos",
+    "evoline": "terapagos",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1024,
+    "num": 1024,
+    "types": [
+      "normal"
+    ],
+    "total": 450,
+    "baseStats": {
+      "hp": 90,
+      "atk": 65,
+      "def": 85,
+      "spa": 65,
+      "spd": 85,
+      "spe": 60
+    }
+  },
+  {
+    "name": "Terapagos-Stellar",
+    "displayName": "Terapagos-Stellar",
+    "label": "Terapagos-Stellar",
+    "sprite": "terapagosstellar",
+    "alias": "terapagosstellar",
+    "evoline": "terapagos",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1024,
+    "num": 1024,
+    "types": [
+      "normal"
+    ],
+    "total": 700,
+    "baseStats": {
+      "hp": 160,
+      "atk": 105,
+      "def": 110,
+      "spa": 130,
+      "spd": 110,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Terapagos-Terastal",
+    "displayName": "Terapagos-Terastal",
+    "label": "Terapagos-Terastal",
+    "sprite": "terapagosterastal",
+    "alias": "terapagosterastal",
+    "evoline": "terapagos",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1024,
+    "num": 1024,
+    "types": [
+      "normal"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 110,
+      "spa": 105,
+      "spd": 110,
+      "spe": 85
+    }
+  },
+  {
+    "name": "Pecharunt",
+    "displayName": "Pecharunt",
+    "label": "Pecharunt",
+    "sprite": "pecharunt",
+    "alias": "pecharunt",
+    "evoline": "pecharunt",
+    "canEncounter": true,
+    "evos": [],
+    "imgId": 1025,
+    "num": 1025,
+    "types": [
+      "poison",
+      "ghost"
+    ],
+    "total": 600,
+    "baseStats": {
+      "hp": 88,
+      "atk": 88,
+      "def": 160,
+      "spa": 88,
+      "spd": 88,
+      "spe": 88
+    }
+  }
+]

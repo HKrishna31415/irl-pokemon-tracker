@@ -18,6 +18,7 @@
   import { Natures, NaturesMap } from '$lib/data/natures'
   import { NuzlockeStates, NuzlockeGroups } from '$lib/data/states'
   import { IconButton, Input } from '$lib/components/core'
+  import TierBadge from '$lib/components/TierBadge.svelte'
   import { Wrapper as SettingsWrapper } from '$lib/components/Settings'
 
   import AutoCompleteV2 from '$c/core/AutoCompleteV2.svelte'
@@ -44,6 +45,7 @@
   } from '$icons'
 
   import { createEventDispatcher, onMount, getContext } from 'svelte'
+  import { getPokemonTier } from '$lib/data/smogon-tiers'
 
   let selected, nickname, status, nature, hidden, death, ability, abilityRoll
   let level, ivs = { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 }
@@ -354,6 +356,7 @@
             <AutoCompleteV2
               inset={selected ? true : '2.4em'}
               itemF={(_) => (fetchSearch ? getEncounterablePkmn() : encounterF())}
+              searchKeyF={(option) => `${option?.label || option?.name || ''} ${getPokemonTier(option)}`}
               max={fetchSearch ? 16 : (encounters || []).length}
               on:change={(_) => (search = null)}
               bind:search
@@ -364,17 +367,20 @@
               class="encounter-select col-span-2 w-11/12 sm:w-full"
             >
               <span
-                class="flex h-8 items-center px-4 py-5 md:py-6"
+                class="flex h-8 items-center justify-between gap-x-3 px-4 py-5 md:py-6"
                 aria-label={label}
                 slot="option"
                 let:option
                 let:label
               >
-                <PIcon
-                  name={option?.sprite}
-                  className="transform -mb-4 -ml-6 -mt-5 -mr-2"
-                />
-                {@html label}
+                <span class="inline-flex min-w-0 items-center">
+                  <PIcon
+                    name={option?.sprite}
+                    className="transform -mb-4 -ml-6 -mt-5 -mr-2"
+                  />
+                  <span class="truncate">{@html label}</span>
+                </span>
+                <TierBadge tier={getPokemonTier(option)} />
               </span>
 
               <svelte:fragment slot="icon" let:iconClass>

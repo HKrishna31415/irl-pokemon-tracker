@@ -2,6 +2,7 @@
   export let id, placeholder, name
   export let itemF = (_) => [],
     labelF = (i) => i?.label || i
+  export let searchKeyF = labelF
 
   export let delay = 50,
     max = 20,
@@ -25,7 +26,7 @@
 
   function filterF(items, search) {
     const filteredItems = matchSorter(items, search ?? '', {
-      keys: [(item) => labelF(item)]
+      keys: [(item) => searchKeyF(item)]
     })
 
     const slicedItems = filteredItems.slice(0, max)

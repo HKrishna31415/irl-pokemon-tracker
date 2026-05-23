@@ -32,6 +32,29 @@
 </Hero>
 
 <main>
+  <a
+    title="Pokémon Dex"
+    style="--col1:#111827;--col2:#65a30d"
+    href="/dex"
+  >
+    <div>
+      <div>
+        <h2 class="text-white">National Dex</h2>
+      </div>
+      <div>
+        <h2>Pokémon Dex</h2>
+        <p>
+          Search every supported National Dex species and form with Smogon tier,
+          Mega, and BST filters.
+        </p>
+        <small>
+          <span>Updated</span>
+          <span>Open Dex</span>
+        </small>
+      </div>
+    </div>
+  </a>
+
   {#each Object.values(Games) as { logo, difficulty, region, title, gen, pid, lastUpdated = '9th Jan 2022'}}
     <a
       title='{title} Guide'
