@@ -269,8 +269,7 @@
       'terrain-seed': 'grassy-seed',
       'standard-bottle-cap': 'bottle-cap',
       'nature-mint': 'neutral-mint',
-      'vitamin': 'hp-up',
-      'move-tutor-access': 'heart-scale'
+      'vitamin': 'hp-up'
     }
 
     const name = mapping[id] || id

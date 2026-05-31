@@ -35,6 +35,7 @@
     spe: 'SPE'
   }
   const tabs = ['Overview', 'Moves', 'Stats', 'Item']
+  const HEART_SCALE_EGG_MOVE_LIMIT = 1
 
   let activeTab = 'Overview'
   let level = pokemon.level || 1
@@ -48,8 +49,10 @@
   let loadingMoves = true
   let showShowdownImport = false
   let showdownText = ''
+  let showdownCopied = false
   let moveDetails = {}
   let itemSearch = ''
+  let showOwnedHeldOnly = false
   let lastMoveFetchKey = ''
   let moves = [...(pokemon.moves || []).map((m) => (typeof m === 'string' ? m : m.name)), '', '', '', ''].slice(0, 4)
   let selectedMoves = moves.map((name) => moveOption(name))
@@ -78,8 +81,11 @@
   $: selectedNature && selectedNature.id !== nature && (nature = selectedNature.id)
   $: selectedMoves, (moves = selectedMoves.map((move) => move?.name || ''))
   $: evTotal = Object.values(evs).reduce((a, b) => a + (Number(b) || 0), 0)
+  $: selectedEggMoveCount = selectedMoves.filter((move) => move?.isEgg).length
+  $: eggMoveBlocked = selectedEggMoveCount > HEART_SCALE_EGG_MOVE_LIMIT
   $: filteredHeldItems = heldItems.filter((item) => {
     const query = itemSearch.toLowerCase().trim()
+    if (showOwnedHeldOnly && !Number(inventory[item.id] || 0) && heldItem !== item.id) return false
     if (!query) return true
     return `${item.name} ${item.id} ${item.description}`.toLowerCase().includes(query)
   })
@@ -201,6 +207,15 @@
     selectedMoves = selectedMoves
   }
 
+  function moveOptionsForSlot(index) {
+    const current = selectedMoves[index]
+    return availableMoves.filter((move) => {
+      if (!move?.isEgg) return true
+      if (current?.name === move.name) return true
+      return selectedEggMoveCount < HEART_SCALE_EGG_MOVE_LIMIT
+    })
+  }
+
   function itemAvailable(itemId) {
     return getHeldItemAvailableCount(inventory, heldUsage, itemId)
   }
@@ -279,6 +294,40 @@
     showdownText = ''
   }
 
+  function statLine(label, values, defaultValue = 0) {
+    const parts = stats
+      .map((stat) => [statLabel[stat].replace('SPA', 'SpA').replace('SPD', 'SpD').replace('SPE', 'Spe'), Number(values[stat]) || 0])
+      .filter(([, value]) => value !== defaultValue)
+      .map(([stat, value]) => `${value} ${stat}`)
+    return parts.length ? `${label}: ${parts.join(' / ')}` : ''
+  }
+
+  function showdownExportText() {
+    const displayName = nickname && nickname !== pokemonLabel ? `${nickname} (${pokemonLabel})` : pokemonLabel
+    const header = `${displayName}${selectedHeldItem ? ` @ ${selectedHeldItem.name}` : ''}`
+    return [
+      header,
+      ability ? `Ability: ${ability}` : '',
+      level ? `Level: ${Number(level) || 1}` : '',
+      statLine('EVs', evs, 0),
+      selectedNature ? `${selectedNature.label} Nature` : nature ? `${capitalise(nature)} Nature` : '',
+      statLine('IVs', ivs, 31),
+      ...selectedMoves.map((move) => move?.name).filter(Boolean).map((move) => `- ${move}`)
+    ].filter(Boolean).join('\n')
+  }
+
+  async function copyShowdownExport() {
+    const text = showdownExportText()
+    showdownCopied = false
+    try {
+      await navigator.clipboard.writeText(text)
+      showdownCopied = true
+    } catch (e) {
+      showdownText = text
+      showShowdownImport = true
+    }
+  }
+
   function cleanStats(values, max) {
     return stats.reduce((acc, stat) => {
       const value = Number(values[stat] || 0)
@@ -288,7 +337,7 @@
   }
 
   function save() {
-    if (heldItemBlocked) return
+    if (heldItemBlocked || eggMoveBlocked) return
     onSave({
       ...pokemon,
       level: Number(level) || 1,
@@ -304,11 +353,11 @@
   }
 </script>
 
-<div class="max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-xl bg-white shadow-2xl dark:bg-gray-950">
-  <div class="sticky top-0 z-20 border-b border-gray-200 bg-white/95 px-5 py-4 backdrop-blur dark:border-gray-800 dark:bg-gray-950/95">
+<div class="pokemon-editor max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-gray-950">
+  <div class="editor-header sticky top-0 z-20 border-b border-gray-200 bg-white/95 px-5 py-4 backdrop-blur dark:border-gray-800 dark:bg-gray-950/95">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div class="flex min-w-0 items-center gap-4">
-        <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-900">
+        <div class="sprite-frame flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-900">
           <PIcon name={pokemonName} className="scale-125" />
         </div>
         <div class="min-w-0">
@@ -329,17 +378,23 @@
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center justify-end gap-2">
+      <div class="header-actions flex flex-wrap items-center justify-end gap-2">
+        <button
+          on:click={copyShowdownExport}
+          class="import-button rounded-lg bg-gray-100 px-3 py-2 text-[10px] font-black uppercase tracking-wider text-gray-500 transition hover:bg-blue-100 hover:text-blue-700 dark:bg-gray-900 dark:hover:bg-blue-900/30 dark:hover:text-blue-300"
+        >
+          {showdownCopied ? 'Copied Set' : 'Export Showdown'}
+        </button>
         <button
           on:click={() => (showShowdownImport = !showShowdownImport)}
-          class="rounded-lg bg-gray-100 px-3 py-2 text-[10px] font-black uppercase tracking-wider text-gray-500 transition hover:bg-blue-100 hover:text-blue-700 dark:bg-gray-900 dark:hover:bg-blue-900/30 dark:hover:text-blue-300"
+          class="import-button rounded-lg bg-gray-100 px-3 py-2 text-[10px] font-black uppercase tracking-wider text-gray-500 transition hover:bg-blue-100 hover:text-blue-700 dark:bg-gray-900 dark:hover:bg-blue-900/30 dark:hover:text-blue-300"
         >
           Import Showdown
         </button>
         <button
           on:click={save}
-          disabled={heldItemBlocked}
-          class="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-black text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-40"
+          disabled={heldItemBlocked || eggMoveBlocked}
+          class="save-button inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-black text-white shadow-lg shadow-blue-500/20 transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-40"
         >
           <Icon icon={Save} />
           Save
@@ -348,11 +403,11 @@
       </div>
     </div>
 
-    <div class="mt-4 flex gap-2 overflow-x-auto">
+    <div class="editor-tabs mt-4 flex gap-2 overflow-x-auto">
       {#each tabs as tab}
         <button
           on:click={() => (activeTab = tab)}
-          class="rounded-lg px-3 py-2 text-sm font-black transition {activeTab === tab ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-950' : 'bg-gray-100 text-gray-500 hover:text-gray-900 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white'}"
+          class="rounded-lg px-3 py-2 text-sm font-black transition {activeTab === tab ? 'active bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-950' : 'bg-gray-100 text-gray-500 hover:text-gray-900 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white'}"
         >
           {tab}
         </button>
@@ -360,10 +415,10 @@
     </div>
   </div>
 
-  <div class="max-h-[calc(88vh-9rem)] overflow-y-auto p-5">
+  <div class="editor-body max-h-[calc(88vh-9rem)] overflow-y-auto p-5">
     {#if showShowdownImport}
       <div class="mb-5 rounded-xl border border-blue-100 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20" in:fade>
-        <div class="mb-3 text-xs font-black uppercase tracking-wider text-blue-600 dark:text-blue-300">Paste Showdown Set</div>
+        <div class="mb-3 text-xs font-black uppercase tracking-wider text-blue-600 dark:text-blue-300">Showdown Set</div>
         <textarea
           bind:value={showdownText}
           placeholder="Species @ Item&#10;Ability: ...&#10;Level: 50&#10;EVs: 252 Atk / 252 Spe&#10;Jolly Nature&#10;- Move 1&#10;- Move 2..."
@@ -384,31 +439,32 @@
     {/if}
 
     {#if activeTab === 'Overview'}
-      <section class="grid gap-4 md:grid-cols-2">
-        <label class="space-y-2">
-          <span class="text-xs font-black uppercase tracking-wider text-gray-500">Nickname</span>
+      <section class="overview-grid grid gap-4 md:grid-cols-2">
+        <label class="editor-field space-y-2">
+          <span>Nickname</span>
           <input
             type="text"
             bind:value={nickname}
             placeholder={pokemonLabel}
-            class="h-12 w-full rounded-xl border-2 border-gray-200 bg-gray-50 px-4 text-lg font-bold outline-none transition focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+            class="editor-input h-12 w-full rounded-xl border-2 border-gray-200 bg-gray-50 px-4 text-lg font-bold outline-none transition focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
           />
         </label>
 
-        <label class="space-y-2">
-          <span class="text-xs font-black uppercase tracking-wider text-gray-500">Level</span>
+        <label class="editor-field space-y-2">
+          <span>Level</span>
           <input
             type="number"
             bind:value={level}
             min="1"
             max="100"
-            class="h-12 w-full rounded-xl border-2 border-gray-200 bg-gray-50 px-4 text-lg font-bold outline-none transition focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+            class="editor-input h-12 w-full rounded-xl border-2 border-gray-200 bg-gray-50 px-4 text-lg font-bold outline-none transition focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
           />
         </label>
 
-        <div class="space-y-2">
-          <span class="text-xs font-black uppercase tracking-wider text-gray-500">Nature</span>
+        <div class="editor-field space-y-2">
+          <span>Nature</span>
           <AutoComplete
+            class="editor-autocomplete"
             id="pokemon-editor-nature"
             placeholder="Select Nature"
             bind:selected={selectedNature}
@@ -418,13 +474,13 @@
           />
         </div>
 
-        <label class="space-y-2">
-          <span class="text-xs font-black uppercase tracking-wider text-gray-500">Ability</span>
+        <label class="editor-field space-y-2">
+          <span>Ability</span>
           <input
             type="text"
             bind:value={ability}
             placeholder="Ability"
-            class="h-12 w-full rounded-xl border-2 border-gray-200 bg-gray-50 px-4 text-lg font-bold outline-none transition focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
+            class="editor-input h-12 w-full rounded-xl border-2 border-gray-200 bg-gray-50 px-4 text-lg font-bold outline-none transition focus:border-blue-500 dark:border-gray-700 dark:bg-gray-900 dark:text-white"
           />
         </label>
       </section>
@@ -435,6 +491,14 @@
             <Loader size="xs" /> Loading available moves...
           </div>
         {:else}
+          <div class="rounded-xl border border-pink-200 bg-pink-50 p-3 text-xs font-bold text-pink-800 dark:border-pink-700 dark:bg-pink-900/20 dark:text-pink-200">
+            Heart Scale unlocks one egg move total. Current egg moves: {selectedEggMoveCount} / {HEART_SCALE_EGG_MOVE_LIMIT}.
+          </div>
+          {#if eggMoveBlocked}
+            <div class="rounded-xl border border-red-200 bg-red-50 p-3 text-xs font-bold text-red-800 dark:border-red-700 dark:bg-red-900/20 dark:text-red-200">
+              Remove extra egg moves before saving.
+            </div>
+          {/if}
           <div class="grid gap-3 md:grid-cols-2">
             {#each [0, 1, 2, 3] as i}
               <div class="rounded-xl border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900/60">
@@ -453,7 +517,7 @@
                       id={`pokemon-editor-move-${i}`}
                       placeholder={`Move ${i + 1}`}
                       bind:selected={selectedMoves[i]}
-                      itemF={() => availableMoves}
+                      itemF={() => moveOptionsForSlot(i)}
                       labelF={(move) => move?.name || ''}
                       searchKeyF={(move) => `${move?.name || ''} ${move?.isTM ? 'tm' : ''} ${move?.isEgg ? 'egg' : ''}`}
                     >
@@ -539,6 +603,11 @@
           </button>
         </div>
 
+        <label class="owned-toggle">
+          <input type="checkbox" bind:checked={showOwnedHeldOnly} />
+          <span>Only show bought items</span>
+        </label>
+
         <div class="grid max-h-[24rem] gap-3 overflow-y-auto pr-1 md:grid-cols-2">
           {#each filteredHeldItems as item}
             {@const available = itemAvailable(item.id)}
@@ -574,3 +643,134 @@
     {/if}
   </div>
 </div>
+
+<style lang="postcss">
+  .pokemon-editor {
+    --editor-panel: theme('colors.white');
+    --editor-muted: theme('colors.gray.500');
+    --editor-border: theme('colors.gray.200');
+    --editor-soft: theme('colors.gray.50');
+    --editor-ink: theme('colors.gray.900');
+  }
+
+  :global(.dark) .pokemon-editor {
+    --editor-panel: theme('colors.gray.900');
+    --editor-muted: theme('colors.gray.400');
+    --editor-border: theme('colors.gray.800');
+    --editor-soft: theme('colors.gray.900');
+    --editor-ink: theme('colors.gray.50');
+  }
+
+  .editor-header {
+    @apply shadow-sm;
+  }
+
+  .sprite-frame {
+    @apply border border-gray-200/80 shadow-inner dark:border-gray-800;
+  }
+
+  .header-actions {
+    @apply shrink-0;
+  }
+
+  .import-button,
+  .save-button {
+    @apply min-h-[2.75rem] rounded-xl px-4;
+  }
+
+  .import-button {
+    @apply border border-gray-200 bg-gray-50 text-gray-600 shadow-sm hover:border-blue-200 dark:border-gray-800 dark:bg-gray-900;
+  }
+
+  .save-button {
+    @apply shadow-xl shadow-blue-500/20;
+  }
+
+  .owned-toggle {
+    @apply inline-flex w-fit cursor-pointer items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-xs font-black uppercase tracking-wider text-gray-500 shadow-sm transition hover:border-blue-300 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-blue-500 dark:hover:text-blue-200;
+  }
+
+  .owned-toggle input {
+    @apply h-4 w-4 accent-blue-600;
+  }
+
+  .editor-tabs {
+    @apply rounded-2xl bg-gray-100/80 p-1 dark:bg-gray-900/80;
+  }
+
+  .editor-tabs button {
+    @apply min-h-[2.5rem] rounded-xl px-4 text-sm;
+  }
+
+  .editor-tabs button.active {
+    @apply shadow-lg shadow-gray-900/10 dark:shadow-none;
+  }
+
+  .editor-body {
+    @apply bg-gray-50/70 dark:bg-gray-900;
+  }
+
+  .overview-grid {
+    @apply rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900/50;
+  }
+
+  .editor-field > span {
+    @apply block text-[11px] font-black uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400;
+  }
+
+  .editor-input {
+    @apply h-12 rounded-xl border border-gray-200 bg-white px-4 text-base font-black text-gray-900 shadow-inner outline-none transition placeholder:text-gray-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white;
+  }
+
+  :global(.editor-autocomplete) {
+    @apply relative;
+  }
+
+  :global(.editor-autocomplete input) {
+    @apply h-12 w-full rounded-xl border border-gray-200 bg-white px-4 pr-11 text-base font-black text-gray-900 shadow-inner outline-none transition placeholder:text-gray-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white;
+  }
+
+  :global(.editor-autocomplete > svg) {
+    @apply right-3 border-0 text-gray-400 dark:text-gray-500;
+  }
+
+  :global(.editor-autocomplete .results) {
+    @apply left-0 right-0 mt-2 max-h-60 w-full min-w-0 overflow-auto rounded-xl border border-gray-200 bg-white p-1 shadow-2xl dark:border-gray-700 dark:bg-gray-900;
+    bottom: auto;
+    top: 100%;
+    transform: none;
+  }
+
+  :global(.editor-autocomplete .results ul) {
+    @apply grid gap-1;
+  }
+
+  :global(.editor-autocomplete .results li),
+  :global(.editor-autocomplete .results small) {
+    @apply rounded-lg px-3 py-2 text-sm font-bold text-gray-700 dark:text-gray-200;
+  }
+
+  :global(.editor-autocomplete .results li:hover),
+  :global(.editor-autocomplete .results ul:not(:hover) li:focus) {
+    @apply bg-blue-50 text-blue-800 dark:bg-blue-500/20 dark:text-blue-100;
+  }
+
+  :global(.editor-autocomplete .results li[aria-selected='true']) {
+    @apply !bg-blue-600 !text-white;
+  }
+
+  @media (max-width: 720px) {
+    .editor-header {
+      @apply px-4;
+    }
+
+    .header-actions {
+      @apply w-full justify-start;
+    }
+
+    .import-button,
+    .save-button {
+      @apply flex-1 justify-center;
+    }
+  }
+</style>
