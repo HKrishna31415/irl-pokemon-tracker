@@ -527,9 +527,9 @@
           {/if}
           <div class="grid gap-3 md:grid-cols-2">
             {#each [0, 1, 2, 3] as i}
-              <div class="rounded-xl border border-gray-200 bg-gray-50 p-3 dark:border-gray-800 dark:bg-gray-900/60">
+              <div class="move-card rounded-xl border border-gray-200 bg-white p-3 shadow-sm dark:border-gray-700 dark:bg-gray-900">
                 <div class="mb-2 flex items-center justify-between">
-                  <span class="text-xs font-black uppercase tracking-wider text-gray-500">Move {i + 1}</span>
+                  <span class="move-label text-xs font-black uppercase tracking-wider text-gray-500">Move {i + 1}</span>
                   <button
                     on:click={() => setMove(i, null)}
                     class="rounded-md px-2 py-1 text-[10px] font-black uppercase text-gray-400 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-800 dark:hover:text-gray-200"
@@ -540,6 +540,7 @@
                 <div class="flex items-center gap-2">
                   <div class="min-w-0 flex-1">
                     <AutoComplete
+                      class="editor-autocomplete"
                       id={`pokemon-editor-move-${i}`}
                       placeholder={`Move ${i + 1}`}
                       bind:selected={selectedMoves[i]}
@@ -720,6 +721,18 @@
     @apply h-4 w-4 accent-blue-600;
   }
 
+  .move-card {
+    @apply relative z-10;
+  }
+
+  .move-card:focus-within {
+    z-index: 1000;
+  }
+
+  .move-label {
+    @apply text-gray-700 dark:text-gray-200;
+  }
+
   .editor-tabs {
     @apply rounded-2xl bg-gray-100/80 p-1 dark:bg-gray-900/80;
   }
@@ -808,6 +821,11 @@
 
   :global(.editor-autocomplete) {
     @apply relative;
+    z-index: 50;
+  }
+
+  :global(.editor-autocomplete:focus-within) {
+    z-index: 5000;
   }
 
   :global(.editor-autocomplete input) {
@@ -819,10 +837,14 @@
   }
 
   :global(.editor-autocomplete .results) {
-    @apply left-0 right-0 mt-2 max-h-60 w-full min-w-0 overflow-auto rounded-xl border border-gray-200 bg-white p-1 shadow-2xl dark:border-gray-700 dark:bg-gray-900;
+    @apply left-0 right-0 mt-2 max-h-60 w-full min-w-0 overflow-auto rounded-xl border p-1 shadow-2xl;
     bottom: auto;
     top: 100%;
     transform: none;
+    z-index: 9999;
+    border-color: rgb(71 85 105);
+    background: rgb(17 24 39);
+    color: rgb(249 250 251);
   }
 
   :global(.editor-autocomplete .results ul) {
@@ -831,12 +853,27 @@
 
   :global(.editor-autocomplete .results li),
   :global(.editor-autocomplete .results small) {
-    @apply rounded-lg px-3 py-2 text-sm font-bold text-gray-700 dark:text-gray-200;
+    @apply rounded-lg px-3 py-2 text-sm font-bold;
+    color: rgb(249 250 251);
+    background: transparent;
+  }
+
+  :global(.editor-autocomplete .results li span),
+  :global(.editor-autocomplete .results li mark) {
+    color: inherit;
+  }
+
+  :global(.editor-autocomplete .results li mark) {
+    background: rgb(250 204 21);
+    color: rgb(17 24 39);
+    border-radius: 0.2rem;
+    padding: 0 0.1rem;
   }
 
   :global(.editor-autocomplete .results li:hover),
   :global(.editor-autocomplete .results ul:not(:hover) li:focus) {
-    @apply bg-blue-50 text-blue-800 dark:bg-blue-500/20 dark:text-blue-100;
+    background: rgb(30 58 138);
+    color: rgb(255 255 255);
   }
 
   :global(.editor-autocomplete .results li[aria-selected='true']) {
