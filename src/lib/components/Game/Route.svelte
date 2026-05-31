@@ -1,5 +1,5 @@
 <script>
-  import { afterUpdate } from 'svelte'
+  import { afterUpdate, createEventDispatcher } from 'svelte'
   import { fade } from 'svelte/transition'
   import {
     patch,
@@ -45,6 +45,7 @@
     progress = '',
     className = ''
   const { store, key, data } = game
+  const dispatch = createEventDispatcher()
 
   let starter = readStarter(data)
   let element
@@ -91,7 +92,15 @@
     store.update(patch({ __collapsedEncounterSegments: next }))
   }
 
+  const setDefeatedSegmentsCollapsed = (collapsed) => {
+    const next = { ...collapsedEncounterSegments }
+    for (const segment of defeatedEncounterSegments) next[segment.id] = collapsed
+    collapsedEncounterSegments = next
+    store.update(patch({ __collapsedEncounterSegments: next }))
+  }
+
   export const toggleAllEncounterSegments = () => setSegmentsCollapsed(!allVisibleSegmentsCollapsed)
+  export const toggleDefeatedEncounterSegments = () => setDefeatedSegmentsCollapsed(!allDefeatedSegmentsCollapsed)
 
   /** Returns the number of extra encounters already used on a route */
   const getRollCount = (routeName) => routeRolls[routeName] || 0
@@ -197,9 +206,18 @@
     let current = null
     let lastTrainerId = 'start'
 
+    const closeCurrentForTrainer = (trainerEntry) => {
+      if (!current) return
+      current.nextTrainerId =
+        trainerEntry.value || slugify(trainerEntry.boss || trainerEntry.name || 'trainer')
+      current.nextTrainerName = trainerEntry.name || trainerEntry.boss || 'Trainer'
+      current.defeated = !!trainerEntry.value && bossTeamIds.includes(trainerEntry.value)
+      current = null
+    }
+
     routeList.forEach((entry, index) => {
       if (isGym(entry)) {
-        current = null
+        closeCurrentForTrainer(entry)
         lastTrainerId = entry.value || slugify(entry.boss || entry.name || `trainer-${index}`)
         return
       }
@@ -212,7 +230,10 @@
           routeIndexes: [],
           routeNames: [],
           visibleIndexes: [],
-          visibleNames: []
+          visibleNames: [],
+          nextTrainerId: '',
+          nextTrainerName: '',
+          defeated: false
         }
         segments.push(current)
       }
@@ -234,19 +255,20 @@
     visibleEncounterSegments.length > 0 &&
     visibleEncounterSegments.every((segment) => collapsedEncounterSegments[segment.id])
   $: encounterCollapseAction = allVisibleSegmentsCollapsed ? 'Expand All' : 'Collapse All'
-
+  $: defeatedEncounterSegments = visibleEncounterSegments.filter((segment) => segment.defeated)
+  $: allDefeatedSegmentsCollapsed =
+    defeatedEncounterSegments.length > 0 &&
+    defeatedEncounterSegments.every((segment) => collapsedEncounterSegments[segment.id])
+  $: defeatedCollapseAction = allDefeatedSegmentsCollapsed ? 'Expand Defeated' : 'Collapse Defeated'
+  $: dispatch('collapseStatus', {
+    visibleCount: visibleEncounterSegments.length,
+    defeatedCount: defeatedEncounterSegments.length,
+    allVisibleSegmentsCollapsed,
+    allDefeatedSegmentsCollapsed,
+    encounterCollapseAction,
+    defeatedCollapseAction
+  })
 </script>
-
-{#if visibleEncounterSegments.length && filters.main !== 'bosses'}
-  <div class="mb-2 flex justify-end">
-    <button
-      class="rounded-full border border-gray-200 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-gray-500 transition hover:border-blue-300 hover:text-blue-500 dark:border-gray-800 dark:text-gray-400"
-      on:click={toggleAllEncounterSegments}
-    >
-      {encounterCollapseAction}
-    </button>
-  </div>
-{/if}
 
 <ul bind:this={ulRef} class="flex flex-col gap-y-0 lg:gap-y-2 {className}">
   {#each routeList as p, id (locid(p, id))}

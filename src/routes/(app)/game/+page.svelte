@@ -28,6 +28,12 @@
 
   let gameStore, gameKey, gameData
   let routeEl
+  let collapseStatus = {
+    visibleCount: 0,
+    defeatedCount: 0,
+    encounterCollapseAction: 'Collapse All',
+    defeatedCollapseAction: 'Collapse Defeated'
+  }
 
   let search = ''
 
@@ -112,6 +118,7 @@
 
   const _onsearch = (e) => (search = e.detail.search)
   const onsearch = debounce(_onsearch, 350)
+  const onCollapseStatus = (e) => (collapseStatus = e.detail)
 
   const latestnav = (routes, game) => {
     const custom = (game?.__custom || []).reduce(
@@ -152,63 +159,87 @@
         id="main"
         class="p-container relative flex flex-col gap-y-4 md:py-6"
       >
-        <div
-          class="flex snap-y snap-start snap-always flex-col items-start justify-between gap-y-4 pt-14 md:mb-6 md:flex-row md:pt-14 lg:gap-y-0"
-        >
+        <div class="run-toolbar">
           <div class="flex w-full flex-col gap-y-2">
-            {#if filter === 'nuzlocke'}
-              <button
-                transition:slide={{ duration: 250 }}
-                class="inline-flex items-center text-sm"
-                on:click={routeEl.setroute(latestnav(route, gameData))}
-              >
-                Continue at {latestnav(route, gameData).name}
-                <Icon inline={true} class="ml-1 fill-current" icon={Arrow} />
-              </button>
-            {/if}
+            <div class="flex flex-col gap-y-2 lg:flex-row lg:items-center lg:justify-between">
+              <div class="flex min-w-0 flex-col gap-y-2">
+                {#if filter === 'nuzlocke'}
+                  <button
+                    transition:slide={{ duration: 250 }}
+                    class="continue-link"
+                    on:click={routeEl.setroute(latestnav(route, gameData))}
+                  >
+                    Continue at {latestnav(route, gameData).name}
+                    <Icon inline={true} class="ml-1 fill-current" icon={Arrow} />
+                  </button>
+                {/if}
 
-            <Tabs name="filter" tabs={filters} bind:selected={filter} />
+                <Tabs name="filter" tabs={filters} bind:selected={filter} />
+              </div>
 
-            {#if filter === 'bosses'}
-              <span transition:slide={{ duration: 250 }}>
-                <Tabs
-                  name="bosses"
-                  tabs={bossFilters}
-                  bind:selected={bossFilter}
-                />
-              </span>
-            {/if}
+              {#if filter !== 'bosses' && collapseStatus.visibleCount}
+                <div class="encounter-collapse-actions" transition:slide={{ duration: 180 }}>
+                  {#if collapseStatus.defeatedCount}
+                    <button
+                      type="button"
+                      class="collapse-action secondary"
+                      on:click={() => routeEl?.toggleDefeatedEncounterSegments?.()}
+                    >
+                      {collapseStatus.defeatedCollapseAction}
+                    </button>
+                  {/if}
+                  <button
+                    type="button"
+                    class="collapse-action"
+                    on:click={() => routeEl?.toggleAllEncounterSegments?.()}
+                  >
+                    {collapseStatus.encounterCollapseAction}
+                  </button>
+                </div>
+              {/if}
+            </div>
 
-            {#if filter === 'route'}
-              <span transition:slide={{ duration: 250 }}>
-                <Tabs
-                  name="route"
-                  tabs={routeFilters}
-                  bind:selected={routeFilter}
-                />
-              </span>
-            {/if}
+            <div class="flex flex-col gap-y-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+              <div class="flex min-w-0 flex-col gap-y-2 sm:flex-row sm:flex-wrap sm:items-center">
+                {#if filter === 'bosses'}
+                  <span transition:slide={{ duration: 250 }}>
+                    <Tabs
+                      name="bosses"
+                      tabs={bossFilters}
+                      bind:selected={bossFilter}
+                    />
+                  </span>
+                {/if}
 
-            {#if filter === 'upcoming'}
-              <span
-                transition:slide={{ duration: 250 }}
-                class="-mb-4 inline-block text-sm leading-5 tracking-tight dark:text-gray-400"
-              >
-                <Icon
-                  inline={true}
-                  height="1.2em"
-                  icon={Hide}
-                  class="-mt-1 mr-1 inline-block fill-current"
-                /><b>{latestnav(route, gameData).id}</b> items hidden
-              </span>
-            {/if}
-          </div>
+                {#if filter === 'route'}
+                  <span transition:slide={{ duration: 250 }}>
+                    <Tabs
+                      name="route"
+                      tabs={routeFilters}
+                      bind:selected={routeFilter}
+                    />
+                  </span>
+                {/if}
 
-          <div class="inline-flex">
-            <Settings />
+                {#if filter === 'upcoming'}
+                  <span
+                    transition:slide={{ duration: 250 }}
+                    class="inline-block text-sm leading-5 tracking-tight dark:text-gray-400"
+                  >
+                    <Icon
+                      inline={true}
+                      height="1.2em"
+                      icon={Hide}
+                      class="-mt-1 mr-1 inline-block fill-current"
+                    /><b>{latestnav(route, gameData).id}</b> items hidden
+                  </span>
+                {/if}
+              </div>
 
-            <div class="fixed bottom-6 max-md:z-[8888] md:relative md:bottom-0">
-              <Search on:search={onsearch} />
+              <div class="toolbar-search inline-flex items-center gap-x-2">
+                <Settings />
+                <Search on:search={onsearch} />
+              </div>
             </div>
           </div>
         </div>
@@ -218,9 +249,10 @@
           {search}
           filters={{ main: filter, boss: bossFilter, route: routeFilter }}
           bind:this={routeEl}
-          className="-mt-8 sm:mt-0"
+          className="sm:mt-0"
           game={{ data: gameData, store: gameStore, key: gameKey }}
           progress={latestnav(route, gameData).id}
+          on:collapseStatus={onCollapseStatus}
         />
       </main>
     </div>
@@ -246,5 +278,45 @@
   .container {
     min-height: 100%;
     @apply snap-y snap-always;
+  }
+
+  .run-toolbar {
+    @apply sticky top-0 z-40 -mx-3 flex snap-start snap-always flex-col items-start justify-between gap-y-3 border-b border-gray-200/80 bg-white/95 px-3 py-3 shadow-sm backdrop-blur-md md:top-0 md:mb-5 md:rounded-b-2xl lg:gap-y-0;
+  }
+
+  :global(.dark) .run-toolbar {
+    @apply border-gray-800 bg-gray-900;
+  }
+
+  .continue-link {
+    @apply inline-flex items-center text-sm font-semibold text-gray-600 transition hover:text-blue-600;
+  }
+
+  :global(.dark) .continue-link {
+    @apply text-gray-300 hover:text-blue-300;
+  }
+
+  .encounter-collapse-actions {
+    @apply flex flex-wrap items-center gap-2;
+  }
+
+  .collapse-action {
+    @apply rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-[10px] font-black uppercase tracking-[0.14em] text-blue-600 shadow-sm transition hover:border-blue-300 hover:bg-blue-100;
+  }
+
+  :global(.dark) .collapse-action {
+    @apply border-blue-900 bg-blue-900 text-blue-300 hover:bg-blue-800;
+  }
+
+  .collapse-action.secondary {
+    @apply border-emerald-200 bg-emerald-50 text-emerald-700 hover:border-emerald-300 hover:bg-emerald-100;
+  }
+
+  :global(.dark) .collapse-action.secondary {
+    @apply border-emerald-900 bg-emerald-900 text-emerald-300 hover:bg-emerald-800;
+  }
+
+  .toolbar-search {
+    @apply shrink-0;
   }
 </style>

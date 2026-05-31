@@ -95,7 +95,7 @@
     {
       label: 'Core Stats',
       description: 'BST and primary stats that define a form',
-      open: true,
+      open: false,
       options: [
         ['total', 'BST', 0, 800, 5, BarChart],
         ['hp', 'HP', 0, 255, 1, HP],
@@ -109,7 +109,7 @@
     {
       label: 'Efficiency',
       description: 'Min-max score, bulk waste, and offensive tradeoffs',
-      open: true,
+      open: false,
       options: [
         ['minMaxPercent', 'Min-Max %', 0, 100, 1, Check],
         ['totalWasted', 'Total Wasted', 0, 800, 5, X],
@@ -332,6 +332,7 @@
   let search = ''
   let tableLimit = 120
   let filterKey = ''
+  let wasteProfileOpen = false
   const defaultRangeFilters = () => Object.fromEntries(RANGE_FILTERS.flatMap(([id]) => [[`${id}Min`, ''], [`${id}Max`, '']]))
   const defaultFilters = () => ({
     selectedStat: 'total',
@@ -915,22 +916,42 @@
 
       <label class="control-card">
         <span class="field-label">Max Level</span>
-        <div class="input-shell">
-          <span class="level-icon">Lv</span>
-          <input value={draftFilters.levelCap} on:input={(event) => setDraft({ levelCap: event.currentTarget.value })} type="number" min="1" max="100" placeholder="All levels" />
+        <div class="level-shell">
+          <div class="level-row">
+            <span class="level-icon">Lv</span>
+            <strong>{draftFilters.levelCap || 'All levels'}</strong>
+            <input
+              value={draftFilters.levelCap}
+              on:input={(event) => setDraft({ levelCap: event.currentTarget.value === '100' ? '' : event.currentTarget.value })}
+              type="number"
+              min="1"
+              max="100"
+              placeholder="All"
+            />
+          </div>
+          <input
+            class="level-range"
+            value={draftFilters.levelCap === '' ? 100 : draftFilters.levelCap}
+            on:input={(event) => setDraft({ levelCap: event.currentTarget.value === '100' ? '' : event.currentTarget.value })}
+            type="range"
+            min="1"
+            max="100"
+            step="1"
+            aria-label="Maximum evolution level"
+          />
         </div>
       </label>
 
-      <div class="control-card wide">
+      <div class="control-card wide" class:open-dropdown={wasteProfileOpen}>
         <span class="field-label">Waste Profile</span>
-        <details class="single-panel">
+        <details class="single-panel" bind:open={wasteProfileOpen}>
           <summary>
             <span><Icon icon={Shield} /> {draftFilters.wasteProfile}</span>
             <Icon icon={Caret} class="menu-chevron" />
           </summary>
           <div class="single-dropdown">
             {#each WASTE_PROFILE_OPTIONS as option}
-              <button type="button" class:active={draftFilters.wasteProfile === option} on:click={() => setDraft({ wasteProfile: option })}>
+              <button type="button" class:active={draftFilters.wasteProfile === option} on:click={() => { setDraft({ wasteProfile: option }); wasteProfileOpen = false }}>
                 {#if draftFilters.wasteProfile === option}
                   <Icon icon={Check} />
                 {/if}
@@ -1352,14 +1373,19 @@
   }
 
   .control-card {
-    @apply grid gap-2;
+    @apply relative grid gap-2;
   }
 
   .control-card.wide {
     @apply xl:col-span-2;
   }
 
+  .control-card.open-dropdown {
+    @apply z-[90];
+  }
+
   .input-shell,
+  .level-shell,
   .select-shell,
   .multi-panel summary,
   .single-panel summary {
@@ -1367,6 +1393,8 @@
   }
 
   .input-shell:focus-within,
+  .level-shell:focus-within,
+  .level-shell:hover,
   .select-shell:focus-within,
   .multi-panel[open] summary,
   .multi-panel summary:hover,
@@ -1409,6 +1437,43 @@
     @apply inline-flex h-6 w-6 flex-none items-center justify-center rounded-full bg-purple-500/10 text-xs font-black text-purple-200;
   }
 
+  .level-shell {
+    @apply grid gap-2 py-2.5;
+  }
+
+  .level-row {
+    @apply flex items-center gap-3;
+  }
+
+  .level-row strong {
+    @apply min-w-0 flex-1 truncate text-sm font-black text-slate-100 md:text-base;
+  }
+
+  .level-row input[type='number'] {
+    @apply h-8 w-20 rounded-md border border-slate-700 bg-gray-900/80 px-2 text-right text-xs font-black text-slate-100 outline-none transition placeholder:text-slate-500 focus:border-purple-400;
+  }
+
+  .level-range {
+    @apply h-4 w-full cursor-pointer appearance-none border-0 bg-transparent p-0 accent-purple-400;
+  }
+
+  .level-range::-webkit-slider-runnable-track {
+    @apply h-2 rounded-full bg-slate-600;
+  }
+
+  .level-range::-webkit-slider-thumb {
+    @apply h-5 w-5 appearance-none rounded-full border-2 border-purple-200 bg-purple-500 shadow-lg;
+    margin-top: -0.375rem;
+  }
+
+  .level-range::-moz-range-track {
+    @apply h-2 rounded-full bg-slate-600;
+  }
+
+  .level-range::-moz-range-thumb {
+    @apply h-5 w-5 rounded-full border-2 border-purple-200 bg-purple-500;
+  }
+
   .type-dot {
     @apply border-4 border-purple-400;
   }
@@ -1419,7 +1484,7 @@
   }
 
   .multi-grid {
-    @apply relative z-30 mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5;
+    @apply relative z-40 mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5;
   }
 
   .multi-panel,
@@ -1453,7 +1518,7 @@
 
   .dropdown-panel,
   .single-dropdown {
-    @apply absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 grid max-h-80 min-w-[17rem] grid-cols-2 gap-2 overflow-y-auto rounded-xl border border-slate-600/80 bg-gray-900/95 p-3 shadow-2xl backdrop-blur;
+    @apply absolute left-0 right-0 top-[calc(100%+0.5rem)] z-[100] grid max-h-80 min-w-[17rem] grid-cols-2 gap-2 overflow-y-auto rounded-xl border border-slate-600/80 bg-gray-900/95 p-3 shadow-2xl backdrop-blur;
   }
 
   .single-dropdown {
@@ -1576,12 +1641,20 @@
   }
 
   .slider-pair {
-    @apply relative h-7;
+    @apply relative h-8;
   }
 
   .slider-pair input {
-    @apply absolute left-0 top-2 h-3 w-full cursor-pointer appearance-none border-0 bg-transparent p-0 accent-purple-400;
+    @apply absolute left-0 top-1/2 h-6 w-full -translate-y-1/2 cursor-pointer appearance-none border-0 bg-transparent p-0 accent-purple-400;
     pointer-events: none;
+  }
+
+  .slider-pair input:first-child {
+    @apply z-20;
+  }
+
+  .slider-pair input:last-child {
+    @apply z-30;
   }
 
   .slider-pair input::-webkit-slider-runnable-track {

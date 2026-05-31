@@ -540,7 +540,7 @@
                 <div class="flex items-center gap-2">
                   <div class="min-w-0 flex-1">
                     <AutoComplete
-                      class="editor-autocomplete"
+                      class="move-autocomplete"
                       id={`pokemon-editor-move-${i}`}
                       placeholder={`Move ${i + 1}`}
                       bind:selected={selectedMoves[i]}
@@ -877,6 +877,59 @@
   }
 
   :global(.editor-autocomplete .results li[aria-selected='true']) {
+    @apply !bg-blue-600 !text-white;
+  }
+
+  :global(.move-autocomplete) {
+    @apply relative;
+    z-index: 50;
+  }
+
+  :global(.move-autocomplete:focus-within) {
+    z-index: 5000;
+  }
+
+  :global(.move-autocomplete input) {
+    @apply h-12 w-full rounded-xl border border-gray-300 bg-white px-4 pr-11 text-base font-black text-gray-900 shadow-inner outline-none transition placeholder:text-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400;
+  }
+
+  :global(.move-autocomplete > svg) {
+    @apply right-3 border-0 text-gray-400 dark:text-gray-500;
+  }
+
+  :global(.move-autocomplete .results) {
+    z-index: 9999;
+    border-color: rgb(71 85 105);
+    background: rgb(17 24 39);
+    color: rgb(249 250 251);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  }
+
+  :global(.move-autocomplete .results li),
+  :global(.move-autocomplete .results small) {
+    color: rgb(249 250 251);
+    background: transparent;
+  }
+
+  :global(.move-autocomplete .results li span),
+  :global(.move-autocomplete .results li mark) {
+    color: inherit;
+  }
+
+  :global(.move-autocomplete .results li mark) {
+    background: rgb(250 204 21);
+    color: rgb(17 24 39);
+    border-radius: 0.2rem;
+    padding: 0 0.1rem;
+  }
+
+  :global(.move-autocomplete .results li:hover),
+  :global(.move-autocomplete .results ul:not(:hover) li:focus) {
+    background: rgb(30 58 138);
+    color: rgb(255 255 255);
+  }
+
+  :global(.move-autocomplete .results li[aria-selected='true']) {
     @apply !bg-blue-600 !text-white;
   }
 
