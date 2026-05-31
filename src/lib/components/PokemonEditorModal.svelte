@@ -737,7 +737,7 @@
   }
 
   .overview-grid {
-    @apply rounded-2xl border border-gray-200 bg-white p-4 shadow-sm md:p-5 dark:border-gray-700 dark:bg-gray-900;
+    @apply relative z-30 overflow-visible rounded-2xl border border-gray-200 bg-white p-4 shadow-sm md:p-5 dark:border-gray-700 dark:bg-gray-900;
   }
 
   .editor-field > span {
@@ -750,6 +750,7 @@
 
   .nature-picker {
     @apply relative;
+    z-index: 1000;
   }
 
   .nature-trigger {
@@ -757,15 +758,21 @@
   }
 
   .nature-trigger small {
-    @apply shrink-0 text-xs font-black uppercase tracking-wide text-gray-600 dark:text-gray-300;
+    @apply shrink-0 text-xs font-black uppercase tracking-wide text-gray-700 dark:text-gray-200;
   }
 
   .nature-menu {
-    @apply absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 grid max-h-80 grid-cols-2 gap-2 overflow-y-auto rounded-xl border border-gray-300 bg-white p-2 shadow-2xl dark:border-gray-600 dark:bg-gray-900;
+    @apply absolute left-0 right-0 top-[calc(100%+0.5rem)] grid max-h-80 grid-cols-2 gap-2 overflow-y-auto rounded-xl border p-2 shadow-2xl;
+    z-index: 9999;
+    border-color: rgb(71 85 105);
+    background: rgb(17 24 39);
+    color: rgb(249 250 251);
   }
 
   .nature-menu button {
-    @apply flex items-center justify-between gap-3 rounded-lg border border-transparent px-3 py-2 text-left text-sm text-gray-900 transition hover:border-blue-300 hover:bg-blue-50 focus:border-blue-500 focus:bg-blue-50 focus:outline-none dark:text-gray-100 dark:hover:border-blue-400 dark:hover:bg-blue-900/40 dark:focus:bg-blue-900/40;
+    @apply flex items-center justify-between gap-3 rounded-lg border border-transparent px-3 py-2 text-left text-sm transition focus:outline-none;
+    color: rgb(249 250 251);
+    background: transparent;
   }
 
   .nature-menu button b {
@@ -773,15 +780,30 @@
   }
 
   .nature-menu button span {
-    @apply shrink-0 text-[11px] font-black uppercase tracking-wide text-gray-600 dark:text-gray-300;
+    @apply shrink-0 text-[11px] font-black uppercase tracking-wide;
+    color: rgb(203 213 225);
+  }
+
+  .nature-menu button:hover,
+  .nature-menu button:focus {
+    border-color: rgb(147 197 253);
+    background: rgb(30 58 138);
+    color: rgb(255 255 255);
+  }
+
+  .nature-menu button:hover span,
+  .nature-menu button:focus span {
+    color: rgb(219 234 254);
   }
 
   .nature-menu button.selected {
-    @apply border-blue-600 bg-blue-600 text-white dark:border-blue-400 dark:bg-blue-500;
+    border-color: rgb(96 165 250);
+    background: rgb(37 99 235);
+    color: rgb(255 255 255);
   }
 
   .nature-menu button.selected span {
-    @apply text-blue-50;
+    color: rgb(239 246 255);
   }
 
   :global(.editor-autocomplete) {
