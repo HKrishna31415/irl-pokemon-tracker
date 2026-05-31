@@ -37,7 +37,7 @@ const compactSpriteKey = (value = '') =>
     .replace(/-/g, '')
 
 const formMarkerPattern =
-  /-(mega(?:-[xy])?|gmax|totem|alola(?:-totem)?|galar(?:-zen)?|hisui|paldea(?:-(?:aqua|blaze|combat))?|origin|hero|crowned|therian|incarnate|sky|white|black|dusk|dawn|blade|shield|school|solo|sunny|rainy|snowy|red|blue|white-striped|female|male|f|m|x|y)$/i
+  /-(mega(?:-[xy])?|gmax|totem|alola(?:-totem)?|galar(?:-zen)?|hisui|paldea(?:-(?:aqua|blaze|combat))?|origin|hero|crowned|therian|incarnate|sky|white|black|dusk(?:-mane)?|dawn(?:-wings)?|blade|shield|school|solo|sunny|rainy|snowy|red|blue|white-striped|female|male|complete|neutral|stellar|terastal|ultra|primal|unbound|attack|defense|speed|pirouette|ash|bond|original|f|m|x|y)$/i
 
 const compactFormSuffixes = [
   'megax',
@@ -62,7 +62,9 @@ const compactFormSuffixes = [
   'white',
   'black',
   'dusk',
+  'duskmane',
   'dawn',
+  'dawnwings',
   'blade',
   'shield',
   'school',
@@ -70,6 +72,20 @@ const compactFormSuffixes = [
   'red',
   'blue',
   'whitestriped',
+  'complete',
+  'neutral',
+  'stellar',
+  'terastal',
+  'ultra',
+  'primal',
+  'unbound',
+  'attack',
+  'defense',
+  'speed',
+  'pirouette',
+  'ash',
+  'bond',
+  'original',
   'female',
   'male'
 ]
@@ -184,6 +200,7 @@ const nationalDexSpriteMap = nationalDex.reduce((acc, pokemon) => {
       acc[normalized] = {
         sprite,
         baseSprite,
+        num: pokemon.num,
         isGmax: sprite.endsWith('-gmax'),
         isCustomMega: sprite.includes('-mega') && !officialMegaSprites.has(sprite)
       }
@@ -205,6 +222,9 @@ const fallbackSpriteMap = {
   quilava: '156',
   totodile: '158',
   croconaw: '159',
+  feraligatr: '160',
+  'feraligatr-mega': '160',
+  feraligatrmega: '160',
   treecko: '252',
   grovyle: '253',
   torchic: '255',
@@ -426,6 +446,14 @@ const showdownSpriteMap = {
   charizardmegay: 'charizard-megay',
   'chi-yu': 'chiyu',
   'chien-pao': 'chienpao',
+  'deoxys-attack': 'deoxys-attack',
+  deoxysattack: 'deoxys-attack',
+  'deoxys-defense': 'deoxys-defense',
+  deoxysdefense: 'deoxys-defense',
+  'deoxys-speed': 'deoxys-speed',
+  deoxysspeed: 'deoxys-speed',
+  'dialga-origin': 'dialga-origin',
+  dialgaorigin: 'dialga-origin',
   equilibra: 'equilibra',
   'flutter-mane': 'fluttermane',
   'gengar-gmax': 'gengar-gmax',
@@ -433,8 +461,14 @@ const showdownSpriteMap = {
   'gengar-mega': 'gengar-mega',
   gengarmega: 'gengar-mega',
   'gouging-fire': 'gougingfire',
+  'groudon-primal': 'groudon-primal',
+  groudonprimal: 'groudon-primal',
   gholdengo: 'gholdengo',
+  'giratina-origin': 'giratina-origin',
+  giratinaorigin: 'giratina-origin',
   'great-tusk': 'greattusk',
+  'greninja-ash': 'greninja-ash',
+  greninjaash: 'greninja-ash',
   'iron-boulder': 'ironboulder',
   'iron-bundle': 'ironbundle',
   'iron-crown': 'ironcrown',
@@ -448,17 +482,27 @@ const showdownSpriteMap = {
   kingambit: 'kingambit',
   koraidon: 'koraidon',
   'kyurem-white': 'kyurem-white',
+  'kyogre-primal': 'kyogre-primal',
+  kyogreprimal: 'kyogre-primal',
+  'meloetta-pirouette': 'meloetta-pirouette',
+  meloettapirouette: 'meloetta-pirouette',
   'meganium-mega': 'meganium-mega',
   'mewtwo-mega-x': 'mewtwo-megax',
   mewtwomegax: 'mewtwo-megax',
   'mewtwo-mega-y': 'mewtwo-megay',
   mewtwomegay: 'mewtwo-megay',
   miraidon: 'miraidon',
+  'necrozma-dawn-wings': 'necrozma-dawnwings',
+  necrozmadawnwings: 'necrozma-dawnwings',
   'necrozma-dusk-mane': 'necrozma-duskmane',
+  necrozmaduskmane: 'necrozma-duskmane',
+  'necrozma-ultra': 'necrozma-ultra',
+  necrozmaultra: 'necrozma-ultra',
   naviathan: 'naviathan',
   'ogerpon-wellspring': 'ogerpon-wellspring',
   'ogerpon-hearthflame': 'ogerpon-hearthflame',
   'palkia-origin': 'palkia-origin',
+  palkiaorigin: 'palkia-origin',
   'palafin-hero': 'palafin-hero',
   'pidgeot-mega': 'pidgeot-mega',
   'pikachu-alola': 'pikachu-alola',
@@ -510,8 +554,43 @@ const showdownSpriteMap = {
   venomicon: 'venomicon',
   volkraken: 'volkraken',
   'walking-wake': 'walkingwake',
+  'articuno-galar': 'articuno-galar',
+  articunogalar: 'articuno-galar',
+  'hoopa-unbound': 'hoopa-unbound',
+  hoopaunbound: 'hoopa-unbound',
+  'moltres-galar': 'moltres-galar',
+  moltresgalar: 'moltres-galar',
+  'terapagos-stellar': 'terapagos-stellar',
+  terapagosstellar: 'terapagos-stellar',
+  'terapagos-terastal': 'terapagos-terastal',
+  terapagosterastal: 'terapagos-terastal',
+  'zapdos-galar': 'zapdos-galar',
+  zapdosgalar: 'zapdos-galar',
   'zacian-crowned': 'zacian-crowned',
   'zamazenta-crowned': 'zamazenta-crowned'
+}
+
+for (const type of [
+  'bug',
+  'dark',
+  'dragon',
+  'electric',
+  'fairy',
+  'fighting',
+  'fire',
+  'flying',
+  'ghost',
+  'grass',
+  'ground',
+  'ice',
+  'poison',
+  'psychic',
+  'rock',
+  'steel',
+  'water'
+]) {
+  showdownSpriteMap[`arceus-${type}`] = `arceus-${type}`
+  showdownSpriteMap[`arceus${type}`] = `arceus-${type}`
 }
 
 const gen8SpriteNames = new Set([
@@ -608,12 +687,51 @@ export async function GET({ params }) {
     return redirectPokeApi(pokeApiFormSpriteMap[gen8SpriteName])
   }
 
+  const dexPokeApiSpriteId =
+    dexSprite && (pokeApiFormSpriteMap[dexSprite.sprite] || fallbackSpriteMap[toSpriteKey(dexSprite.sprite)])
+
+  if (dexPokeApiSpriteId) {
+    return redirectPokeApi(dexPokeApiSpriteId)
+  }
+
   if (variant === 'gen8' && gen8SpriteNames.has(gen8SpriteName)) {
     return redirectShowdown('gen5', gen8SpriteName, shiny)
   }
 
   if (dexSprite?.isGmax || gen8SpriteNames.has(dexSprite?.sprite)) {
     return redirectShowdown('gen5', showdownSpriteName(dexSprite.sprite), shiny)
+  }
+
+  if (dexSprite?.isCustomMega) {
+    const baseSprite = await keyToBase64(dexSprite.baseSprite, shiny)
+    if (baseSprite) {
+      return new Response(Buffer.from(baseSprite, 'base64'), {
+        headers: {
+          'Content-Type': 'image/png'
+        }
+      })
+    }
+    return redirectPokeApi(fallbackSpriteMap[toSpriteKey(dexSprite.baseSprite)] || spriteMap[toSpriteKey(dexSprite.baseSprite)] || dexSprite.num || dexSprite.baseSprite)
+  }
+
+  const unknownShowdownForm =
+    dexSprite?.sprite?.includes('-') &&
+    !officialMegaSprites.has(dexSprite.sprite) &&
+    !gen8SpriteNames.has(dexSprite.sprite) &&
+    !showdownSpriteMap[dexSprite.sprite] &&
+    !pokeApiFormSpriteMap[dexSprite.sprite] &&
+    !fallbackSpriteMap[toSpriteKey(dexSprite.sprite)]
+
+  if (unknownShowdownForm && dexSprite.baseSprite) {
+    const baseSprite = await keyToBase64(dexSprite.baseSprite, shiny)
+    if (baseSprite) {
+      return new Response(Buffer.from(baseSprite, 'base64'), {
+        headers: {
+          'Content-Type': 'image/png'
+        }
+      })
+    }
+    return redirectPokeApi(fallbackSpriteMap[toSpriteKey(dexSprite.baseSprite)] || spriteMap[toSpriteKey(dexSprite.baseSprite)] || dexSprite.num || dexSprite.baseSprite)
   }
 
   if (dexSprite?.sprite?.includes('-')) {

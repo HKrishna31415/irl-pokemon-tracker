@@ -23,6 +23,7 @@
   import { toList, regionise, capitalise } from '$utils/string'
   import { locid } from '$utils/pokemon'
   import { nonnull } from '$utils/obj'
+  import { rewardPatch } from '$lib/utils/economy'
 
   const { getPkmn } = getContext('game')
   const { close } = getContext('simple-modal')
@@ -67,8 +68,9 @@
     let extraPatch = {}
 
     if (isNewDefeat) {
-      const payout = boss.type === 'gym-leader' ? 10000 : 2000
-      extraPatch.__money = (rawData.__money || 0) + payout
+      const rewarded = rewardPatch(rawData, boss)
+      extraPatch.__money = rewarded.__money
+      extraPatch.__transactions = rewarded.__transactions
 
       team.forEach(i => {
         const id = locid(i.original)

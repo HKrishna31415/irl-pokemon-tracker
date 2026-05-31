@@ -28,7 +28,7 @@
     .replace(/\s+/g, '-')
 
   const formMarkerPattern =
-    /-(mega(?:-[xy])?|gmax|totem|alola(?:-totem)?|galar(?:-zen)?|hisui|paldea(?:-(?:aqua|blaze|combat))?|origin|hero|crowned|therian|incarnate|sky|white|black|dusk|dawn|blade|shield|school|solo|sunny|rainy|snowy|red|blue|white-striped|female|male|f|m|x|y)$/i
+    /-(mega(?:-[xy])?|gmax|totem|alola(?:-totem)?|galar(?:-zen)?|hisui|paldea(?:-(?:aqua|blaze|combat))?|origin|hero|crowned|therian|incarnate|sky|white|black|dusk|dawn|blade|shield|school|solo|sunny|rainy|snowy|red|blue|white-striped|female|male|complete|neutral|stellar|ultra|primal|original|f|m|x|y)$/i
 
   const compactFormSuffixes = [
     'megax',
@@ -61,6 +61,12 @@
     'red',
     'blue',
     'whitestriped',
+    'complete',
+    'neutral',
+    'stellar',
+    'ultra',
+    'primal',
+    'original',
     'female',
     'male'
   ]

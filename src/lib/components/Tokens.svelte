@@ -1,6 +1,7 @@
 <script>
   import { getContext, onMount } from 'svelte'
-  import { readdata, getGameStore, read, patch } from '$lib/store'
+  import { readdata, getGameStore, read } from '$lib/store'
+  import { getEconomyConfig, tokenPurchasePatch } from '$lib/utils/economy'
   import { Button, Icon } from '$c/core'
   import { Plus } from '$icons'
 
@@ -8,29 +9,28 @@
   let money = 0
   let loading = true
   let gameStore
+  let rawData = {}
+  let tokenPrice = 500
 
   onMount(() => {
     const [, , id] = readdata()
     gameStore = getGameStore(id)
     gameStore.subscribe(
       read((data) => {
+        rawData = data
         tokens = data.__encounterTokens || 0
         money = data.__money || 0
+        tokenPrice = getEconomyConfig(data).tokenPrice
         loading = false
       })
     )
   })
 
   const buyToken = () => {
-    if (money < 500) return window.alert('Not enough money! Each token costs $500.')
-    if (!window.confirm('Buy an Extra Encounter Token for $500?')) return
+    if (money < tokenPrice) return window.alert(`Not enough money! Each token costs $${tokenPrice.toLocaleString()}.`)
+    if (!window.confirm(`Buy an Extra Encounter Token for $${tokenPrice.toLocaleString()}?`)) return
 
-    gameStore.update(
-      patch({
-        __money: money - 500,
-        __encounterTokens: tokens + 1
-      })
-    )
+    gameStore.update(() => JSON.stringify(tokenPurchasePatch(rawData, tokenPrice, 1, 'tokens')))
   }
 </script>
 
@@ -57,7 +57,7 @@
       <div class="flex flex-col items-center gap-y-4">
         <Button solid rounded class="px-8 py-3 text-lg" on:click={buyToken}>
           <Icon icon={Plus} inline class="mr-2" />
-          Buy Extra Token ($500)
+          Buy Extra Token (${tokenPrice.toLocaleString()})
         </Button>
         <span class="text-sm font-medium text-lime-600 dark:text-lime-400">Current Balance: ${money.toLocaleString()}</span>
       </div>

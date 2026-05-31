@@ -28,7 +28,7 @@
   import PokemonEditorModal from '$lib/components/PokemonEditorModal.svelte'
   import ShowdownImportModal from '$lib/components/ShowdownImportModal.svelte'
 
-  import { capitalise } from '$utils/string'
+  import { capitalise, toShowdownItem } from '$utils/string'
   import { drag } from '$utils/drag'
   import { locid } from '$utils/pokemon'
   import { pokeapi } from '$utils/api'
@@ -53,6 +53,12 @@
   import { toDb } from '$utils/link'
   import { summarise } from '$utils/badges'
   import { NaturesMap } from '$lib/data/natures'
+  import {
+    addTransaction,
+    findCatalogItemId,
+    getItemCatalog,
+    itemDisplayName
+  } from '$lib/utils/economy'
 
   const region = getContext('region')
   const { getPkmns, getPkmn, getLeague } = getContext('game')
@@ -67,6 +73,7 @@
     rawData,
     money = 0,
     inventory = {},
+    itemCatalog = {},
     teamData = [],
     winData,
     subview = 'pokemon',
@@ -87,6 +94,7 @@
         rawData = data
         money = data.__money || 0
         inventory = data.__items || {}
+        itemCatalog = getItemCatalog(data)
         teamData = readTeam(data)
         winData = readTeams(data)
       })
@@ -177,12 +185,27 @@
           )
         )
           return
-        gameStore.update(
-          patch({
-            __items: { ...inventory, 'rare-candy': qty - 1 },
-            [monId]: { ...rawData[monId], level: (currentLevel || 0) + 1 }
-          })
-        )
+        const nextLevel = (currentLevel || 0) + 1
+        gameStore.update(() => JSON.stringify(addTransaction({
+          ...rawData,
+          __items: { ...inventory, 'rare-candy': qty - 1 },
+          [monId]: { ...rawData[monId], level: nextLevel }
+        }, {
+          kind: 'consume',
+          source: 'box',
+          itemId: 'rare-candy',
+          itemName: 'Rare Candy',
+          itemType: 'item',
+          quantity: 1,
+          unitPrice: 0,
+          total: 0,
+          moneyBefore: rawData.__money || 0,
+          moneyAfter: rawData.__money || 0,
+          target: monId,
+          levelBefore: currentLevel || 0,
+          levelAfter: nextLevel,
+          refundable: false
+        })))
       } else {
         const cap = await getActiveLevelCap()
         const lvl = currentLevel || 0
@@ -197,12 +220,26 @@
           )
         )
           return
-        gameStore.update(
-          patch({
-            __items: { ...inventory, 'rare-candy': qty - 1 },
-            [monId]: { ...rawData[monId], level: cap }
-          })
-        )
+        gameStore.update(() => JSON.stringify(addTransaction({
+          ...rawData,
+          __items: { ...inventory, 'rare-candy': qty - 1 },
+          [monId]: { ...rawData[monId], level: cap }
+        }, {
+          kind: 'consume',
+          source: 'box',
+          itemId: 'rare-candy',
+          itemName: 'Rare Candy',
+          itemType: 'item',
+          quantity: 1,
+          unitPrice: 0,
+          total: 0,
+          moneyBefore: rawData.__money || 0,
+          moneyAfter: rawData.__money || 0,
+          target: monId,
+          levelBefore: lvl,
+          levelAfter: cap,
+          refundable: false
+        })))
       }
     }
 
@@ -297,6 +334,7 @@
   })
 
   $: enabled = box.length && (stat || type)
+  const heldFor = (pokemon) => (pokemon?.heldItem ? itemCatalog[pokemon.heldItem] : null)
 
   const toid = (p) => `${p.id}@${p.location}`
 
@@ -387,7 +425,7 @@
   const formatPokemon = async (p) => {
     const data = Pokemon[p.pokemon] || { name: capitalise(p.pokemon) }
     const nickname = p.nickname ? `${p.nickname} (${data.name})` : data.name
-    const item = '' // Item tracking not currently implemented
+    const item = p.heldItem ? toShowdownItem(itemDisplayName(p.heldItem, rawData)) : ''
     const ability = p.ability || 'Unknown Ability'
     const level = p.level || 50
     const nature = p.nature ? NaturesMap[p.nature]?.label : 'Serious'
@@ -479,6 +517,8 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${
   const handleBulkImport = (sets) => {
     const newRawData = { ...rawData }
     let updatedCount = 0
+    let skippedItems = 0
+    const nextHeldItems = new Map(ogbox.map((p) => [locid(p), p.heldItem || '']))
 
     const normalizeSpecies = (s) =>
       s
@@ -501,7 +541,26 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${
       })
 
       if (match) {
-        const { species, ...updates } = set
+        const { species, heldItemName, ...updates } = set
+        if (heldItemName) {
+          const itemId = findCatalogItemId(heldItemName, itemCatalog)
+          const item = itemCatalog[itemId]
+          if (item?.type === 'held') {
+            const matchKey = locid(match)
+            const equippedElsewhere = Array.from(nextHeldItems.entries()).reduce(
+              (count, [key, heldItem]) => count + (key !== matchKey && heldItem === itemId ? 1 : 0),
+              0
+            )
+            if ((inventory[itemId] || 0) - equippedElsewhere > 0) {
+              updates.heldItem = itemId
+              nextHeldItems.set(matchKey, itemId)
+            } else {
+              skippedItems++
+            }
+          } else {
+            skippedItems++
+          }
+        }
         newRawData[match.location] = {
           ...newRawData[match.location],
           ...updates
@@ -512,7 +571,7 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${
 
     if (updatedCount > 0) {
       gameStore.update(() => JSON.stringify(newRawData))
-      alert(`Successfully updated ${updatedCount} Pokémon from Showdown!`)
+      alert(`Successfully updated ${updatedCount} Pokémon from Showdown!${skippedItems ? ` ${skippedItems} held item assignment${skippedItems === 1 ? '' : 's'} skipped because no free copy was available.` : ''}`)
     } else {
       alert('No matching Pokémon found in Box to update.')
     }
@@ -767,6 +826,7 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${
                   name={Pokemon[p.pokemon].name}
                   level={p.level}
                   nature={p.nature}
+                  held={heldFor(p)}
                   ivs={p.ivs}
                   evs={p.evs}
                   stats={Pokemon[p.pokemon].baseStats}
@@ -905,6 +965,8 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${
                           open(PokemonEditorModal, {
                             pokemon: p,
                             inventory,
+                            box: ogbox,
+                            itemCatalog,
                             onSave: (updated) => {
                               gameStore.update(
                                 patch({ [p.customId || p.location]: updated })

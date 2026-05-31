@@ -63,6 +63,7 @@
     { name: 'Box', link: '/box', icon: Box },
     { name: 'Locker', link: '/locker', icon: Save },
     { name: 'Store', link: '/store', icon: Gift },
+    { name: 'Receipts', link: '/receipts', icon: Save },
     { name: 'Grave', link: '/graveyard', icon: Grave }
   ]
 </script>

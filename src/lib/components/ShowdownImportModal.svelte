@@ -18,7 +18,7 @@
       if (!lines.length) return null
 
       const firstLine = lines[0]
-      const [pokemonPart] = firstLine.split('@')
+      const [pokemonPart, itemPart] = firstLine.split('@')
       const part = pokemonPart.trim()
       
       let species = part
@@ -52,6 +52,8 @@
         species: normalizeSpecies(species), 
         nickname: nickname.trim() 
       }
+
+      if (itemPart?.trim()) updates.heldItemName = itemPart.trim()
 
       const levelLine = lines.find(l => l.startsWith('Level:'))
       if (levelLine) updates.level = parseInt(levelLine.replace('Level:', '').trim())

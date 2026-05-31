@@ -55,6 +55,29 @@
     </div>
   </a>
 
+  <a
+    title="Pokémon Stat Explorer"
+    style="--col1:#111827;--col2:#db2777"
+    href="/stats"
+  >
+    <div>
+      <div>
+        <h2 class="text-white">Raincloud Stats</h2>
+      </div>
+      <div>
+        <h2>Stat Explorer</h2>
+        <p>
+          Compare every supported Pokémon species and form by generation with
+          raincloud plots, type filters, Smogon tiers, and VGC tiers.
+        </p>
+        <small>
+          <span>Updated</span>
+          <span>Open Stats</span>
+        </small>
+      </div>
+    </div>
+  </a>
+
   {#each Object.values(Games) as { logo, difficulty, region, title, gen, pid, lastUpdated = '9th Jan 2022'}}
     <a
       title='{title} Guide'

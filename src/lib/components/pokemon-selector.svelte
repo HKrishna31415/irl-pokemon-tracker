@@ -6,7 +6,8 @@
     type = '',
     infolink = '',
     cap = 0,
-    method = ''
+    method = '',
+    defaultIvs = null
 
   import { nonnull, equal as oEqual } from '$utils/obj'
 
@@ -48,7 +49,19 @@
   import { getPokemonTier } from '$lib/data/smogon-tiers'
 
   let selected, nickname, status, nature, hidden, death, ability, abilityRoll
-  let level, ivs = { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 }
+  const perfectIvs = { hp: 31, atk: 31, def: 31, spa: 31, spd: 31, spe: 31 }
+  const randomIvs = () => ({
+    hp: Math.floor(Math.random() * 32),
+    atk: Math.floor(Math.random() * 32),
+    def: Math.floor(Math.random() * 32),
+    spa: Math.floor(Math.random() * 32),
+    spd: Math.floor(Math.random() * 32),
+    spe: Math.floor(Math.random() * 32)
+  })
+  const cloneIvs = (value) => ({ ...(value || perfectIvs) })
+  const initialIvs = () => cloneIvs(defaultIvs || perfectIvs)
+
+  let level, ivs = initialIvs()
   let evs = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 }
   const stats = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
   let prevstatus = 'loading'
@@ -562,14 +575,7 @@
           class="flex items-center gap-x-1 rounded-md border border-gray-100 bg-gray-50/50 px-2 py-0.5 text-[9px] font-bold text-gray-400 transition-colors hover:border-lime-200 hover:bg-lime-50/50 hover:text-lime-600 dark:border-gray-800 dark:bg-gray-800/40 dark:hover:border-lime-900/40 dark:hover:text-lime-400"
           title="Re-roll IVs"
           on:click={() => {
-            ivs = {
-              hp: Math.floor(Math.random() * 32),
-              atk: Math.floor(Math.random() * 32),
-              def: Math.floor(Math.random() * 32),
-              spa: Math.floor(Math.random() * 32),
-              spd: Math.floor(Math.random() * 32),
-              spe: Math.floor(Math.random() * 32)
-            }
+            ivs = randomIvs()
 
             // Fetch abilities from PokeAPI
             pokeapi(`pokemon/${selected.name.toLowerCase().replace(/ /g, '-')}`)
@@ -688,14 +694,7 @@
                    })
 
                  nature = Natures[Math.floor(Math.random() * Natures.length)]
-                 ivs = {
-                   hp: Math.floor(Math.random() * 32),
-                   atk: Math.floor(Math.random() * 32),
-                   def: Math.floor(Math.random() * 32),
-                   spa: Math.floor(Math.random() * 32),
-                   spd: Math.floor(Math.random() * 32),
-                   spe: Math.floor(Math.random() * 32)
-                 }
+                 ivs = defaultIvs ? cloneIvs(defaultIvs) : randomIvs()
                  selected = result
                }
             })

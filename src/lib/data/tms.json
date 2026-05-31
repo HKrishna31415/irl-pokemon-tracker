@@ -1,1158 +1,2529 @@
 {
   "tier0": [
     {
-      "name": "Close Combat",
-      "alias": "close-combat",
-      "type": "Fighting",
-      "bp": 120,
-      "acc": 100
+      "tm": "TM048",
+      "name": "Volt Switch",
+      "alias": "voltswitch",
+      "type": "Electric",
+      "category": "Special",
+      "bp": 70,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier0"
     },
     {
-      "name": "Draco Meteor",
-      "alias": "draco-meteor",
-      "type": "Dragon",
-      "bp": 130,
-      "acc": 90
+      "tm": "TM060",
+      "name": "U-turn",
+      "alias": "uturn",
+      "type": "Bug",
+      "category": "Physical",
+      "bp": 70,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier0"
     },
     {
-      "name": "Dragon Dance",
-      "alias": "dragon-dance",
-      "type": "Dragon",
+      "tm": "TM088",
+      "name": "Swords Dance",
+      "alias": "swordsdance",
+      "type": "Normal",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier0"
     },
     {
+      "tm": "TM100",
+      "name": "Dragon Dance",
+      "alias": "dragondance",
+      "type": "Dragon",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier0"
+    },
+    {
+      "tm": "TM129",
+      "name": "Calm Mind",
+      "alias": "calmmind",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier0"
+    },
+    {
+      "tm": "TM140",
+      "name": "Nasty Plot",
+      "alias": "nastyplot",
+      "type": "Dark",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier0"
+    },
+    {
+      "tm": "TM149",
       "name": "Earthquake",
       "alias": "earthquake",
       "type": "Ground",
+      "category": "Physical",
       "bp": 100,
-      "acc": 100
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier0"
     },
     {
+      "tm": "TM167",
+      "name": "Close Combat",
+      "alias": "closecombat",
+      "type": "Fighting",
+      "category": "Physical",
+      "bp": 120,
+      "acc": 100,
+      "pp": 5,
+      "tier": "tier0"
+    },
+    {
+      "tm": "TM169",
+      "name": "Draco Meteor",
+      "alias": "dracometeor",
+      "type": "Dragon",
+      "category": "Special",
+      "bp": 130,
+      "acc": 90,
+      "pp": 5,
+      "tier": "tier0"
+    },
+    {
+      "tm": "TM196",
       "name": "Flip Turn",
-      "alias": "flip-turn",
+      "alias": "flipturn",
       "type": "Water",
+      "category": "Physical",
       "bp": 60,
-      "acc": 100
-    },
-    {
-      "name": "Nasty Plot",
-      "alias": "nasty-plot",
-      "type": "Dark",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Swords Dance",
-      "alias": "swords-dance",
-      "type": "Normal",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "U-turn",
-      "alias": "u-turn",
-      "type": "Bug",
-      "bp": 70,
-      "acc": 100
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier0"
     }
   ],
   "tier1": [
     {
-      "name": "Acrobatics",
-      "type": "Flying",
-      "bp": 55,
-      "acc": 100,
-      "alias": "acrobatics"
-    },
-    {
-      "name": "Agility",
-      "alias": "agility",
-      "type": "Psychic",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Amnesia",
-      "alias": "amnesia",
-      "type": "Psychic",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Brave Bird",
-      "alias": "brave-bird",
-      "type": "Flying",
-      "bp": 120,
-      "acc": 100
-    },
-    {
-      "name": "Bug Buzz",
-      "alias": "bug-buzz",
-      "type": "Bug",
-      "bp": 90,
-      "acc": 100
-    },
-    {
-      "name": "Bulk Up",
-      "alias": "bulk-up",
-      "type": "Fighting",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Calm Mind",
-      "alias": "calm-mind",
-      "type": "Psychic",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Dark Pulse",
-      "alias": "dark-pulse",
-      "type": "Dark",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Double-Edge",
-      "alias": "double-edge",
-      "type": "Normal",
-      "bp": 120,
-      "acc": 100
-    },
-    {
-      "name": "Dragon Pulse",
-      "alias": "dragon-pulse",
-      "type": "Dragon",
-      "bp": 85,
-      "acc": 100
-    },
-    {
-      "name": "Earth Power",
-      "alias": "earth-power",
-      "type": "Ground",
-      "bp": 90,
-      "acc": 100
-    },
-    {
-      "name": "Energy Ball",
-      "alias": "energy-ball",
-      "type": "Grass",
-      "bp": 90,
-      "acc": 100
-    },
-    {
-      "name": "Flamethrower",
-      "alias": "flamethrower",
-      "type": "Fire",
-      "bp": 90,
-      "acc": 100
-    },
-    {
-      "name": "Flare Blitz",
-      "alias": "flare-blitz",
-      "type": "Fire",
-      "bp": 120,
-      "acc": 100
-    },
-    {
-      "name": "Ice Beam",
-      "alias": "ice-beam",
-      "type": "Ice",
-      "bp": 90,
-      "acc": 100
-    },
-    {
-      "name": "Iron Defense",
-      "alias": "iron-defense",
-      "type": "Steel",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Iron Head",
-      "alias": "iron-head",
-      "type": "Steel",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Knock Off",
-      "type": "Dark",
-      "bp": 65,
-      "acc": 100,
-      "alias": "knock-off"
-    },
-    {
-      "name": "Leaf Blade",
-      "alias": "leaf-blade",
-      "type": "Grass",
-      "bp": 90,
-      "acc": 100
-    },
-    {
-      "name": "Malignant Chain",
-      "type": "Poison",
-      "bp": 77,
-      "acc": 100,
-      "alias": "malignant-chain"
-    },
-    {
-      "name": "Moonblast",
-      "type": "Fairy",
-      "bp": 95,
-      "acc": 100,
-      "alias": "moonblast"
-    },
-    {
-      "name": "Play Rough",
-      "alias": "play-rough",
-      "type": "Fairy",
-      "bp": 90,
-      "acc": 90
-    },
-    {
+      "tm": "TM007",
       "name": "Protect",
       "alias": "protect",
       "type": "Normal",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier1"
     },
     {
-      "name": "Psychic",
-      "alias": "psychic",
-      "type": "Psychic",
-      "bp": 90,
-      "acc": 100
+      "tm": "TM014",
+      "name": "Acrobatics",
+      "alias": "acrobatics",
+      "type": "Flying",
+      "category": "Physical",
+      "bp": 55,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
     },
     {
-      "name": "Roost",
+      "tm": "TM025",
+      "name": "Facade",
+      "alias": "facade",
       "type": "Normal",
+      "category": "Physical",
+      "bp": 70,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM054",
+      "name": "Psyshock",
+      "alias": "psyshock",
+      "type": "Psychic",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM064",
+      "name": "Bulk Up",
+      "alias": "bulkup",
+      "type": "Fighting",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM073",
+      "name": "Drain Punch",
+      "alias": "drainpunch",
+      "type": "Fighting",
+      "category": "Physical",
+      "bp": 75,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM077",
+      "name": "Waterfall",
+      "alias": "waterfall",
+      "type": "Water",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM078",
+      "name": "Dragon Claw",
+      "alias": "dragonclaw",
+      "type": "Dragon",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM079",
+      "name": "Dazzling Gleam",
+      "alias": "dazzlinggleam",
+      "type": "Fairy",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM082",
+      "name": "Thunder Wave",
+      "alias": "thunderwave",
+      "type": "Electric",
+      "category": "Status",
+      "bp": 0,
+      "acc": 90,
+      "pp": 20,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM087",
+      "name": "Taunt",
+      "alias": "taunt",
+      "type": "Dark",
+      "category": "Status",
       "bp": 0,
       "acc": 100,
-      "alias": "roost"
+      "pp": 20,
+      "tier": "tier1"
     },
     {
-      "name": "Scald",
-      "alias": "scald",
-      "type": "Water",
+      "tm": "TM089",
+      "name": "Body Press",
+      "alias": "bodypress",
+      "type": "Fighting",
+      "category": "Physical",
       "bp": 80,
-      "acc": 100
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
     },
     {
-      "name": "Shadow Ball",
-      "alias": "shadow-ball",
-      "type": "Ghost",
+      "tm": "TM094",
+      "name": "Dark Pulse",
+      "alias": "darkpulse",
+      "type": "Dark",
+      "category": "Special",
       "bp": 80,
-      "acc": 100
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
     },
     {
-      "name": "Sludge Bomb",
-      "alias": "sludge-bomb",
+      "tm": "TM099",
+      "name": "Iron Head",
+      "alias": "ironhead",
+      "type": "Steel",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM102",
+      "name": "Gunk Shot",
+      "alias": "gunkshot",
       "type": "Poison",
-      "bp": 90,
-      "acc": 100
+      "category": "Physical",
+      "bp": 120,
+      "acc": 80,
+      "pp": 5,
+      "tier": "tier1"
     },
     {
-      "name": "Stealth Rock",
-      "alias": "stealth-rock",
-      "type": "Rock",
-      "bp": 0,
-      "acc": 100
-    },
-    {
+      "tm": "TM103",
       "name": "Substitute",
       "alias": "substitute",
       "type": "Normal",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier1"
     },
     {
+      "tm": "TM107",
+      "name": "Will-O-Wisp",
+      "alias": "willowisp",
+      "type": "Fire",
+      "category": "Status",
+      "bp": 0,
+      "acc": 85,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM109",
+      "name": "Trick",
+      "alias": "trick",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM110",
+      "name": "Liquidation",
+      "alias": "liquidation",
+      "type": "Water",
+      "category": "Physical",
+      "bp": 85,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM111",
+      "name": "Giga Drain",
+      "alias": "gigadrain",
+      "type": "Grass",
+      "category": "Special",
+      "bp": 75,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM112",
+      "name": "Aura Sphere",
+      "alias": "aurasphere",
+      "type": "Fighting",
+      "category": "Special",
+      "bp": 80,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM113",
+      "name": "Tailwind",
+      "alias": "tailwind",
+      "type": "Flying",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM114",
+      "name": "Shadow Ball",
+      "alias": "shadowball",
+      "type": "Ghost",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM118",
+      "name": "Heat Wave",
+      "alias": "heatwave",
+      "type": "Fire",
+      "category": "Special",
+      "bp": 95,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM119",
+      "name": "Energy Ball",
+      "alias": "energyball",
+      "type": "Grass",
+      "category": "Special",
+      "bp": 90,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM120",
+      "name": "Psychic",
+      "alias": "psychic",
+      "type": "Psychic",
+      "category": "Special",
+      "bp": 90,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM122",
+      "name": "Encore",
+      "alias": "encore",
+      "type": "Normal",
+      "category": "Status",
+      "bp": 0,
+      "acc": 100,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM123",
       "name": "Surf",
       "alias": "surf",
       "type": "Water",
+      "category": "Special",
       "bp": 90,
-      "acc": 100
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
     },
     {
+      "tm": "TM124",
+      "name": "Ice Spinner",
+      "alias": "icespinner",
+      "type": "Ice",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM125",
+      "name": "Flamethrower",
+      "alias": "flamethrower",
+      "type": "Fire",
+      "category": "Special",
+      "bp": 90,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM126",
       "name": "Thunderbolt",
       "alias": "thunderbolt",
       "type": "Electric",
+      "category": "Special",
       "bp": 90,
-      "acc": 100
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
     },
     {
-      "name": "Volt Switch",
-      "alias": "volt-switch",
-      "type": "Electric",
-      "bp": 70,
-      "acc": 100
+      "tm": "TM127",
+      "name": "Play Rough",
+      "alias": "playrough",
+      "type": "Fairy",
+      "category": "Physical",
+      "bp": 90,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier1"
     },
     {
-      "name": "Wild Charge",
-      "alias": "wild-charge",
-      "type": "Electric",
+      "tm": "TM131",
+      "name": "Pollen Puff",
+      "alias": "pollenpuff",
+      "type": "Bug",
+      "category": "Special",
       "bp": 90,
-      "acc": 100
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM132",
+      "name": "Baton Pass",
+      "alias": "batonpass",
+      "type": "Normal",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 40,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM133",
+      "name": "Earth Power",
+      "alias": "earthpower",
+      "type": "Ground",
+      "category": "Special",
+      "bp": 90,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM135",
+      "name": "Ice Beam",
+      "alias": "icebeam",
+      "type": "Ice",
+      "category": "Special",
+      "bp": 90,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM141",
+      "name": "Fire Blast",
+      "alias": "fireblast",
+      "type": "Fire",
+      "category": "Special",
+      "bp": 110,
+      "acc": 85,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM142",
+      "name": "Hydro Pump",
+      "alias": "hydropump",
+      "type": "Water",
+      "category": "Special",
+      "bp": 110,
+      "acc": 80,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM143",
+      "name": "Blizzard",
+      "alias": "blizzard",
+      "type": "Ice",
+      "category": "Special",
+      "bp": 110,
+      "acc": 70,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM148",
+      "name": "Sludge Bomb",
+      "alias": "sludgebomb",
+      "type": "Poison",
+      "category": "Special",
+      "bp": 90,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM150",
+      "name": "Stone Edge",
+      "alias": "stoneedge",
+      "type": "Rock",
+      "category": "Physical",
+      "bp": 100,
+      "acc": 80,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM156",
+      "name": "Outrage",
+      "alias": "outrage",
+      "type": "Dragon",
+      "category": "Physical",
+      "bp": 120,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM157",
+      "name": "Overheat",
+      "alias": "overheat",
+      "type": "Fire",
+      "category": "Special",
+      "bp": 130,
+      "acc": 90,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM158",
+      "name": "Focus Blast",
+      "alias": "focusblast",
+      "type": "Fighting",
+      "category": "Special",
+      "bp": 120,
+      "acc": 70,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM159",
+      "name": "Leaf Storm",
+      "alias": "leafstorm",
+      "type": "Grass",
+      "category": "Special",
+      "bp": 130,
+      "acc": 90,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM160",
+      "name": "Hurricane",
+      "alias": "hurricane",
+      "type": "Flying",
+      "category": "Special",
+      "bp": 110,
+      "acc": 70,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM161",
+      "name": "Trick Room",
+      "alias": "trickroom",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM164",
+      "name": "Brave Bird",
+      "alias": "bravebird",
+      "type": "Flying",
+      "category": "Physical",
+      "bp": 120,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM165",
+      "name": "Flare Blitz",
+      "alias": "flareblitz",
+      "type": "Fire",
+      "category": "Physical",
+      "bp": 120,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM166",
+      "name": "Thunder",
+      "alias": "thunder",
+      "type": "Electric",
+      "category": "Special",
+      "bp": 110,
+      "acc": 70,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM171",
+      "name": "Tera Blast",
+      "alias": "terablast",
+      "type": "Normal",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM175",
+      "name": "Toxic",
+      "alias": "toxic",
+      "type": "Poison",
+      "category": "Status",
+      "bp": 0,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM181",
+      "name": "Knock Off",
+      "alias": "knockoff",
+      "type": "Dark",
+      "category": "Physical",
+      "bp": 65,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM186",
+      "name": "High Horsepower",
+      "alias": "highhorsepower",
+      "type": "Ground",
+      "category": "Physical",
+      "bp": 95,
+      "acc": 95,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM188",
+      "name": "Scald",
+      "alias": "scald",
+      "type": "Water",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM198",
+      "name": "Poltergeist",
+      "alias": "poltergeist",
+      "type": "Ghost",
+      "category": "Physical",
+      "bp": 110,
+      "acc": 90,
+      "pp": 5,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM200",
+      "name": "Scale Shot",
+      "alias": "scaleshot",
+      "type": "Dragon",
+      "category": "Physical",
+      "bp": 25,
+      "acc": 90,
+      "pp": 20,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM212",
+      "name": "Triple Axel",
+      "alias": "tripleaxel",
+      "type": "Ice",
+      "category": "Physical",
+      "bp": 20,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM214",
+      "name": "Sludge Wave",
+      "alias": "sludgewave",
+      "type": "Poison",
+      "category": "Special",
+      "bp": 95,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM218",
+      "name": "Expanding Force",
+      "alias": "expandingforce",
+      "type": "Psychic",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier1"
+    },
+    {
+      "tm": "TM220",
+      "name": "Meteor Beam",
+      "alias": "meteorbeam",
+      "type": "Rock",
+      "category": "Special",
+      "bp": 120,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier1"
     }
   ],
   "tier2": [
     {
-      "name": "Aura Sphere",
-      "alias": "aura-sphere",
-      "type": "Fighting",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Blast Burn",
-      "alias": "blast-burn",
-      "type": "Fire",
-      "bp": 150,
-      "acc": 90
-    },
-    {
-      "name": "Blizzard",
-      "alias": "blizzard",
-      "type": "Ice",
-      "bp": 110,
-      "acc": 70
-    },
-    {
-      "name": "Body Press",
-      "alias": "body-press",
-      "type": "Fighting",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Breaking Swipe",
-      "alias": "breaking-swipe",
-      "type": "Dragon",
-      "bp": 60,
-      "acc": 100
-    },
-    {
-      "name": "Darkest Lariat",
-      "type": "Dark",
-      "bp": 85,
-      "acc": 100,
-      "alias": "darkest-lariat"
-    },
-    {
-      "name": "Dazzling Gleam",
-      "alias": "dazzling-gleam",
-      "type": "Fairy",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Defog",
-      "type": "Flying",
-      "bp": 0,
-      "acc": 100,
-      "alias": "defog"
-    },
-    {
-      "name": "Dragon Claw",
-      "alias": "dragon-claw",
-      "type": "Dragon",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Drain Punch",
-      "alias": "drain-punch",
-      "type": "Fighting",
-      "bp": 75,
-      "acc": 100
-    },
-    {
-      "name": "Encore",
-      "alias": "encore",
-      "type": "Normal",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Expanding Force",
-      "alias": "expanding-force",
+      "tm": "TM004",
+      "name": "Agility",
+      "alias": "agility",
       "type": "Psychic",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Fire Blast",
-      "alias": "fire-blast",
-      "type": "Fire",
-      "bp": 110,
-      "acc": 85
-    },
-    {
-      "name": "Focus Blast",
-      "alias": "focus-blast",
-      "type": "Fighting",
-      "bp": 120,
-      "acc": 70
-    },
-    {
-      "name": "Frenzy Plant",
-      "alias": "frenzy-plant",
-      "type": "Grass",
-      "bp": 150,
-      "acc": 90
-    },
-    {
-      "name": "Giga Drain",
-      "alias": "giga-drain",
-      "type": "Grass",
-      "bp": 75,
-      "acc": 100
-    },
-    {
-      "name": "Giga Impact",
-      "alias": "giga-impact",
-      "type": "Normal",
-      "bp": 150,
-      "acc": 90
-    },
-    {
-      "name": "Grassy Glide",
-      "alias": "grassy-glide",
-      "type": "Grass",
-      "bp": 60,
-      "acc": 100
-    },
-    {
-      "name": "Gunk Shot",
-      "alias": "gunk-shot",
-      "type": "Poison",
-      "bp": 120,
-      "acc": 80
-    },
-    {
-      "name": "Hard Press",
-      "type": "Steel",
+      "category": "Status",
       "bp": 0,
-      "acc": 100,
-      "alias": "hard-press"
+      "acc": 0,
+      "pp": 30,
+      "tier": "tier2"
     },
     {
-      "name": "Heat Wave",
-      "type": "Fire",
-      "bp": 95,
+      "tm": "TM020",
+      "name": "Trailblaze",
+      "alias": "trailblaze",
+      "type": "Grass",
+      "category": "Physical",
+      "bp": 50,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM022",
+      "name": "Chilling Water",
+      "alias": "chilling-water",
+      "type": "Water",
+      "category": "Special",
+      "bp": 50,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM023",
+      "name": "Charge Beam",
+      "alias": "chargebeam",
+      "type": "Electric",
+      "category": "Special",
+      "bp": 50,
       "acc": 90,
-      "alias": "heat-wave"
+      "pp": 10,
+      "tier": "tier2"
     },
     {
-      "name": "Hurricane",
-      "alias": "hurricane",
-      "type": "Flying",
-      "bp": 110,
-      "acc": 70
-    },
-    {
-      "name": "Hydro Cannon",
-      "alias": "hydro-cannon",
-      "type": "Water",
-      "bp": 150,
-      "acc": 90
-    },
-    {
-      "name": "Hydro Pump",
-      "alias": "hydro-pump",
-      "type": "Water",
-      "bp": 110,
-      "acc": 80
-    },
-    {
-      "name": "Hyper Beam",
-      "alias": "hyper-beam",
-      "type": "Normal",
-      "bp": 150,
-      "acc": 90
-    },
-    {
-      "name": "Icicle Crash",
-      "type": "Ice",
-      "bp": 85,
-      "acc": 90,
-      "alias": "icicle-crash"
-    },
-    {
-      "name": "Leaf Storm",
-      "alias": "leaf-storm",
-      "type": "Grass",
-      "bp": 130,
-      "acc": 90
-    },
-    {
-      "name": "Leech Life",
-      "alias": "leech-life",
-      "type": "Bug",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Light Screen",
-      "type": "Psychic",
-      "bp": 0,
-      "acc": 100,
-      "alias": "light-screen"
-    },
-    {
-      "name": "Liquidation",
-      "alias": "liquidation",
-      "type": "Water",
-      "bp": 85,
-      "acc": 100
-    },
-    {
-      "name": "Megahorn",
-      "alias": "megahorn",
-      "type": "Bug",
-      "bp": 120,
-      "acc": 85
-    },
-    {
-      "name": "Meteor Beam",
-      "alias": "meteor-beam",
-      "type": "Rock",
-      "bp": 120,
-      "acc": 90
-    },
-    {
-      "name": "Overheat",
-      "alias": "overheat",
-      "type": "Fire",
-      "bp": 130,
-      "acc": 90
-    },
-    {
-      "name": "Poltergeist",
-      "alias": "poltergeist",
-      "type": "Ghost",
-      "bp": 110,
-      "acc": 90
-    },
-    {
-      "name": "Power Whip",
-      "alias": "power-whip",
-      "type": "Grass",
-      "bp": 120,
-      "acc": 85
-    },
-    {
-      "name": "Psychic Noise",
-      "type": "Psychic",
-      "bp": 75,
-      "acc": 100,
-      "alias": "psychic-noise"
-    },
-    {
-      "name": "Reflect",
-      "type": "Psychic",
-      "bp": 0,
-      "acc": 100,
-      "alias": "reflect"
-    },
-    {
-      "name": "Scorching Sands",
-      "alias": "scorching-sands",
+      "tm": "TM028",
+      "name": "Bulldoze",
+      "alias": "bulldoze",
       "type": "Ground",
-      "bp": 70,
-      "acc": 100
+      "category": "Physical",
+      "bp": 60,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier2"
     },
     {
-      "name": "Shadow Claw",
-      "alias": "shadow-claw",
+      "tm": "TM029",
+      "name": "Hex",
+      "alias": "hex",
       "type": "Ghost",
-      "bp": 70,
-      "acc": 100
+      "category": "Special",
+      "bp": 65,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
     },
     {
-      "name": "Skill Swap",
-      "alias": "skill-swap",
+      "tm": "TM030",
+      "name": "Snarl",
+      "alias": "snarl",
+      "type": "Dark",
+      "category": "Special",
+      "bp": 55,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM034",
+      "name": "Icy Wind",
+      "alias": "icywind",
+      "type": "Ice",
+      "category": "Special",
+      "bp": 55,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM035",
+      "name": "Mud Shot",
+      "alias": "mudshot",
+      "type": "Ground",
+      "category": "Special",
+      "bp": 55,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM036",
+      "name": "Rock Tomb",
+      "alias": "rocktomb",
+      "type": "Rock",
+      "category": "Physical",
+      "bp": 60,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM037",
+      "name": "Draining Kiss",
+      "alias": "drainingkiss",
+      "type": "Fairy",
+      "category": "Special",
+      "bp": 50,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM038",
+      "name": "Flame Charge",
+      "alias": "flamecharge",
+      "type": "Fire",
+      "category": "Physical",
+      "bp": 50,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM039",
+      "name": "Low Sweep",
+      "alias": "lowsweep",
+      "type": "Fighting",
+      "category": "Physical",
+      "bp": 65,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM041",
+      "name": "Stored Power",
+      "alias": "storedpower",
       "type": "Psychic",
+      "category": "Special",
+      "bp": 20,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM044",
+      "name": "Dragon Tail",
+      "alias": "dragontail",
+      "type": "Dragon",
+      "category": "Physical",
+      "bp": 60,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM045",
+      "name": "Venoshock",
+      "alias": "venoshock",
+      "type": "Poison",
+      "category": "Special",
+      "bp": 65,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM046",
+      "name": "Avalanche",
+      "alias": "avalanche",
+      "type": "Ice",
+      "category": "Physical",
+      "bp": 60,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM047",
+      "name": "Endure",
+      "alias": "endure",
+      "type": "Normal",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
     },
     {
-      "name": "Sky Attack",
-      "alias": "sky-attack",
+      "tm": "TM049",
+      "name": "Sunny Day",
+      "alias": "sunnyday",
+      "type": "Fire",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM050",
+      "name": "Rain Dance",
+      "alias": "raindance",
+      "type": "Water",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM051",
+      "name": "Sandstorm",
+      "alias": "sandstorm",
+      "type": "Rock",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM052",
+      "name": "Snowscape",
+      "alias": "snowscape",
+      "type": "Ice",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM053",
+      "name": "Smart Strike",
+      "alias": "smartstrike",
+      "type": "Steel",
+      "category": "Physical",
+      "bp": 70,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM056",
+      "name": "Bullet Seed",
+      "alias": "bulletseed",
+      "type": "Grass",
+      "category": "Physical",
+      "bp": 25,
+      "acc": 100,
+      "pp": 30,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM058",
+      "name": "Brick Break",
+      "alias": "brickbreak",
+      "type": "Fighting",
+      "category": "Physical",
+      "bp": 75,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM059",
+      "name": "Zen Headbutt",
+      "alias": "zenheadbutt",
+      "type": "Psychic",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 90,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM061",
+      "name": "Shadow Claw",
+      "alias": "shadowclaw",
+      "type": "Ghost",
+      "category": "Physical",
+      "bp": 70,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM062",
+      "name": "Foul Play",
+      "alias": "foulplay",
+      "type": "Dark",
+      "category": "Physical",
+      "bp": 95,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM063",
+      "name": "Psychic Fangs",
+      "alias": "psychicfangs",
+      "type": "Psychic",
+      "category": "Physical",
+      "bp": 85,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM065",
+      "name": "Air Slash",
+      "alias": "airslash",
       "type": "Flying",
-      "bp": 140,
-      "acc": 90
+      "category": "Special",
+      "bp": 75,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier2"
     },
     {
-      "name": "Solar Beam",
-      "alias": "solar-beam",
+      "tm": "TM066",
+      "name": "Body Slam",
+      "alias": "bodyslam",
+      "type": "Normal",
+      "category": "Physical",
+      "bp": 85,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM070",
+      "name": "Sleep Talk",
+      "alias": "sleeptalk",
+      "type": "Normal",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM071",
+      "name": "Seed Bomb",
+      "alias": "seedbomb",
       "type": "Grass",
-      "bp": 120,
-      "acc": 100
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
     },
     {
-      "name": "Solar Blade",
-      "alias": "solar-blade",
+      "tm": "TM072",
+      "name": "Electro Ball",
+      "alias": "electroball",
+      "type": "Electric",
+      "category": "Special",
+      "bp": 0,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM074",
+      "name": "Reflect",
+      "alias": "reflect",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM075",
+      "name": "Light Screen",
+      "alias": "lightscreen",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 30,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM076",
+      "name": "Rock Blast",
+      "alias": "rockblast",
+      "type": "Rock",
+      "category": "Physical",
+      "bp": 25,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM081",
+      "name": "Grass Knot",
+      "alias": "grassknot",
       "type": "Grass",
-      "bp": 125,
-      "acc": 100
+      "category": "Special",
+      "bp": 0,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier2"
     },
     {
+      "tm": "TM083",
+      "name": "Poison Jab",
+      "alias": "poisonjab",
+      "type": "Poison",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM084",
+      "name": "Stomping Tantrum",
+      "alias": "stompingtantrum",
+      "type": "Ground",
+      "category": "Physical",
+      "bp": 75,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM085",
+      "name": "Rest",
+      "alias": "rest",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM086",
+      "name": "Rock Slide",
+      "alias": "rockslide",
+      "type": "Rock",
+      "category": "Physical",
+      "bp": 75,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM090",
       "name": "Spikes",
       "alias": "spikes",
       "type": "Ground",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier2"
     },
     {
-      "name": "Steel Beam",
-      "alias": "steel-beam",
-      "type": "Steel",
-      "bp": 140,
-      "acc": 95
-    },
-    {
-      "name": "Superpower",
-      "alias": "superpower",
-      "type": "Fighting",
-      "bp": 120,
-      "acc": 100
-    },
-    {
-      "name": "Tailwind",
-      "type": "Flying",
-      "bp": 0,
-      "acc": 100,
-      "alias": "tailwind"
-    },
-    {
-      "name": "Taunt",
-      "alias": "taunt",
-      "type": "Dark",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Teleport",
-      "alias": "teleport",
-      "type": "Psychic",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Tera Blast",
-      "type": "Normal",
-      "bp": 80,
-      "acc": 100,
-      "alias": "tera-blast"
-    },
-    {
-      "name": "Thunder",
-      "alias": "thunder",
-      "type": "Electric",
-      "bp": 110,
-      "acc": 70
-    },
-    {
-      "name": "Thunder Wave",
-      "alias": "thunder-wave",
-      "type": "Electric",
-      "bp": 0,
-      "acc": 90
-    },
-    {
-      "name": "Toxic",
-      "alias": "toxic",
-      "type": "Poison",
-      "bp": 0,
-      "acc": 90
-    },
-    {
+      "tm": "TM091",
       "name": "Toxic Spikes",
-      "alias": "toxic-spikes",
+      "alias": "toxicspikes",
       "type": "Poison",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier2"
     },
     {
-      "name": "Trick",
-      "alias": "trick",
+      "tm": "TM092",
+      "name": "Imprison",
+      "alias": "imprison",
       "type": "Psychic",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
     },
     {
-      "name": "Trick Room",
-      "alias": "trick-room",
-      "type": "Psychic",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Will-O-Wisp",
-      "alias": "will-o-wisp",
-      "type": "Fire",
-      "bp": 0,
-      "acc": 85
-    },
-    {
-      "name": "X-Scissor",
-      "alias": "x-scissor",
-      "type": "Bug",
+      "tm": "TM093",
+      "name": "Flash Cannon",
+      "alias": "flashcannon",
+      "type": "Steel",
+      "category": "Special",
       "bp": 80,
-      "acc": 100
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM095",
+      "name": "Leech Life",
+      "alias": "leechlife",
+      "type": "Bug",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM096",
+      "name": "Eerie Impulse",
+      "alias": "eerieimpulse",
+      "type": "Electric",
+      "category": "Status",
+      "bp": 0,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM098",
+      "name": "Skill Swap",
+      "alias": "skillswap",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM101",
+      "name": "Power Gem",
+      "alias": "powergem",
+      "type": "Rock",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM104",
+      "name": "Iron Defense",
+      "alias": "irondefense",
+      "type": "Steel",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM105",
+      "name": "X-Scissor",
+      "alias": "xscissor",
+      "type": "Bug",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM106",
+      "name": "Drill Run",
+      "alias": "drillrun",
+      "type": "Ground",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 95,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM108",
+      "name": "Crunch",
+      "alias": "crunch",
+      "type": "Dark",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM115",
+      "name": "Dragon Pulse",
+      "alias": "dragonpulse",
+      "type": "Dragon",
+      "category": "Special",
+      "bp": 85,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM116",
+      "name": "Stealth Rock",
+      "alias": "stealthrock",
+      "type": "Rock",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM117",
+      "name": "Hyper Voice",
+      "alias": "hypervoice",
+      "type": "Normal",
+      "category": "Special",
+      "bp": 90,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM121",
+      "name": "Heavy Slam",
+      "alias": "heavyslam",
+      "type": "Steel",
+      "category": "Physical",
+      "bp": 0,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM128",
+      "name": "Amnesia",
+      "alias": "amnesia",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM130",
+      "name": "Helping Hand",
+      "alias": "helpinghand",
+      "type": "Normal",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM134",
+      "name": "Reversal",
+      "alias": "reversal",
+      "type": "Fighting",
+      "category": "Physical",
+      "bp": 0,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM136",
+      "name": "Electric Terrain",
+      "alias": "electricterrain",
+      "type": "Electric",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM137",
+      "name": "Grassy Terrain",
+      "alias": "grassyterrain",
+      "type": "Grass",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM138",
+      "name": "Psychic Terrain",
+      "alias": "psychicterrain",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM139",
+      "name": "Misty Terrain",
+      "alias": "mistyterrain",
+      "type": "Fairy",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM144",
+      "name": "Fire Pledge",
+      "alias": "firepledge",
+      "type": "Fire",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM145",
+      "name": "Water Pledge",
+      "alias": "waterpledge",
+      "type": "Water",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM146",
+      "name": "Grass Pledge",
+      "alias": "grasspledge",
+      "type": "Grass",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM147",
+      "name": "Wild Charge",
+      "alias": "wildcharge",
+      "type": "Electric",
+      "category": "Physical",
+      "bp": 90,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM151",
+      "name": "Phantom Force",
+      "alias": "phantomforce",
+      "type": "Ghost",
+      "category": "Physical",
+      "bp": 90,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM152",
+      "name": "Giga Impact",
+      "alias": "gigaimpact",
+      "type": "Normal",
+      "category": "Physical",
+      "bp": 150,
+      "acc": 90,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM153",
+      "name": "Blast Burn",
+      "alias": "blastburn",
+      "type": "Fire",
+      "category": "Special",
+      "bp": 150,
+      "acc": 90,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM154",
+      "name": "Hydro Cannon",
+      "alias": "hydrocannon",
+      "type": "Water",
+      "category": "Special",
+      "bp": 150,
+      "acc": 90,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM155",
+      "name": "Frenzy Plant",
+      "alias": "frenzyplant",
+      "type": "Grass",
+      "category": "Special",
+      "bp": 150,
+      "acc": 90,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM162",
+      "name": "Bug Buzz",
+      "alias": "bugbuzz",
+      "type": "Bug",
+      "category": "Special",
+      "bp": 90,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM163",
+      "name": "Hyper Beam",
+      "alias": "hyperbeam",
+      "type": "Normal",
+      "category": "Special",
+      "bp": 150,
+      "acc": 90,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM168",
+      "name": "Solar Beam",
+      "alias": "solarbeam",
+      "type": "Grass",
+      "category": "Special",
+      "bp": 120,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM170",
+      "name": "Steel Beam",
+      "alias": "steelbeam",
+      "type": "Steel",
+      "category": "Special",
+      "bp": 140,
+      "acc": 95,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM172",
+      "name": "Roar",
+      "alias": "roar",
+      "type": "Normal",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM174",
+      "name": "Haze",
+      "alias": "haze",
+      "type": "Ice",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 30,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM178",
+      "name": "Gravity",
+      "alias": "gravity",
+      "type": "Psychic",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM180",
+      "name": "Gyro Ball",
+      "alias": "gyroball",
+      "type": "Steel",
+      "category": "Physical",
+      "bp": 0,
+      "acc": 100,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM183",
+      "name": "Super Fang",
+      "alias": "superfang",
+      "type": "Normal",
+      "category": "Physical",
+      "bp": 0,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM184",
+      "name": "Vacuum Wave",
+      "alias": "vacuumwave",
+      "type": "Fighting",
+      "category": "Special",
+      "bp": 40,
+      "acc": 100,
+      "pp": 30,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM185",
+      "name": "Lunge",
+      "alias": "lunge",
+      "type": "Bug",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM187",
+      "name": "Icicle Spear",
+      "alias": "iciclespear",
+      "type": "Ice",
+      "category": "Physical",
+      "bp": 25,
+      "acc": 100,
+      "pp": 30,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM189",
+      "name": "Heat Crash",
+      "alias": "heatcrash",
+      "type": "Fire",
+      "category": "Physical",
+      "bp": 0,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM190",
+      "name": "Solar Blade",
+      "alias": "solarblade",
+      "type": "Grass",
+      "category": "Physical",
+      "bp": 125,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM193",
+      "name": "Weather Ball",
+      "alias": "weatherball",
+      "type": "Normal",
+      "category": "Special",
+      "bp": 50,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM194",
+      "name": "Grassy Glide",
+      "alias": "grassyglide",
+      "type": "Grass",
+      "category": "Physical",
+      "bp": 70,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM195",
+      "name": "Burning Jealousy",
+      "alias": "burningjealousy",
+      "type": "Fire",
+      "category": "Special",
+      "bp": 70,
+      "acc": 100,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM197",
+      "name": "Dual Wingbeat",
+      "alias": "dualwingbeat",
+      "type": "Flying",
+      "category": "Physical",
+      "bp": 40,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM199",
+      "name": "Lash Out",
+      "alias": "lashout",
+      "type": "Dark",
+      "category": "Physical",
+      "bp": 75,
+      "acc": 100,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM201",
+      "name": "Misty Explosion",
+      "alias": "mistyexplosion",
+      "type": "Fairy",
+      "category": "Special",
+      "bp": 100,
+      "acc": 100,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM202",
+      "name": "Pain Split",
+      "alias": "painsplit",
+      "type": "Normal",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM203",
+      "name": "Psych Up",
+      "alias": "psychup",
+      "type": "Normal",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM204",
+      "name": "Double-Edge",
+      "alias": "doubleedge",
+      "type": "Normal",
+      "category": "Physical",
+      "bp": 120,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM205",
+      "name": "Endeavor",
+      "alias": "endeavor",
+      "type": "Normal",
+      "category": "Physical",
+      "bp": 0,
+      "acc": 100,
+      "pp": 5,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM206",
+      "name": "Petal Blizzard",
+      "alias": "petalblizzard",
+      "type": "Grass",
+      "category": "Physical",
+      "bp": 90,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM207",
+      "name": "Temper Flare",
+      "alias": "temper-flare",
+      "type": "Fire",
+      "category": "Physical",
+      "bp": 75,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM209",
+      "name": "Muddy Water",
+      "alias": "muddywater",
+      "type": "Water",
+      "category": "Special",
+      "bp": 90,
+      "acc": 85,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM210",
+      "name": "Supercell Slam",
+      "alias": "supercell-slam",
+      "type": "Electric",
+      "category": "Physical",
+      "bp": 100,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM211",
+      "name": "Electroweb",
+      "alias": "electroweb",
+      "type": "Electric",
+      "category": "Special",
+      "bp": 55,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM213",
+      "name": "Coaching",
+      "alias": "coaching",
+      "type": "Fighting",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM215",
+      "name": "Scorching Sands",
+      "alias": "scorchingsands",
+      "type": "Ground",
+      "category": "Special",
+      "bp": 70,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM216",
+      "name": "Feather Dance",
+      "alias": "featherdance",
+      "type": "Flying",
+      "category": "Status",
+      "bp": 0,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM217",
+      "name": "Future Sight",
+      "alias": "futuresight",
+      "type": "Psychic",
+      "category": "Special",
+      "bp": 120,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM221",
+      "name": "Throat Chop",
+      "alias": "throatchop",
+      "type": "Dark",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM222",
+      "name": "Breaking Swipe",
+      "alias": "breakingswipe",
+      "type": "Dragon",
+      "category": "Physical",
+      "bp": 60,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM224",
+      "name": "Curse",
+      "alias": "curse",
+      "type": "Ghost",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM225",
+      "name": "Hard Press",
+      "alias": "hard-press",
+      "type": "Steel",
+      "category": "Physical",
+      "bp": 0,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM226",
+      "name": "Dragon Cheer",
+      "alias": "dragon-cheer",
+      "type": "Dragon",
+      "category": "Status",
+      "bp": 0,
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM227",
+      "name": "Alluring Voice",
+      "alias": "alluring-voice",
+      "type": "Fairy",
+      "category": "Special",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM228",
+      "name": "Psychic Noise",
+      "alias": "psychic-noise",
+      "type": "Psychic",
+      "category": "Special",
+      "bp": 75,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier2"
+    },
+    {
+      "tm": "TM229",
+      "name": "Upper Hand",
+      "alias": "upper-hand",
+      "type": "Fighting",
+      "category": "Physical",
+      "bp": 65,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier2"
     }
   ],
   "tier3": [
     {
-      "name": "Alluring Voice",
-      "alias": "alluring-voice",
+      "tm": "TM001",
+      "name": "Take Down",
+      "alias": "takedown",
+      "type": "Normal",
+      "category": "Physical",
+      "bp": 90,
+      "acc": 85,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM002",
+      "name": "Charm",
+      "alias": "charm",
       "type": "Fairy",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Ally Switch",
-      "alias": "ally-switch",
-      "type": "Psychic",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Avalanche",
-      "alias": "avalanche",
-      "type": "Ice",
-      "bp": 60,
-      "acc": 100
-    },
-    {
-      "name": "Baton Pass",
-      "alias": "baton-pass",
-      "type": "Normal",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Body Slam",
-      "alias": "body-slam",
-      "type": "Normal",
-      "bp": 85,
-      "acc": 100
-    },
-    {
-      "name": "Bullet Seed",
-      "type": "Grass",
-      "bp": 25,
       "acc": 100,
-      "alias": "bullet-seed"
+      "pp": 20,
+      "tier": "tier3"
     },
     {
-      "name": "Burning Jealousy",
-      "alias": "burning-jealousy",
+      "tm": "TM003",
+      "name": "Fake Tears",
+      "alias": "faketears",
+      "type": "Dark",
+      "category": "Status",
+      "bp": 0,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM005",
+      "name": "Mud-Slap",
+      "alias": "mudslap",
+      "type": "Ground",
+      "category": "Special",
+      "bp": 20,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM006",
+      "name": "Scary Face",
+      "alias": "scaryface",
+      "type": "Normal",
+      "category": "Status",
+      "bp": 0,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM008",
+      "name": "Fire Fang",
+      "alias": "firefang",
       "type": "Fire",
-      "bp": 70,
-      "acc": 100
+      "category": "Physical",
+      "bp": 65,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier3"
     },
     {
-      "name": "Chilling Water",
+      "tm": "TM009",
+      "name": "Thunder Fang",
+      "alias": "thunderfang",
+      "type": "Electric",
+      "category": "Physical",
+      "bp": 65,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM010",
+      "name": "Ice Fang",
+      "alias": "icefang",
+      "type": "Ice",
+      "category": "Physical",
+      "bp": 65,
+      "acc": 95,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM011",
+      "name": "Water Pulse",
+      "alias": "waterpulse",
       "type": "Water",
+      "category": "Special",
+      "bp": 60,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM012",
+      "name": "Low Kick",
+      "alias": "lowkick",
+      "type": "Fighting",
+      "category": "Physical",
+      "bp": 0,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM013",
+      "name": "Acid Spray",
+      "alias": "acidspray",
+      "type": "Poison",
+      "category": "Special",
+      "bp": 40,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM015",
+      "name": "Struggle Bug",
+      "alias": "strugglebug",
+      "type": "Bug",
+      "category": "Special",
       "bp": 50,
       "acc": 100,
-      "alias": "chilling-water"
+      "pp": 20,
+      "tier": "tier3"
     },
     {
-      "name": "Coaching",
-      "alias": "coaching",
-      "type": "Fighting",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Crunch",
-      "alias": "crunch",
-      "type": "Dark",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Dream Eater",
-      "alias": "dream-eater",
+      "tm": "TM016",
+      "name": "Psybeam",
+      "alias": "psybeam",
       "type": "Psychic",
-      "bp": 100,
-      "acc": 100
+      "category": "Special",
+      "bp": 65,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier3"
     },
     {
-      "name": "Drill Run",
-      "alias": "drill-run",
-      "type": "Ground",
-      "bp": 80,
-      "acc": 95
-    },
-    {
-      "name": "Electric Terrain",
-      "alias": "electric-terrain",
-      "type": "Electric",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Facade",
-      "alias": "facade",
-      "type": "Normal",
-      "bp": 70,
-      "acc": 100
-    },
-    {
-      "name": "False Swipe",
-      "alias": "false-swipe",
-      "type": "Normal",
-      "bp": 40,
-      "acc": 100
-    },
-    {
-      "name": "Fire Punch",
-      "alias": "fire-punch",
-      "type": "Fire",
-      "bp": 75,
-      "acc": 100
-    },
-    {
-      "name": "Flash Cannon",
-      "alias": "flash-cannon",
-      "type": "Steel",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Grass Knot",
-      "alias": "grass-knot",
-      "type": "Grass",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Grassy Terrain",
-      "alias": "grassy-terrain",
-      "type": "Grass",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Haze",
-      "type": "Ice",
+      "tm": "TM017",
+      "name": "Confuse Ray",
+      "alias": "confuseray",
+      "type": "Ghost",
+      "category": "Status",
       "bp": 0,
       "acc": 100,
-      "alias": "haze"
+      "pp": 10,
+      "tier": "tier3"
     },
     {
-      "name": "Heat Crash",
-      "alias": "heat-crash",
-      "type": "Fire",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Helping Hand",
-      "alias": "helping-hand",
-      "type": "Normal",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "High Horsepower",
-      "alias": "high-horsepower",
-      "type": "Ground",
-      "bp": 95,
-      "acc": 95
-    },
-    {
-      "name": "Ice Punch",
-      "alias": "ice-punch",
-      "type": "Ice",
-      "bp": 75,
-      "acc": 100
-    },
-    {
-      "name": "Ice Spinner",
-      "alias": "ice-spinner",
-      "type": "Ice",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Icicle Spear",
-      "alias": "icicle-spear",
-      "type": "Ice",
-      "bp": 25,
-      "acc": 100
-    },
-    {
-      "name": "Icy Wind",
-      "alias": "icy-wind",
-      "type": "Ice",
-      "bp": 55,
-      "acc": 95
-    },
-    {
-      "name": "Low Kick",
-      "alias": "low-kick",
-      "type": "Fighting",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Magical Leaf",
-      "alias": "magical-leaf",
-      "type": "Grass",
+      "tm": "TM018",
+      "name": "Thief",
+      "alias": "thief",
+      "type": "Dark",
+      "category": "Physical",
       "bp": 60,
-      "acc": 100
+      "acc": 100,
+      "pp": 25,
+      "tier": "tier3"
     },
     {
+      "tm": "TM019",
+      "name": "Disarming Voice",
+      "alias": "disarmingvoice",
+      "type": "Fairy",
+      "category": "Special",
+      "bp": 40,
+      "acc": 0,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM021",
+      "name": "Pounce",
+      "alias": "pounce",
+      "type": "Bug",
+      "category": "Physical",
+      "bp": 50,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM024",
+      "name": "Fire Spin",
+      "alias": "firespin",
+      "type": "Fire",
+      "category": "Special",
+      "bp": 35,
+      "acc": 85,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM026",
+      "name": "Poison Tail",
+      "alias": "poisontail",
+      "type": "Poison",
+      "category": "Physical",
+      "bp": 50,
+      "acc": 100,
+      "pp": 25,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM027",
+      "name": "Aerial Ace",
+      "alias": "aerialace",
+      "type": "Flying",
+      "category": "Physical",
+      "bp": 60,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM031",
+      "name": "Metal Claw",
+      "alias": "metalclaw",
+      "type": "Steel",
+      "category": "Physical",
+      "bp": 50,
+      "acc": 95,
+      "pp": 35,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM032",
+      "name": "Swift",
+      "alias": "swift",
+      "type": "Normal",
+      "category": "Special",
+      "bp": 60,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM033",
+      "name": "Magical Leaf",
+      "alias": "magicalleaf",
+      "type": "Grass",
+      "category": "Special",
+      "bp": 60,
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM040",
+      "name": "Air Cutter",
+      "alias": "aircutter",
+      "type": "Flying",
+      "category": "Special",
+      "bp": 60,
+      "acc": 95,
+      "pp": 25,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM042",
+      "name": "Night Shade",
+      "alias": "nightshade",
+      "type": "Ghost",
+      "category": "Special",
+      "bp": 0,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM043",
+      "name": "Fling",
+      "alias": "fling",
+      "type": "Dark",
+      "category": "Physical",
+      "bp": 0,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM055",
+      "name": "Dig",
+      "alias": "dig",
+      "type": "Ground",
+      "category": "Physical",
+      "bp": 80,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM057",
+      "name": "False Swipe",
+      "alias": "falseswipe",
+      "type": "Normal",
+      "category": "Physical",
+      "bp": 40,
+      "acc": 100,
+      "pp": 40,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM067",
+      "name": "Fire Punch",
+      "alias": "firepunch",
+      "type": "Fire",
+      "category": "Physical",
+      "bp": 75,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM068",
+      "name": "Thunder Punch",
+      "alias": "thunderpunch",
+      "type": "Electric",
+      "category": "Physical",
+      "bp": 75,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM069",
+      "name": "Ice Punch",
+      "alias": "icepunch",
+      "type": "Ice",
+      "category": "Physical",
+      "bp": 75,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM080",
       "name": "Metronome",
       "alias": "metronome",
       "type": "Normal",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
+      "acc": 0,
+      "pp": 10,
+      "tier": "tier3"
     },
     {
-      "name": "Misty Explosion",
-      "alias": "misty-explosion",
-      "type": "Fairy",
-      "bp": 100,
-      "acc": 100
-    },
-    {
-      "name": "Misty Terrain",
-      "alias": "misty-terrain",
-      "type": "Fairy",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Muddy Water",
-      "alias": "muddy-water",
-      "type": "Water",
+      "tm": "TM097",
+      "name": "Fly",
+      "alias": "fly",
+      "type": "Flying",
+      "category": "Physical",
       "bp": 90,
-      "acc": 85
-    },
-    {
-      "name": "Mystical Fire",
-      "alias": "mystical-fire",
-      "type": "Fire",
-      "bp": 75,
-      "acc": 100
-    },
-    {
-      "name": "Night Shade",
-      "alias": "night-shade",
-      "type": "Ghost",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Pin Missile",
-      "type": "Bug",
-      "bp": 25,
       "acc": 95,
-      "alias": "pin-missile"
+      "pp": 15,
+      "tier": "tier3"
     },
     {
-      "name": "Poison Jab",
-      "alias": "poison-jab",
-      "type": "Poison",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Pounce",
-      "type": "Bug",
-      "bp": 50,
-      "acc": 100,
-      "alias": "pounce"
-    },
-    {
-      "name": "Psych Up",
-      "alias": "psych-up",
-      "type": "Normal",
+      "tm": "TM173",
+      "name": "Charge",
+      "alias": "charge",
+      "type": "Electric",
+      "category": "Status",
       "bp": 0,
-      "acc": 100
+      "acc": 0,
+      "pp": 20,
+      "tier": "tier3"
     },
     {
-      "name": "Psychic Terrain",
-      "alias": "psychic-terrain",
-      "type": "Psychic",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Psyshock",
-      "alias": "psyshock",
-      "type": "Psychic",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Rain Dance",
-      "alias": "rain-dance",
-      "type": "Water",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Roar",
-      "alias": "roar",
-      "type": "Normal",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Rock Blast",
-      "alias": "rock-blast",
-      "type": "Rock",
-      "bp": 25,
-      "acc": 90
-    },
-    {
-      "name": "Rock Slide",
-      "alias": "rock-slide",
-      "type": "Rock",
-      "bp": 75,
-      "acc": 90
-    },
-    {
-      "name": "Safeguard",
-      "alias": "safeguard",
-      "type": "Normal",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Sandstorm",
-      "alias": "sandstorm",
-      "type": "Rock",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Self-Destruct",
-      "alias": "self-destruct",
-      "type": "Normal",
-      "bp": 200,
-      "acc": 100
-    },
-    {
-      "name": "Sludge Wave",
-      "alias": "sludge-wave",
-      "type": "Poison",
-      "bp": 95,
-      "acc": 100
-    },
-    {
-      "name": "Smart Strike",
-      "type": "Steel",
-      "bp": 70,
-      "acc": 100,
-      "alias": "smart-strike"
-    },
-    {
-      "name": "Snatch",
-      "alias": "snatch",
-      "type": "Dark",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Stomping Tantrum",
-      "alias": "stomping-tantrum",
+      "tm": "TM176",
+      "name": "Sand Tomb",
+      "alias": "sandtomb",
       "type": "Ground",
-      "bp": 75,
-      "acc": 100
-    },
-    {
-      "name": "Sunny Day",
-      "alias": "sunny-day",
-      "type": "Fire",
-      "bp": 0,
-      "acc": 100
-    },
-    {
-      "name": "Supercell Slam",
-      "alias": "supercell-slam",
-      "type": "Electric",
-      "bp": 100,
-      "acc": 95
-    },
-    {
-      "name": "Tail Slap",
-      "type": "Normal",
-      "bp": 25,
+      "category": "Physical",
+      "bp": 35,
       "acc": 85,
-      "alias": "tail-slap"
+      "pp": 15,
+      "tier": "tier3"
     },
     {
-      "name": "Throat Chop",
-      "alias": "throat-chop",
-      "type": "Dark",
-      "bp": 80,
-      "acc": 100
-    },
-    {
-      "name": "Thunder Punch",
-      "alias": "thunder-punch",
-      "type": "Electric",
-      "bp": 75,
-      "acc": 100
-    },
-    {
-      "name": "Trailblaze",
-      "type": "Grass",
-      "bp": 50,
-      "acc": 100,
-      "alias": "trailblaze"
-    },
-    {
-      "name": "Upper Hand",
-      "type": "Fighting",
-      "bp": 65,
-      "acc": 100,
-      "alias": "upper-hand"
-    },
-    {
-      "name": "Vacuum Wave",
-      "alias": "vacuum-wave",
-      "type": "Fighting",
-      "bp": 40,
-      "acc": 100
-    },
-    {
-      "name": "Weather Ball",
-      "alias": "weather-ball",
-      "type": "Normal",
-      "bp": 50,
-      "acc": 100
-    },
-    {
-      "name": "Whirlwind",
-      "type": "Normal",
+      "tm": "TM177",
+      "name": "Spite",
+      "alias": "spite",
+      "type": "Ghost",
+      "category": "Status",
       "bp": 0,
       "acc": 100,
-      "alias": "whirlwind"
+      "pp": 10,
+      "tier": "tier3"
     },
     {
-      "name": "Work Up",
-      "alias": "work-up",
+      "tm": "TM179",
+      "name": "Smack Down",
+      "alias": "smackdown",
+      "type": "Rock",
+      "category": "Physical",
+      "bp": 50,
+      "acc": 100,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM182",
+      "name": "Bug Bite",
+      "alias": "bugbite",
+      "type": "Bug",
+      "category": "Physical",
+      "bp": 60,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM191",
+      "name": "Uproar",
+      "alias": "uproar",
       "type": "Normal",
-      "bp": 0,
-      "acc": 100
+      "category": "Special",
+      "bp": 90,
+      "acc": 100,
+      "pp": 10,
+      "tier": "tier3"
     },
     {
-      "name": "Zen Headbutt",
-      "alias": "zen-headbutt",
-      "type": "Psychic",
-      "bp": 80,
-      "acc": 90
+      "tm": "TM192",
+      "name": "Focus Punch",
+      "alias": "focuspunch",
+      "type": "Fighting",
+      "category": "Physical",
+      "bp": 150,
+      "acc": 100,
+      "pp": 20,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM208",
+      "name": "Whirlpool",
+      "alias": "whirlpool",
+      "type": "Water",
+      "category": "Special",
+      "bp": 35,
+      "acc": 85,
+      "pp": 15,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM219",
+      "name": "Skitter Smack",
+      "alias": "skittersmack",
+      "type": "Bug",
+      "category": "Physical",
+      "bp": 70,
+      "acc": 90,
+      "pp": 10,
+      "tier": "tier3"
+    },
+    {
+      "tm": "TM223",
+      "name": "Metal Sound",
+      "alias": "metalsound",
+      "type": "Steel",
+      "category": "Status",
+      "bp": 0,
+      "acc": 85,
+      "pp": 40,
+      "tier": "tier3"
     }
   ]
 }

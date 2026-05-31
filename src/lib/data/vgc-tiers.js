@@ -1,0 +1,202 @@
+import { normalisePokemonId } from './smogon-tiers'
+
+const entries = [
+  ['xerneas', 0],
+  ['groudon', 0],
+  ['groudonprimal', 0],
+  ['kyogre', 0],
+  ['kyogreprimal', 0],
+  ['zaciancrowned', 0],
+  ['calyrexshadow', 0],
+  ['calyrexice', 0],
+  ['lunala', 0],
+  ['solgaleo', 0],
+  ['kyuremwhite', 0],
+  ['koraidon', 0],
+  ['miraidon', 0],
+  ['rayquaza', 0],
+  ['dialga', 0],
+  ['palkia', 0],
+  ['mewtwo', 0],
+  ['terapagos', 0],
+  ['reshiram', 0],
+  ['zekrom', 0],
+  ['kyuremblack', 0],
+  ['necrozmaduskmane', 0],
+  ['necrozmadawnwings', 0],
+  ['yveltal', 0],
+  ['lugia', 0],
+  ['hooh', 0],
+  ['giratina', 0],
+
+  ['incineroar', 1],
+  ['amoonguss', 1],
+  ['tapukoko', 1],
+  ['arcanine', 1],
+  ['landorustherian', 1],
+  ['kartana', 1],
+
+  ['porygon2', 2],
+  ['tapufini', 2],
+  ['tapulele', 2],
+  ['regieleki', 2],
+  ['garchomp', 2],
+  ['rillaboom', 2],
+  ['urshifurapidstrike', 2],
+  ['snorlax', 2],
+  ['kangaskhan', 2],
+  ['tornadustherian', 2],
+
+  ['gholdengo', 3],
+  ['cresselia', 3],
+  ['salamence', 3],
+  ['thundurustherian', 3],
+  ['whimsicott', 3],
+  ['celesteela', 3],
+
+  ['gyarados', 4],
+  ['ironhands', 4],
+  ['nihilego', 4],
+  ['dragonite', 4],
+  ['heatran', 4],
+  ['zapdos', 4],
+  ['dracovish', 4],
+  ['smeargle', 4],
+  ['metagross', 4],
+  ['tyranitar', 4],
+  ['charizard', 4],
+  ['dragapult', 4],
+  ['kingambit', 4],
+  ['ursalunabloodmoon', 4],
+  ['ursaluna', 4],
+  ['fluttermane', 4],
+  ['mimikyu', 4],
+  ['ninetalesalola', 4],
+  ['torkoal', 4],
+  ['venusaur', 4],
+  ['sableye', 4],
+  ['pelipper', 4],
+  ['archaludon', 4],
+  ['farigiraf', 4],
+  ['chiyu', 4],
+  ['chienpao', 4],
+  ['roaringmoon', 4],
+  ['talonflame', 4],
+  ['landorusincarnate', 4],
+  ['venusaurmega', 4],
+  ['charizardmegay', 4],
+  ['entei', 4],
+  ['bronzong', 4],
+  ['grimmsnarl', 4],
+
+  ['porygonz', 5],
+  ['gastrodon', 5],
+  ['volcarona', 5],
+  ['clefairy', 5],
+  ['excadrill', 5],
+  ['kangaskhanmega', 5],
+  ['toxapex', 5],
+  ['hydreigon', 5],
+  ['swampert', 5],
+  ['politoed', 5],
+  ['jellicent', 5],
+  ['empoleon', 5],
+  ['primarina', 5],
+  ['milotic', 5],
+  ['ludicolo', 5],
+  ['buzzwole', 5],
+  ['slurpuff', 5],
+  ['clefable', 5],
+  ['umbreon', 5],
+  ['rotomheat', 5],
+  ['magnezone', 5],
+  ['zapdosgalar', 5],
+  ['raichu', 5],
+  ['tinkaton', 5],
+  ['hatterene', 5],
+  ['latios', 5],
+  ['latias', 5],
+  ['kyurem', 5],
+  ['gengarmega', 5],
+  ['noivern', 5],
+  ['weezinggalar', 5],
+  ['togekiss', 5],
+  ['aegislash', 5],
+  ['goodrahisui', 5],
+  ['meowscarada', 5],
+  ['regidrago', 5],
+  ['ogerponhearthflame', 5],
+  ['abomasnow', 5],
+  ['krookodile', 5],
+  ['chandelure', 5],
+  ['ditto', 5],
+  ['gardevoir', 5],
+  ['gallade', 5],
+  ['sylveon', 5],
+  ['gastrodoneast', 5],
+  ['slowking', 5],
+  ['sneasler', 5],
+  ['ironbundle', 5],
+  ['clawitzer', 5],
+  ['flamigo', 5],
+  ['duraludon', 5],
+  ['marowakalola', 5],
+  ['salamencemega', 5],
+  ['ribombee', 5],
+  ['araquanid', 5],
+  ['gastrodonwest', 5],
+  ['toxtricity', 5],
+  ['electivire', 5],
+  ['scizor', 5],
+  ['brambleghast', 5],
+  ['ironcrown', 5],
+  ['indeedeef', 5],
+
+  ['weavile', 6],
+  ['mienshao', 6],
+  ['aerodactyl', 6],
+  ['butterfree', 6],
+  ['serperior', 6],
+  ['liepard', 6],
+  ['arcaninehisui', 6],
+  ['kingdra', 6],
+  ['heliolisk', 6],
+  ['shedinja', 6],
+  ['pachirisu', 6],
+  ['murkrow', 6],
+  ['vivillon', 6],
+  ['basculegion', 6],
+  ['sinistcha', 6],
+  ['klefki', 6],
+  ['orthworm', 6]
+]
+
+export const VGC_TIERS = ['All', 'Tier 0', 'Tier 1', 'Tier 2', 'Tier 3', 'Tier 4', 'Tier 5', 'Tier 6']
+
+export const vgcTierMap = entries.reduce((acc, [name, tier]) => {
+  acc[normalisePokemonId(name)] = {
+    tier,
+    label: `VGC Tier ${tier}`,
+    hasWon: true
+  }
+  return acc
+}, {})
+
+export const getVgcTier = (pokemon = {}) => {
+  const keys = [pokemon.alias, pokemon.sprite, pokemon.name].map(normalisePokemonId).filter(Boolean)
+  const direct = keys.map((key) => vgcTierMap[key]).find(Boolean)
+  if (direct) return direct
+
+  const base = keys
+    .map((key) =>
+      key
+        .replace(/mega[xy]?$/, '')
+        .replace(/gmax$/, '')
+        .replace(/totem$/, '')
+        .replace(/shiny$/, '')
+    )
+    .map((key) => vgcTierMap[key])
+    .find(Boolean)
+
+  return base || null
+}

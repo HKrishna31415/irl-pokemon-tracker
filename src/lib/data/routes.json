@@ -302,6 +302,22 @@
     },
     {
       "type": "route",
+      "name": "Post-Brock Gift",
+      "gift": true,
+      "encounters": [
+        "vulpix"
+      ],
+      "defaultIvs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      }
+    },
+    {
+      "type": "route",
       "name": "Route 3",
       "encounters": [
         "caterpie",
@@ -338,6 +354,13 @@
         "larvitar": 3
       },
       "cap": 16
+    },
+    {
+      "type": "gym",
+      "name": "Route 3",
+      "value": "lass1",
+      "group": "mini-boss",
+      "boss": "Lass 1"
     },
     {
       "type": "route",
@@ -377,6 +400,13 @@
       "cap": 17
     },
     {
+      "type": "gym",
+      "name": "Route 4",
+      "value": "acetrainer1",
+      "group": "mini-boss",
+      "boss": "Ace Trainer"
+    },
+    {
       "type": "route",
       "name": "Mt. Moon",
       "encounters": [
@@ -412,37 +442,6 @@
       "cap": 18
     },
     {
-      "type": "route",
-      "name": "Cerulean City",
-      "encounters": [
-        "chewtle",
-        "clauncher",
-        "wishiwashi",
-        "wailmer",
-        "remoraid",
-        "luvdisc",
-        "sharpedo",
-        "octillery",
-        "golduck",
-        "carnivine",
-        "froakie"
-      ]
-    },
-    {
-      "type": "gym",
-      "name": "Route 3",
-      "value": "lass1",
-      "group": "mini-boss",
-      "boss": "Lass 1"
-    },
-    {
-      "type": "gym",
-      "name": "Route 4",
-      "value": "acetrainer1",
-      "group": "mini-boss",
-      "boss": "Ace Trainer"
-    },
-    {
       "type": "gym",
       "name": "Mt. Moon 1F",
       "value": "hiker1",
@@ -470,6 +469,23 @@
         "kabuto",
         "omanyte",
         "aerodactyl"
+      ]
+    },
+    {
+      "type": "route",
+      "name": "Cerulean City",
+      "encounters": [
+        "chewtle",
+        "clauncher",
+        "wishiwashi",
+        "wailmer",
+        "remoraid",
+        "luvdisc",
+        "sharpedo",
+        "octillery",
+        "golduck",
+        "carnivine",
+        "froakie"
       ]
     },
     {
@@ -2598,13 +2614,6 @@
       "boss": "Miner George"
     },
     {
-      "type": "gym",
-      "name": "Pewter City Gym",
-      "value": "1_hard",
-      "group": "gym-leader",
-      "boss": "Brock"
-    },
-    {
       "type": "route",
       "name": "Pewter City",
       "encounters": [
@@ -2626,6 +2635,29 @@
         "skiddo",
         "gastly"
       ]
+    },
+    {
+      "type": "gym",
+      "name": "Pewter City Gym",
+      "value": "1_hard",
+      "group": "gym-leader",
+      "boss": "Brock"
+    },
+    {
+      "type": "route",
+      "name": "Post-Brock Gift",
+      "gift": true,
+      "encounters": [
+        "vulpix"
+      ],
+      "defaultIvs": {
+        "hp": 31,
+        "atk": 31,
+        "def": 31,
+        "spa": 31,
+        "spd": 31,
+        "spe": 31
+      }
     },
     {
       "type": "route",
@@ -2667,6 +2699,13 @@
       "cap": 16
     },
     {
+      "type": "gym",
+      "name": "Route 3",
+      "value": "lass1_hard",
+      "group": "mini-boss",
+      "boss": "Lass 1"
+    },
+    {
       "type": "route",
       "name": "Route 4",
       "encounters": [
@@ -2702,6 +2741,20 @@
         "jangmo-o": 1
       },
       "cap": 17
+    },
+    {
+      "type": "gym",
+      "name": "Route 4",
+      "value": "acetrainer1_hard",
+      "group": "mini-boss",
+      "boss": "Ace Trainer"
+    },
+    {
+      "type": "route",
+      "name": "Route 4 Magikarp ($1000)",
+      "encounters": [
+        "magikarp"
+      ]
     },
     {
       "type": "route",
@@ -2740,58 +2793,6 @@
     },
     {
       "type": "gym",
-      "name": "Mt. Moon",
-      "value": "ev1_hard",
-      "group": "evil-team",
-      "boss": "Admin Archer"
-    },
-    {
-      "type": "gym",
-      "name": "Bill's House",
-      "value": "mb2_hard",
-      "group": "mini-boss",
-      "boss": "Bugsy"
-    },
-    {
-      "type": "route",
-      "name": "Cerulean City",
-      "encounters": [
-        "chewtle",
-        "clauncher",
-        "wishiwashi",
-        "wailmer",
-        "remoraid",
-        "luvdisc",
-        "sharpedo",
-        "octillery",
-        "golduck",
-        "carnivine",
-        "froakie"
-      ]
-    },
-    {
-      "type": "gym",
-      "name": "Route 3",
-      "value": "lass1_hard",
-      "group": "mini-boss",
-      "boss": "Lass 1"
-    },
-    {
-      "type": "route",
-      "name": "Route 4 Magikarp ($1000)",
-      "encounters": [
-        "magikarp"
-      ]
-    },
-    {
-      "type": "gym",
-      "name": "Route 4",
-      "value": "acetrainer1_hard",
-      "group": "mini-boss",
-      "boss": "Ace Trainer"
-    },
-    {
-      "type": "gym",
       "name": "Mt. Moon 1F",
       "value": "hiker1_hard",
       "group": "mini-boss",
@@ -2823,6 +2824,37 @@
       "name": "Mt. Moon Gift - Omanyte",
       "encounters": [
         "omanyte"
+      ]
+    },
+    {
+      "type": "gym",
+      "name": "Mt. Moon",
+      "value": "ev1_hard",
+      "group": "evil-team",
+      "boss": "Admin Archer"
+    },
+    {
+      "type": "gym",
+      "name": "Bill's House",
+      "value": "mb2_hard",
+      "group": "mini-boss",
+      "boss": "Bugsy"
+    },
+    {
+      "type": "route",
+      "name": "Cerulean City",
+      "encounters": [
+        "chewtle",
+        "clauncher",
+        "wishiwashi",
+        "wailmer",
+        "remoraid",
+        "luvdisc",
+        "sharpedo",
+        "octillery",
+        "golduck",
+        "carnivine",
+        "froakie"
       ]
     },
     {

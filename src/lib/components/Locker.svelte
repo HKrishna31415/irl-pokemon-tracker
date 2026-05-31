@@ -2,10 +2,18 @@
   import { getContext, onMount } from 'svelte'
   import { readdata, getGameStore, read, readBox } from '$lib/store'
   import { capitalise } from '$utils/string'
-  import { PIcon } from '$c/core'
+  import {
+    getHeldItemAvailableCount,
+    getHeldItemUsage,
+    getItemCatalog,
+    getTmCatalog,
+    isRemovedTmItem
+  } from '$lib/utils/economy'
   import TMCompatibilityModal from './TMCompatibilityModal.svelte'
 
   let inventory = {}
+  let tokens = 0
+  let catalog = {}
   let boxData = []
   let loading = true
 
@@ -18,6 +26,8 @@
     gameStore.subscribe(
       read(async (data) => {
         inventory = data.__items || {}
+        tokens = data.__encounterTokens || 0
+        catalog = { ...getItemCatalog(data), ...getTmCatalog() }
         
         const box = readBox(data)
         const e = await getPkmns(box.map((p) => p.pokemon))
@@ -65,6 +75,20 @@
     const name = mapping[id] || id
     return `/assets/img/items/${name}.png`
   }
+
+  const getItemName = (id) => catalog[id]?.name || capitalise(id.replace(/^tm-/, '').replace(/-/g, ' '))
+  const getItemType = (id) => {
+    if (id === 'encounter-token') return 'Token'
+    if (id.startsWith('tm-')) return 'Technical Machine'
+    return capitalise((catalog[id]?.type || 'item').replace(/-/g, ' '))
+  }
+  const isHeldItem = (id) => catalog[id]?.type === 'held'
+
+  $: visibleInventory = Object.entries({
+    ...inventory,
+    ...(tokens > 0 ? { 'encounter-token': tokens } : {})
+  }).filter(([itemId, qty]) => Number(qty) > 0 && !isRemovedTmItem(itemId)).sort(([a], [b]) => getItemName(a).localeCompare(getItemName(b)))
+  $: heldUsage = getHeldItemUsage(boxData)
 </script>
 
 <div class="locker p-4">
@@ -75,14 +99,14 @@
 
   {#if loading}
     <div class="py-12 text-center opacity-50">Loading locker...</div>
-  {:else if Object.keys(inventory).length === 0}
+  {:else if visibleInventory.length === 0}
     <div class="py-20 text-center">
        <div class="text-4xl mb-4">🎒</div>
        <p class="text-gray-500">Your locker is empty. Visit the Store to buy items!</p>
     </div>
   {:else}
     <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-      {#each Object.entries(inventory).sort() as [itemId, qty]}
+      {#each visibleInventory as [itemId, qty]}
         <button 
           class="flex items-center justify-between rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-all hover:scale-[1.02] hover:shadow-md dark:border-gray-800 dark:bg-gray-800/50 {itemId.startsWith('tm-') ? 'cursor-help border-blue-100 dark:border-blue-900/30' : 'cursor-default text-left'}"
           on:click={() => checkCompatibility(itemId)}
@@ -98,15 +122,20 @@
             </div>
             <div class="flex flex-col">
               <span class="text-sm font-bold leading-tight">
-                {capitalise(itemId.replace(/-/g, ' '))}
+                {getItemName(itemId)}
               </span>
               <span class="text-[10px] uppercase opacity-50">
-                {itemId.includes('tm') ? 'Technical Machine' : 'Held Item'}
+                {getItemType(itemId)}
               </span>
             </div>
           </div>
           <div class="text-lg font-black text-lime-600 dark:text-lime-400">
             x{qty}
+            {#if isHeldItem(itemId)}
+              <div class="mt-1 text-right text-[10px] font-bold uppercase tracking-wider text-gray-400">
+                {heldUsage.counts[itemId] || 0} held / {getHeldItemAvailableCount(inventory, heldUsage, itemId)} free
+              </div>
+            {/if}
           </div>
         </button>
       {/each}

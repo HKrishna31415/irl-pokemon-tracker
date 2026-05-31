@@ -16,6 +16,7 @@
   import { insertList } from '$utils/arr'
   import { shortuuid } from '$utils/uuid'
   import { slugify } from '$utils/string'
+  import { spendTokenPatch } from '$lib/utils/economy'
 
   import { Tooltip } from '$lib/components/core'
   import CustomLocation from './CustomLocation.svelte'
@@ -56,6 +57,8 @@
     bossTeamIds = [],
     encounterTokens = 0,
     routeRolls = {},
+    collapsedRoutes = {},
+    collapsedEncounterSegments = {},
     hideRoute = (_) => false
   store.subscribe(
     read((d) => {
@@ -65,10 +68,30 @@
       bossTeamIds = (d.__teams || []).map((i) => i.id)
       encounterTokens = d.__encounterTokens || 0
       routeRolls = d.__routeRolls || {}
+      collapsedRoutes = d.__collapsedRoutes || {}
+      collapsedEncounterSegments = d.__collapsedEncounterSegments || {}
       hideRoute = hideRouteF(d)
       starter = readStarter(d)
     })
   )
+
+  const toggleSegmentCollapsed = (segmentId) => {
+    const next = {
+      ...collapsedEncounterSegments,
+      [segmentId]: !collapsedEncounterSegments[segmentId]
+    }
+    collapsedEncounterSegments = next
+    store.update(patch({ __collapsedEncounterSegments: next }))
+  }
+
+  const setSegmentsCollapsed = (collapsed) => {
+    const next = { ...collapsedEncounterSegments }
+    for (const segment of visibleEncounterSegments) next[segment.id] = collapsed
+    collapsedEncounterSegments = next
+    store.update(patch({ __collapsedEncounterSegments: next }))
+  }
+
+  export const toggleAllEncounterSegments = () => setSegmentsCollapsed(!allVisibleSegmentsCollapsed)
 
   /** Returns the number of extra encounters already used on a route */
   const getRollCount = (routeName) => routeRolls[routeName] || 0
@@ -98,9 +121,7 @@
 
     store.update((raw) => {
       const d = JSON.parse(raw)
-      const newCustom = (d.__custom || []).concat(loc)
-      const newTokens = Math.max(0, (d.__encounterTokens || 0) - 1)
-      return JSON.stringify({ ...d, __encounterTokens: newTokens, __custom: newCustom })
+      return JSON.stringify(spendTokenPatch(d, routeName, loc))
     })
   }
 
@@ -168,12 +189,71 @@
   $: isProgressLocked = (id) =>
     firstUndefeatedLeaderIndex >= 0 &&
     id > firstUndefeatedLeaderIndex
+  $: entryVisible = (p, id) => !filterEntry(filters, search, game.data, progress - 1)(p)
+  $: canShowRouteEntry = (p, id) => !entryVisible(p, id) && !isProgressLocked(id) && showRoute(p, filters, hideRoute)
+  $: routeSegmentInfo = (() => {
+    const segmentByIndex = {}
+    const segments = []
+    let current = null
+    let lastTrainerId = 'start'
+
+    routeList.forEach((entry, index) => {
+      if (isGym(entry)) {
+        current = null
+        lastTrainerId = entry.value || slugify(entry.boss || entry.name || `trainer-${index}`)
+        return
+      }
+
+      if (!isRoute(entry) || isStarter(entry)) return
+
+      if (!current) {
+        current = {
+          id: `after-${slugify(lastTrainerId)}__${slugify(entry.name)}`,
+          routeIndexes: [],
+          routeNames: [],
+          visibleIndexes: [],
+          visibleNames: []
+        }
+        segments.push(current)
+      }
+
+      current.routeIndexes.push(index)
+      current.routeNames.push(entry.name)
+      segmentByIndex[index] = current
+
+      if (canShowRouteEntry(entry, index)) {
+        current.visibleIndexes.push(index)
+        current.visibleNames.push(entry.name)
+      }
+    })
+
+    return { segmentByIndex, segments: segments.filter((segment) => segment.visibleIndexes.length) }
+  })()
+  $: visibleEncounterSegments = routeSegmentInfo.segments
+  $: allVisibleSegmentsCollapsed =
+    visibleEncounterSegments.length > 0 &&
+    visibleEncounterSegments.every((segment) => collapsedEncounterSegments[segment.id])
+  $: encounterCollapseAction = allVisibleSegmentsCollapsed ? 'Expand All' : 'Collapse All'
 
 </script>
+
+{#if visibleEncounterSegments.length && filters.main !== 'bosses'}
+  <div class="mb-2 flex justify-end">
+    <button
+      class="rounded-full border border-gray-200 px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-gray-500 transition hover:border-blue-300 hover:text-blue-500 dark:border-gray-800 dark:text-gray-400"
+      on:click={toggleAllEncounterSegments}
+    >
+      {encounterCollapseAction}
+    </button>
+  </div>
+{/if}
 
 <ul bind:this={ulRef} class="flex flex-col gap-y-0 lg:gap-y-2 {className}">
   {#each routeList as p, id (locid(p, id))}
     {@const hidden = !filterEntry(filters, search, game.data, progress - 1)(p)}
+    {@const segment = routeSegmentInfo.segmentByIndex[id]}
+    {@const segmentCollapsed = segment && collapsedEncounterSegments[segment.id]}
+    {@const isFirstVisibleSegmentRoute = segment && segment.visibleIndexes[0] === id}
 
   {#if isStarter(p)}
       <li
@@ -210,17 +290,39 @@
     {:else if isRoute(p)}
       <li
         class="location-group mb-4 flex w-full flex-col gap-y-2 rounded-2xl border border-gray-100 bg-white/40 p-3 shadow-sm transition-all hover:bg-white/60 dark:border-gray-800/50 dark:bg-gray-900/20 dark:hover:bg-gray-900/40 lg:mb-6"
+        class:collapsed-segment={segmentCollapsed && isFirstVisibleSegmentRoute}
         id="route-{p.name}"
         in:fade
         out:fade={{ duration: 100 }}
-        class:hidden={hidden || isProgressLocked(id) || !showRoute(p, filters, hideRoute)}
+        class:hidden={hidden || isProgressLocked(id) || !showRoute(p, filters, hideRoute) || (segmentCollapsed && !isFirstVisibleSegmentRoute)}
       >
+        {#if segmentCollapsed && isFirstVisibleSegmentRoute}
+          <button
+            class="flex w-full items-center justify-between gap-x-3 rounded-lg border border-dashed border-gray-200 px-3 py-1.5 text-left text-[11px] font-bold text-gray-500 transition hover:border-blue-300 hover:text-blue-500 dark:border-gray-800 dark:text-gray-400"
+            on:click={() => toggleSegmentCollapsed(segment.id)}
+          >
+            <span class="truncate">
+              {segment.visibleNames.length} encounter{segment.visibleNames.length === 1 ? '' : 's'} hidden:
+              {segment.visibleNames.join(', ')}
+            </span>
+            <span class="shrink-0 uppercase tracking-wide">Expand</span>
+          </button>
+        {:else}
         <div class="flex items-center justify-between px-1">
           <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-400 dark:text-gray-500">
             {p.name}
           </h3>
           
-          {#if encounterTokens > 0}
+          {#if isFirstVisibleSegmentRoute}
+            <button
+              class="rounded-full border border-gray-200 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gray-500 transition hover:border-blue-300 hover:text-blue-500 dark:border-gray-800 dark:text-gray-400"
+              on:click={() => toggleSegmentCollapsed(segment.id)}
+            >
+              Collapse {segment.visibleNames.length} encounter{segment.visibleNames.length === 1 ? '' : 's'}
+            </button>
+          {/if}
+
+          {#if encounterTokens > 0 && !p.gift}
             <button
               class="inline-flex items-center gap-x-1 rounded-full bg-lime-100 px-2 py-0.5 text-[10px] font-bold text-lime-700 shadow-xs transition hover:bg-lime-200 dark:bg-lime-900/40 dark:text-lime-300 dark:hover:bg-lime-800/60"
               title="Spend 1 Encounter Token for an extra slot on {p.name}"
@@ -242,50 +344,57 @@
             location={p.name}
             encounters={p.encounters}
             encounterRates={p.encounterRates}
+            defaultIvs={p.defaultIvs}
             on:hide={onhidelocation}
             on:new={onnewlocation}
           />
-          
-          <PokemonSelector
-            id="{id}-2"
-            {store}
-            cap={p.cap}
-            method={p.method}
-            location="{p.name} (Roll 2)"
-            locationName="{p.name} (Roll 2)"
-            encounters={p.encounters}
-            encounterRates={p.encounterRates}
-            on:new={onnewlocation}
-          />
 
-          <PokemonSelector
-            id="{id}-3"
-            {store}
-            cap={p.cap}
-            method={p.method}
-            location="{p.name} (Roll 3)"
-            locationName="{p.name} (Roll 3)"
-            encounters={p.encounters}
-            encounterRates={p.encounterRates}
-            on:new={onnewlocation}
-          />
-
-          {#each getExtras(p.name) as extra, i}
+          {#if !p.gift}
             <PokemonSelector
-              id="{id}-extra-{i}"
+              id="{id}-2"
               {store}
               cap={p.cap}
               method={p.method}
-              type="custom"
-              location={extra.id}
-              locationName={extra.name}
+              location="{p.name} (Roll 2)"
+              locationName="{p.name} (Roll 2)"
               encounters={p.encounters}
               encounterRates={p.encounterRates}
+              defaultIvs={p.defaultIvs}
               on:new={onnewlocation}
-              on:delete={ondeletelocation}
             />
-          {/each}
+
+            <PokemonSelector
+              id="{id}-3"
+              {store}
+              cap={p.cap}
+              method={p.method}
+              location="{p.name} (Roll 3)"
+              locationName="{p.name} (Roll 3)"
+              encounters={p.encounters}
+              encounterRates={p.encounterRates}
+              defaultIvs={p.defaultIvs}
+              on:new={onnewlocation}
+            />
+
+            {#each getExtras(p.name) as extra, i}
+              <PokemonSelector
+                id="{id}-extra-{i}"
+                {store}
+                cap={p.cap}
+                method={p.method}
+                type="custom"
+                location={extra.id}
+                locationName={extra.name}
+                encounters={p.encounters}
+                encounterRates={p.encounterRates}
+                defaultIvs={p.defaultIvs}
+                on:new={onnewlocation}
+                on:delete={ondeletelocation}
+              />
+            {/each}
+          {/if}
         </div>
+        {/if}
       </li>
     {:else if isCustom(p)}
       <li
@@ -343,5 +452,9 @@
     li.location {
       scroll-margin-top: 32px;
     }
+  }
+
+  li.collapsed-segment {
+    @apply mb-2 gap-y-0 rounded-xl p-1 shadow-none lg:mb-2;
   }
 </style>

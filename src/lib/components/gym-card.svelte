@@ -221,9 +221,17 @@
     }
   }
 
+  const isNumericSprite = (value) => /^\d+$/.test(String(value || ''))
+
   const pokemonRef = (p) => {
-    const key = moveKey(p?.sprite || p?.alias || p?.name)
-    return pokemonData[key] || fallbackPokemon[key]
+    const keys = [p?.alias, p?.name]
+    if (p?.sprite && !isNumericSprite(p.sprite)) keys.push(p.sprite)
+    if (p?.sprite && isNumericSprite(p.sprite)) keys.push(p.sprite)
+
+    for (const key of keys) {
+      const ref = pokemonData[moveKey(key)] || fallbackPokemon[moveKey(key)]
+      if (ref) return ref
+    }
   }
 
   const enrichPokemon = (p) => {
@@ -233,7 +241,7 @@
 
     return {
       ...p,
-      sprite: p.sprite || ref?.sprite,
+      sprite: isNumericSprite(p.sprite) ? ref?.sprite || p.sprite : p.sprite || ref?.sprite,
       icon: p.icon || ref?.sprite,
       types: (!p.types?.length || hasPlaceholderTypes)
         ? ref?.types?.map((it) => it.toLowerCase()) || p.types
@@ -254,7 +262,10 @@
     const data = (await import('../../routes/assets/data/pokemon.json')).default
     pokemonData = Object.values(data).reduce((acc, p) => {
       for (const key of [p.alias, p.sprite, p.name, p.num]) {
-        if (key) acc[moveKey(key)] = p
+        if (!key) continue
+        const normalized = moveKey(key)
+        if (/^\d+$/.test(String(key)) && acc[normalized]) continue
+        acc[normalized] = p
       }
       return acc
     }, {})

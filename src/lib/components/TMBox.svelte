@@ -1,33 +1,42 @@
 <script>
   import { getContext, onMount } from 'svelte'
   import tms from '$lib/data/tms.json'
-  import { capitalise } from '$utils/string'
+  import moves from '../../routes/assets/data/moves.json'
   import { Tooltip, PIcon } from '$c/core'
-  import { readdata, getGameStore, read, patch, readBox } from '$lib/store'
+  import { readdata, getGameStore, read, readBox } from '$lib/store'
+  import { getTmTiers, isRemovedTmAlias, purchasePatch } from '$lib/utils/economy'
   import TMCompatibilityModal from './TMCompatibilityModal.svelte'
-
-  const tiers = [
-    { id: 'tier0', name: 'Tier 0', desc: 'Momentum, 100/100, High Power Recoil', price: 8000 },
-    { id: 'tier1', name: 'Tier 1', desc: '90/100 Elemental, 2-Stage Boosting', price: 4000 },
-    { id: 'tier2', name: 'Tier 2', desc: 'Status, Weather, Hazards, High Power/Low Acc', price: 2000 },
-    { id: 'tier3', name: 'Tier 3', desc: 'Other Utility', price: 1000 }
-  ]
 
   let search = ''
   let money = 0
   let gameStore
   let inventory = {}
   let boxData = []
+  let rawData = {}
+  let tiers = getTmTiers()
 
   const { getPkmns } = getContext('game')
   const { open } = getContext('simple-modal')
+
+  const moveKey = (value = '') => String(value).toLowerCase().replace(/[^a-z0-9]/g, '')
+  const moveRef = (tm) => moves[moveKey(tm.alias)] || moves[moveKey(tm.name)] || tm
+  const statValue = (value, fallback = '--') => {
+    if (value === true || value === 0 || value === null || typeof value === 'undefined') return fallback
+    return value
+  }
+  const categoryLabel = (tm) => moveRef(tm).category || tm.category
+  const powerLabel = (tm) => statValue(moveRef(tm).basePower ?? tm.bp)
+  const accuracyLabel = (tm) => statValue(moveRef(tm).accuracy ?? tm.acc)
+  const ppLabel = (tm) => moveRef(tm).pp ?? tm.pp
 
   onMount(async () => {
     const [, , id] = readdata()
     gameStore = getGameStore(id)
     gameStore.subscribe(read(async d => {
+      rawData = d
       money = d.__money || 0
       inventory = d.__items || {}
+      tiers = getTmTiers(d)
       
       const box = readBox(d)
       const e = await getPkmns(box.map((p) => p.pokemon))
@@ -51,25 +60,46 @@
     if (money < price) return window.alert(`Not enough money! This TM costs $${price.toLocaleString()}.`)
     if (!window.confirm(`Buy ${tm.name} TM for $${price.toLocaleString()}?`)) return
 
-    gameStore.update(patch({
-      __money: money - price,
-      __items: {
-        ...inventory,
-        [itemId]: (inventory[itemId] || 0) + 1
-      }
-    }))
+    gameStore.update(() => JSON.stringify(purchasePatch(rawData, {
+      id: itemId,
+      name: `${tm.name} TM`,
+      price,
+      type: 'tm'
+    }, 1, {
+      source: 'tm-box',
+      itemId,
+      itemName: `${tm.name} TM`,
+      itemType: 'tm'
+    })))
   }
 
   $: filteredTms = (tierId) => {
     const s = search.toLowerCase().trim()
-    if (!s) return tms[tierId]
-    return tms[tierId].filter(tm => 
-      tm.name.toLowerCase().includes(s) ||
-      tm.type.toLowerCase().includes(s) ||
-      (tm.bp && tm.bp.toString() === s) ||
-      (s === 'status' && tm.bp === 0)
-    )
+    const availableTms = (tms[tierId] || []).filter((tm) => !isRemovedTmAlias(tm.alias || tm.name))
+    if (!s) return availableTms
+    const tier = tiers.find((it) => it.id === tierId)
+    return availableTms.filter((tm) => {
+      const fields = [
+        tm.tm,
+        tm.name,
+        tm.alias,
+        tm.type,
+        tm.category,
+        tm.tier,
+        tier?.name,
+        tier?.desc,
+        `tier ${tm.tier?.replace('tier', '')}`,
+        `${tm.bp} bp`,
+        `${tm.acc} accuracy`,
+        `${tm.pp} pp`
+      ]
+      return fields.some((field) => String(field || '').toLowerCase().includes(s))
+    })
   }
+
+  $: totalVisibleTms = Object.values(tms)
+    .flat()
+    .filter((tm) => !isRemovedTmAlias(tm.alias || tm.name)).length
 </script>
 
 <div class="tm-box p-4">
@@ -78,7 +108,7 @@
       <input
         type="text"
         bind:value={search}
-        placeholder="Search TMs by name or type..."
+        placeholder="Search TMs by number, name, type, category, or tier..."
         class="w-full rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
       />
     </div>
@@ -87,7 +117,7 @@
         ${money.toLocaleString()}
       </div>
       <div class="opacity-30">
-        Total TMs: {Object.values(tms).reduce((acc, curr) => acc + curr.length, 0)}
+        Total TMs: {totalVisibleTms}
       </div>
     </div>
   </div>
@@ -124,24 +154,31 @@
                 </div>
                 
                 <span class="text-center text-[10px] font-bold leading-tight line-clamp-2 min-h-[2.5em] mb-1">
+                  <span class="block text-[8px] font-mono text-gray-400">{tm.tm}</span>
                   {tm.name}
                 </span>
 
-                <div class="flex items-center gap-x-1 opacity-60">
+                <div class="flex flex-wrap items-center justify-center gap-1 opacity-60">
                    <span class="text-[8px] uppercase px-1 rounded-sm bg-gray-100 dark:bg-gray-700">
                      {tm.type}
                    </span>
+                   <span class="text-[8px] uppercase px-1 rounded-sm bg-gray-100 dark:bg-gray-700">
+                     {categoryLabel(tm)}
+                   </span>
                    {#if tm.bp > 0}
-                     <span class="text-[8px] font-mono">{tm.bp} BP</span>
+                     <span class="text-[8px] font-mono">{powerLabel(tm)} BP</span>
                    {/if}
                 </div>
 
                 <Tooltip>
-                  <div class="p-2 space-y-1">
-                    <div class="font-bold border-b pb-1 mb-1">{tm.name}</div>
+                  <div class="space-y-1 p-2 text-left text-xs">
+                    <div class="mb-1 border-b pb-1 font-bold">{tm.tm} {tm.name}</div>
                     <div>Type: {tm.type}</div>
-                    {#if tm.bp > 0}<div>Power: {tm.bp}</div>{/if}
-                    {#if tm.acc > 0}<div>Accuracy: {tm.acc}%</div>{/if}
+                    <div>Category: {categoryLabel(tm)}</div>
+                    <div>Power: {powerLabel(tm)}</div>
+                    <div>Accuracy: {accuracyLabel(tm)}</div>
+                    <div>PP: {ppLabel(tm)}</div>
+                    <div>Tier: {tm.tier?.replace('tier', 'Tier ')}</div>
                   </div>
                 </Tooltip>
               </button>
