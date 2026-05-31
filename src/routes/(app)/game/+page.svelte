@@ -157,7 +157,7 @@
     <div class="flex snap-start flex-row flex-wrap justify-center pb-16">
       <main
         id="main"
-        class="p-container relative flex flex-col gap-y-4 md:py-6"
+        class="p-container game-main relative flex flex-col gap-y-4 md:pb-6"
       >
         <div class="run-toolbar">
           <div class="flex w-full flex-col gap-y-2">
@@ -280,8 +280,20 @@
     @apply snap-y snap-always;
   }
 
+  .game-main {
+    --game-nav-offset: 4.75rem;
+    padding-top: var(--game-nav-offset);
+  }
+
+  @media (min-width: theme('screens.sm')) {
+    .game-main {
+      --game-nav-offset: 7rem;
+    }
+  }
+
   .run-toolbar {
-    @apply sticky top-0 z-40 -mx-3 flex snap-start snap-always flex-col items-start justify-between gap-y-3 border-b border-gray-200/80 bg-white/95 px-3 py-3 shadow-sm backdrop-blur-md md:top-0 md:mb-5 md:rounded-b-2xl lg:gap-y-0;
+    top: var(--game-nav-offset);
+    @apply sticky z-40 -mx-3 flex snap-start snap-always flex-col items-start justify-between gap-y-3 border-b border-gray-200/80 bg-white/95 px-3 py-3 shadow-sm backdrop-blur-md md:mb-5 md:rounded-b-2xl lg:gap-y-0;
   }
 
   :global(.dark) .run-toolbar {

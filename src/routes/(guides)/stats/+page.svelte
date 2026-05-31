@@ -49,6 +49,23 @@
       ]
     },
     {
+      label: 'Stat ratings',
+      options: [
+        ['baseStatRating', 'BSR'],
+        ['physicalTankiness', 'Physical Tankiness'],
+        ['specialTankiness', 'Special Tankiness'],
+        ['physicalSweepiness', 'Physical Sweepiness'],
+        ['specialSweepiness', 'Special Sweepiness']
+      ]
+    },
+    {
+      label: 'Balance ratings',
+      options: [
+        ['offenseDefenseBalance', 'Offense/Defense Balance'],
+        ['physicalSpecialBalance', 'Physical/Special Balance']
+      ]
+    },
+    {
       label: 'Waste subparts',
       options: [
         ['wastedOffense', 'Wasted Offense'],
@@ -91,6 +108,13 @@
     specialBulk: 'HP + Sp. Defense.',
     maxOffense: 'The higher of Attack and Sp. Attack.',
     speedBandValue: 'Speed category: 0 Trick Room, 1 awkward middle speed, 2 fast.',
+    physicalTankiness: 'Smogon CAP Physical Tankiness: normalized HP x normalized Defense / 35. 100 is average.',
+    specialTankiness: 'Smogon CAP Special Tankiness: normalized HP x normalized Sp. Defense / 35. 100 is average.',
+    physicalSweepiness: 'Smogon CAP Physical Sweepiness: normalized Attack adjusted by Speed Factor. 100 is average.',
+    specialSweepiness: 'Smogon CAP Special Sweepiness: normalized Sp. Attack adjusted by Speed Factor. 100 is average.',
+    offenseDefenseBalance: 'ODB: positive values lean offensive; negative values lean defensive.',
+    physicalSpecialBalance: 'PSB: positive values lean physical; negative values lean special.',
+    baseStatRating: 'BSR: Smogon CAP Overall Rating from tankiness, sweepiness, and rating modifiers.',
   }
 
   const RANGE_FILTER_GROUPS = [
@@ -135,6 +159,20 @@
         ['maxOffense', 'Max Offense', 0, 255, 1, Atk],
         ['speedBandValue', 'Speed Band', 0, 2, 1, Spe],
         ['statSpread', 'Stat Spread', 0, 255, 1, BarChart]
+      ]
+    },
+    {
+      label: 'Smogon Stat Ratings',
+      description: 'CAP-style tankiness, sweepiness, balance, and BSR',
+      open: false,
+      options: [
+        ['physicalTankiness', 'Physical Tankiness', 0, 350, 5, Shield],
+        ['specialTankiness', 'Special Tankiness', 0, 350, 5, Shield],
+        ['physicalSweepiness', 'Physical Sweepiness', 0, 350, 5, Sword],
+        ['specialSweepiness', 'Special Sweepiness', 0, 350, 5, Sword],
+        ['offenseDefenseBalance', 'Offense/Defense Balance', -80, 80, 1, BarChart],
+        ['physicalSpecialBalance', 'Physical/Special Balance', -80, 80, 1, BarChart],
+        ['baseStatRating', 'BSR', 0, 1600, 10, Trophy]
       ]
     }
   ]
@@ -200,6 +238,44 @@
     NFE: 3,
     LC: 2,
     Untiered: 1
+  }
+  const SPEED_FACTOR_TABLE = [
+    [10, 0],
+    [15, 0.01],
+    [20, 0.02],
+    [25, 0.04],
+    [30, 0.06],
+    [35, 0.12],
+    [40, 0.17],
+    [45, 0.23],
+    [50, 0.29],
+    [55, 0.37],
+    [60, 0.42],
+    [65, 0.49],
+    [70, 0.55],
+    [75, 0.62],
+    [80, 0.65],
+    [85, 0.71],
+    [90, 0.77],
+    [95, 0.82],
+    [100, 0.87],
+    [105, 0.92],
+    [110, 0.94],
+    [115, 0.95],
+    [120, 0.97],
+    [130, 0.98],
+    [150, 0.99],
+    [Infinity, 1]
+  ]
+  const STAT_AXIS_BOUNDS = {
+    smogonTierScore: [1, 16],
+    offenseDefenseBalance: [-80, 80],
+    physicalSpecialBalance: [-80, 80],
+    baseStatRating: [0, 1600],
+    physicalTankiness: [0, 350],
+    specialTankiness: [0, 350],
+    physicalSweepiness: [0, 350],
+    specialSweepiness: [0, 350]
   }
   const VGC_GROUP_ORDER = VGC_TIERS.filter((tier) => tier !== 'All').map((tier) => tier.replace('Tier', 'VGC Tier')).concat('No VGC wins')
   const tierColors = {
@@ -417,6 +493,9 @@
   const statValueLabel = (pokemon, stat) => {
     const value = getStatValue(pokemon, stat)
     if (stat === 'smogonTierScore') return `${pokemon.tier} · score ${value}`
+    if (stat === 'offenseDefenseBalance') return `${formatNumber(value)} · ${offenseDefenseLabel(value)}`
+    if (stat === 'physicalSpecialBalance') return `${formatNumber(value)} · ${physicalSpecialLabel(value)}`
+    if (stat === 'baseStatRating') return `${formatNumber(value)} · ${bsrQualityLabel(value)}`
     return formatNumber(value)
   }
   const statDescription = (stat) => STAT_DESCRIPTIONS[stat] || 'Derived stat used for filtering, sorting, and charting.'
@@ -535,6 +614,48 @@
     const number = Number(value) || 0
     return Math.abs(number % 1) > 0.001 ? number.toFixed(2) : Math.round(number)
   }
+  const speedFactorFor = (speed) => SPEED_FACTOR_TABLE.find(([max]) => speed <= max)?.[1] ?? 1
+  const roundTo = (value, digits = 2) => Number(Number(value || 0).toFixed(digits))
+  const ratingModifier = (rating) =>
+    rating > 100 ? (3 * rating ** 2 - 600 * rating + 81200) / 51200 : 1
+  const balanceIntensity = (value) => {
+    const magnitude = Math.abs(Number(value) || 0)
+    if (magnitude > 40) return 'Absolutely'
+    if (magnitude > 30) return 'Strongly'
+    if (magnitude > 20) return ''
+    if (magnitude > 10) return 'Moderately'
+    if (magnitude > 5) return 'Slightly'
+    return 'Equally'
+  }
+  const offenseDefenseLabel = (value) => {
+    const number = Number(value) || 0
+    if (Math.abs(number) <= 5) return 'Balanced'
+    const direction = number > 0 ? 'offensive' : 'defensive'
+    const intensity = balanceIntensity(number)
+    return intensity ? `${intensity} ${direction}` : direction[0].toUpperCase() + direction.slice(1)
+  }
+  const physicalSpecialLabel = (value) => {
+    const number = Number(value) || 0
+    if (Math.abs(number) <= 5) return 'Balanced'
+    const direction = number > 0 ? 'physical' : 'special'
+    const intensity = balanceIntensity(number)
+    return intensity ? `${intensity} ${direction}` : direction[0].toUpperCase() + direction.slice(1)
+  }
+  const bsrQualityLabel = (value) => {
+    const rating = Number(value) || 0
+    if (rating > 1400) return 'Exaggerated'
+    if (rating >= 900) return 'Too Good'
+    if (rating >= 580) return 'Fantastic'
+    if (rating >= 420) return 'Excellent'
+    if (rating >= 300) return 'Very Good'
+    if (rating >= 250) return 'Quite Good'
+    if (rating >= 210) return 'Good'
+    if (rating >= 175) return 'Average'
+    if (rating >= 143) return 'Below Average'
+    if (rating >= 127) return 'Poor'
+    if (rating >= 100) return 'Bad'
+    return 'Horrible'
+  }
   const speedBandLabel = (value) => Number(value) <= 0 ? 'Trick Room' : Number(value) >= 2 ? 'Fast' : 'Middling'
   const selectedDefenseWaste = (metrics, wasteProfile = activeFilters.wasteProfile) =>
     wasteProfile.includes('adjusted') ? metrics.adjustedWastedDefense : metrics.wastedDefense
@@ -568,6 +689,31 @@
         : hp + def + spd >= 250 && maxOffense <= 85
           ? 'STALL'
           : 'BALANCE / UTILITY'
+    const normalizedHp = hp / 4 + 18
+    const normalizedAtk = atk + 18
+    const normalizedDef = def + 18
+    const normalizedSpa = spa + 18
+    const normalizedSpd = spd + 18
+    const speedFactor = speedFactorFor(spe)
+    const physicalTankiness = normalizedHp * normalizedDef / 35
+    const specialTankiness = normalizedHp * normalizedSpd / 35
+    const physicalSweepiness =
+      normalizedAtk * (normalizedAtk * speedFactor + 315) / (normalizedAtk * (1 - speedFactor) + 315)
+    const specialSweepiness =
+      normalizedSpa * (normalizedSpa * speedFactor + 315) / (normalizedSpa * (1 - speedFactor) + 315)
+    const offenseDefenseBalance =
+      roundTo(55 * Math.log(Math.max(physicalSweepiness, specialSweepiness) / Math.max(physicalTankiness, specialTankiness)), 1)
+    const physicalSpecialBalance =
+      roundTo(55 * Math.log((physicalTankiness * physicalSweepiness) / (specialTankiness * specialSweepiness)), 1)
+    const modifier =
+      ratingModifier(physicalTankiness) *
+      ratingModifier(specialTankiness) *
+      ratingModifier(physicalSweepiness) *
+      ratingModifier(specialSweepiness)
+    const baseStatRating = Math.round(
+      physicalTankiness * specialTankiness * (physicalSweepiness + specialSweepiness) * modifier /
+      (56 * (physicalTankiness + specialTankiness))
+    )
 
     return {
       hp,
@@ -589,6 +735,14 @@
       lopsidedRatio,
       adjustedWastedDefense,
       offenseDeficit,
+      speedFactor,
+      physicalTankiness: roundTo(physicalTankiness),
+      specialTankiness: roundTo(specialTankiness),
+      physicalSweepiness: roundTo(physicalSweepiness),
+      specialSweepiness: roundTo(specialSweepiness),
+      offenseDefenseBalance,
+      physicalSpecialBalance,
+      baseStatRating,
       archetype
     }
   }
@@ -745,17 +899,18 @@
     .filter((pokemon) => selectedOrAll(activeFilters.evoStageFilters, pokemon.evoStage))
     .filter((pokemon) => selectedOrAll(activeFilters.vgcTierFilters, pokemon.vgc?.label || 'No VGC wins'))
     .filter((pokemon) => RANGE_FILTERS.every(([id]) => withinRange(pokemon, id)))
-    .filter((pokemon) => !query || normalisePokemonId(`${pokemon.name} ${pokemon.alias} ${pokemon.num} gen ${pokemon.generation} form gen ${pokemon.formGeneration} introduced gen ${pokemon.formGeneration} minimum level ${pokemon.minimumLevel} level ${pokemon.minimumLevel} ${pokemon.tier} smogon tier ${pokemon.tier} smogon tier score ${pokemon.smogonTierScore} ${pokemon.vgc?.label || 'No VGC wins'} ${pokemon.types?.join(' ')} ${typeComboLabel(pokemon.typeCombo)} ${pokemon.evoStage} ${categoryLabels(pokemon).join(' ')} ${pokemon.archetype} bst ${pokemon.total} hp ${pokemon.hp} attack ${pokemon.atk} defense ${pokemon.def} special attack ${pokemon.spa} special defense ${pokemon.spd} speed ${pokemon.spe} ${speedBandLabel(pokemon.speedBandValue)} wasted offense ${pokemon.wastedOffense} wasted speed ${pokemon.wastedSpeed} wasted defense ${pokemon.wastedDefense} adjusted wasted defense ${pokemon.adjustedWastedDefense} lopsided ratio ${formatNumber(pokemon.lopsidedRatio)} offense deficit ${pokemon.offenseDeficit} mixed offense ${pokemon.mixedOffenseRatio} bulk ${pokemon.bulkTotal} physical bulk ${pokemon.physicalBulk} special bulk ${pokemon.specialBulk} max offense ${pokemon.maxOffense} stat spread ${pokemon.statSpread} total wasted ${pokemon.totalWasted} min max ${pokemon.minMaxPercent}`).includes(query))
+    .filter((pokemon) => !query || normalisePokemonId(`${pokemon.name} ${pokemon.alias} ${pokemon.num} gen ${pokemon.generation} form gen ${pokemon.formGeneration} introduced gen ${pokemon.formGeneration} minimum level ${pokemon.minimumLevel} level ${pokemon.minimumLevel} ${pokemon.tier} smogon tier ${pokemon.tier} smogon tier score ${pokemon.smogonTierScore} ${pokemon.vgc?.label || 'No VGC wins'} ${pokemon.types?.join(' ')} ${typeComboLabel(pokemon.typeCombo)} ${pokemon.evoStage} ${categoryLabels(pokemon).join(' ')} ${pokemon.archetype} bst ${pokemon.total} hp ${pokemon.hp} attack ${pokemon.atk} defense ${pokemon.def} special attack ${pokemon.spa} special defense ${pokemon.spd} speed ${pokemon.spe} ${speedBandLabel(pokemon.speedBandValue)} wasted offense ${pokemon.wastedOffense} wasted speed ${pokemon.wastedSpeed} wasted defense ${pokemon.wastedDefense} adjusted wasted defense ${pokemon.adjustedWastedDefense} lopsided ratio ${formatNumber(pokemon.lopsidedRatio)} offense deficit ${pokemon.offenseDeficit} mixed offense ${pokemon.mixedOffenseRatio} bulk ${pokemon.bulkTotal} physical bulk ${pokemon.physicalBulk} special bulk ${pokemon.specialBulk} max offense ${pokemon.maxOffense} stat spread ${pokemon.statSpread} total wasted ${pokemon.totalWasted} min max ${pokemon.minMaxPercent} physical tankiness ${pokemon.physicalTankiness} special tankiness ${pokemon.specialTankiness} physical sweepiness ${pokemon.physicalSweepiness} special sweepiness ${pokemon.specialSweepiness} offense defense balance ${pokemon.offenseDefenseBalance} ${offenseDefenseLabel(pokemon.offenseDefenseBalance)} physical special balance ${pokemon.physicalSpecialBalance} ${physicalSpecialLabel(pokemon.physicalSpecialBalance)} bsr base stat rating ${pokemon.baseStatRating} ${bsrQualityLabel(pokemon.baseStatRating)}`).includes(query))
   $: sortedDex = filteredDex.slice().sort((a, b) => getStatValue(b, activeFilters.selectedStat) - getStatValue(a, activeFilters.selectedStat) || a.num - b.num)
   $: renderedTable = sortedDex.slice(0, tableLimit)
   $: values = filteredDex.map((pokemon) => getStatValue(pokemon, activeFilters.selectedStat))
-  $: minValue = activeFilters.selectedStat === 'smogonTierScore'
-    ? 1
+  $: axisBounds = STAT_AXIS_BOUNDS[activeFilters.selectedStat]
+  $: minValue = axisBounds
+    ? values.length ? Math.min(...values, axisBounds[0]) : axisBounds[0]
     : values.length
       ? activeFilters.selectedStat === 'minMaxPercent' ? Math.min(...values, 100) - 5 : Math.max(0, Math.min(...values, 1) - 20)
       : 0
-  $: maxValue = activeFilters.selectedStat === 'smogonTierScore'
-    ? 16
+  $: maxValue = axisBounds
+    ? values.length ? Math.max(...values, axisBounds[1]) : axisBounds[1]
     : values.length ? Math.max(...values, activeFilters.selectedStat === 'total' ? 800 : 255, 1) : 100
   $: plotWidth = 960
   $: plotHeight = Math.max(220, 94 + chartRows.length * 74)
@@ -1283,6 +1438,12 @@
               <td>
                 {#if activeFilters.selectedStat === 'smogonTierScore'}
                   <span class="tier-score-cell"><TierBadge tier={pokemon.tier} /><small>score {rowValue}</small></span>
+                {:else if activeFilters.selectedStat === 'offenseDefenseBalance'}
+                  <span class="metric-label-cell"><b>{formatNumber(rowValue)}</b><small>{offenseDefenseLabel(rowValue)}</small></span>
+                {:else if activeFilters.selectedStat === 'physicalSpecialBalance'}
+                  <span class="metric-label-cell"><b>{formatNumber(rowValue)}</b><small>{physicalSpecialLabel(rowValue)}</small></span>
+                {:else if activeFilters.selectedStat === 'baseStatRating'}
+                  <span class="metric-label-cell"><b>{formatNumber(rowValue)}</b><small>{bsrQualityLabel(rowValue)}</small></span>
                 {:else}
                   <b>{formatNumber(rowValue)}</b>
                 {/if}
@@ -1887,12 +2048,18 @@
     @apply inline-flex items-center gap-2;
   }
 
-  .tier-score-cell small {
+  .tier-score-cell small,
+  .metric-label-cell small {
     @apply text-xs font-black uppercase tracking-wide text-gray-500;
   }
 
-  :global(.dark) .tier-score-cell small {
+  :global(.dark) .tier-score-cell small,
+  :global(.dark) .metric-label-cell small {
     @apply text-gray-300;
+  }
+
+  .metric-label-cell {
+    @apply inline-flex flex-col gap-1;
   }
 
   .archetype-pill {
