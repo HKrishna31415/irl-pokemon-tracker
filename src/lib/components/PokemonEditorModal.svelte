@@ -50,6 +50,7 @@
   let showShowdownImport = false
   let showdownText = ''
   let showdownCopied = false
+  let natureMenuOpen = false
   let moveDetails = {}
   let itemSearch = ''
   let showOwnedHeldOnly = false
@@ -207,6 +208,12 @@
     selectedMoves = selectedMoves
   }
 
+  function chooseNature(nextNature) {
+    selectedNature = nextNature
+    nature = nextNature?.id || ''
+    natureMenuOpen = false
+  }
+
   function moveOptionsForSlot(index) {
     const current = selectedMoves[index]
     return availableMoves.filter((move) => {
@@ -353,8 +360,8 @@
   }
 </script>
 
-<div class="pokemon-editor max-h-[88vh] w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-gray-950">
-  <div class="editor-header sticky top-0 z-20 border-b border-gray-200 bg-white/95 px-5 py-4 backdrop-blur dark:border-gray-800 dark:bg-gray-950/95">
+<div class="pokemon-editor max-h-[94vh] w-[min(96vw,80rem)] overflow-hidden rounded-2xl bg-white shadow-2xl dark:bg-gray-900">
+  <div class="editor-header sticky top-0 z-20 border-b border-gray-200 bg-white/95 px-5 py-4 backdrop-blur dark:border-gray-800 dark:bg-gray-900/95">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div class="flex min-w-0 items-center gap-4">
         <div class="sprite-frame flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-gray-100 dark:bg-gray-900">
@@ -407,7 +414,7 @@
       {#each tabs as tab}
         <button
           on:click={() => (activeTab = tab)}
-          class="rounded-lg px-3 py-2 text-sm font-black transition {activeTab === tab ? 'active bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-950' : 'bg-gray-100 text-gray-500 hover:text-gray-900 dark:bg-gray-900 dark:text-gray-400 dark:hover:text-white'}"
+          class="rounded-lg px-3 py-2 text-sm font-black transition {activeTab === tab ? 'active bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900' : 'bg-gray-100 text-gray-600 hover:text-gray-900 dark:bg-gray-800 dark:text-gray-300 dark:hover:text-white'}"
         >
           {tab}
         </button>
@@ -415,7 +422,7 @@
     </div>
   </div>
 
-  <div class="editor-body max-h-[calc(88vh-9rem)] overflow-y-auto p-5">
+  <div class="editor-body max-h-[calc(94vh-9rem)] overflow-y-auto p-5 md:p-6">
     {#if showShowdownImport}
       <div class="mb-5 rounded-xl border border-blue-100 bg-blue-50 p-4 dark:border-blue-800 dark:bg-blue-900/20" in:fade>
         <div class="mb-3 text-xs font-black uppercase tracking-wider text-blue-600 dark:text-blue-300">Showdown Set</div>
@@ -463,15 +470,34 @@
 
         <div class="editor-field space-y-2">
           <span>Nature</span>
-          <AutoComplete
-            class="editor-autocomplete"
-            id="pokemon-editor-nature"
-            placeholder="Select Nature"
-            bind:selected={selectedNature}
-            itemF={() => Natures}
-            labelF={(nature) => nature?.label || ''}
-            searchKeyF={(nature) => `${nature?.label || ''} ${nature?.id || ''}`}
-          />
+          <div class="nature-picker">
+            <button
+              type="button"
+              class="nature-trigger"
+              aria-haspopup="listbox"
+              aria-expanded={natureMenuOpen}
+              on:click={() => (natureMenuOpen = !natureMenuOpen)}
+            >
+              <span>{selectedNature?.label || 'Select Nature'}</span>
+              <small>{selectedNature?.value?.length ? `+${statLabel[selectedNature.value[0]]} / -${statLabel[selectedNature.value[1]]}` : 'Neutral'}</small>
+            </button>
+            {#if natureMenuOpen}
+              <div class="nature-menu" role="listbox">
+                {#each Natures as natureOption}
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={selectedNature?.id === natureOption.id}
+                    class:selected={selectedNature?.id === natureOption.id}
+                    on:click={() => chooseNature(natureOption)}
+                  >
+                    <b>{natureOption.label}</b>
+                    <span>{natureOption.value?.length ? `+${statLabel[natureOption.value[0]]} / -${statLabel[natureOption.value[1]]}` : 'Neutral'}</span>
+                  </button>
+                {/each}
+              </div>
+            {/if}
+          </div>
         </div>
 
         <label class="editor-field space-y-2">
@@ -557,7 +583,7 @@
           <h3 class="mb-3 text-sm font-black uppercase tracking-wider text-gray-500">Individual Values</h3>
           <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {#each stats as stat}
-              <label class="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-950">
+              <label class="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-900">
                 <span class="text-xs font-black text-gray-500">{statLabel[stat]}</span>
                 <input type="number" bind:value={ivs[stat]} min="0" max="31" class="w-14 bg-transparent text-right font-mono text-lg font-black outline-none dark:text-white" />
               </label>
@@ -572,7 +598,7 @@
           </div>
           <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {#each stats as stat}
-              <label class="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-950">
+              <label class="flex items-center justify-between rounded-lg border border-gray-200 bg-white p-3 dark:border-gray-800 dark:bg-gray-900">
                 <span class="text-xs font-black text-blue-500">EV:{statLabel[stat]}</span>
                 <input type="number" bind:value={evs[stat]} min="0" max="252" class="w-16 bg-transparent text-right font-mono text-lg font-black outline-none dark:text-white" />
               </label>
@@ -619,7 +645,7 @@
               {disabled}
               class="flex items-start gap-3 rounded-xl border p-3 text-left transition {selected ? 'border-lime-400 bg-lime-50 dark:border-lime-500 dark:bg-lime-500/10' : 'border-gray-200 bg-gray-50 hover:border-gray-400 hover:bg-white dark:border-gray-800 dark:bg-gray-900/60 dark:hover:border-gray-600'} {disabled ? 'cursor-not-allowed opacity-45' : ''}"
             >
-              <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-950">
+              <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-900">
                 <PIcon type="item" name={item.sprite || item.id} className="h-9 w-9" />
               </span>
               <span class="min-w-0 flex-1">
@@ -707,19 +733,55 @@
   }
 
   .editor-body {
-    @apply bg-gray-50/70 dark:bg-gray-900;
+    @apply bg-gray-50/70 dark:bg-gray-800;
   }
 
   .overview-grid {
-    @apply rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-800 dark:bg-gray-900/50;
+    @apply rounded-2xl border border-gray-200 bg-white p-4 shadow-sm md:p-5 dark:border-gray-700 dark:bg-gray-900;
   }
 
   .editor-field > span {
-    @apply block text-[11px] font-black uppercase tracking-[0.18em] text-gray-500 dark:text-gray-400;
+    @apply block text-[11px] font-black uppercase tracking-[0.18em] text-gray-700 dark:text-gray-200;
   }
 
   .editor-input {
-    @apply h-12 rounded-xl border border-gray-200 bg-white px-4 text-base font-black text-gray-900 shadow-inner outline-none transition placeholder:text-gray-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white;
+    @apply h-12 rounded-xl border border-gray-300 bg-white px-4 text-base font-black text-gray-900 shadow-inner outline-none transition placeholder:text-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400;
+  }
+
+  .nature-picker {
+    @apply relative;
+  }
+
+  .nature-trigger {
+    @apply flex h-12 w-full items-center justify-between gap-3 rounded-xl border border-gray-300 bg-white px-4 text-left text-base font-black text-gray-900 shadow-inner outline-none transition hover:border-blue-400 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white;
+  }
+
+  .nature-trigger small {
+    @apply shrink-0 text-xs font-black uppercase tracking-wide text-gray-600 dark:text-gray-300;
+  }
+
+  .nature-menu {
+    @apply absolute left-0 right-0 top-[calc(100%+0.5rem)] z-50 grid max-h-80 grid-cols-2 gap-2 overflow-y-auto rounded-xl border border-gray-300 bg-white p-2 shadow-2xl dark:border-gray-600 dark:bg-gray-900;
+  }
+
+  .nature-menu button {
+    @apply flex items-center justify-between gap-3 rounded-lg border border-transparent px-3 py-2 text-left text-sm text-gray-900 transition hover:border-blue-300 hover:bg-blue-50 focus:border-blue-500 focus:bg-blue-50 focus:outline-none dark:text-gray-100 dark:hover:border-blue-400 dark:hover:bg-blue-900/40 dark:focus:bg-blue-900/40;
+  }
+
+  .nature-menu button b {
+    @apply font-black;
+  }
+
+  .nature-menu button span {
+    @apply shrink-0 text-[11px] font-black uppercase tracking-wide text-gray-600 dark:text-gray-300;
+  }
+
+  .nature-menu button.selected {
+    @apply border-blue-600 bg-blue-600 text-white dark:border-blue-400 dark:bg-blue-500;
+  }
+
+  .nature-menu button.selected span {
+    @apply text-blue-50;
   }
 
   :global(.editor-autocomplete) {
@@ -727,7 +789,7 @@
   }
 
   :global(.editor-autocomplete input) {
-    @apply h-12 w-full rounded-xl border border-gray-200 bg-white px-4 pr-11 text-base font-black text-gray-900 shadow-inner outline-none transition placeholder:text-gray-400 focus:border-blue-400 focus:ring-4 focus:ring-blue-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white;
+    @apply h-12 w-full rounded-xl border border-gray-300 bg-white px-4 pr-11 text-base font-black text-gray-900 shadow-inner outline-none transition placeholder:text-gray-500 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder:text-gray-400;
   }
 
   :global(.editor-autocomplete > svg) {
