@@ -31,6 +31,7 @@
       label: 'Core totals',
       options: [
         ['total', 'BST'],
+        ['smogonTierScore', 'Smogon Tier'],
         ['minMaxPercent', 'Min-Max %'],
         ['totalWasted', 'Total Wasted'],
         ['statSpread', 'Stat Spread']
@@ -68,6 +69,7 @@
   const STAT_OPTIONS = STAT_GROUPS.flatMap((group) => group.options)
   const STAT_DESCRIPTIONS = {
     total: 'Base Stat Total: HP + Attack + Defense + Sp. Attack + Sp. Defense + Speed.',
+    smogonTierScore: 'Ordinal Smogon tier score: AG 16, Uber 15, OU 14, UUBL 13, UU 12, down to Untiered 1.',
     hp: 'Base HP. Higher HP improves both physical and special durability.',
     atk: 'Base Attack. Physical damage stat.',
     def: 'Base Defense. Physical durability stat.',
@@ -180,16 +182,39 @@
     'Advanced + adjusted defense'
   ]
   const GROUP_BY_OPTIONS = ['Generation', 'Type', 'Type Combo', 'Smogon Tier', 'VGC Tier']
-  const SMOGON_GROUP_ORDER = ['AG', 'Uber', 'OU', 'UU', 'RU', 'NU', 'PU', 'ZU', 'LC', 'NFE', 'Untiered']
+  const SMOGON_GROUP_ORDER = ['AG', 'Uber', 'OU', 'UUBL', 'UU', 'RUBL', 'RU', 'NUBL', 'NU', 'PUBL', 'PU', 'ZUBL', 'ZU', 'NFE', 'LC', 'Untiered']
+  const SMOGON_TIER_SCORES = {
+    AG: 16,
+    Uber: 15,
+    OU: 14,
+    UUBL: 13,
+    UU: 12,
+    RUBL: 11,
+    RU: 10,
+    NUBL: 9,
+    NU: 8,
+    PUBL: 7,
+    PU: 6,
+    ZUBL: 5,
+    ZU: 4,
+    NFE: 3,
+    LC: 2,
+    Untiered: 1
+  }
   const VGC_GROUP_ORDER = VGC_TIERS.filter((tier) => tier !== 'All').map((tier) => tier.replace('Tier', 'VGC Tier')).concat('No VGC wins')
   const tierColors = {
     AG: '#ef4444',
     Uber: '#f97316',
     OU: '#eab308',
+    UUBL: '#f59e0b',
     UU: '#22c55e',
+    RUBL: '#84cc16',
     RU: '#14b8a6',
+    NUBL: '#06b6d4',
     NU: '#3b82f6',
+    PUBL: '#0ea5e9',
     PU: '#8b5cf6',
+    ZUBL: '#6366f1',
     ZU: '#a855f7',
     LC: '#ec4899',
     NFE: '#64748b',
@@ -382,12 +407,18 @@
   }
   const getStatValue = (pokemon, stat) => {
     if (stat === 'total') return pokemon.total
+    if (stat === 'smogonTierScore') return pokemon.smogonTierScore
     if (stat === 'totalWasted') return pokemon.totalWasted
     if (stat === 'minMaxPercent') return pokemon.minMaxPercent
     if (stat === 'lopsidedRatio') return (Number(pokemon.lopsidedRatio) || 0) * 100
     return pokemon.baseStats?.[stat] ?? pokemon[stat] ?? pokemon.heuristics?.[stat] ?? 0
   }
   const statLabel = (stat) => stat === 'lopsidedRatio' ? 'Lopsided Ratio x100' : STAT_OPTIONS.find(([id]) => id === stat)?.[1] || 'BST'
+  const statValueLabel = (pokemon, stat) => {
+    const value = getStatValue(pokemon, stat)
+    if (stat === 'smogonTierScore') return `${pokemon.tier} · score ${value}`
+    return formatNumber(value)
+  }
   const statDescription = (stat) => STAT_DESCRIPTIONS[stat] || 'Derived stat used for filtering, sorting, and charting.'
   const idFor = (pokemon) => normalisePokemonId(`${pokemon.alias} ${pokemon.sprite} ${pokemon.name}`)
   const isMega = (pokemon) => /mega/i.test(`${pokemon.name} ${pokemon.alias}`)
@@ -602,7 +633,8 @@
   const densityPath = (values, y, scaleX, minValue, maxValue, color, rowHeight = 88) => {
     if (!values.length) return { path: '', color }
     const bins = 34
-    const bandwidth = Math.max(18, (maxValue - minValue) / 18)
+    const valueRange = maxValue - minValue
+    const bandwidth = valueRange <= 20 ? Math.max(0.6, valueRange / 12) : Math.max(18, valueRange / 18)
     const points = Array.from({ length: bins }, (_, i) => {
       const value = minValue + ((maxValue - minValue) * i) / (bins - 1)
       const density = values.reduce((sum, sample) => {
@@ -687,6 +719,7 @@
             : heuristics.wastedOffense + heuristics.wastedSpeed + selectedDefenseWaste(heuristics, wasteProfile) + heuristics.offenseDeficit,
       minMaxPercent,
       tier,
+      smogonTierScore: SMOGON_TIER_SCORES[tier] || SMOGON_TIER_SCORES.Untiered,
       vgc,
       isLegendary: isLegendary(pokemon),
       isUltraBeast: isUltraBeast(pokemon),
@@ -712,14 +745,18 @@
     .filter((pokemon) => selectedOrAll(activeFilters.evoStageFilters, pokemon.evoStage))
     .filter((pokemon) => selectedOrAll(activeFilters.vgcTierFilters, pokemon.vgc?.label || 'No VGC wins'))
     .filter((pokemon) => RANGE_FILTERS.every(([id]) => withinRange(pokemon, id)))
-    .filter((pokemon) => !query || normalisePokemonId(`${pokemon.name} ${pokemon.alias} ${pokemon.num} gen ${pokemon.generation} form gen ${pokemon.formGeneration} introduced gen ${pokemon.formGeneration} minimum level ${pokemon.minimumLevel} level ${pokemon.minimumLevel} ${pokemon.tier} ${pokemon.vgc?.label || 'No VGC wins'} ${pokemon.types?.join(' ')} ${typeComboLabel(pokemon.typeCombo)} ${pokemon.evoStage} ${categoryLabels(pokemon).join(' ')} ${pokemon.archetype} bst ${pokemon.total} hp ${pokemon.hp} attack ${pokemon.atk} defense ${pokemon.def} special attack ${pokemon.spa} special defense ${pokemon.spd} speed ${pokemon.spe} ${speedBandLabel(pokemon.speedBandValue)} wasted offense ${pokemon.wastedOffense} wasted speed ${pokemon.wastedSpeed} wasted defense ${pokemon.wastedDefense} adjusted wasted defense ${pokemon.adjustedWastedDefense} lopsided ratio ${formatNumber(pokemon.lopsidedRatio)} offense deficit ${pokemon.offenseDeficit} mixed offense ${pokemon.mixedOffenseRatio} bulk ${pokemon.bulkTotal} physical bulk ${pokemon.physicalBulk} special bulk ${pokemon.specialBulk} max offense ${pokemon.maxOffense} stat spread ${pokemon.statSpread} total wasted ${pokemon.totalWasted} min max ${pokemon.minMaxPercent}`).includes(query))
+    .filter((pokemon) => !query || normalisePokemonId(`${pokemon.name} ${pokemon.alias} ${pokemon.num} gen ${pokemon.generation} form gen ${pokemon.formGeneration} introduced gen ${pokemon.formGeneration} minimum level ${pokemon.minimumLevel} level ${pokemon.minimumLevel} ${pokemon.tier} smogon tier ${pokemon.tier} smogon tier score ${pokemon.smogonTierScore} ${pokemon.vgc?.label || 'No VGC wins'} ${pokemon.types?.join(' ')} ${typeComboLabel(pokemon.typeCombo)} ${pokemon.evoStage} ${categoryLabels(pokemon).join(' ')} ${pokemon.archetype} bst ${pokemon.total} hp ${pokemon.hp} attack ${pokemon.atk} defense ${pokemon.def} special attack ${pokemon.spa} special defense ${pokemon.spd} speed ${pokemon.spe} ${speedBandLabel(pokemon.speedBandValue)} wasted offense ${pokemon.wastedOffense} wasted speed ${pokemon.wastedSpeed} wasted defense ${pokemon.wastedDefense} adjusted wasted defense ${pokemon.adjustedWastedDefense} lopsided ratio ${formatNumber(pokemon.lopsidedRatio)} offense deficit ${pokemon.offenseDeficit} mixed offense ${pokemon.mixedOffenseRatio} bulk ${pokemon.bulkTotal} physical bulk ${pokemon.physicalBulk} special bulk ${pokemon.specialBulk} max offense ${pokemon.maxOffense} stat spread ${pokemon.statSpread} total wasted ${pokemon.totalWasted} min max ${pokemon.minMaxPercent}`).includes(query))
   $: sortedDex = filteredDex.slice().sort((a, b) => getStatValue(b, activeFilters.selectedStat) - getStatValue(a, activeFilters.selectedStat) || a.num - b.num)
   $: renderedTable = sortedDex.slice(0, tableLimit)
   $: values = filteredDex.map((pokemon) => getStatValue(pokemon, activeFilters.selectedStat))
-  $: minValue = values.length
-    ? activeFilters.selectedStat === 'minMaxPercent' ? Math.min(...values, 100) - 5 : Math.max(0, Math.min(...values, 1) - 20)
-    : 0
-  $: maxValue = values.length ? Math.max(...values, activeFilters.selectedStat === 'total' ? 800 : 255, 1) : 100
+  $: minValue = activeFilters.selectedStat === 'smogonTierScore'
+    ? 1
+    : values.length
+      ? activeFilters.selectedStat === 'minMaxPercent' ? Math.min(...values, 100) - 5 : Math.max(0, Math.min(...values, 1) - 20)
+      : 0
+  $: maxValue = activeFilters.selectedStat === 'smogonTierScore'
+    ? 16
+    : values.length ? Math.max(...values, activeFilters.selectedStat === 'total' ? 800 : 255, 1) : 100
   $: plotWidth = 960
   $: plotHeight = Math.max(220, 94 + chartRows.length * 74)
   $: chartLeft = 230
@@ -1142,7 +1179,7 @@
               <line x1={scaleX(row.max)} x2={scaleX(row.max)} y1={row.y} y2={row.y + 8} class="whisker" />
               <rect x={scaleX(row.q1)} y={row.y - 7} width={Math.max(2, scaleX(row.q3) - scaleX(row.q1))} height="22" class="box" />
               <line x1={scaleX(row.median)} x2={scaleX(row.median)} y1={row.y - 7} y2={row.y + 15} class="median" />
-              <text x={scaleX(row.median)} y={row.y - 12} class="median-label">{Math.round(row.median)}</text>
+              <text x={scaleX(row.median)} y={row.y - 12} class="median-label">{formatNumber(row.median)}</text>
               {#each row.items as pokemon, dotIndex (pokemon.alias)}
                 {@const dotValue = getStatValue(pokemon, activeFilters.selectedStat)}
                 <circle
@@ -1152,11 +1189,11 @@
                   fill={row.color}
                   opacity="0.55"
                 >
-                  <title>{pokemon.name} · {statLabel(activeFilters.selectedStat)} {formatNumber(dotValue)} · {activeFilters.groupBy} {row.label}</title>
+                  <title>{pokemon.name} · {statLabel(activeFilters.selectedStat)} {statValueLabel(pokemon, activeFilters.selectedStat)} · {activeFilters.groupBy} {row.label}</title>
                 </circle>
               {/each}
-              <text x={scaleX(row.min) - 4} y={row.y + 10} class="range-label" text-anchor="end">{Math.round(row.min)}</text>
-              <text x={scaleX(row.max) + 4} y={row.y + 10} class="range-label">{Math.round(row.max)}</text>
+              <text x={scaleX(row.min) - 4} y={row.y + 10} class="range-label" text-anchor="end">{formatNumber(row.min)}</text>
+              <text x={scaleX(row.max) + 4} y={row.y + 10} class="range-label">{formatNumber(row.max)}</text>
               <text x={plotWidth - 22} y={row.y + 8} class="count-label" text-anchor="end">(n = {row.items.length})</text>
               {#each row.highExamples as pokemon, iconIndex}
                 <foreignObject x={plotWidth - 176 + iconIndex * 34} y={row.y - 28} width="44" height="44">
@@ -1243,7 +1280,13 @@
                   {/if}
                 </span>
               </td>
-              <td><b>{formatNumber(rowValue)}</b></td>
+              <td>
+                {#if activeFilters.selectedStat === 'smogonTierScore'}
+                  <span class="tier-score-cell"><TierBadge tier={pokemon.tier} /><small>score {rowValue}</small></span>
+                {:else}
+                  <b>{formatNumber(rowValue)}</b>
+                {/if}
+              </td>
               <td>{pokemon.total}</td>
               <td><span class="archetype-pill">{pokemon.archetype}</span></td>
               <td>{formatNumber(pokemon.totalWasted)}</td>
@@ -1838,6 +1881,18 @@
 
   :global(.dark) .category-cell span {
     @apply bg-gray-800 text-gray-300;
+  }
+
+  .tier-score-cell {
+    @apply inline-flex items-center gap-2;
+  }
+
+  .tier-score-cell small {
+    @apply text-xs font-black uppercase tracking-wide text-gray-500;
+  }
+
+  :global(.dark) .tier-score-cell small {
+    @apply text-gray-300;
   }
 
   .archetype-pill {

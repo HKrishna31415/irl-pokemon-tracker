@@ -37,11 +37,12 @@ const compactSpriteKey = (value = '') =>
     .replace(/-/g, '')
 
 const formMarkerPattern =
-  /-(mega(?:-[xy])?|gmax|totem|alola(?:-totem)?|galar(?:-zen)?|hisui|paldea(?:-(?:aqua|blaze|combat))?|origin|hero|crowned|therian|incarnate|sky|white|black|dusk(?:-mane)?|dawn(?:-wings)?|blade|shield|school|solo|sunny|rainy|snowy|red|blue|white-striped|female|male|complete|neutral|stellar|terastal|ultra|primal|unbound|attack|defense|speed|pirouette|ash|bond|original|f|m|x|y)$/i
+  /-(mega(?:-[xyz])?|gmax|totem|alola(?:-totem)?|galar(?:-zen)?|hisui|paldea(?:-(?:aqua|blaze|combat))?|origin|hero|crowned|therian|incarnate|sky|white|black|dusk(?:-mane)?|dawn(?:-wings)?|blade|shield|school|solo|sunny|rainy|snowy|red|blue|white-striped|female|male|complete|neutral|stellar|terastal|ultra|primal|unbound|attack|defense|speed|pirouette|ash|bond|original|eternal|10|f|m|x|y|z)$/i
 
 const compactFormSuffixes = [
   'megax',
   'megay',
+  'megaz',
   'mega',
   'gmax',
   'alolatotem',
@@ -73,6 +74,8 @@ const compactFormSuffixes = [
   'blue',
   'whitestriped',
   'complete',
+  '10percent',
+  '10',
   'neutral',
   'stellar',
   'terastal',
@@ -86,25 +89,51 @@ const compactFormSuffixes = [
   'ash',
   'bond',
   'original',
+  'eternal',
   'female',
   'male'
 ]
 
-const baseSpriteKey = (value = '') => {
+const canonicalSpriteAliases = {
+  floetteeternal: 'floette-eternal',
+  floettemega: 'floette-mega',
+  garchompmegaz: 'garchomp-mega-z',
+  lucariomegaz: 'lucario-mega-z',
+  magearnaoriginal: 'magearna-original',
+  magearnaoriginalmega: 'magearna-original-mega',
+  magearnamega: 'magearna-mega',
+  megearna: 'magearna',
+  megearnaoriginal: 'magearna-original',
+  megearnaoriginalmega: 'magearna-original-mega',
+  megearnamega: 'magearna-mega',
+  zygarde10: 'zygarde-10',
+  zygarde10percent: 'zygarde-10',
+  zygardecomplete: 'zygarde-complete'
+}
+
+const canonicalSpriteKey = (value = '') => {
   const display = toSpriteKey(value)
+  const compact = compactSpriteKey(value)
+  return canonicalSpriteAliases[display] || canonicalSpriteAliases[compact] || display
+}
+
+const baseSpriteKey = (value = '') => {
+  const display = canonicalSpriteKey(value)
   const hyphenBase = display.replace(formMarkerPattern, '')
   if (hyphenBase !== display) return hyphenBase
 
-  const compact = compactSpriteKey(value)
+  const compact = compactSpriteKey(display)
   const suffix = compactFormSuffixes.find((ending) => compact.endsWith(ending) && compact.length > ending.length)
   return suffix ? compact.slice(0, -suffix.length) : display
 }
 
 const dexDisplaySpriteKey = (pokemon = {}) => {
-  const display = toSpriteKey(pokemon.name || pokemon.label || pokemon.alias || pokemon.sprite)
+  const display = canonicalSpriteKey(pokemon.name || pokemon.label || pokemon.alias || pokemon.sprite)
   const compact = compactSpriteKey(pokemon.alias || pokemon.sprite || pokemon.name)
+  const canonicalCompact = canonicalSpriteAliases[compact]
   const isForm =
     formMarkerPattern.test(display) ||
+    Boolean(canonicalCompact) ||
     display.includes('-paldea-') ||
     display.includes('-alola-') ||
     display.includes('-galar-') ||
@@ -780,6 +809,24 @@ const redirectPokeApi = (spriteId) =>
     302
   )
 
+const spriteResponseFromBase = async (baseSprite, shiny, fallback) => {
+  const localBaseSprite = await keyToBase64(baseSprite, shiny)
+  if (localBaseSprite) {
+    return new Response(Buffer.from(localBaseSprite, 'base64'), {
+      headers: {
+        'Content-Type': 'image/png'
+      }
+    })
+  }
+
+  return redirectPokeApi(
+    fallbackSpriteMap[toSpriteKey(baseSprite)] ||
+    spriteMap[toSpriteKey(baseSprite)] ||
+    fallback ||
+    baseSprite
+  )
+}
+
 export async function GET({ params }) {
 
   const {id, variant} = params;
@@ -789,9 +836,13 @@ export async function GET({ params }) {
     shiny = true;
   }
 
-  const gen8SpriteName = toSpriteKey(id)
+  const gen8SpriteName = canonicalSpriteKey(id)
+  const rawSpriteName = toSpriteKey(id)
   const dexSprite = nationalDexSpriteMap[gen8SpriteName]
-  const customSprite = customFormSpriteMap[gen8SpriteName] || (dexSprite && customFormSpriteMap[dexSprite.sprite])
+  const customSprite =
+    customFormSpriteMap[gen8SpriteName] ||
+    customFormSpriteMap[rawSpriteName] ||
+    (dexSprite && customFormSpriteMap[dexSprite.sprite])
 
   if (customSprite) {
     return Response.redirect(customSprite, 302)
@@ -821,15 +872,7 @@ export async function GET({ params }) {
   }
 
   if (dexSprite?.isCustomMega) {
-    const baseSprite = await keyToBase64(dexSprite.baseSprite, shiny)
-    if (baseSprite) {
-      return new Response(Buffer.from(baseSprite, 'base64'), {
-        headers: {
-          'Content-Type': 'image/png'
-        }
-      })
-    }
-    return redirectPokeApi(fallbackSpriteMap[toSpriteKey(dexSprite.baseSprite)] || spriteMap[toSpriteKey(dexSprite.baseSprite)] || dexSprite.num || dexSprite.baseSprite)
+    return spriteResponseFromBase(dexSprite.baseSprite, shiny, dexSprite.num)
   }
 
   const unknownShowdownForm =
@@ -841,15 +884,7 @@ export async function GET({ params }) {
     !fallbackSpriteMap[toSpriteKey(dexSprite.sprite)]
 
   if (unknownShowdownForm && dexSprite.baseSprite) {
-    const baseSprite = await keyToBase64(dexSprite.baseSprite, shiny)
-    if (baseSprite) {
-      return new Response(Buffer.from(baseSprite, 'base64'), {
-        headers: {
-          'Content-Type': 'image/png'
-        }
-      })
-    }
-    return redirectPokeApi(fallbackSpriteMap[toSpriteKey(dexSprite.baseSprite)] || spriteMap[toSpriteKey(dexSprite.baseSprite)] || dexSprite.num || dexSprite.baseSprite)
+    return spriteResponseFromBase(dexSprite.baseSprite, shiny, dexSprite.num)
   }
 
   if (dexSprite?.sprite?.includes('-')) {
