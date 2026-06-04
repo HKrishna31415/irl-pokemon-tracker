@@ -144,7 +144,7 @@ export const SPECIAL_ENCOUNTERS = [
     id: 'route-4-magikarp',
     name: 'Route 4 Magikarp',
     pokemon: 'magikarp',
-    price: 1000,
+    price: 500,
     description: 'A special Magikarp sold by a suspicious salesman near Route 4.',
     requirement: 'acetrainer1',
     type: 'encounter'
@@ -290,6 +290,16 @@ export const getHeldItemUsage = (pokemonList = [], options = {}) => {
 export const getHeldItemAvailableCount = (inventory = {}, usage = {}, itemId = '') =>
   Math.max(0, Number(inventory?.[itemId] || 0) - Number(usage?.counts?.[itemId] || 0))
 
+export const hasItemInInventoryOrBox = (data = {}, itemId = '') => {
+  if (!itemId) return false
+  if (Number(data.__items?.[itemId] || 0) > 0) return true
+
+  return Object.entries(data || {}).some(([key, pokemon]) => {
+    if (key.startsWith('__') || !pokemon?.pokemon) return false
+    return getPokemonHeldItemId(pokemon) === itemId
+  })
+}
+
 export const isBattleRewardTransaction = (entry = {}) =>
   entry.kind === 'earn' && entry.source === 'boss-reward'
 
@@ -408,7 +418,7 @@ export const rewardPatch = (data, boss) => {
   const config = getEconomyConfig(data)
   const isGymLeader = boss?.type === 'gym-leader'
   const base = isGymLeader ? config.rewards.gymLeader : config.rewards.trainer
-  const hasAmuletCoin = (data.__items?.['amulet-coin'] || 0) > 0
+  const hasAmuletCoin = hasItemInInventoryOrBox(data, 'amulet-coin')
   const multiplier = hasAmuletCoin ? config.rewards.amuletCoinMultiplier : 1
   const total = Math.floor(base * multiplier)
   const moneyBefore = data.__money || 0

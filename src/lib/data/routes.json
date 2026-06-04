@@ -408,6 +408,13 @@
     },
     {
       "type": "route",
+      "name": "Route 4 Magikarp ($500)",
+      "encounters": [
+        "magikarp"
+      ]
+    },
+    {
+      "type": "route",
       "name": "Mt. Moon",
       "encounters": [
         "paras",
@@ -2751,7 +2758,7 @@
     },
     {
       "type": "route",
-      "name": "Route 4 Magikarp ($1000)",
+      "name": "Route 4 Magikarp ($500)",
       "encounters": [
         "magikarp"
       ]

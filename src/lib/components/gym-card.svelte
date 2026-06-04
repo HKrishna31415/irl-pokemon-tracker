@@ -365,9 +365,10 @@
     const showdownTeam = buildShowdownTeam(pokemon)
     showdownText = showdownTeam
 
-    navigator.clipboard.writeText(showdownTeam).then(() => {
-      alert(`${name}'s team exported to clipboard!`)
-    })
+    navigator.clipboard.writeText(showdownTeam).then(
+      () => alert(`${name}'s team exported to clipboard!`),
+      () => alert(`${name}'s team export is ready below, but clipboard access was blocked.`)
+    )
   }
 </script>
 
@@ -522,7 +523,7 @@
               />
             </IconButton>
           {/if}
-          {#if reader}
+          {#if !loading}
             <IconButton rounded title="Export {name}'s team to Showdown" on:click={exportToShowdown}>
               <Icon class="pl-1" height="1.2em" inline icon={Download} />
             </IconButton>
@@ -541,7 +542,7 @@
         </div>
       {/if}
 
-      {#if reader}
+      {#if !loading}
         <div class="mb-6 flex flex-wrap gap-4 items-center justify-between bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl p-5 shadow-sm">
           <div class="flex items-center gap-x-3">
             <span class="flex items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-900/30 p-2 text-indigo-600 dark:text-indigo-400">
@@ -561,7 +562,7 @@
             on:click|stopPropagation={exportToShowdown}
           >
             <Icon height="1.2em" inline icon={Download} />
-            Export Team to Showdown
+            Export Trainer
           </button>
         </div>
         {#if showdownText}
@@ -580,6 +581,11 @@
           showStatDetails={reader}
         >
           <div slot="footer" class="flex items-center justify-between mx-8 mb-2 z-50 transition opacity-25 hover:opacity-75">
+            {#if bossOverrides[boss.id]?.[id]}
+              <span class="rounded-full border border-emerald-300 bg-emerald-50 px-2 py-1 text-[10px] font-black uppercase tracking-wider text-emerald-700 dark:border-emerald-700 dark:bg-emerald-950 dark:text-emerald-200">
+                Saved edits
+              </span>
+            {/if}
             <button
               class="compare flex items-center gap-x-2"
               on:click={openCompare(id)}

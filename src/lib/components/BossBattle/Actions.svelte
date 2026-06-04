@@ -1,10 +1,11 @@
 <script>
-  export let badge, name, team
+  export let badge, name, team, pokemon = []
 
   import { onMount, createEventDispatcher } from 'svelte'
   import { Button, PIcon } from '$c/core'
   import { toList, regionise, capitalise } from '$lib/utils/string'
   import deferStyles from '$lib/utils/defer-styles'
+  import { buildShowdownTeam } from '$lib/utils/showdown'
 
   const dispatch = createEventDispatcher()
   onMount(async () => {
@@ -23,65 +24,23 @@
   const ontoggle = (_) => dispatch('toggle')
   const oncomplete = (_) => dispatch('complete')
 
-  const exportToShowdown = async () => {
-    const showdownTeam = await Promise.all(
-      team.map(async (p) => {
-        const nickname = p.original.nickname
-          ? `${p.original.nickname} (${capitalise(p.alias)})`
-          : capitalise(p.alias)
-        const item = '' // Item tracking not currently implemented for player
-        const ability = p.original.ability || 'Unknown Ability'
-        const level = p.original.level || 50
-        const nature = p.original.nature || 'Serious'
-        const ivs = p.original.ivs || {
-          hp: 31,
-          atk: 31,
-          def: 31,
-          spa: 31,
-          spd: 31,
-          spe: 31
-        }
-
-        let moves = ['Move 1', 'Move 2', 'Move 3', 'Move 4']
-        try {
-          const res = await fetch(`/assets/data/learnsets/${p.alias}.json`)
-          const ls = await res.json()
-          if (ls && ls.learnset) {
-            const possibleMoves = Object.entries(ls.learnset)
-              .map(([move, sources]) => {
-                const lvlSource = sources.find((s) => s.startsWith('8L'))
-                if (!lvlSource) return null
-                const lvl = parseInt(lvlSource.replace('8L', ''))
-                return { move, lvl }
-              })
-              .filter((m) => m && m.lvl <= level)
-              .sort((a, b) => b.lvl - a.lvl)
-
-            moves = possibleMoves
-              .slice(0, 4)
-              .map((m) => capitalise(m.move.replace(/-/g, ' ')))
-            while (moves.length < 4) moves.push(`Move ${moves.length + 1}`)
-          }
-        } catch (e) {
-          console.warn(`Could not fetch learnset for ${p.alias}`)
-        }
-
-        return `${nickname}${item ? ' @ ' + item : ''}
-Ability: ${ability}
-Level: ${level}
-EVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-${capitalise(nature)} Nature
-IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd} SpD / ${ivs.spe} Spe
-- ${moves[0]}
-- ${moves[1]}
-- ${moves[2]}
-- ${moves[3]}`
-      })
+  const copyShowdown = (text, label) => {
+    navigator.clipboard.writeText(text).then(
+      () => alert(`${label} exported to clipboard!`),
+      () => alert(`${label} export is ready, but clipboard access was blocked.`)
     )
+  }
 
-    navigator.clipboard.writeText(showdownTeam.join('\n\n')).then(() => {
-      alert('Team exported to clipboard!')
-    })
+  const exportOpponentToShowdown = () =>
+    copyShowdown(buildShowdownTeam(pokemon), `${name}'s team`)
+
+  const exportMyTeamToShowdown = () => {
+    const playerTeam = team.map((p) => ({
+      ...p.original,
+      name: p.original?.pokemon || p.name || p.alias,
+      moves: p.original?.moves || []
+    }))
+    copyShowdown(buildShowdownTeam(playerTeam), 'Your team')
   }
 </script>
 
@@ -120,8 +79,11 @@ IVs: ${ivs.hp} HP / ${ivs.atk} Atk / ${ivs.def} Def / ${ivs.spa} SpA / ${ivs.spd
         Mark victory
       {/if}
     </Button>
-    <Button on:click={exportToShowdown} class="!py-1 text-xs" rounded>
-      Showdown
+    <Button on:click={exportOpponentToShowdown} class="!py-1 text-xs" rounded>
+      Export Opponent
+    </Button>
+    <Button disabled={!team.length} on:click={exportMyTeamToShowdown} class="!py-1 text-xs" rounded>
+      Export My Team
     </Button>
   </div>
 </div>
